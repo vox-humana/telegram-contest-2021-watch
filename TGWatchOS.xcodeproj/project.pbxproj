@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E8FE55425F39DA9002A0927 /* TGWatchOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8E8FE55325F39DA9002A0927 /* TGWatchOS WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8E8FE55925F39DAB002A0927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E8FE55825F39DAB002A0927 /* Assets.xcassets */; };
+		8E8FE56025F39DAB002A0927 /* TGWatchOS WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8E8FE55F25F39DAB002A0927 /* TGWatchOS WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8E8FE56525F39DAB002A0927 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FE56425F39DAB002A0927 /* ContentView.swift */; };
+		8E8FE56725F39DAB002A0927 /* TGWatchOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FE56625F39DAB002A0927 /* TGWatchOSApp.swift */; };
+		8E8FE56925F39DAB002A0927 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8FE56825F39DAB002A0927 /* ComplicationController.swift */; };
+		8E8FE56B25F39DAC002A0927 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E8FE56A25F39DAC002A0927 /* Assets.xcassets */; };
+		8E8FE56E25F39DAC002A0927 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E8FE56D25F39DAC002A0927 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E8FE55525F39DA9002A0927 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E8FE54925F39DA9002A0927 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E8FE55225F39DA9002A0927;
+			remoteInfo = "TGWatchOS WatchKit App";
+		};
+		8E8FE56125F39DAB002A0927 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E8FE54925F39DA9002A0927 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E8FE55E25F39DAB002A0927;
+			remoteInfo = "TGWatchOS WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8E8FE57525F39DAC002A0927 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8E8FE56025F39DAB002A0927 /* TGWatchOS WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E8FE57925F39DAC002A0927 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				8E8FE55425F39DA9002A0927 /* TGWatchOS WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8E8FE54F25F39DA9002A0927 /* TGWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E8FE55325F39DA9002A0927 /* TGWatchOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TGWatchOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E8FE55825F39DAB002A0927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E8FE55A25F39DAB002A0927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E8FE55F25F39DAB002A0927 /* TGWatchOS WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TGWatchOS WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E8FE56425F39DAB002A0927 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8E8FE56625F39DAB002A0927 /* TGWatchOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGWatchOSApp.swift; sourceTree = "<group>"; };
+		8E8FE56825F39DAB002A0927 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		8E8FE56A25F39DAC002A0927 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E8FE56D25F39DAC002A0927 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8E8FE56F25F39DAC002A0927 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E8FE55C25F39DAB002A0927 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E8FE54825F39DA9002A0927 = {
+			isa = PBXGroup;
+			children = (
+				8E8FE55725F39DA9002A0927 /* TGWatchOS WatchKit App */,
+				8E8FE56325F39DAB002A0927 /* TGWatchOS WatchKit Extension */,
+				8E8FE55025F39DA9002A0927 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E8FE55025F39DA9002A0927 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E8FE54F25F39DA9002A0927 /* TGWatchOS.app */,
+				8E8FE55325F39DA9002A0927 /* TGWatchOS WatchKit App.app */,
+				8E8FE55F25F39DAB002A0927 /* TGWatchOS WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E8FE55725F39DA9002A0927 /* TGWatchOS WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				8E8FE55825F39DAB002A0927 /* Assets.xcassets */,
+				8E8FE55A25F39DAB002A0927 /* Info.plist */,
+			);
+			path = "TGWatchOS WatchKit App";
+			sourceTree = "<group>";
+		};
+		8E8FE56325F39DAB002A0927 /* TGWatchOS WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8E8FE56425F39DAB002A0927 /* ContentView.swift */,
+				8E8FE56625F39DAB002A0927 /* TGWatchOSApp.swift */,
+				8E8FE56825F39DAB002A0927 /* ComplicationController.swift */,
+				8E8FE56A25F39DAC002A0927 /* Assets.xcassets */,
+				8E8FE56F25F39DAC002A0927 /* Info.plist */,
+				8E8FE56C25F39DAC002A0927 /* Preview Content */,
+			);
+			path = "TGWatchOS WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		8E8FE56C25F39DAC002A0927 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8E8FE56D25F39DAC002A0927 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E8FE54E25F39DA9002A0927 /* TGWatchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E8FE57A25F39DAC002A0927 /* Build configuration list for PBXNativeTarget "TGWatchOS" */;
+			buildPhases = (
+				8E8FE54D25F39DA9002A0927 /* Resources */,
+				8E8FE57925F39DAC002A0927 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E8FE55625F39DA9002A0927 /* PBXTargetDependency */,
+			);
+			name = TGWatchOS;
+			productName = TGWatchOS;
+			productReference = 8E8FE54F25F39DA9002A0927 /* TGWatchOS.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		8E8FE55225F39DA9002A0927 /* TGWatchOS WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E8FE57625F39DAC002A0927 /* Build configuration list for PBXNativeTarget "TGWatchOS WatchKit App" */;
+			buildPhases = (
+				8E8FE55125F39DA9002A0927 /* Resources */,
+				8E8FE57525F39DAC002A0927 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E8FE56225F39DAB002A0927 /* PBXTargetDependency */,
+			);
+			name = "TGWatchOS WatchKit App";
+			productName = "TGWatchOS WatchKit App";
+			productReference = 8E8FE55325F39DA9002A0927 /* TGWatchOS WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		8E8FE55E25F39DAB002A0927 /* TGWatchOS WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E8FE57225F39DAC002A0927 /* Build configuration list for PBXNativeTarget "TGWatchOS WatchKit Extension" */;
+			buildPhases = (
+				8E8FE55B25F39DAB002A0927 /* Sources */,
+				8E8FE55C25F39DAB002A0927 /* Frameworks */,
+				8E8FE55D25F39DAB002A0927 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TGWatchOS WatchKit Extension";
+			productName = "TGWatchOS WatchKit Extension";
+			productReference = 8E8FE55F25F39DAB002A0927 /* TGWatchOS WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E8FE54925F39DA9002A0927 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					8E8FE54E25F39DA9002A0927 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					8E8FE55225F39DA9002A0927 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					8E8FE55E25F39DAB002A0927 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = 8E8FE54C25F39DA9002A0927 /* Build configuration list for PBXProject "TGWatchOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8E8FE54825F39DA9002A0927;
+			productRefGroup = 8E8FE55025F39DA9002A0927 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E8FE54E25F39DA9002A0927 /* TGWatchOS */,
+				8E8FE55225F39DA9002A0927 /* TGWatchOS WatchKit App */,
+				8E8FE55E25F39DAB002A0927 /* TGWatchOS WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E8FE54D25F39DA9002A0927 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E8FE55125F39DA9002A0927 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E8FE55925F39DAB002A0927 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E8FE55D25F39DAB002A0927 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E8FE56E25F39DAC002A0927 /* Preview Assets.xcassets in Resources */,
+				8E8FE56B25F39DAC002A0927 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E8FE55B25F39DAB002A0927 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E8FE56725F39DAB002A0927 /* TGWatchOSApp.swift in Sources */,
+				8E8FE56525F39DAB002A0927 /* ContentView.swift in Sources */,
+				8E8FE56925F39DAB002A0927 /* ComplicationController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E8FE55625F39DA9002A0927 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E8FE55225F39DA9002A0927 /* TGWatchOS WatchKit App */;
+			targetProxy = 8E8FE55525F39DA9002A0927 /* PBXContainerItemProxy */;
+		};
+		8E8FE56225F39DAB002A0927 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E8FE55E25F39DAB002A0927 /* TGWatchOS WatchKit Extension */;
+			targetProxy = 8E8FE56125F39DAB002A0927 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8E8FE57025F39DAC002A0927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8E8FE57125F39DAC002A0927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E8FE57325F39DAC002A0927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"TGWatchOS WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "TGWatchOS WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		8E8FE57425F39DAC002A0927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"TGWatchOS WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "TGWatchOS WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+		8E8FE57725F39DAC002A0927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				IBSC_MODULE = TGWatchOS_WatchKit_Extension;
+				INFOPLIST_FILE = "TGWatchOS WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		8E8FE57825F39DAC002A0927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				IBSC_MODULE = TGWatchOS_WatchKit_Extension;
+				INFOPLIST_FILE = "TGWatchOS WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+		8E8FE57B25F39DAC002A0927 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8E8FE57C25F39DAC002A0927 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E8FE54C25F39DA9002A0927 /* Build configuration list for PBXProject "TGWatchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E8FE57025F39DAC002A0927 /* Debug */,
+				8E8FE57125F39DAC002A0927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E8FE57225F39DAC002A0927 /* Build configuration list for PBXNativeTarget "TGWatchOS WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E8FE57325F39DAC002A0927 /* Debug */,
+				8E8FE57425F39DAC002A0927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E8FE57625F39DAC002A0927 /* Build configuration list for PBXNativeTarget "TGWatchOS WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E8FE57725F39DAC002A0927 /* Debug */,
+				8E8FE57825F39DAC002A0927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E8FE57A25F39DAC002A0927 /* Build configuration list for PBXNativeTarget "TGWatchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E8FE57B25F39DAC002A0927 /* Debug */,
+				8E8FE57C25F39DAC002A0927 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E8FE54925F39DA9002A0927 /* Project object */;
+}
