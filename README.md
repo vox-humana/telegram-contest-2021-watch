@@ -1,10 +1,47 @@
-# Plan
-- TDLib for networking
-- Thin Swift wrapper
-- QR Code login
-- Chat list
+# Plan of attack
+### TDLib for networking
+1. Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
+
+⚠️ Apple Watch uses 64bit arm from S3 (series 4) and TDLib buiild is not ready for 64bit yet https://github.com/tdlib/td/issues/745
+
+- add 64bit watchOS architectures in openssl Makefile
+```
+# watchOS targets
+TARGETS-watchOS=watchsimulator.i386 watchsimulator.x86_64 watchos.armv7k watchos.arm64_32
+```
+- limit list of target platforms in build-openssl.sh
+```
+#TODO: change openssl version
+#platforms="macOS iOS watchOS tvOS"
+platforms="watchOS"
+```
+and build.sh
+```
+#platforms="macOS iOS watchOS tvOS"
+platforms="watchOS"
+for platform in $platforms;
+```
+
+bitcode translation (from https://twitter.com/stroughtonsmith/status/1044706837478735873)
+```
+/Applications/Xcode-12.4.app/Contents/Developer/usr/bin/bitcode-build-tool -o ~/Downloads/libtdjson.1.7.2.arm64_32.dylib --sdk /Applications/Xcode-12.4.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS.sdk/ --translate-watchos ~/Downloads/libtdjson.1.7.2.dylib
+```
+to ignore fat binary linking error set VALIDATE_WORKSPACE=YES in Xcode configuration
+
+2. integrate into project https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
+
+### Thin Swift client wrapper
+### QR Code login
+### Chat list
 
 
+## Crazy thoughts
+- Use external JSON serialization lib (faster than built-in)
+- Use whole module + time optimizations
+
+## Environment
+Xcode 12.4 (App Store version)
+Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
 # Intro
 https://t.me/contest/221
@@ -31,7 +68,7 @@ The task is to create a standalone Telegram app for WatchOS 6+ in Swift without 
 
 Your app should run on WatchOS 6 and above. The design implementation should be identical to the mockups attached below (Sketch, PNG).
 
-You are welcome to view the API docs and inspect the source code of Telegram for iOS. The main criteria for us to identify the winners will be the speed and stability of the apps – as well as attention to detail.
+You are welcome to view the [API docs](https://core.telegram.org/#telegram-api) and inspect the [source code of Telegram for iOS](https://github.com/TelegramMessenger/Telegram-iOS). The main criteria for us to identify the winners will be the speed and stability of the apps – as well as attention to detail.
 
 We understand that you may not be able to suport all the features on our list before the deadline. During evaluation we will note the number of features implemented flawlessly. The largest prizes will be awarded to contestants who implemented the largest number of features without major issues.
 
