@@ -12,7 +12,7 @@ struct TGWatchOSApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                ChatListView()
             }
         }
     }

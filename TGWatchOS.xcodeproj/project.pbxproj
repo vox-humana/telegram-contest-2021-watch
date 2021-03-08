@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E18EDA725F4A5240049554A /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18EDA625F4A5240049554A /* ChatList.swift */; };
+		8E18EDB525F4AC490049554A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18EDB425F4AC490049554A /* Style.swift */; };
+		8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18ED8925F4A2A80049554A /* TDClient.swift */; };
 		8E27194E25F4A14500A263D2 /* TGWatchOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E27195425F4A14500A263D2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195225F4A14500A263D2 /* Interface.storyboard */; };
 		8E27195625F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195525F4A14600A263D2 /* Assets.xcassets */; };
@@ -16,6 +19,8 @@
 		8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */; };
 		8E27196A25F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196925F4A14600A263D2 /* Assets.xcassets */; };
 		8E27196D25F4A14600A263D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */; };
+		8EC41D9D25F59E9C000A63B5 /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC41D9C25F59E9C000A63B5 /* libtdjson.dylib */; };
+		8EC41D9E25F59EB2000A63B5 /* libtdjson.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8EC41D9C25F59E9C000A63B5 /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +63,33 @@
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8E4B8B6625F4ED8D001F4238 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8EC41D9E25F59EB2000A63B5 /* libtdjson.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8E18ED8725F4A2A80049554A /* TDLibBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLibBridgingHeader.h; sourceTree = "<group>"; };
+		8E18ED8925F4A2A80049554A /* TDClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDClient.swift; sourceTree = "<group>"; };
+		8E18ED9925F4A3030049554A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8E18EDA625F4A5240049554A /* ChatList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		8E18EDB425F4AC490049554A /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		8E18EDBD25F4B3E00049554A /* TlObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TlObject.h; sourceTree = "<group>"; };
+		8E18EDBF25F4B3E00049554A /* tdjson_export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tdjson_export.h; sourceTree = "<group>"; };
+		8E18EDC025F4B3E00049554A /* td_json_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_json_client.h; sourceTree = "<group>"; };
+		8E18EDC125F4B3E00049554A /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		8E18EDC225F4B3E00049554A /* td_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_api.h; sourceTree = "<group>"; };
+		8E18EDC325F4B3E00049554A /* td_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_log.h; sourceTree = "<group>"; };
+		8E18EDC425F4B3E00049554A /* td_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = td_api.hpp; sourceTree = "<group>"; };
+		8E18EDC525F4B3E00049554A /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		8E27194925F4A14400A263D2 /* TGWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TGWatchOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27195325F4A14500A263D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -73,6 +102,7 @@
 		8E27196925F4A14600A263D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E27196E25F4A14600A263D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EC41D9C25F59E9C000A63B5 /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtdjson.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,15 +110,92 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC41D9D25F59E9C000A63B5 /* libtdjson.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E18ED4925F4A2A80049554A /* tdjson */ = {
+			isa = PBXGroup;
+			children = (
+				8E18EDB925F4B3E00049554A /* watchOS */,
+				8E18ED8725F4A2A80049554A /* TDLibBridgingHeader.h */,
+			);
+			path = tdjson;
+			sourceTree = "<group>";
+		};
+		8E18ED8825F4A2A80049554A /* TDLibClient */ = {
+			isa = PBXGroup;
+			children = (
+				8E18ED8925F4A2A80049554A /* TDClient.swift */,
+			);
+			path = TDLibClient;
+			sourceTree = "<group>";
+		};
+		8E18EDB925F4B3E00049554A /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				8E18EDBA25F4B3E00049554A /* include */,
+				8E18EDC625F4B3E00049554A /* lib */,
+			);
+			path = watchOS;
+			sourceTree = "<group>";
+		};
+		8E18EDBA25F4B3E00049554A /* include */ = {
+			isa = PBXGroup;
+			children = (
+				8E18EDBB25F4B3E00049554A /* td */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		8E18EDBB25F4B3E00049554A /* td */ = {
+			isa = PBXGroup;
+			children = (
+				8E18EDBC25F4B3E00049554A /* tl */,
+				8E18EDBE25F4B3E00049554A /* telegram */,
+			);
+			path = td;
+			sourceTree = "<group>";
+		};
+		8E18EDBC25F4B3E00049554A /* tl */ = {
+			isa = PBXGroup;
+			children = (
+				8E18EDBD25F4B3E00049554A /* TlObject.h */,
+			);
+			path = tl;
+			sourceTree = "<group>";
+		};
+		8E18EDBE25F4B3E00049554A /* telegram */ = {
+			isa = PBXGroup;
+			children = (
+				8E18EDBF25F4B3E00049554A /* tdjson_export.h */,
+				8E18EDC025F4B3E00049554A /* td_json_client.h */,
+				8E18EDC125F4B3E00049554A /* Client.h */,
+				8E18EDC225F4B3E00049554A /* td_api.h */,
+				8E18EDC325F4B3E00049554A /* td_log.h */,
+				8E18EDC425F4B3E00049554A /* td_api.hpp */,
+				8E18EDC525F4B3E00049554A /* Log.h */,
+			);
+			path = telegram;
+			sourceTree = "<group>";
+		};
+		8E18EDC625F4B3E00049554A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				8EC41D9C25F59E9C000A63B5 /* libtdjson.dylib */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		8E27194225F4A14400A263D2 = {
 			isa = PBXGroup;
 			children = (
+				8E18ED9925F4A3030049554A /* README.md */,
+				8E18ED4925F4A2A80049554A /* tdjson */,
+				8E18ED8825F4A2A80049554A /* TDLibClient */,
 				8E27195125F4A14500A263D2 /* TGWatchOS WatchKit App */,
 				8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */,
 				8E27194A25F4A14400A263D2 /* Products */,
@@ -118,6 +225,8 @@
 		8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				8E18EDA625F4A5240049554A /* ChatList.swift */,
+				8E18EDB425F4AC490049554A /* Style.swift */,
 				8E27196125F4A14600A263D2 /* HostingController.swift */,
 				8E27196325F4A14600A263D2 /* ContentView.swift */,
 				8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */,
@@ -180,6 +289,7 @@
 				8E27195825F4A14600A263D2 /* Sources */,
 				8E27195925F4A14600A263D2 /* Frameworks */,
 				8E27195A25F4A14600A263D2 /* Resources */,
+				8E4B8B6625F4ED8D001F4238 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -263,9 +373,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E18EDA725F4A5240049554A /* ChatList.swift in Sources */,
 				8E27196425F4A14600A263D2 /* ContentView.swift in Sources */,
 				8E27196225F4A14600A263D2 /* HostingController.swift in Sources */,
 				8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */,
+				8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */,
+				8E18EDB525F4AC490049554A /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +466,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -407,6 +521,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -418,19 +533,27 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TGWatchOS WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = HHSNDG5J5M;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				INFOPLIST_FILE = "TGWatchOS WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/tdjson/watchOS/lib",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = tdjson/TDLibBridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+				USER_HEADER_SEARCH_PATHS = tdjson/watchOS/include;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -442,19 +565,26 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TGWatchOS WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = HHSNDG5J5M;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				INFOPLIST_FILE = "TGWatchOS WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/tdjson/watchOS/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = tdjson/TDLibBridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+				USER_HEADER_SEARCH_PATHS = tdjson/watchOS/include;
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};
@@ -474,7 +604,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -494,7 +623,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};

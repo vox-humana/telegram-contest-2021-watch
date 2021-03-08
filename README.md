@@ -1,13 +1,27 @@
 # Plan of attack
+### MTProto for networking
+🛑 MTProto depends on CFNetwork which is not available for watchOS (https://developer.apple.com/documentation/cfnetwork)
+
 ### TDLib for networking
 1. Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
 
-⚠️ Apple Watch uses 64bit arm from S3 (series 4) and TDLib buiild is not ready for 64bit yet https://github.com/tdlib/td/issues/745
+⚠️ Apple Watch uses 64bit arm from S3 (Series 4) and TDLib buiild is not ready for 64bit yet https://github.com/tdlib/td/issues/745
+WatchOS simulator also has arm64 architecture even if test device is Series 3 (armv7k 32 bit) 
 
-- add 64bit watchOS architectures in openssl Makefile
+⚠️ Failed to build openssl with watchsimulator.arm64 with TDLib
+```
+ld: in ../../third_party/openssl/watchOS/lib/libcrypto.a(aes_core.o), building for watchOS Simulator, but linking in object file built for watchOS, for architecture arm64
+```
+so ignore  `watchsimulator.arm64` everywhere and also add `EXCLUDED_ARCHS=arm64` into Xcode build configuration. 
+
+- add 64bit watchOS architectures in openssl Makefile, enable bitcode for arm64_32, and remove unused simulator architectures
 ```
 # watchOS targets
-TARGETS-watchOS=watchsimulator.i386 watchsimulator.x86_64 watchos.armv7k watchos.arm64_32
+TARGETS-watchOS=watchsimulator.i386 watchsimulator.x86_64 watchsimulator.arm64 watchos.armv7k watchos.arm64_32
+CFLAGS-watchOS=-mwatchos-version-min=4.0
+CFLAGS-watchos.armv7k=-fembed-bitcode
+CFLAGS-watchos.arm64_32=-fembed-bitcode
+PYTHON_CONFIGURE-watchOS=ac_cv_func_sigaltstack=no
 ```
 - limit list of target platforms in build-openssl.sh
 ```
@@ -21,13 +35,20 @@ and build.sh
 platforms="watchOS"
 for platform in $platforms;
 ```
-
-bitcode translation (from https://twitter.com/stroughtonsmith/status/1044706837478735873)
+- add 64bit watchOS architectures in `CMake/iOS.make` file
 ```
-/Applications/Xcode-12.4.app/Contents/Developer/usr/bin/bitcode-build-tool -o ~/Downloads/libtdjson.1.7.2.arm64_32.dylib --sdk /Applications/Xcode-12.4.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS.sdk/ --translate-watchos ~/Downloads/libtdjson.1.7.2.dylib
+elseif (IOS_PLATFORM STREQUAL "WATCHOS")
+    set (IOS_ARCH "armv7k;arm64_32")
+elseif (IOS_PLATFORM STREQUAL "WATCHSIMULATOR")
+    set (IOS_ARCH "i386;x86_64;arm64")
 ```
 to ignore fat binary linking error set VALIDATE_WORKSPACE=YES in Xcode configuration
 
+
+Another possible way to solve architecture error is bitcode translation (from https://twitter.com/stroughtonsmith/status/1044706837478735873)
+```
+/Applications/Xcode-12.4.app/Contents/Developer/usr/bin/bitcode-build-tool -o ~/Downloads/libtdjson.1.7.2.arm64_32.dylib --sdk /Applications/Xcode-12.4.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS.sdk/ --translate-watchos ~/Downloads/libtdjson.1.7.2.dylib
+```
 2. integrate into project https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
 
 ### Thin Swift client wrapper
@@ -36,6 +57,7 @@ to ignore fat binary linking error set VALIDATE_WORKSPACE=YES in Xcode configura
 
 
 ## Crazy thoughts
+- Check archiving to make sure simulator slices (i386, x86_64) aren't included 
 - Use external JSON serialization lib (faster than built-in)
 - Use whole module + time optimizations
 
