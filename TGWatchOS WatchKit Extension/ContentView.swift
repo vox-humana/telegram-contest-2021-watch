@@ -1,15 +1,28 @@
-//
-//  ContentView.swift
-//  TGWatchOS WatchKit Extension
-//
-//  Created by Arthur Semenyutin on 6/3/21.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State var showLoginFlow: Bool = true
+    
     var body: some View {
-        ChatListView()
+        if showLoginFlow {
+            LoginView(vm: LoginViewModel(service: service))
+                .onReceive(service.authStateSignal, perform: { state in
+                    switch state {
+                    case .initial:
+                        showLoginFlow = true
+                    case .confirmationWaiting:
+                        showLoginFlow = true
+                    case .authorized:
+                        showLoginFlow = false
+                    case .passwordWaiting:
+                        showLoginFlow = true
+                    case .passwordSent:
+                        showLoginFlow = true
+                    }
+                })
+        } else {
+            ChatListView()
+        }
     }
 }
 
@@ -18,3 +31,9 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+let service: TGService = {
+    let s = TGService()
+    s.start()
+    return s
+}()

@@ -103,3 +103,12 @@ struct AvatarView: View {
             .cornerRadius(12)
     }
 }
+
+final class ChatListViewModel {
+    @State var list: [Chat] = []
+    private let service: TGService
+    
+    init(service: TGService) {
+        self.service = service
+    }
+}

@@ -1,3 +1,5 @@
+// from https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
+
 import Foundation
 
 final class TdClient {
@@ -71,7 +73,7 @@ final class TdClient {
     }
 }
 
-func to_json(_ obj: Any) -> String {
+private func to_json(_ obj: Any) -> String {
     do {
         let obj = try JSONSerialization.data(withJSONObject: obj)
         return String(data: obj, encoding: .utf8)!

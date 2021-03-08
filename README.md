@@ -1,9 +1,10 @@
 # Plan of attack
+## Networking
 ### MTProto for networking
 🛑 MTProto depends on CFNetwork which is not available for watchOS (https://developer.apple.com/documentation/cfnetwork)
 
 ### TDLib for networking
-1. Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
+Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
 
 ⚠️ Apple Watch uses 64bit arm from S3 (Series 4) and TDLib buiild is not ready for 64bit yet https://github.com/tdlib/td/issues/745
 WatchOS simulator also has arm64 architecture even if test device is Series 3 (armv7k 32 bit) 
@@ -49,17 +50,20 @@ Another possible way to solve architecture error is bitcode translation (from ht
 ```
 /Applications/Xcode-12.4.app/Contents/Developer/usr/bin/bitcode-build-tool -o ~/Downloads/libtdjson.1.7.2.arm64_32.dylib --sdk /Applications/Xcode-12.4.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS.sdk/ --translate-watchos ~/Downloads/libtdjson.1.7.2.dylib
 ```
-2. integrate into project https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
+## QRCode generator
+from TG iOS?
 
-### Thin Swift client wrapper
-### QR Code login
-### Chat list
+## Image loading
+TDLib?
 
+## DB / local storage
+TDLib?
 
 ## Crazy thoughts
 - Check archiving to make sure simulator slices (i386, x86_64) aren't included 
 - Use external JSON serialization lib (faster than built-in)
 - Use whole module + time optimizations
+- Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 
 ## Environment
 Xcode 12.4 (App Store version)

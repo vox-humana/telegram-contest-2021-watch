@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "swift_qrcodejs",
+        "repositoryURL": "https://github.com/ApolloZhu/swift_qrcodejs.git",
+        "state": {
+          "branch": null,
+          "revision": "53da4ea930345cb3c7d72a0e639d3318179722b4",
+          "version": "1.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
