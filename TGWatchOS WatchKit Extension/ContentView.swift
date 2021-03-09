@@ -21,7 +21,7 @@ struct ContentView: View {
                     }
                 })
         } else {
-            ChatListView()
+            ChatListView(vm: .init(listPublisher: service.chatListSignal.eraseToAnyPublisher()))
         }
     }
 }

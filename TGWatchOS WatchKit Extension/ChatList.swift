@@ -1,54 +1,19 @@
 import SwiftUI
-
-struct Message {
-    let text: String
-    let date: Date
-}
-
-struct Chat: Identifiable {
-    let id: String
-    let title: String
-    let icon: UIImage
-    let lastMessage: Message
-}
-
-extension Array where Element == Chat {
-    static func fake() -> [Chat] {
-        [
-            .init(
-                id: UUID().uuidString,
-                title: "Alicia Torreaux",
-                icon: UIImage(systemName: "person")!,
-                lastMessage: .init(text: "🥰Sticker", date: Date())
-            ),
-            .init(
-                id: UUID().uuidString,
-                title: "Digital Nomads",
-                icon: UIImage(systemName: "person.2")!,
-                lastMessage: .init(text: "We just reached", date: Date().addingTimeInterval(-3 * 60))
-            ),
-            .init(
-                id: UUID().uuidString,
-                title: "James",
-                icon: UIImage(systemName: "person")!,
-                lastMessage: .init(text: "I'm good thank you!", date: Date().addingTimeInterval(-3 * 60))
-            )
-        ]
-    }
-}
-
+import Combine
 
 struct ChatListView: View {
-    @State var chatList: [Chat] = .fake()
+    @State var chatList: [Chat] = []
+    @ObservedObject var vm: ChatListViewModel
     
     var body: some View {
-        VStack {
+        List {
             Button("New Message") {
-                
             }
             .buttonStyle(AccentStyle())
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets())
             
-            List(chatList) { chat in
+            ForEach(vm.list) { chat in
                 ChatCellView(chat: chat)
             }
         }
@@ -58,7 +23,7 @@ struct ChatListView: View {
 
 struct ChatListView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListView()
+        ChatListView(vm: .init(listPublisher: Just([Chat].fake()).eraseToAnyPublisher()))
     }
 }
 
@@ -104,11 +69,13 @@ struct AvatarView: View {
     }
 }
 
-final class ChatListViewModel {
-    @State var list: [Chat] = []
-    private let service: TGService
-    
-    init(service: TGService) {
-        self.service = service
+final class ChatListViewModel: ObservableObject {
+    @Published var list: [Chat] = []
+    private var subscription: AnyCancellable?
+
+    init(listPublisher: AnyPublisher<[Chat], Never>) {
+        subscription = listPublisher.receive(on: DispatchQueue.main).sink { [weak self] chats in
+            self?.list = chats
+        }
     }
 }

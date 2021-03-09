@@ -31,9 +31,12 @@ struct LoginView: View {
     }
     
     var inputView: some View {
-        SecureField("Enter password", text: $password, onCommit:  {
-            self.vm.service.sendAuthentication(password: Secrets.testPassword)
-        })
+        Form {
+            Text("Enter password to complete login")
+            SecureField("password", text: $password, onCommit:  {
+                self.vm.service.sendAuthentication(password: Secrets.testPassword)
+            })
+        }
     }
 }
 
@@ -74,7 +77,7 @@ final class LoginViewModel: ObservableObject {
                     self.state = .codeRecevied(image)
                 }
             case .authorized:
-                print("authorized")
+                logger.debug("authorized")
             case .passwordWaiting:
                 self.state = .passwordWaiting
             case .passwordSent:

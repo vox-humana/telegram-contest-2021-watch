@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccentStyle: ButtonStyle {
-    private let color = Color.accentColor
+    private let color = Color.accentColor // doesn't work on watchOS 6
     
     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
         RoundedRectangle(cornerRadius: 4)

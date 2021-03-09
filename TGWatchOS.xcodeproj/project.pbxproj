@@ -10,6 +10,10 @@
 		8E18EDA725F4A5240049554A /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18EDA625F4A5240049554A /* ChatList.swift */; };
 		8E18EDB525F4AC490049554A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18EDB425F4AC490049554A /* Style.swift */; };
 		8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18ED8925F4A2A80049554A /* TDClient.swift */; };
+		8E20677525F7763F003C57A1 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20677425F7763F003C57A1 /* Chat.swift */; };
+		8E20677B25F78475003C57A1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20677A25F78475003C57A1 /* Logger.swift */; };
+		8E20695F25F78707003C57A1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20695E25F78707003C57A1 /* Message.swift */; };
+		8E20696325F787ED003C57A1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20696225F787ED003C57A1 /* JSON.swift */; };
 		8E27194E25F4A14500A263D2 /* TGWatchOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E27195425F4A14500A263D2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195225F4A14500A263D2 /* Interface.storyboard */; };
 		8E27195625F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195525F4A14600A263D2 /* Assets.xcassets */; };
@@ -94,6 +98,10 @@
 		8E18EDC325F4B3E00049554A /* td_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_log.h; sourceTree = "<group>"; };
 		8E18EDC425F4B3E00049554A /* td_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = td_api.hpp; sourceTree = "<group>"; };
 		8E18EDC525F4B3E00049554A /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		8E20677425F7763F003C57A1 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		8E20677A25F78475003C57A1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		8E20695E25F78707003C57A1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8E20696225F787ED003C57A1 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		8E27194925F4A14400A263D2 /* TGWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TGWatchOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27195325F4A14500A263D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -200,6 +208,16 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		8E20677325F77624003C57A1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E20677425F7763F003C57A1 /* Chat.swift */,
+				8E20695E25F78707003C57A1 /* Message.swift */,
+				8E20696225F787ED003C57A1 /* JSON.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8E27194225F4A14400A263D2 = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +256,7 @@
 		8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				8E20677325F77624003C57A1 /* Model */,
 				8EB3418325F5CC2F0030F121 /* LoginView.swift */,
 				8E18EDA625F4A5240049554A /* ChatList.swift */,
 				8E18EDB425F4AC490049554A /* Style.swift */,
@@ -247,6 +266,7 @@
 				8E27196925F4A14600A263D2 /* Assets.xcassets */,
 				8E27196E25F4A14600A263D2 /* Info.plist */,
 				8E27196B25F4A14600A263D2 /* Preview Content */,
+				8E20677A25F78475003C57A1 /* Logger.swift */,
 			);
 			path = "TGWatchOS WatchKit Extension";
 			sourceTree = "<group>";
@@ -398,12 +418,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E18EDA725F4A5240049554A /* ChatList.swift in Sources */,
+				8E20696325F787ED003C57A1 /* JSON.swift in Sources */,
+				8E20677B25F78475003C57A1 /* Logger.swift in Sources */,
 				8EB341A025F640D60030F121 /* Secrets.swift in Sources */,
 				8EB3418425F5CC2F0030F121 /* LoginView.swift in Sources */,
+				8E20677525F7763F003C57A1 /* Chat.swift in Sources */,
 				8E27196425F4A14600A263D2 /* ContentView.swift in Sources */,
 				8E27196225F4A14600A263D2 /* HostingController.swift in Sources */,
 				8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */,
 				8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */,
+				8E20695F25F78707003C57A1 /* Message.swift in Sources */,
 				8E18EDB525F4AC490049554A /* Style.swift in Sources */,
 				8EB3418A25F5D0A10030F121 /* TGService.swift in Sources */,
 			);
