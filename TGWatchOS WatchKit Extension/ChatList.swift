@@ -2,7 +2,6 @@ import SwiftUI
 import Combine
 
 struct ChatListView: View {
-    @State var chatList: [Chat] = []
     @ObservedObject var vm: ChatListViewModel
     
     var body: some View {
@@ -12,9 +11,12 @@ struct ChatListView: View {
             .buttonStyle(AccentStyle())
             .listRowBackground(Color.clear)
             .listRowInsets(EdgeInsets())
-            
+
             ForEach(vm.list) { chat in
-                ChatCellView(chat: chat)
+                ChatCellView(chat: chat) { chat in
+                    self.vm.fileLoader.downloadPhoto(for: chat)
+                }
+                    .listRowInsets(EdgeInsets())
             }
         }
         .navigationBarTitle("Charts")
@@ -23,25 +25,40 @@ struct ChatListView: View {
 
 struct ChatListView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatListView(vm: .init(listPublisher: Just([Chat].fake()).eraseToAnyPublisher()))
+        ChatListView(vm: .init(fileLoader: FakeFileLoader(), listPublisher: Just([Chat].fake()).eraseToAnyPublisher()))
     }
 }
 
 struct ChatCellView: View {
     let chat: Chat
+    let downloadPhoto: (Chat) -> Void
     
     var body: some View {
-        HStack {
-            AvatarView()
+        HStack(alignment: .top, spacing: 8) {
+            AvatarView(photo: chat.icon)
+                .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
+                .onAppear {
+                    self.downloadPhoto(chat)
+                }
+
             VStack(alignment: .leading) {
                 Text(chat.title)
                     .lineLimit(1)
                     .font(.tgChatTitle)
+                    .padding(EdgeInsets(top: 3, leading: 0, bottom: 0, trailing: 0))
                 Text(chat.lastMessage.text)
                     .lineLimit(1)
                     .font(.body)
-                Text(DateFormatter.time(from: chat.lastMessage.date))
-                    .font(.caption)
+                
+                HStack(alignment: .top, spacing: 0) {
+                    Text(DateFormatter.time(from: chat.lastMessage.date))
+                        .font(.caption)
+                    Spacer()
+                    if chat.unreadCount > 0 {
+                        UnreadBadge(count: chat.unreadCount)
+                    }
+                }
+                .padding(EdgeInsets(top: 2, leading: 0, bottom: 4, trailing: 4))
             }
         }
     }
@@ -61,21 +78,81 @@ extension DateFormatter {
     }()
 }
 
-struct AvatarView: View {
+struct UnreadBadge: View {
+    let count: Int
     var body: some View {
-        Image(systemName: "person.crop.circle")
-            .frame(width: 24, height: 24, alignment: .top)
-            .cornerRadius(12)
+        Text("\(count)")
+            .font(.tgBadgeCount)
+            .background(
+                Circle().fill(Color.accentColor).frame(width: 17, height: 17)
+            )
+    }
+}
+
+struct AvatarView: View {
+    let photo: Photo
+    private let size: CGFloat = 24
+    
+    var body: some View {
+        LocalPhotoView(file: photo.smallFile)
+            .frame(width: size, height: size)
+            .cornerRadius(size / 2)
     }
 }
 
 final class ChatListViewModel: ObservableObject {
     @Published var list: [Chat] = []
     private var subscription: AnyCancellable?
+    let fileLoader: FileLoader
 
-    init(listPublisher: AnyPublisher<[Chat], Never>) {
+    init(fileLoader: FileLoader, listPublisher: AnyPublisher<[Chat], Never>) {
+        self.fileLoader = fileLoader
         subscription = listPublisher.receive(on: DispatchQueue.main).sink { [weak self] chats in
             self?.list = chats
+        }
+    }
+}
+
+
+struct LocalPhotoView: View {
+    private class LocalLoader: ObservableObject {
+        var image: Image? = nil
+
+        init(file: File?) {
+            guard let file = file, file.downloaded else {
+                return
+            }
+            let fileURL = URL(fileURLWithPath: file.path)
+            
+            // background?
+            guard
+                let data = try? Data(contentsOf: fileURL),
+                let uiImage = UIImage(data: data)
+            else {
+                assertionFailure("Can't read image from: \(file.path)")
+                return
+            }
+            
+            self.image = Image(uiImage: uiImage)
+            self.objectWillChange.send()
+        }
+    }
+
+    @ObservedObject private var loader: LocalLoader
+
+    var body: some View {
+        image.resizable()
+    }
+
+    init(file: File?) {
+        _loader = ObservedObject(wrappedValue: LocalLoader(file: file))
+    }
+
+    private var image: Image {
+        if let image = loader.image {
+            return image
+        } else {
+            return Image(systemName: "person")
         }
     }
 }

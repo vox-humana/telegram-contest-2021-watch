@@ -23,6 +23,8 @@
 		8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */; };
 		8E27196A25F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196925F4A14600A263D2 /* Assets.xcassets */; };
 		8E27196D25F4A14600A263D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */; };
+		8E33A3F825F8E50400C2AD8E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33A3F725F8E50400C2AD8E /* Photo.swift */; };
+		8E33A3FC25F8F24300C2AD8E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33A3FB25F8F24300C2AD8E /* Model.swift */; };
 		8EB3418425F5CC2F0030F121 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418325F5CC2F0030F121 /* LoginView.swift */; };
 		8EB3418A25F5D0A10030F121 /* TGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418925F5D0A10030F121 /* TGService.swift */; };
 		8EB3419225F5FA330030F121 /* QrCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8EB3419125F5FA330030F121 /* QrCode */; };
@@ -114,6 +116,8 @@
 		8E27196925F4A14600A263D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E27196E25F4A14600A263D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E33A3F725F8E50400C2AD8E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		8E33A3FB25F8F24300C2AD8E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8EB3418325F5CC2F0030F121 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8EB3418925F5D0A10030F121 /* TGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGService.swift; sourceTree = "<group>"; };
 		8EB3418D25F5F9F10030F121 /* QrCode */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QrCode; path = ../QrCode; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				8E20677425F7763F003C57A1 /* Chat.swift */,
 				8E20695E25F78707003C57A1 /* Message.swift */,
 				8E20696225F787ED003C57A1 /* JSON.swift */,
+				8E33A3F725F8E50400C2AD8E /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */,
+				8E33A3FB25F8F24300C2AD8E /* Model.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -417,6 +423,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E33A3FC25F8F24300C2AD8E /* Model.swift in Sources */,
+				8E33A3F825F8E50400C2AD8E /* Photo.swift in Sources */,
 				8E18EDA725F4A5240049554A /* ChatList.swift in Sources */,
 				8E20696325F787ED003C57A1 /* JSON.swift in Sources */,
 				8E20677B25F78475003C57A1 /* Logger.swift in Sources */,

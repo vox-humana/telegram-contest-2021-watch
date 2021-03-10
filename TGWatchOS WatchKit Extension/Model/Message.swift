@@ -2,7 +2,7 @@ import Foundation
 
 typealias MessageId = Int64
 
-struct Message {
+struct Message: Hashable {
     let id: MessageId
     let text: String
     let date: Date
@@ -24,7 +24,7 @@ private extension JSON {
         let content: JSON = self.unwrap("content")
         let type: String = content.unwrap("@type")
         if type == "messageVideo" {
-            return "video"
+            return "🎥video"
         }
         if type == "messageText" {
             return content.unwrap("text").extractMessageText()
@@ -38,12 +38,48 @@ private extension JSON {
             return "📊"
         }
 
+        if type == "messageSupergroupChatCreate" {
+            return "Channel created"
+        }
+        
+        if type == "messageDocument" {
+            return "📎" + content.unwrap("caption").extractMessageText()
+        }
+        
+        if type == "messageChatAddMembers" {
+            return "+👤"
+        }
+
+        if type == "messageChatDeleteMember" {
+            return "-👤"
+        }
+
+        if type == "messageContactRegistered" {
+            return "👤"
+        }
+
+        if type == "messageSticker" {
+            return content.unwrap("sticker").extractStickerEmoji()
+        }
+        
+        if type == "messageAnimation" {
+            return "🎥animation"
+        }
+        
+        if type == "messageCustomServiceAction" {
+            return content.extractMessageText()
+        }
+        
         logger.debug("Unsupported content: \(content)")
         return "🖼"
     }
     
     func extractMessageText() -> String {
         self.unwrap("text")
+    }
+
+    func extractStickerEmoji() -> String {
+        self.unwrap("emoji")
     }
 }
 

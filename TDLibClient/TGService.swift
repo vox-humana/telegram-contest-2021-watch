@@ -1,24 +1,17 @@
 import Foundation
 import Combine
 
-protocol NetworkClient {
-    func requestQRCode()
-    func requestChatList()
-}
-
-extension URL {
-    private static let documentsURL = FileManager.default
-        .urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let tdLibDirectory = documentsURL.appendingPathComponent("tdlib")
-    static let filesDirectory = documentsURL.appendingPathComponent("files")
-}
-
 enum AuthState {
     case initial
     case confirmationWaiting(link: String)
     case passwordWaiting
     case passwordSent
     case authorized
+}
+
+protocol FileLoader {
+    //var loadingStream: AnyPublisher<File>
+    func downloadPhoto(for chat: Chat)
 }
 
 final class TGService {
@@ -30,6 +23,8 @@ final class TGService {
     
     private let databasePath = FileManager.SearchPathDirectory.applicationDirectory
     private let client = TdClient()
+    
+    private var chatIcons: [FileId: ChatId] = [:]
     
     init() {
     }
@@ -46,39 +41,73 @@ final class TGService {
             switch updateType {
             case "updateAuthorizationState":
                 self.updateAuthorizationState(authorizationState: update["authorization_state"] as! Dictionary<String, Any>)
+
             case "updateNewChat":
                 let chat = Chat(json: update["chat"]!)
                 self.chats[chat.id] = chat
+                self.setOrder(0, for: chat.id)
                 self.notifyChats()
-                
-                break
+
+            // or separate storages?
+            case "updateSecretChat",
+                 "updateBasicGroup",
+                 "updateSupergroup":
+                logger.debug("Other chat type \(update)")
+//                let chat = Chat(json: update["chat"]!)
+//                self.chats[chat.id] = chat
+//                self.notifyChats()
+
+
             case "updateUser":
                 break
                 
             case "updateChatLastMessage":
-                let message = Message(json: update["last_message"]!)
-                if let chatId = update["chat_id"] as? ChatId {
-                    self.chats[chatId]?.lastMessage = message
-                    self.notifyChats()
+                guard let chatId = update["chat_id"] as? ChatId else {
+                    assertionFailure("empty chat_id")
+                    break
                 }
+                if let messageJSON = update["last_message"] as? JSON {
+                    let message = Message(json: messageJSON)
+                    self.chats[chatId]?.lastMessage = message
+                }
+                
+                if let position = update["positions"] as? [JSON] {
+                    // TODO: check
+                    let lastPosition = position.last
+                    assert(position.count <= 1)
+                    if let order = lastPosition?.chatOrder() {
+                        self.setOrder(order, for: chatId)
+                    }
+                }
+                self.notifyChats()
+                
             case "updateChatPosition":
                 let chatId: ChatId = update.unwrap("chat_id")
                 let position: JSON = update.unwrap("position")
-                let orderString: String = position.unwrap("order") // :Why:
-                let order = Int64(orderString)!
+                
                 if self.chats[chatId] == nil {
                     logger.debug("ignore position update for \(chatId)")
                     break
                 }
                 //assert(self.chats[chatId] == nil) // TODO: check
-                self.chats[chatId]?.position = order
+                self.setOrder(position.chatOrder(), for: chatId)
                 self.notifyChats()
                 break
                 
             case "updateChatPhoto":
                 break
                 
+            case "updateFile":
+                let file = File(json: update.unwrap("file"))
+                guard let chatId = self.chatIcons[file.id] else {
+                    assertionFailure("Can't find chat for download \(file.id)")
+                    break
+                }
+                self.chats[chatId]?.icon.smallFile = file
+                self.notifyChats()
+                
             default:
+                logger.debug("Unknown update \(updateType)")
                 break
             }
         }
@@ -89,9 +118,10 @@ final class TGService {
         client.queryAsync(query:["@type":"checkAuthenticationPassword", "password":password], f:checkAuthenticationError)
     }
     
-    func requestChats() {
-        logger.debug("Requesting chats....\(mainChatList.count)")
-        
+    private func requestMainChatList() {
+        let limit = 20
+        logger.debug("getChats....\(mainChatList)")
+
         let offsetChatId: ChatId
         let offsetOrder: Int64
         if !mainChatList.isEmpty {
@@ -102,7 +132,7 @@ final class TGService {
             offsetChatId = 0
             offsetOrder = Int64.max
         }
-        let limit = 20
+
         // https://core.telegram.org/tdlib/getting-started#getting-the-lists-of-chats
         client.queryAsync(query: ["@type":"getChats", "limit": limit, "offset_chat_id": offsetChatId, "offset_order": offsetOrder]) { [weak self] response in
             guard let self = self else { return }
@@ -110,13 +140,32 @@ final class TGService {
 
             let chatIds: [ChatId] = response.unwrap("chat_ids")
             if chatIds.isEmpty {
-                logger.debug("getChats done \(self.mainChatList.count)")
+                logger.debug("getChats done 1 \(self.mainChatList)")
                 return
             }
-            
-            // TODO: pagination
-            // self.requestChats()
+
+            for chatId in chatIds {
+                if self.chats[chatId] == nil {
+                    self.requestMainChatList()
+                }
+            }
+
+            // FIXME: check this
+            // all chats were requested
+            logger.debug("getChats done 2 \(self.mainChatList)")
         }
+    }
+    
+    private func setOrder(_ order: Int64, for chatId: ChatId) {
+        guard let chat = chats[chatId] else {
+            logger.debug("Haven't found chat for \(chatId)")
+            return
+        }
+        if let index = mainChatList.firstIndex(where: { $0.0 == chatId && $0.1 == chat.position }) {
+            mainChatList.remove(at: index)
+        }
+        chats[chatId]?.position = order
+        mainChatList.append((chatId, order))
     }
     
     private func notifyChats() {
@@ -204,7 +253,23 @@ final class TGService {
     }
     
     private func onLogin() {
-        requestChats()
+        requestMainChatList()
+    }
+}
+
+extension TGService: FileLoader {
+    func downloadPhoto(for chat: Chat) {
+        guard let file = chat.icon.smallFile, !file.downloaded else {
+            return
+        }
+
+        logger.debug("Start download \(file.id)")
+        chatIcons[file.id] = chat.id
+        
+        let chatAvatarsDownloadPriority = 1 // [1..32]
+        client.queryAsync(query: ["@type":"downloadFile", "file_id": file.id, "priority": chatAvatarsDownloadPriority]) { [weak self] response in
+            logger.debug(response)
+        }
     }
 }
 
@@ -217,4 +282,11 @@ private extension Chat {
 
 extension TGService {
     static let fake = TGService()
+}
+
+private extension URL {
+    static let documentsURL = FileManager.default
+        .urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let tdLibDirectory = documentsURL.appendingPathComponent("tdlib")
+    static let filesDirectory = documentsURL.appendingPathComponent("files")
 }

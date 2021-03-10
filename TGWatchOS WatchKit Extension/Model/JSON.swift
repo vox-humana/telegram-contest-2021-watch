@@ -45,3 +45,10 @@ extension JSONDecodable {
         self.init(json: json as! JSON)
     }
 }
+
+extension JSON {
+    func chatOrder() -> Int64 {
+        let orderString: String = self.unwrap("order") // :Why:
+        return Int64(orderString)!
+    }
+}
