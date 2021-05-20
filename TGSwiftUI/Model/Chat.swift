@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-enum ChatType: String, Equatable {
+public enum ChatType: String, Equatable {
     case chat
     case chatTypeSecret
     case chatTypeBasicGroup
@@ -9,20 +9,21 @@ enum ChatType: String, Equatable {
     case chatTypePrivate
 }
 
-typealias ChatId = Int64
+public typealias ChatId = Int64
 
-struct Chat: Hashable, Identifiable {
-    let id: ChatId
-    let type: ChatType
-    let title: String
-    var icon: Photo
-    var lastMessage: Message
-    let unreadCount: Int
-    var position: Int64 = 0
+public struct Chat: Hashable, Identifiable {
+    public let id: ChatId
+    public let type: ChatType
+    public let title: String
+    public var icon: Photo
+    public var lastMessage: Message
+    public let unreadCount: Int
+    public let unread: Bool
+    public var position: Int64 = 0
 }
 
 extension Chat: JSONDecodable {
-    init(json: [String: Any]) {
+    public init(json: [String: Any]) {
         let typeDict = json["type"] as! [String: Any]
         type = ChatType(rawValue: typeDict.unwrap("@type"))!
 
@@ -36,11 +37,14 @@ extension Chat: JSONDecodable {
         } else {
             icon = Photo(smallFile: nil)
         }
+        
+        // TODO:
+        unread = false
     }
 }
 
 extension Photo: JSONDecodable {
-    init(json: [String: Any]) {
+    public init(json: [String: Any]) {
         guard !json.isEmpty else {
             smallFile = nil
             return

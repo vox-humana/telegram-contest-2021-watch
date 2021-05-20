@@ -1,7 +1,7 @@
 import Foundation
 
-struct Logger {
-    func debug(
+public struct Logger {
+    public func debug(
         _ closure: @autoclosure () -> Any?,
         filename: StaticString = #fileID, line: Int = #line, function: StaticString = #function
     ) {
@@ -9,4 +9,4 @@ struct Logger {
     }
 }
 
-let logger = Logger()
+public let logger = Logger()

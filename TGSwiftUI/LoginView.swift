@@ -2,11 +2,15 @@ import Combine
 import QrCode
 import SwiftUI
 
-struct LoginView: View {
+public struct LoginView: View {
     @ObservedObject var vm: LoginViewModel
     @State var password: String = ""
 
-    var body: some View {
+    public init(_ vm: LoginViewModel) {
+        self.vm = vm
+    }
+    
+    public var body: some View {
         switch vm.state {
         case .codeRequested:
             ActivityIndicator()
@@ -34,7 +38,8 @@ struct LoginView: View {
         Form {
             Text("Enter password to complete login")
             SecureField("password", text: $password, onCommit: {
-                self.vm.service.sendAuthentication(password: Secrets.testPassword)
+                // TODO: real pass
+                self.vm.sendPassword(Secrets.testPassword)
             })
         }
     }
@@ -43,16 +48,18 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(
-            vm: LoginViewModel(
-                service: .fake,
-                initialState: .codeRecevied(QRCode.image(for: "tg://login?token=SomeRandomTelegramToken")!)
-//                initialState: .codeRecevied(UIImage(named: "qr-code")!)
+            LoginViewModel(
+                signal: Just(
+                    AuthState.confirmationWaiting(link: "tg://login?token=SomeRandomTelegramToken")
+                )
+                .eraseToAnyPublisher()
             )
         )
     }
 }
 
-final class LoginViewModel: ObservableObject {
+
+public final class LoginViewModel: ObservableObject {
     enum State: Equatable {
         case codeRequested
         case codeRecevied(UIImage)
@@ -60,14 +67,14 @@ final class LoginViewModel: ObservableObject {
     }
 
     @Published var state: State
+    let sendPassword: (String) -> Void
     private var subscription: AnyCancellable?
-    let service: TGService
 
-    init(service: TGService, initialState: State = .codeRequested) {
-        self.service = service
-        state = initialState
+    public init(signal: AnyPublisher<AuthState, Never>, sendPassword: @escaping (String) -> Void = { _ in }) {
+        self.sendPassword = sendPassword
+        state = .codeRequested
 
-        subscription = service.authStateSignal.receive(on: DispatchQueue.main).sink { [weak self] state in
+        subscription = signal.receive(on: DispatchQueue.main).sink { [weak self] state in
             guard let self = self else { return }
             switch state {
             case .initial:
@@ -97,7 +104,8 @@ struct ActivityIndicator: View {
 enum QRCode {
     static func image(for link: String) -> UIImage? {
         let screenSize = WKInterfaceDevice.current().screenBounds.width
-        let (size, callback) = qrCode(string: link, color: .black, icon: .custom(UIImage(named: "Logo")))
+        let logo = UIImage(named: "Logo", in: Bundle(for: LoginViewModel.self), with: nil)
+        let (size, callback) = qrCode(string: link, color: .black, icon: .custom(logo))
         let imageSize = CGSize(width: screenSize, height: screenSize)
         return callback(.init(corners: .init(radius: 10), imageSize: imageSize, boundingSize: imageSize, intrinsicInsets: .zero))?.generateImage()
     }

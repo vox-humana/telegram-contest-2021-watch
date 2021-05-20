@@ -1,18 +1,6 @@
 import Combine
 import Foundation
-
-enum AuthState {
-    case initial
-    case confirmationWaiting(link: String)
-    case passwordWaiting
-    case passwordSent
-    case authorized
-}
-
-protocol FileLoader {
-    // var loadingStream: AnyPublisher<File>
-    func downloadPhoto(for chat: Chat)
-}
+import TGSwiftUI
 
 final class TGService {
     let authStateSignal = CurrentValueSubject<AuthState, Never>(.initial)
@@ -69,10 +57,9 @@ final class TGService {
                 }
 
                 if let position = update["positions"] as? [JSON] {
-                    // TODO: check
-                    let lastPosition = position.last
-                    assert(position.count <= 1)
-                    if let order = lastPosition?.chatOrder() {
+                    let positions = position.map(Position.init(json:))
+                    let mainPosition = positions.first(where: { $0.list == .main })
+                    if let order = mainPosition?.order {
                         self.setOrder(order, for: chatId)
                     }
                 }
@@ -80,14 +67,14 @@ final class TGService {
 
             case "updateChatPosition":
                 let chatId: ChatId = update.unwrap("chat_id")
-                let position: JSON = update.unwrap("position")
 
                 if self.chats[chatId] == nil {
                     logger.debug("ignore position update for \(chatId)")
                     break
                 }
-                // assert(self.chats[chatId] == nil) // TODO: check
-                self.setOrder(position.chatOrder(), for: chatId)
+
+                let position = Position(json: update.unwrap("position"))
+                self.setOrder(position.order, for: chatId)
                 self.notifyChats()
 
             case "updateChatPhoto":
@@ -107,6 +94,10 @@ final class TGService {
 
             default:
                 logger.debug("Unknown update \(updateType)")
+                // updateSupergroupFullInfo
+                // updateUserStatus
+                // updateDeleteMessages
+                // updateUserFullInfo
             }
         }
 
@@ -226,11 +217,11 @@ final class TGService {
 
         case "authorizationStateWaitPassword":
             logger.debug("Enter password: ")
-            authStateSignal.send(.passwordWaiting)
+            sendAuthState(.passwordWaiting)
 
         case "authorizationStateReady":
             logger.debug("Authorized!")
-            authStateSignal.send(.authorized)
+            sendAuthState(.authorized)
             onLogin()
 
         case "authorizationStateLoggingOut":
@@ -245,13 +236,19 @@ final class TGService {
         case "authorizationStateWaitOtherDeviceConfirmation":
             let link = authorizationState["link"] as! String
             logger.debug("received QR link \(link)")
-            authStateSignal.send(.confirmationWaiting(link: link))
+            sendAuthState(.confirmationWaiting(link: link))
 
         default:
             assert(false, "TODO: Unexpected authorization state")
         }
     }
 
+    private func sendAuthState(_ state: AuthState) {
+        DispatchQueue.main.async {
+            self.authStateSignal.send(state)
+        }
+    }
+    
     private func checkAuthenticationError(error: [String: Any]) {
         if error["@type"] as! String == "error" {
             client.queryAsync(query: ["@type": "getAuthorizationState"], f: updateAuthorizationState)

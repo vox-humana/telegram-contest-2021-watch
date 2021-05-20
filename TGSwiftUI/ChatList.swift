@@ -1,10 +1,14 @@
 import Combine
 import SwiftUI
 
-struct ChatListView: View {
+public struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
-
-    var body: some View {
+    
+    public init(_ vm: ChatListViewModel) {
+        self.vm = vm
+    }
+    
+    public var body: some View {
         List {
             Button("New Message") {}
                 .buttonStyle(AccentStyle())
@@ -19,47 +23,6 @@ struct ChatListView: View {
             }
         }
         .navigationBarTitle("Charts")
-    }
-}
-
-struct ChatListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatListView(vm: .init(fileLoader: FakeFileLoader(), listPublisher: Just([Chat].fake()).eraseToAnyPublisher()))
-    }
-}
-
-struct ChatCellView: View {
-    let chat: Chat
-    let downloadPhoto: (Chat) -> Void
-
-    var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            AvatarView(photo: chat.icon)
-                .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
-                .onAppear {
-                    self.downloadPhoto(chat)
-                }
-
-            VStack(alignment: .leading) {
-                Text(chat.title)
-                    .lineLimit(1)
-                    .font(.tgChatTitle)
-                    .padding(EdgeInsets(top: 3, leading: 0, bottom: 0, trailing: 0))
-                Text(chat.lastMessage.text)
-                    .lineLimit(1)
-                    .font(.body)
-
-                HStack(alignment: .top, spacing: 0) {
-                    Text(DateFormatter.time(from: chat.lastMessage.date))
-                        .font(.caption)
-                    Spacer()
-                    if chat.unreadCount > 0 {
-                        UnreadBadge(count: chat.unreadCount)
-                    }
-                }
-                .padding(EdgeInsets(top: 2, leading: 0, bottom: 4, trailing: 4))
-            }
-        }
     }
 }
 
@@ -82,9 +45,18 @@ struct UnreadBadge: View {
     var body: some View {
         Text("\(count)")
             .font(.tgBadgeCount)
+            .padding(3)
             .background(
-                Circle().fill(Color.accentColor).frame(width: 17, height: 17)
+                Circle().fill(Color.accentColor)
             )
+    }
+}
+
+struct UnreadBadge_Previews: PreviewProvider {
+    static var previews: some View {
+        UnreadBadge(count: 99)
+
+        UnreadBadge(count: 6)
     }
 }
 
@@ -99,12 +71,12 @@ struct AvatarView: View {
     }
 }
 
-final class ChatListViewModel: ObservableObject {
+public final class ChatListViewModel: ObservableObject {
     @Published var list: [Chat] = []
     private var subscription: AnyCancellable?
     let fileLoader: FileLoader
 
-    init(fileLoader: FileLoader, listPublisher: AnyPublisher<[Chat], Never>) {
+    public init(fileLoader: FileLoader, listPublisher: AnyPublisher<[Chat], Never>) {
         self.fileLoader = fileLoader
         subscription = listPublisher.receive(on: DispatchQueue.main).sink { [weak self] chats in
             self?.list = chats

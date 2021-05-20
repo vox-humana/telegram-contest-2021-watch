@@ -11,13 +11,14 @@ extension Array where Element == Chat {
                 id: 0,
                 type: .chatTypePrivate,
                 title: "Alicia Torreaux",
-                icon: Photo(smallFile: nil),
+                icon: Photo(smallFile: .userAvatar),
                 lastMessage: .init(
                     id: 1,
                     text: "🥰Sticker",
                     date: Date()
                 ),
-                unreadCount: 0
+                unreadCount: 0,
+                unread: true
             ),
             .init(
                 id: 1,
@@ -29,7 +30,8 @@ extension Array where Element == Chat {
                     text: "We just reached",
                     date: Date().addingTimeInterval(-3 * 60)
                 ),
-                unreadCount: 6
+                unreadCount: 6,
+                unread: false
             ),
             .init(
                 id: 2,
@@ -41,8 +43,17 @@ extension Array where Element == Chat {
                     text: "I'm good thank you!",
                     date: Date().addingTimeInterval(-3 * 60)
                 ),
-                unreadCount: 0
+                unreadCount: 0,
+                unread: true
             ),
         ]
+    }
+    
+}
+
+extension File {
+    static let userAvatar: File = .init(id: 1, path: imagePath("user-avatar"), downloaded: true, size: 0)
+    private static func imagePath(_ name: String) -> String {
+        "\(Bundle(for: LoginViewModel.self).bundlePath)/\(name).png"
     }
 }

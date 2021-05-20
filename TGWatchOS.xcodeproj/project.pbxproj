@@ -7,13 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E18EDA725F4A5240049554A /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18EDA625F4A5240049554A /* ChatList.swift */; };
-		8E18EDB525F4AC490049554A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18EDB425F4AC490049554A /* Style.swift */; };
 		8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18ED8925F4A2A80049554A /* TDClient.swift */; };
-		8E20677525F7763F003C57A1 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20677425F7763F003C57A1 /* Chat.swift */; };
-		8E20677B25F78475003C57A1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20677A25F78475003C57A1 /* Logger.swift */; };
-		8E20695F25F78707003C57A1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20695E25F78707003C57A1 /* Message.swift */; };
-		8E20696325F787ED003C57A1 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E20696225F787ED003C57A1 /* JSON.swift */; };
 		8E27194E25F4A14500A263D2 /* TGWatchOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E27195425F4A14500A263D2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195225F4A14500A263D2 /* Interface.storyboard */; };
 		8E27195625F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195525F4A14600A263D2 /* Assets.xcassets */; };
@@ -23,14 +17,29 @@
 		8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */; };
 		8E27196A25F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196925F4A14600A263D2 /* Assets.xcassets */; };
 		8E27196D25F4A14600A263D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */; };
-		8E33A3F825F8E50400C2AD8E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33A3F725F8E50400C2AD8E /* Photo.swift */; };
-		8E33A3FC25F8F24300C2AD8E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33A3FB25F8F24300C2AD8E /* Model.swift */; };
 		8E3DE0D6265668E100A29D7F /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DE0D5265668D900A29D7F /* libtdjson.dylib */; };
 		8E3DE0D7265668E100A29D7F /* libtdjson.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8E3DE0D5265668D900A29D7F /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		8EB3418425F5CC2F0030F121 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418325F5CC2F0030F121 /* LoginView.swift */; };
 		8EB3418A25F5D0A10030F121 /* TGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418925F5D0A10030F121 /* TGService.swift */; };
-		8EB3419225F5FA330030F121 /* QrCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8EB3419125F5FA330030F121 /* QrCode */; };
-		8EB341A025F640D60030F121 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3419F25F640D60030F121 /* Secrets.swift */; };
+		8EEA86D326567A5300FF82E9 /* TGSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EEA86D126567A5300FF82E9 /* TGSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8EEA86D626567A5300FF82E9 /* TGSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */; };
+		8EEA86D726567A5300FF82E9 /* TGSwiftUI.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8EEA86E626567A8300FF82E9 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86DC26567A8300FF82E9 /* Chat.swift */; };
+		8EEA86E726567A8300FF82E9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86DD26567A8300FF82E9 /* Message.swift */; };
+		8EEA86E826567A8300FF82E9 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86DE26567A8300FF82E9 /* JSON.swift */; };
+		8EEA86E926567A8300FF82E9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86DF26567A8300FF82E9 /* Photo.swift */; };
+		8EEA86EA26567A8300FF82E9 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86E026567A8300FF82E9 /* Client.swift */; };
+		8EEA86EB26567A8300FF82E9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86E126567A8300FF82E9 /* LoginView.swift */; };
+		8EEA86EC26567A8300FF82E9 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86E226567A8300FF82E9 /* Secrets.swift */; };
+		8EEA86ED26567A8300FF82E9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86E326567A8300FF82E9 /* Logger.swift */; };
+		8EEA86EE26567A8300FF82E9 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86E426567A8300FF82E9 /* ChatList.swift */; };
+		8EEA86EF26567A8300FF82E9 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86E526567A8300FF82E9 /* Style.swift */; };
+		8EEA86F326567B1C00FF82E9 /* QrCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8EEA86F226567B1C00FF82E9 /* QrCode */; };
+		8EEA86F426567B5700FF82E9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E33A3FB25F8F24300C2AD8E /* Model.swift */; };
+		8EEA86F526567E3300FF82E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196925F4A14600A263D2 /* Assets.xcassets */; };
+		8EEA86F72656838B00FF82E9 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86F62656838B00FF82E9 /* Position.swift */; };
+		8EEA86F92656883F00FF82E9 /* ChatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86F82656883F00FF82E9 /* ChatCellView.swift */; };
+		8EEA86FB26568DFD00FF82E9 /* user-avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EEA86FA26568DFC00FF82E9 /* user-avatar.png */; };
+		8EEA86FD2656929A00FF82E9 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEA86FC2656929A00FF82E9 /* Debug.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +56,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8E27195B25F4A14600A263D2;
 			remoteInfo = "TGWatchOS WatchKit Extension";
+		};
+		8EEA86D426567A5300FF82E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E27194325F4A14400A263D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8EEA86CE26567A5300FF82E9;
+			remoteInfo = TGSwiftUI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -80,6 +96,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8E3DE0D7265668E100A29D7F /* libtdjson.dylib in Embed Libraries */,
+				8EEA86D726567A5300FF82E9 /* TGSwiftUI.framework in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,8 +107,6 @@
 		8E18ED8725F4A2A80049554A /* TDLibBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLibBridgingHeader.h; sourceTree = "<group>"; };
 		8E18ED8925F4A2A80049554A /* TDClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDClient.swift; sourceTree = "<group>"; };
 		8E18ED9925F4A3030049554A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8E18EDA625F4A5240049554A /* ChatList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
-		8E18EDB425F4AC490049554A /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		8E18EDBD25F4B3E00049554A /* TlObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TlObject.h; sourceTree = "<group>"; };
 		8E18EDBF25F4B3E00049554A /* tdjson_export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tdjson_export.h; sourceTree = "<group>"; };
 		8E18EDC025F4B3E00049554A /* td_json_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_json_client.h; sourceTree = "<group>"; };
@@ -100,10 +115,6 @@
 		8E18EDC325F4B3E00049554A /* td_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_log.h; sourceTree = "<group>"; };
 		8E18EDC425F4B3E00049554A /* td_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = td_api.hpp; sourceTree = "<group>"; };
 		8E18EDC525F4B3E00049554A /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
-		8E20677425F7763F003C57A1 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
-		8E20677A25F78475003C57A1 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		8E20695E25F78707003C57A1 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		8E20696225F787ED003C57A1 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		8E27194925F4A14400A263D2 /* TGWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TGWatchOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27195325F4A14500A263D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -116,13 +127,27 @@
 		8E27196925F4A14600A263D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E27196E25F4A14600A263D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E33A3F725F8E50400C2AD8E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		8E33A3FB25F8F24300C2AD8E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		8E3DE0D5265668D900A29D7F /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtdjson.dylib; sourceTree = "<group>"; };
-		8EB3418325F5CC2F0030F121 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8EB3418925F5D0A10030F121 /* TGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGService.swift; sourceTree = "<group>"; };
 		8EB3418D25F5F9F10030F121 /* QrCode */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QrCode; path = ../QrCode; sourceTree = "<group>"; };
-		8EB3419F25F640D60030F121 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TGSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EEA86D126567A5300FF82E9 /* TGSwiftUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TGSwiftUI.h; sourceTree = "<group>"; };
+		8EEA86D226567A5300FF82E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EEA86DC26567A8300FF82E9 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		8EEA86DD26567A8300FF82E9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8EEA86DE26567A8300FF82E9 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		8EEA86DF26567A8300FF82E9 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		8EEA86E026567A8300FF82E9 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		8EEA86E126567A8300FF82E9 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8EEA86E226567A8300FF82E9 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		8EEA86E326567A8300FF82E9 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		8EEA86E426567A8300FF82E9 /* ChatList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		8EEA86E526567A8300FF82E9 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		8EEA86F62656838B00FF82E9 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		8EEA86F82656883F00FF82E9 /* ChatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellView.swift; sourceTree = "<group>"; };
+		8EEA86FA26568DFC00FF82E9 /* user-avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-avatar.png"; path = "Preview Assets.xcassets/user-avatar.imageset/user-avatar.png"; sourceTree = "<group>"; };
+		8EEA86FC2656929A00FF82E9 /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +155,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EEA86D626567A5300FF82E9 /* TGSwiftUI.framework in Frameworks */,
 				8E3DE0D6265668E100A29D7F /* libtdjson.dylib in Frameworks */,
-				8EB3419225F5FA330030F121 /* QrCode in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EEA86CC26567A5300FF82E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EEA86F326567B1C00FF82E9 /* QrCode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,27 +245,16 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
-		8E20677325F77624003C57A1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8E20677425F7763F003C57A1 /* Chat.swift */,
-				8E20695E25F78707003C57A1 /* Message.swift */,
-				8E20696225F787ED003C57A1 /* JSON.swift */,
-				8E33A3F725F8E50400C2AD8E /* Photo.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		8E27194225F4A14400A263D2 = {
 			isa = PBXGroup;
 			children = (
 				8E18ED9925F4A3030049554A /* README.md */,
-				8EB3419F25F640D60030F121 /* Secrets.swift */,
 				8EB3418D25F5F9F10030F121 /* QrCode */,
 				8E18ED4925F4A2A80049554A /* tdjson */,
 				8E18ED8825F4A2A80049554A /* TDLibClient */,
 				8E27195125F4A14500A263D2 /* TGWatchOS WatchKit App */,
 				8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */,
+				8EEA86D026567A5300FF82E9 /* TGSwiftUI */,
 				8E27194A25F4A14400A263D2 /* Products */,
 				8EB3419025F5FA330030F121 /* Frameworks */,
 			);
@@ -244,6 +266,7 @@
 				8E27194925F4A14400A263D2 /* TGWatchOS.app */,
 				8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */,
 				8E27195C25F4A14600A263D2 /* TGWatchOS WatchKit Extension.appex */,
+				8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,17 +284,11 @@
 		8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				8E20677325F77624003C57A1 /* Model */,
-				8EB3418325F5CC2F0030F121 /* LoginView.swift */,
-				8E18EDA625F4A5240049554A /* ChatList.swift */,
-				8E18EDB425F4AC490049554A /* Style.swift */,
 				8E27196125F4A14600A263D2 /* HostingController.swift */,
 				8E27196325F4A14600A263D2 /* ContentView.swift */,
 				8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */,
 				8E27196925F4A14600A263D2 /* Assets.xcassets */,
 				8E27196E25F4A14600A263D2 /* Info.plist */,
-				8E27196B25F4A14600A263D2 /* Preview Content */,
-				8E20677A25F78475003C57A1 /* Logger.swift */,
 			);
 			path = "TGWatchOS WatchKit Extension";
 			sourceTree = "<group>";
@@ -279,6 +296,7 @@
 		8E27196B25F4A14600A263D2 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				8EEA86FA26568DFC00FF82E9 /* user-avatar.png */,
 				8E27196C25F4A14600A263D2 /* Preview Assets.xcassets */,
 				8E33A3FB25F8F24300C2AD8E /* Model.swift */,
 			);
@@ -292,7 +310,49 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8EEA86D026567A5300FF82E9 /* TGSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				8EEA86FC2656929A00FF82E9 /* Debug.swift */,
+				8E27196B25F4A14600A263D2 /* Preview Content */,
+				8EEA86E426567A8300FF82E9 /* ChatList.swift */,
+				8EEA86F82656883F00FF82E9 /* ChatCellView.swift */,
+				8EEA86E326567A8300FF82E9 /* Logger.swift */,
+				8EEA86E126567A8300FF82E9 /* LoginView.swift */,
+				8EEA86DB26567A8300FF82E9 /* Model */,
+				8EEA86E226567A8300FF82E9 /* Secrets.swift */,
+				8EEA86E526567A8300FF82E9 /* Style.swift */,
+				8EEA86D126567A5300FF82E9 /* TGSwiftUI.h */,
+				8EEA86D226567A5300FF82E9 /* Info.plist */,
+			);
+			path = TGSwiftUI;
+			sourceTree = "<group>";
+		};
+		8EEA86DB26567A8300FF82E9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EEA86DC26567A8300FF82E9 /* Chat.swift */,
+				8EEA86DD26567A8300FF82E9 /* Message.swift */,
+				8EEA86F62656838B00FF82E9 /* Position.swift */,
+				8EEA86DE26567A8300FF82E9 /* JSON.swift */,
+				8EEA86DF26567A8300FF82E9 /* Photo.swift */,
+				8EEA86E026567A8300FF82E9 /* Client.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8EEA86CA26567A5300FF82E9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EEA86D326567A5300FF82E9 /* TGSwiftUI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		8E27194825F4A14400A263D2 /* TGWatchOS */ = {
@@ -341,14 +401,35 @@
 			buildRules = (
 			);
 			dependencies = (
+				8EEA86D526567A5300FF82E9 /* PBXTargetDependency */,
 			);
 			name = "TGWatchOS WatchKit Extension";
 			packageProductDependencies = (
-				8EB3419125F5FA330030F121 /* QrCode */,
 			);
 			productName = "TGWatchOS WatchKit Extension";
 			productReference = 8E27195C25F4A14600A263D2 /* TGWatchOS WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		8EEA86CE26567A5300FF82E9 /* TGSwiftUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EEA86D826567A5300FF82E9 /* Build configuration list for PBXNativeTarget "TGSwiftUI" */;
+			buildPhases = (
+				8EEA86CA26567A5300FF82E9 /* Headers */,
+				8EEA86CB26567A5300FF82E9 /* Sources */,
+				8EEA86CC26567A5300FF82E9 /* Frameworks */,
+				8EEA86CD26567A5300FF82E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TGSwiftUI;
+			packageProductDependencies = (
+				8EEA86F226567B1C00FF82E9 /* QrCode */,
+			);
+			productName = TGSwiftUI;
+			productReference = 8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -356,7 +437,7 @@
 		8E27194325F4A14400A263D2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					8E27194825F4A14400A263D2 = {
@@ -367,6 +448,10 @@
 					};
 					8E27195B25F4A14600A263D2 = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					8EEA86CE26567A5300FF82E9 = {
+						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -386,6 +471,7 @@
 				8E27194825F4A14400A263D2 /* TGWatchOS */,
 				8E27194C25F4A14500A263D2 /* TGWatchOS WatchKit App */,
 				8E27195B25F4A14600A263D2 /* TGWatchOS WatchKit Extension */,
+				8EEA86CE26567A5300FF82E9 /* TGSwiftUI */,
 			);
 		};
 /* End PBXProject section */
@@ -416,6 +502,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8EEA86CD26567A5300FF82E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EEA86F526567E3300FF82E9 /* Assets.xcassets in Resources */,
+				8EEA86FB26568DFD00FF82E9 /* user-avatar.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -423,21 +518,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E33A3FC25F8F24300C2AD8E /* Model.swift in Sources */,
-				8E33A3F825F8E50400C2AD8E /* Photo.swift in Sources */,
-				8E18EDA725F4A5240049554A /* ChatList.swift in Sources */,
-				8E20696325F787ED003C57A1 /* JSON.swift in Sources */,
-				8E20677B25F78475003C57A1 /* Logger.swift in Sources */,
-				8EB341A025F640D60030F121 /* Secrets.swift in Sources */,
-				8EB3418425F5CC2F0030F121 /* LoginView.swift in Sources */,
-				8E20677525F7763F003C57A1 /* Chat.swift in Sources */,
 				8E27196425F4A14600A263D2 /* ContentView.swift in Sources */,
 				8E27196225F4A14600A263D2 /* HostingController.swift in Sources */,
 				8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */,
 				8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */,
-				8E20695F25F78707003C57A1 /* Message.swift in Sources */,
-				8E18EDB525F4AC490049554A /* Style.swift in Sources */,
 				8EB3418A25F5D0A10030F121 /* TGService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8EEA86CB26567A5300FF82E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EEA86EB26567A8300FF82E9 /* LoginView.swift in Sources */,
+				8EEA86E926567A8300FF82E9 /* Photo.swift in Sources */,
+				8EEA86F72656838B00FF82E9 /* Position.swift in Sources */,
+				8EEA86EC26567A8300FF82E9 /* Secrets.swift in Sources */,
+				8EEA86E826567A8300FF82E9 /* JSON.swift in Sources */,
+				8EEA86FD2656929A00FF82E9 /* Debug.swift in Sources */,
+				8EEA86E626567A8300FF82E9 /* Chat.swift in Sources */,
+				8EEA86EA26567A8300FF82E9 /* Client.swift in Sources */,
+				8EEA86F92656883F00FF82E9 /* ChatCellView.swift in Sources */,
+				8EEA86E726567A8300FF82E9 /* Message.swift in Sources */,
+				8EEA86EE26567A8300FF82E9 /* ChatList.swift in Sources */,
+				8EEA86F426567B5700FF82E9 /* Model.swift in Sources */,
+				8EEA86ED26567A8300FF82E9 /* Logger.swift in Sources */,
+				8EEA86EF26567A8300FF82E9 /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +559,11 @@
 			isa = PBXTargetDependency;
 			target = 8E27195B25F4A14600A263D2 /* TGWatchOS WatchKit Extension */;
 			targetProxy = 8E27195E25F4A14600A263D2 /* PBXContainerItemProxy */;
+		};
+		8EEA86D526567A5300FF82E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8EEA86CE26567A5300FF82E9 /* TGSwiftUI */;
+			targetProxy = 8EEA86D426567A5300FF82E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -711,6 +822,67 @@
 			};
 			name = Release;
 		};
+		8EEA86D926567A5300FF82E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = TGSwiftUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8EEA86DA26567A5300FF82E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HHSNDG5J5M;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = TGSwiftUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -750,10 +922,19 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		8EEA86D826567A5300FF82E9 /* Build configuration list for PBXNativeTarget "TGSwiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EEA86D926567A5300FF82E9 /* Debug */,
+				8EEA86DA26567A5300FF82E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8EB3419125F5FA330030F121 /* QrCode */ = {
+		8EEA86F226567B1C00FF82E9 /* QrCode */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = QrCode;
 		};

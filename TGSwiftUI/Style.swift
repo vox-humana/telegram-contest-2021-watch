@@ -2,8 +2,8 @@ import SwiftUI
 
 struct AccentStyle: ButtonStyle {
     // watchOS7+
-    // private let color = Color.accentColor // doesn't work on watchOS 6
-    private let color = Color("AccentColor") // doesn't work on watchOS 6
+     private let color = Color.accentColor // doesn't work on watchOS 6
+    //private let color = Color("AccentColor") // doesn't work on watchOS 6
 
     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
         configuration.label
@@ -12,8 +12,8 @@ struct AccentStyle: ButtonStyle {
             .padding()
             .frame(maxWidth: .infinity, minHeight: 44)
             .background(
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.accentColor)
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(color)
             )
     }
 }
@@ -29,4 +29,8 @@ extension Font {
     static let tgTitle = Font.system(size: 17)
     static let tgChatTitle = tgTitle.weight(.medium)
     static let tgBadgeCount = Font.system(size: 14)
+}
+
+extension Color {
+    static let tgGrey = Color.secondary
 }

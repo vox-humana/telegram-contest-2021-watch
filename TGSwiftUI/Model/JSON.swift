@@ -1,8 +1,8 @@
 import Foundation
 
-typealias JSON = [String: Any]
+public typealias JSON = [String: Any]
 
-extension JSON {
+public extension JSON {
     func unwrap(_ key: String) -> String {
         unwrap(key, empty: "")
     }
@@ -15,6 +15,10 @@ extension JSON {
         unwrap(key, empty: 13)
     }
 
+    func unwrap(_ key: String) -> Bool {
+        unwrap(key, empty: false)
+    }
+
     func unwrap(_ key: String) -> JSON {
         unwrap(key, empty: [:])
     }
@@ -23,6 +27,7 @@ extension JSON {
         unwrap(key, empty: [])
     }
 
+    
     private func unwrap<T>(_ key: String, empty: T) -> T {
         let value = self[key] as? T
         assert(value != nil, "Cannot unwrap key: \(key)")
@@ -36,19 +41,13 @@ extension JSON {
     }
 }
 
-protocol JSONDecodable {
+public protocol JSONDecodable {
     init(json: JSON)
 }
 
 extension JSONDecodable {
-    init(json: Any) {
+    public init(json: Any) {
         self.init(json: json as! JSON)
     }
 }
 
-extension JSON {
-    func chatOrder() -> Int64 {
-        let orderString: String = unwrap("order") // :Why:
-        return Int64(orderString)!
-    }
-}

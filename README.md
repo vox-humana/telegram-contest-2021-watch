@@ -24,9 +24,12 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 # Notes watchOS 6 limitiations
 - No SwiftUI LifeStyle (@main)
 - Check `watchOS7+` for watchOS 6 API limitations
+- No navigationTitle (use navigationBarTitle)
+- No @StateObject
 
 # Tasks
 [] Remove `swift_qrcodejs` dependency
+[] Check colors in style
 [] Embed only device or simulator dylib (see warning)
 [] Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 

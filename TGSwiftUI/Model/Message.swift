@@ -1,15 +1,15 @@
 import Foundation
 
-typealias MessageId = Int64
+public typealias MessageId = Int64
 
-struct Message: Hashable {
-    let id: MessageId
-    let text: String
-    let date: Date
+public struct Message: Hashable {
+    public let id: MessageId
+    public let text: String
+    public let date: Date
 }
 
 extension Message: JSONDecodable {
-    init(json: [String: Any]) {
+    public init(json: [String: Any]) {
         json.checkType("message")
 
         id = json.unwrap("id")

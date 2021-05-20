@@ -1,20 +1,20 @@
 import Foundation
 
-struct Photo: Hashable {
-    var smallFile: File?
+public struct Photo: Hashable {
+    public var smallFile: File?
 }
 
-typealias FileId = Int64
+public typealias FileId = Int64
 
-struct File: Hashable {
-    let id: FileId
-    let path: String
-    let downloaded: Bool
-    let size: Int64
+public struct File: Hashable {
+    public let id: FileId
+    public let path: String
+    public let downloaded: Bool
+    public let size: Int64
 }
 
 extension File: JSONDecodable {
-    init(json: [String: Any]) {
+    public init(json: [String: Any]) {
         json.checkType("file")
 
         id = json.unwrap("id")

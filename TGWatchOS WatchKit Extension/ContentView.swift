@@ -1,11 +1,17 @@
 import SwiftUI
+import TGSwiftUI
 
 struct ContentView: View {
     @State var showLoginFlow: Bool = true
 
     var body: some View {
         if showLoginFlow {
-            LoginView(vm: LoginViewModel(service: service))
+            let login = LoginView(
+                LoginViewModel(
+                    signal: service.authStateSignal.eraseToAnyPublisher(),
+                    sendPassword: service.sendAuthentication(password:)
+                )
+            )
                 .onReceive(service.authStateSignal, perform: { state in
                     switch state {
                     case .initial:
@@ -20,15 +26,16 @@ struct ContentView: View {
                         showLoginFlow = true
                     }
                 })
+            
+            if #available(watchOS 7.0, *) {
+                login
+                    .navigationBarTitle("Telegram")
+            } else {
+                login
+            }            
         } else {
-            ChatListView(vm: .init(fileLoader: service, listPublisher: service.chatListSignal.eraseToAnyPublisher()))
+            ChatListView(.init(fileLoader: service, listPublisher: service.chatListSignal.eraseToAnyPublisher()))
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
 
