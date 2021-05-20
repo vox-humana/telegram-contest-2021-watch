@@ -14,17 +14,21 @@ TDLib?
 TDLib?
 
 ## Crazy thoughts
-- Check archiving to make sure simulator slices (i386, x86_64) aren't included 
 - Use external JSON serialization lib (faster than built-in)
 - Use whole module + time optimizations
-- Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 
 ## Environment
 Xcode 12.5-RC (App Store version)
 Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
-## Notes
-`watchOS7+` for watchOS 6 API limitations
+# Notes watchOS 6 limitiations
+- No SwiftUI LifeStyle (@main)
+- Check `watchOS7+` for watchOS 6 API limitations
+
+# Tasks
+[] Remove `swift_qrcodejs` dependency
+[] Embed only device or simulator dylib (see warning)
+[] Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 
 # Intro
 https://t.me/contest/258

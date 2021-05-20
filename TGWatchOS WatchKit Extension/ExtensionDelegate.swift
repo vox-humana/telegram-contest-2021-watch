@@ -1,10 +1,3 @@
-//
-//  ExtensionDelegate.swift
-//  TGWatchOS WatchKit Extension
-//
-//  Created by Arthur Semenyutin on 7/3/21.
-//
-
 import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
