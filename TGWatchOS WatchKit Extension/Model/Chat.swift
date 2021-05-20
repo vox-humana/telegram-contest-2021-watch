@@ -25,12 +25,12 @@ extension Chat: JSONDecodable {
     init(json: [String: Any]) {
         let typeDict = json["type"] as! [String: Any]
         type = ChatType(rawValue: typeDict.unwrap("@type"))!
-        
+
         id = json.unwrap("id")
         title = json.unwrap("title")
         unreadCount = json.unwrap("unread_count")
         lastMessage = .init(id: -1, text: "[TBD]", date: Date().addingTimeInterval(-3 * 60))
-        
+
         if let photoJson = json["photo"] as? JSON {
             icon = Photo(json: photoJson)
         } else {

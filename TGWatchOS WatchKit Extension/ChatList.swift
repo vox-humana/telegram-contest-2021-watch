@@ -1,22 +1,21 @@
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
-    
+
     var body: some View {
         List {
-            Button("New Message") {
-            }
-            .buttonStyle(AccentStyle())
-            .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets())
+            Button("New Message") {}
+                .buttonStyle(AccentStyle())
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
 
             ForEach(vm.list) { chat in
                 ChatCellView(chat: chat) { chat in
                     self.vm.fileLoader.downloadPhoto(for: chat)
                 }
-                    .listRowInsets(EdgeInsets())
+                .listRowInsets(EdgeInsets())
             }
         }
         .navigationBarTitle("Charts")
@@ -32,7 +31,7 @@ struct ChatListView_Previews: PreviewProvider {
 struct ChatCellView: View {
     let chat: Chat
     let downloadPhoto: (Chat) -> Void
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             AvatarView(photo: chat.icon)
@@ -49,7 +48,7 @@ struct ChatCellView: View {
                 Text(chat.lastMessage.text)
                     .lineLimit(1)
                     .font(.body)
-                
+
                 HStack(alignment: .top, spacing: 0) {
                     Text(DateFormatter.time(from: chat.lastMessage.date))
                         .font(.caption)
@@ -64,12 +63,12 @@ struct ChatCellView: View {
     }
 }
 
-// 'Text(_:style:)' is only available in application extensions for watchOS 7.0 or newer
+// watchOS7+ 'Text(_:style:)'
 extension DateFormatter {
     static func time(from date: Date) -> String {
         timeFormatter.string(from: date)
     }
-    
+
     static var timeFormatter: DateFormatter = {
         var formatter = DateFormatter()
         formatter.dateStyle = .none
@@ -92,7 +91,7 @@ struct UnreadBadge: View {
 struct AvatarView: View {
     let photo: Photo
     private let size: CGFloat = 24
-    
+
     var body: some View {
         LocalPhotoView(file: photo.smallFile)
             .frame(width: size, height: size)
@@ -113,17 +112,16 @@ final class ChatListViewModel: ObservableObject {
     }
 }
 
-
 struct LocalPhotoView: View {
     private class LocalLoader: ObservableObject {
-        var image: Image? = nil
+        var image: Image?
 
         init(file: File?) {
             guard let file = file, file.downloaded else {
                 return
             }
             let fileURL = URL(fileURLWithPath: file.path)
-            
+
             // background?
             guard
                 let data = try? Data(contentsOf: fileURL),
@@ -132,9 +130,9 @@ struct LocalPhotoView: View {
                 assertionFailure("Can't read image from: \(file.path)")
                 return
             }
-            
-            self.image = Image(uiImage: uiImage)
-            self.objectWillChange.send()
+
+            image = Image(uiImage: uiImage)
+            objectWillChange.send()
         }
     }
 

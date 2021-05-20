@@ -1,55 +1,9 @@
 # Plan of attack
 ## Networking
-### MTProto for networking
-🛑 MTProto depends on CFNetwork which is not available for watchOS (https://developer.apple.com/documentation/cfnetwork)
 
 ### TDLib for networking
 Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
 
-⚠️ Apple Watch uses 64bit arm from S3 (Series 4) and TDLib buiild is not ready for 64bit yet https://github.com/tdlib/td/issues/745
-WatchOS simulator also has arm64 architecture even if test device is Series 3 (armv7k 32 bit) 
-
-⚠️ Failed to build openssl with watchsimulator.arm64 with TDLib
-```
-ld: in ../../third_party/openssl/watchOS/lib/libcrypto.a(aes_core.o), building for watchOS Simulator, but linking in object file built for watchOS, for architecture arm64
-```
-so ignore  `watchsimulator.arm64` everywhere and also add `EXCLUDED_ARCHS=arm64` into Xcode build configuration. 
-
-- add 64bit watchOS architectures in openssl Makefile, enable bitcode for arm64_32, and remove unused simulator architectures
-```
-# watchOS targets
-TARGETS-watchOS=watchsimulator.i386 watchsimulator.x86_64 watchsimulator.arm64 watchos.armv7k watchos.arm64_32
-CFLAGS-watchOS=-mwatchos-version-min=4.0
-CFLAGS-watchos.armv7k=-fembed-bitcode
-CFLAGS-watchos.arm64_32=-fembed-bitcode
-PYTHON_CONFIGURE-watchOS=ac_cv_func_sigaltstack=no
-```
-- limit list of target platforms in build-openssl.sh
-```
-#TODO: change openssl version
-#platforms="macOS iOS watchOS tvOS"
-platforms="watchOS"
-```
-and build.sh
-```
-#platforms="macOS iOS watchOS tvOS"
-platforms="watchOS"
-for platform in $platforms;
-```
-- add 64bit watchOS architectures in `CMake/iOS.make` file
-```
-elseif (IOS_PLATFORM STREQUAL "WATCHOS")
-    set (IOS_ARCH "armv7k;arm64_32")
-elseif (IOS_PLATFORM STREQUAL "WATCHSIMULATOR")
-    set (IOS_ARCH "i386;x86_64;arm64")
-```
-to ignore fat binary linking error set VALIDATE_WORKSPACE=YES in Xcode configuration
-
-
-Another possible way to solve architecture error is bitcode translation (from https://twitter.com/stroughtonsmith/status/1044706837478735873)
-```
-/Applications/Xcode-12.4.app/Contents/Developer/usr/bin/bitcode-build-tool -o ~/Downloads/libtdjson.1.7.2.arm64_32.dylib --sdk /Applications/Xcode-12.4.app/Contents/Developer/Platforms/WatchOS.platform/Developer/SDKs/WatchOS.sdk/ --translate-watchos ~/Downloads/libtdjson.1.7.2.dylib
-```
 ## QRCode generator
 from TG iOS?
 
@@ -66,21 +20,34 @@ TDLib?
 - Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 
 ## Environment
-Xcode 12.4 (App Store version)
+Xcode 12.5-RC (App Store version)
 Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
+## Notes
+`watchOS7+` for watchOS 6 API limitations
+
 # Intro
-https://t.me/contest/221
+https://t.me/contest/258
 
-The Second Round of the iOS Contest 2021 starts now.
+🏆 iOS Contest, Round 3 (watchOS)
 
-Prize fund: $52,000. 
-Deadline: 23:59 on March, 21 (Dubai time).
-Who can participate: Everyone. You are welcome to join even if you didn't take part in the previous round.
+The third round of the iOS contest starts now. Everyone can participate, even if they didn't take part in the previous rounds.
 
-The task is to create a standalone Telegram app for WatchOS 6+ in Swift without using third-party UI frameworks. The app should support:
+The task is the same as in the [second round](https://t.me/contest/221) – to create a working watchOS app based on the [mockups](https://t.me/contest/222) provided.
 
-- Logging in via QR Code with support for accounts protected by a 2-Step Verfication password.
+Deadline: June 6, 23:59 Dubai time.
+Prize fund: $40,000
+
+Who can participate: Everyone. We expect the participants of the second round to improve their submissions. We also invite new participants to join. 
+
+TDLib: Most of the participants of the second round based their apps on [TDLib](https://core.telegram.org/tdlib). At that time, TDLib wasn’t optimized to run on WatchOS. We have recently updated TDLib to better support WatchOS. We hope that this will result in a significant improvement in stability and performance of apps submitted in this new round.
+
+The Task:
+Create a standalone Telegram app for watchOS 7 in Swift without using third-party UI frameworks (using TDLib is allowed). Bonus points if the app also supports watchOS 6.
+
+The app should support:
+
+- Logging in via QR Code with support for accounts protected by a 2-Step Verification password.
 - Viewing the chat list.
 - Opening chats with users, groups, channels.
 - Viewing messages in chats, including text messages and all types of attachments: photos, videos, files, voice and video messages, locations, contacts, static and animated stickers, polls and quizzes.
@@ -92,12 +59,15 @@ The task is to create a standalone Telegram app for WatchOS 6+ in Swift without 
 - Changing Data settings.
 - Terminating sessions from the Devices menu.
 
-Your app should run on WatchOS 6 and above. The design implementation should be identical to the mockups attached below (Sketch, PNG).
+Your app should run on WatchOS 7. The design implementation should be identical to the mockups (Sketch, PNG).
 
 You are welcome to view the [API docs](https://core.telegram.org/#telegram-api) and inspect the [source code of Telegram for iOS](https://github.com/TelegramMessenger/Telegram-iOS). The main criteria for us to identify the winners will be the speed and stability of the apps – as well as attention to detail.
 
-We understand that you may not be able to suport all the features on our list before the deadline. During evaluation we will note the number of features implemented flawlessly. The largest prizes will be awarded to contestants who implemented the largest number of features without major issues.
+The primary objective is to implement viewing messages in chats, sending text messages and push notification support.
 
-Note that the list of features above is sorted by their relative importance.
+We understand that you may not be able to support all the features from our list before the deadline. During evaluation we will note the number of features implemented flawlessly. The largest prizes will be awarded to contestants who implemented the largest number of features without major issues.
 
-UPD: After the results of this round are published, we may announce further rounds with similar prize funds. The task will likely be to improve the WatchOS apps created during this round.
+Note that features on list are sorted by their relative importance.
+
+Submissions:
+Contestants will be able to submit their apps to @ContestBot closer to the end of this round.

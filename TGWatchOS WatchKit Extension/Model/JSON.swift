@@ -48,7 +48,7 @@ extension JSONDecodable {
 
 extension JSON {
     func chatOrder() -> Int64 {
-        let orderString: String = self.unwrap("order") // :Why:
+        let orderString: String = unwrap("order") // :Why:
         return Int64(orderString)!
     }
 }

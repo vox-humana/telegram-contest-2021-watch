@@ -11,7 +11,7 @@ struct Message: Hashable {
 extension Message: JSONDecodable {
     init(json: [String: Any]) {
         json.checkType("message")
-        
+
         id = json.unwrap("id")
         text = json.extractContentTextOrPlaceholder()
         let timestamp: Int64 = json.unwrap("date")
@@ -21,7 +21,7 @@ extension Message: JSONDecodable {
 
 private extension JSON {
     func extractContentTextOrPlaceholder() -> String {
-        let content: JSON = self.unwrap("content")
+        let content: JSON = unwrap("content")
         let type: String = content.unwrap("@type")
         if type == "messageVideo" {
             return "🎥video"
@@ -29,7 +29,7 @@ private extension JSON {
         if type == "messageText" {
             return content.unwrap("text").extractMessageText()
         }
-        
+
         if type == "messagePhoto" {
             return content.unwrap("caption").extractMessageText()
         }
@@ -41,11 +41,11 @@ private extension JSON {
         if type == "messageSupergroupChatCreate" {
             return "Channel created"
         }
-        
+
         if type == "messageDocument" {
             return "📎" + content.unwrap("caption").extractMessageText()
         }
-        
+
         if type == "messageChatAddMembers" {
             return "+👤"
         }
@@ -61,25 +61,24 @@ private extension JSON {
         if type == "messageSticker" {
             return content.unwrap("sticker").extractStickerEmoji()
         }
-        
+
         if type == "messageAnimation" {
             return "🎥animation"
         }
-        
+
         if type == "messageCustomServiceAction" {
             return content.extractMessageText()
         }
-        
+
         logger.debug("Unsupported content: \(content)")
         return "🖼"
     }
-    
+
     func extractMessageText() -> String {
-        self.unwrap("text")
+        unwrap("text")
     }
 
     func extractStickerEmoji() -> String {
-        self.unwrap("emoji")
+        unwrap("emoji")
     }
 }
-

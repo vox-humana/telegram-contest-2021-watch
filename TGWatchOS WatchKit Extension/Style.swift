@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AccentStyle: ButtonStyle {
-    //private let color = Color.accentColor // doesn't work on watchOS 6
+    // watchOS7+
+    // private let color = Color.accentColor // doesn't work on watchOS 6
     private let color = Color("AccentColor") // doesn't work on watchOS 6
 
     func makeBody(configuration: ButtonStyleConfiguration) -> some View {
@@ -26,10 +27,8 @@ struct AccentStyle: ButtonStyle {
 
 struct AccentStyle_Previews: PreviewProvider {
     static var previews: some View {
-        Button("New Message") {
-            
-        }
-        .buttonStyle(AccentStyle())
+        Button("New Message") {}
+            .buttonStyle(AccentStyle())
     }
 }
 

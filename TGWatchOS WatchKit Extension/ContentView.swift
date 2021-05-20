@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var showLoginFlow: Bool = true
-    
+
     var body: some View {
         if showLoginFlow {
             LoginView(vm: LoginViewModel(service: service))

@@ -1,9 +1,8 @@
 import Foundation
 
 struct FakeFileLoader: FileLoader {
-    func downloadPhoto(for chat: Chat) {}
+    func downloadPhoto(for _: Chat) {}
 }
-
 
 extension Array where Element == Chat {
     static func fake() -> [Chat] {
@@ -43,7 +42,7 @@ extension Array where Element == Chat {
                     date: Date().addingTimeInterval(-3 * 60)
                 ),
                 unreadCount: 0
-            )
+            ),
         ]
     }
 }

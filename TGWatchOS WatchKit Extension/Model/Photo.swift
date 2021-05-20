@@ -16,13 +16,13 @@ struct File: Hashable {
 extension File: JSONDecodable {
     init(json: [String: Any]) {
         json.checkType("file")
-        
+
         id = json.unwrap("id")
         size = json.unwrap("size")
-        
+
         let local: JSON = json.unwrap("local")
         path = local.unwrap("path")
-        
+
         let downloadedFlag: Int = local.unwrap("is_downloading_completed")
         downloaded = downloadedFlag == 1
     }

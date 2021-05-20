@@ -1,22 +1,22 @@
-import SwiftUI
-import QrCode
 import Combine
+import QrCode
+import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var vm: LoginViewModel
     @State var password: String = ""
-        
+
     var body: some View {
         switch vm.state {
         case .codeRequested:
             ActivityIndicator()
-        case .codeRecevied(let image):
+        case let .codeRecevied(image):
             connectedView(qrCode: image)
         case .passwordWaiting:
             inputView
         }
     }
-    
+
     func connectedView(qrCode: UIImage) -> some View {
         ScrollView {
             VStack(alignment: .center) {
@@ -29,11 +29,11 @@ struct LoginView: View {
             }
         }
     }
-    
+
     var inputView: some View {
         Form {
             Text("Enter password to complete login")
-            SecureField("password", text: $password, onCommit:  {
+            SecureField("password", text: $password, onCommit: {
                 self.vm.service.sendAuthentication(password: Secrets.testPassword)
             })
         }
@@ -58,21 +58,21 @@ final class LoginViewModel: ObservableObject {
         case codeRecevied(UIImage)
         case passwordWaiting
     }
-    
+
     @Published var state: State
     private var subscription: AnyCancellable?
     let service: TGService
-    
+
     init(service: TGService, initialState: State = .codeRequested) {
         self.service = service
         state = initialState
-        
+
         subscription = service.authStateSignal.receive(on: DispatchQueue.main).sink { [weak self] state in
             guard let self = self else { return }
             switch state {
             case .initial:
-                    self.state = .codeRequested
-            case .confirmationWaiting(link: let link):
+                self.state = .codeRequested
+            case let .confirmationWaiting(link: link):
                 if let image = QRCode.image(for: link) {
                     self.state = .codeRecevied(image)
                 }
@@ -89,16 +89,16 @@ final class LoginViewModel: ObservableObject {
 
 struct ActivityIndicator: View {
     var body: some View {
-        // watchOS 7 doesn't have ProgressView
+        // watchOS7+ ProgressView
         Text("loading...")
     }
 }
 
-struct QRCode {
+enum QRCode {
     static func image(for link: String) -> UIImage? {
         let screenSize = WKInterfaceDevice.current().screenBounds.width
         let (size, callback) = qrCode(string: link, color: .black, icon: .custom(UIImage(named: "Logo")))
         let imageSize = CGSize(width: screenSize, height: screenSize)
-        return callback(.init(corners: .init(radius: 10), imageSize:imageSize , boundingSize: imageSize, intrinsicInsets: .zero))?.generateImage()
+        return callback(.init(corners: .init(radius: 10), imageSize: imageSize, boundingSize: imageSize, intrinsicInsets: .zero))?.generateImage()
     }
 }

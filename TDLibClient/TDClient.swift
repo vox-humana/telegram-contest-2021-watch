@@ -6,11 +6,11 @@ final class TdClient {
     var client_id = td_create_client_id()
     let tdlibMainLoop = DispatchQueue(label: "TDLib")
     let tdlibQueryQueue = DispatchQueue(label: "TDLibQuery")
-    var queryF = Dictionary<Int64, (Dictionary<String,Any>)->()>()
-    var updateF: ((Dictionary<String,Any>)->())?
+    var queryF = [Int64: ([String: Any]) -> Void]()
+    var updateF: (([String: Any]) -> Void)?
     var queryId: Int64 = 0
 
-    func queryAsync(query: [String: Any], f: ((Dictionary<String,Any>)->())? = nil) {
+    func queryAsync(query: [String: Any], f: (([String: Any]) -> Void)? = nil) {
         tdlibQueryQueue.async {
             var newQuery = query
 
@@ -24,9 +24,9 @@ final class TdClient {
         }
     }
 
-    func querySync(query: [String: Any]) -> Dictionary<String,Any> {
-        let semaphore = DispatchSemaphore(value:0)
-        var result = Dictionary<String,Any>()
+    func querySync(query: [String: Any]) -> [String: Any] {
+        let semaphore = DispatchSemaphore(value: 0)
+        var result = [String: Any]()
         queryAsync(query: query) {
             result = $0
             semaphore.signal()
@@ -35,16 +35,14 @@ final class TdClient {
         return result
     }
 
-    init() {
-    }
+    init() {}
 
-    deinit {
-    }
+    deinit {}
 
-    func run(updateHandler: @escaping (Dictionary<String,Any>)->()) {
+    func run(updateHandler: @escaping ([String: Any]) -> Void) {
         updateF = updateHandler
         tdlibMainLoop.async { [weak self] in
-            while (true) {
+            while true {
                 if let s = self {
                     if let res = td_receive(10) {
                         let event = String(cString: res)
@@ -59,8 +57,8 @@ final class TdClient {
 
     private func queryResultAsync(_ result: String) {
         tdlibQueryQueue.async {
-            let json = try? JSONSerialization.jsonObject(with: result.data(using: .utf8)!, options:[])
-            if let dictionary = json as? [String:Any] {
+            let json = try? JSONSerialization.jsonObject(with: result.data(using: .utf8)!, options: [])
+            if let dictionary = json as? [String: Any] {
                 if let extra = dictionary["@extra"] as? Int64 {
                     let index = self.queryF.index(forKey: extra)!
                     self.queryF[index].value(dictionary)
