@@ -6,9 +6,8 @@ public enum AuthState {
     case authorized
 }
 
-
 public protocol FileLoader {
     // var loadingStream: AnyPublisher<File>
     func downloadPhoto(for chat: Chat)
+    // func downloadPhoto(for user: User)
 }
-

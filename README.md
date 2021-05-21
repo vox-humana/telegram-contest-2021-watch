@@ -28,6 +28,7 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 - No @StateObject
 
 # Tasks
+[] Check run on device
 [] Remove `swift_qrcodejs` dependency
 [] Check colors in style
 [] Embed only device or simulator dylib (see warning)

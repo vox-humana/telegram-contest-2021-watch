@@ -48,7 +48,6 @@ extension Array where Element == Chat {
             ),
         ]
     }
-    
 }
 
 extension File {
@@ -56,4 +55,13 @@ extension File {
     private static func imagePath(_ name: String) -> String {
         "\(Bundle(for: LoginViewModel.self).bundlePath)/\(name).png"
     }
+}
+
+extension User {
+    static let profile = User(
+        id: 0,
+        photo: .init(smallFile: .userAvatar),
+        name: "Alicia",
+        phone: "123456789"
+    )
 }

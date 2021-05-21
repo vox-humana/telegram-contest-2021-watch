@@ -9,7 +9,7 @@ public struct LoginView: View {
     public init(_ vm: LoginViewModel) {
         self.vm = vm
     }
-    
+
     public var body: some View {
         switch vm.state {
         case .codeRequested:
@@ -23,13 +23,34 @@ public struct LoginView: View {
 
     func connectedView(qrCode: UIImage) -> some View {
         ScrollView {
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 3) {
                 Text("Log in to Telegram\nby QR Code")
-                    .font(.tgTitle)
+                    .font(.tgLoginTitle)
                     .multilineTextAlignment(.center)
-                Text("Settings on your Phone\nDevices\nScan QR")
+
+                Text("Settings on your Phone")
+                    .font(.tgSubtitle)
                     .multilineTextAlignment(.center)
-                Image(uiImage: qrCode).background(Color.white)
+                    .foregroundColor(.tgGrey)
+                Image(systemName: "chevron.down")
+                    .foregroundColor(.tgGrey)
+
+                Text("Devices")
+                    .font(.tgSubtitle)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.tgGrey)
+                Image(systemName: "chevron.down")
+                    .foregroundColor(.tgGrey)
+
+                Text("Scan QR")
+                    .font(.tgSubtitle)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.tgGrey)
+
+                Image(uiImage: qrCode)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.top, 5)
             }
         }
     }
@@ -58,7 +79,6 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
-
 public final class LoginViewModel: ObservableObject {
     enum State: Equatable {
         case codeRequested
@@ -74,7 +94,7 @@ public final class LoginViewModel: ObservableObject {
         self.sendPassword = sendPassword
         state = .codeRequested
 
-        subscription = signal.receive(on: DispatchQueue.main).sink { [weak self] state in
+        subscription = signal.sink { [weak self] state in
             guard let self = self else { return }
             switch state {
             case .initial:
@@ -96,8 +116,11 @@ public final class LoginViewModel: ObservableObject {
 
 struct ActivityIndicator: View {
     var body: some View {
-        // watchOS7+ ProgressView
-        Text("loading...")
+        if #available(watchOS 7.0, *) {
+            ProgressView()
+        } else {
+            Text("loading...")
+        }
     }
 }
 

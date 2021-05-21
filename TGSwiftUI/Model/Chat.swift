@@ -37,7 +37,7 @@ extension Chat: JSONDecodable {
         } else {
             icon = Photo(smallFile: nil)
         }
-        
+
         // TODO:
         unread = false
     }

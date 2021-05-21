@@ -25,15 +25,15 @@ struct ChatCellView: View {
                     Text(DateFormatter.time(from: chat.lastMessage.date))
                         .font(.caption)
                         .foregroundColor(.tgGrey)
-                    
+
                     if chat.unread {
                         Circle()
                             .size(.init(width: 6, height: 6))
                             .fixedSize()
-                            .frame(width: 6, height: 6, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .frame(width: 6, height: 6, alignment: .center)
                             .foregroundColor(.accentColor)
                     }
-                    
+
                     Spacer()
 
                     if chat.unreadCount > 0 {

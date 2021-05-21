@@ -12,29 +12,46 @@ struct ContentView: View {
                     sendPassword: service.sendAuthentication(password:)
                 )
             )
-                .onReceive(service.authStateSignal, perform: { state in
-                    switch state {
-                    case .initial:
-                        showLoginFlow = true
-                    case .confirmationWaiting:
-                        showLoginFlow = true
-                    case .authorized:
-                        showLoginFlow = false
-                    case .passwordWaiting:
-                        showLoginFlow = true
-                    case .passwordSent:
-                        showLoginFlow = true
-                    }
-                })
-            
+            .onReceive(service.authStateSignal, perform: { state in
+                switch state {
+                case .initial:
+                    showLoginFlow = true
+                case .confirmationWaiting:
+                    showLoginFlow = true
+                case .authorized:
+                    showLoginFlow = false
+                case .passwordWaiting:
+                    showLoginFlow = true
+                case .passwordSent:
+                    showLoginFlow = true
+                }
+            })
+
             if #available(watchOS 7.0, *) {
                 login
                     .navigationBarTitle("Telegram")
             } else {
                 login
-            }            
+            }
         } else {
-            ChatListView(.init(fileLoader: service, listPublisher: service.chatListSignal.eraseToAnyPublisher()))
+            let chatList = ChatListView(
+                .init(
+                    fileLoader: service,
+                    listPublisher: service.chatListSignal.eraseToAnyPublisher()
+                )
+            )
+            if #available(watchOS 7.0, *) {
+                TabView {
+                    chatList
+                    SettingsView(
+                        SettingsModel(
+                            profile: service.requestMe()
+                        )
+                    )
+                }
+            } else {
+                chatList
+            }
         }
     }
 }

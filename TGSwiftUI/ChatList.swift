@@ -3,11 +3,11 @@ import SwiftUI
 
 public struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
-    
+
     public init(_ vm: ChatListViewModel) {
         self.vm = vm
     }
-    
+
     public var body: some View {
         List {
             Button("New Message") {}
@@ -45,9 +45,11 @@ struct UnreadBadge: View {
     var body: some View {
         Text("\(count)")
             .font(.tgBadgeCount)
-            .padding(3)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 1)
             .background(
-                Circle().fill(Color.accentColor)
+                RoundedRectangle(cornerRadius: 10, style: .circular)
+                    .foregroundColor(.accentColor)
             )
     }
 }
@@ -55,7 +57,6 @@ struct UnreadBadge: View {
 struct UnreadBadge_Previews: PreviewProvider {
     static var previews: some View {
         UnreadBadge(count: 99)
-
         UnreadBadge(count: 6)
     }
 }

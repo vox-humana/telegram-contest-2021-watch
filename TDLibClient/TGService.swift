@@ -147,6 +147,16 @@ final class TGService {
         }
     }
 
+    func requestMe() -> AnyPublisher<User, Never> {
+        Future<User, Never> { [client] promise in
+            client.queryAsync(query: ["@type": "getMe"]) { response in
+                logger.debug("GOT respone \(response)")
+                promise(.success(User(json: response)))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+
     private func updateConnectionSate(payload: JSON) {
         let state: JSON = payload.unwrap("state")
         let type: String = state.unwrap("@type")
@@ -248,7 +258,7 @@ final class TGService {
             self.authStateSignal.send(state)
         }
     }
-    
+
     private func checkAuthenticationError(error: [String: Any]) {
         if error["@type"] as! String == "error" {
             client.queryAsync(query: ["@type": "getAuthorizationState"], f: updateAuthorizationState)

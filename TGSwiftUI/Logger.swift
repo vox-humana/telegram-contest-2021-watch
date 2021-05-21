@@ -5,7 +5,9 @@ public struct Logger {
         _ closure: @autoclosure () -> Any?,
         filename: StaticString = #fileID, line: Int = #line, function: StaticString = #function
     ) {
-        print("⌚️\(filename):\(line):\(function)", closure() ?? "")
+        #if DEBUG
+            print("⌚️\(filename):\(line):\(function)", closure() ?? "")
+        #endif
     }
 }
 

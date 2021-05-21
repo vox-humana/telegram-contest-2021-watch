@@ -1,7 +1,7 @@
 public enum ChatListType {
     case unknown
     case main
-    //case filter(Int)
+    // case filter(Int)
 }
 
 public struct Position: Hashable {
@@ -15,7 +15,7 @@ extension Position: JSONDecodable {
         json.checkType("chatPosition")
 
         isPinned = json.unwrap("is_pinned")
-        
+
         let orderString: String = json.unwrap("order") // :Why:
         order = Int64(orderString)!
 
