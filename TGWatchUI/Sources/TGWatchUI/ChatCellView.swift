@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchModel
 
 struct ChatCellView: View {
     let chat: Chat
@@ -57,7 +58,7 @@ struct ChatListView_Previews: PreviewProvider {
     static var previews: some View {
         ChatListView(
             ChatListViewModel(
-                fileLoader: FakeService(),
+                fileLoader: DummyService(),
                 listPublisher: Just([Chat].fake()).eraseToAnyPublisher()
             )
         )

@@ -1,12 +1,13 @@
 import Combine
 import SwiftUI
+import TGWatchModel
 
 struct FileServiceEnvironment: EnvironmentKey {
-    static var defaultValue: FileLoader = FakeService()
+    static var defaultValue: FileLoader = DummyService()
 }
 
 struct HistoryServiceEnvironment: EnvironmentKey {
-    static var defaultValue: HistoryService = FakeService()
+    static var defaultValue: HistoryService = DummyService()
 }
 
 extension EnvironmentValues {

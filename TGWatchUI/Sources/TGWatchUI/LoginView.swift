@@ -1,6 +1,7 @@
 import Combine
 import QrCode
 import SwiftUI
+import TGWatchModel
 
 public struct LoginView: View {
     @ObservedObject var vm: LoginViewModel
@@ -59,8 +60,12 @@ public struct LoginView: View {
         Form {
             Text("Enter password to complete login")
             SecureField("password", text: $password, onCommit: {
-                // TODO: real pass
-                self.vm.sendPassword(Secrets.testPassword)
+                // TODO: remove
+                #if DEBUG
+                    self.vm.sendPassword(Secrets.testPassword)
+                #else
+                    self.vm.sendPassword(password)
+                #endif
             })
         }
     }
@@ -104,7 +109,7 @@ public final class LoginViewModel: ObservableObject {
                     self.state = .codeRecevied(image)
                 }
             case .authorized:
-                logger.debug("authorized")
+                print("authorized")
             case .passwordWaiting:
                 self.state = .passwordWaiting
             case .passwordSent:

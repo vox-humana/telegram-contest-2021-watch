@@ -1,5 +1,5 @@
 import SwiftUI
-import TGSwiftUI
+import TGWatchUI
 
 struct ContentView: View {
     @State var showLoginFlow: Bool = true

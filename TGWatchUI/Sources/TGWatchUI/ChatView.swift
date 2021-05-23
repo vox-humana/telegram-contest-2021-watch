@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchModel
 
 public struct ChatView: View {
     @ObservedObject var vm: ChatViewModel

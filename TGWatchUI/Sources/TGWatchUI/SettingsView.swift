@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchModel
 
 public struct SettingsView: View {
     @ObservedObject var vm: SettingsViewModel

@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchModel
 
 public struct MessageCellView: View {
     let message: Message
@@ -32,5 +33,6 @@ struct MessageCellView_Previews: PreviewProvider {
         ForEach(0 ..< messages.count) { idx in
             MessageCellView(message: messages[idx])
         }
+        .accentColor(/*@START_MENU_TOKEN@*/ .blue/*@END_MENU_TOKEN@*/)
     }
 }

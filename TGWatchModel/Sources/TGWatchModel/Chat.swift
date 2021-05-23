@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 public enum ChatType: String, Equatable {
     case chat

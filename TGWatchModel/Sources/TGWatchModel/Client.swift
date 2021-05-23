@@ -17,3 +17,17 @@ import Combine
 public protocol HistoryService {
     func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int) -> AnyPublisher<[Message], Never>
 }
+
+public struct DummyService: FileLoader, HistoryService {
+    private let chatHistory: [Message]
+
+    public init(chatHistory: [Message] = []) {
+        self.chatHistory = chatHistory
+    }
+
+    public func downloadPhoto(for _: Chat) {}
+
+    public func chatHistory(_: ChatId, from _: MessageId, limit _: Int) -> AnyPublisher<[Message], Never> {
+        Just(chatHistory).eraseToAnyPublisher()
+    }
+}

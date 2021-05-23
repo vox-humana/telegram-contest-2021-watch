@@ -1,6 +1,6 @@
 import Combine
 import Foundation
-import TGSwiftUI
+import TGWatchModel
 
 final class TGService {
     let authStateSignal = CurrentValueSubject<AuthState, Never>(.initial)
