@@ -23,7 +23,7 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
 # Notes watchOS 6 limitiations
 - No SwiftUI LifeStyle (@main)
-- Check `watchOS7+` for watchOS 6 API limitations
+- Check `watchOS6` for watchOS 6 API limitations
 - No navigationTitle (use navigationBarTitle)
 - No @StateObject
 

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AccentStyle: ButtonStyle {
-    // watchOS7+
+    // watchOS6
     private let color = Color.accentColor // doesn't work on watchOS 6
     // private let color = Color("AccentColor") // doesn't work on watchOS 6
 

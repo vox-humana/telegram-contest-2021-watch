@@ -1,15 +1,15 @@
 import SwiftUI
 
 public struct SettingsView: View {
-    @ObservedObject var model: SettingsModel
+    @ObservedObject var vm: SettingsViewModel
 
-    public init(_ model: SettingsModel) {
-        self.model = model
+    public init(_ vm: SettingsViewModel) {
+        self.vm = vm
     }
 
     public var body: some View {
         List {
-            if let profile = model.profile {
+            if let profile = vm.profile {
                 ProfileLabel(profile: profile) { _ in }
             }
             SettingsLabel(name: "Archive", text: "Archive")
@@ -25,7 +25,7 @@ public struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(
-            SettingsModel(
+            SettingsViewModel(
                 profile: CurrentValueSubject(.profile).eraseToAnyPublisher()
             )
         )
@@ -69,12 +69,12 @@ struct SettingsLabel: View {
 }
 
 extension Bundle {
-    static let current = Bundle(for: SettingsModel.self)
+    static let current = Bundle(for: SettingsViewModel.self)
 }
 
 import Combine
 
-public final class SettingsModel: ObservableObject {
+public final class SettingsViewModel: ObservableObject {
     @Published var profile: User?
     private var subscription: AnyCancellable?
 

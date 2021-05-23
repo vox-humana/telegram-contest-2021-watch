@@ -1,8 +1,31 @@
 import Combine
 import SwiftUI
 
+struct FileServiceEnvironment: EnvironmentKey {
+    static var defaultValue: FileLoader = FakeService()
+}
+
+struct HistoryServiceEnvironment: EnvironmentKey {
+    static var defaultValue: HistoryService = FakeService()
+}
+
+extension EnvironmentValues {
+    var fileService: FileLoader {
+        get { self[FileServiceEnvironment.self] }
+        set { self[FileServiceEnvironment.self] = newValue }
+    }
+}
+
+public extension EnvironmentValues {
+    var historyService: HistoryService {
+        get { self[HistoryServiceEnvironment.self] }
+        set { self[HistoryServiceEnvironment.self] = newValue }
+    }
+}
+
 public struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
+    @Environment(\.historyService) var historyService
 
     public init(_ vm: ChatListViewModel) {
         self.vm = vm
@@ -16,13 +39,22 @@ public struct ChatListView: View {
                 .listRowInsets(EdgeInsets())
 
             ForEach(vm.list) { chat in
-                ChatCellView(chat: chat) { chat in
-                    self.vm.fileLoader.downloadPhoto(for: chat)
+                NavigationLink(
+                    destination:
+                    NavigationLazyView(
+                        ChatView(
+                            vm.chatViewModel(for: chat, historyService: historyService)
+                        )
+                    )
+                ) {
+                    ChatCellView(chat: chat) { chat in
+                        self.vm.fileLoader.downloadPhoto(for: chat)
+                    }
                 }
                 .listRowInsets(EdgeInsets())
             }
         }
-        .navigationBarTitle("Charts")
+        .navigationBarTitle("Chats")
     }
 }
 
@@ -77,9 +109,25 @@ public final class ChatListViewModel: ObservableObject {
     private var subscription: AnyCancellable?
     let fileLoader: FileLoader
 
+    // watchOS6 no StateObject
+    private var chatVMCache: [ChatId: ChatViewModel] = [:]
+    func chatViewModel(for chat: Chat, historyService: HistoryService) -> ChatViewModel {
+        if let existed = chatVMCache[chat.id] {
+            return existed
+        }
+        let created = ChatViewModel(
+            chat: chat,
+            service: historyService
+        )
+        chatVMCache[chat.id] = created
+        return created
+    }
+
     public init(fileLoader: FileLoader, listPublisher: AnyPublisher<[Chat], Never>) {
         self.fileLoader = fileLoader
         subscription = listPublisher.receive(on: DispatchQueue.main).sink { [weak self] chats in
+            // TODO: test only
+            // self?.list = Array(chats.prefix(1))
             self?.list = chats
         }
     }
@@ -125,5 +173,17 @@ struct LocalPhotoView: View {
         } else {
             return Image(systemName: "person")
         }
+    }
+}
+
+struct NavigationLazyView<Content: View>: View {
+    let build: () -> Content
+
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+
+    var body: Content {
+        build()
     }
 }

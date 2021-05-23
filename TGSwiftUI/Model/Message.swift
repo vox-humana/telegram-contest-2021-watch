@@ -2,10 +2,18 @@ import Foundation
 
 public typealias MessageId = Int64
 
+public enum Sender: Hashable {
+    case unknown
+    case user(userId: Int)
+    case chat(chatId: Int)
+}
+
 public struct Message: Hashable {
     public let id: MessageId
     public let text: String
     public let date: Date
+    public let sender: Sender
+    public let outgoing: Bool
 }
 
 extension Message: JSONDecodable {
@@ -16,6 +24,11 @@ extension Message: JSONDecodable {
         text = json.extractContentTextOrPlaceholder()
         let timestamp: Int64 = json.unwrap("date")
         date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+
+        let senderJson: JSON = json.unwrap("sender")
+        sender = Sender(json: senderJson)
+
+        outgoing = json.unwrap("is_outgoing")
     }
 }
 
@@ -82,3 +95,24 @@ private extension JSON {
         unwrap("emoji")
     }
 }
+
+extension Sender: JSONDecodable {
+    public init(json: [String: Any]) {
+        // TODO: other types?
+        let senderType: String = json.unwrap("@type")
+        if senderType == "messageSenderUser" {
+            self = .user(userId: json.unwrap("user_id"))
+            return
+        }
+
+        if senderType == "messageSenderChat" {
+            self = .chat(chatId: json.unwrap("chat_id"))
+            return
+        }
+
+        logger.assert("Unknown sender type")
+        self = .unknown
+    }
+}
+
+public extension Sender {}

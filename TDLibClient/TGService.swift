@@ -56,12 +56,10 @@ final class TGService {
                     self.chats[chatId]?.lastMessage = message
                 }
 
-                if let position = update["positions"] as? [JSON] {
-                    let positions = position.map(Position.init(json:))
-                    let mainPosition = positions.first(where: { $0.list == .main })
-                    if let order = mainPosition?.order {
-                        self.setOrder(order, for: chatId)
-                    }
+                let positions: [Position] = update.unwrapArray("positions")
+                let mainPosition = positions.first(where: { $0.list == .main })
+                if let order = mainPosition?.order {
+                    self.setOrder(order, for: chatId)
                 }
                 self.notifyChats()
 
@@ -104,13 +102,12 @@ final class TGService {
                     break
                 }
 
-                if let position = update["positions"] as? [JSON] {
-                    let positions = position.map(Position.init(json:))
-                    let mainPosition = positions.first(where: { $0.list == .main })
-                    if let order = mainPosition?.order {
-                        self.setOrder(order, for: chatId)
-                    }
+                let positions: [Position] = update.unwrapArray("positions")
+                let mainPosition = positions.first(where: { $0.list == .main })
+                if let order = mainPosition?.order {
+                    self.setOrder(order, for: chatId)
                 }
+
                 // TODO: extract "draft_message"
                 self.notifyChats()
 
@@ -236,7 +233,6 @@ final class TGService {
             }
 
         case "authorizationStateWaitCode":
-            var code: String = ""
             logger.debug("Enter (SMS) code: ")
                 // TODO:
 //                code = myReadLine()
@@ -301,9 +297,31 @@ extension TGService: FileLoader {
         chatIcons[file.id] = chat.id
 
         let chatAvatarsDownloadPriority = 1 // [1..32]
-        client.queryAsync(query: ["@type": "downloadFile", "file_id": file.id, "priority": chatAvatarsDownloadPriority]) { [weak self] response in
+        client.queryAsync(query: ["@type": "downloadFile", "file_id": file.id, "priority": chatAvatarsDownloadPriority]) { response in
             logger.debug(response)
         }
+    }
+}
+
+extension TGService: HistoryService {
+    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int = 20) -> AnyPublisher<[Message], Never> {
+        Future<[Message], Never> { [client] promise in
+            client.queryAsync(
+                query: [
+                    "@type": "getChatHistory",
+                    "chat_id": chatId,
+                    "limit": limit,
+                    "from_message_id": from,
+                    // "only_local"
+                    // "offset"
+                ]
+            ) { response in
+                logger.debug("GOT respone \(response)")
+                let messages: [Message] = response.unwrapArray("messages")
+                promise(.success(messages))
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }
 

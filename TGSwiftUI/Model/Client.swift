@@ -11,3 +11,9 @@ public protocol FileLoader {
     func downloadPhoto(for chat: Chat)
     // func downloadPhoto(for user: User)
 }
+
+import Combine
+
+public protocol HistoryService {
+    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int) -> AnyPublisher<[Message], Never>
+}

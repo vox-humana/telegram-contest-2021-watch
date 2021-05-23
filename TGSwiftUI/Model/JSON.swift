@@ -27,6 +27,11 @@ public extension JSON {
         unwrap(key, empty: [])
     }
 
+    func unwrapArray<T: JSONDecodable>(_ key: String) -> [T] {
+        let array: [JSON] = unwrap(key)
+        return array.map(T.init(json:))
+    }
+
     private func unwrap<T>(_ key: String, empty: T) -> T {
         let value = self[key] as? T
         assert(value != nil, "Cannot unwrap key: \(key)")

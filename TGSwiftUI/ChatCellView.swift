@@ -17,14 +17,19 @@ struct ChatCellView: View {
                     .lineLimit(1)
                     .font(.tgChatTitle)
                     .padding(EdgeInsets(top: 3, leading: 0, bottom: 0, trailing: 0))
-                Text(chat.lastMessage.text)
+                Text(chat.lastMessage?.text ?? "")
                     .lineLimit(1)
                     .font(.body)
 
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
-                    Text(DateFormatter.time(from: chat.lastMessage.date))
-                        .font(.caption)
-                        .foregroundColor(.tgGrey)
+                    Text(
+                        chat.lastMessage
+                            .map(\.date)
+                            .flatMap(DateFormatter.time(from:))
+                            ?? ""
+                    )
+                    .font(.caption)
+                    .foregroundColor(.tgGrey)
 
                     if chat.unread {
                         Circle()
@@ -52,7 +57,7 @@ struct ChatListView_Previews: PreviewProvider {
     static var previews: some View {
         ChatListView(
             ChatListViewModel(
-                fileLoader: FakeFileLoader(),
+                fileLoader: FakeService(),
                 listPublisher: Just([Chat].fake()).eraseToAnyPublisher()
             )
         )

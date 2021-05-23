@@ -40,11 +40,13 @@ struct ContentView: View {
                     listPublisher: service.chatListSignal.eraseToAnyPublisher()
                 )
             )
+            .environment(\.historyService, service)
+
             if #available(watchOS 7.0, *) {
                 TabView {
                     chatList
                     SettingsView(
-                        SettingsModel(
+                        SettingsViewModel(
                             profile: service.requestMe()
                         )
                     )

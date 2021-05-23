@@ -21,6 +21,9 @@
 		8E3DE0D7265668E100A29D7F /* libtdjson.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8E3DE0D5265668D900A29D7F /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8E452FE32657CA70005C3332 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E452FE22657CA70005C3332 /* SettingsView.swift */; };
 		8E452FE52657D32D005C3332 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E452FE42657D32D005C3332 /* User.swift */; };
+		8E452FE7265A0C64005C3332 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E452FE6265A0C64005C3332 /* ChatView.swift */; };
+		8E452FE9265A0E56005C3332 /* MessageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E452FE8265A0E56005C3332 /* MessageCellView.swift */; };
+		8E452FEB265A3941005C3332 /* ScrollViewReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E452FEA265A3941005C3332 /* ScrollViewReader.swift */; };
 		8EB3418A25F5D0A10030F121 /* TGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418925F5D0A10030F121 /* TGService.swift */; };
 		8EEA86D326567A5300FF82E9 /* TGSwiftUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 8EEA86D126567A5300FF82E9 /* TGSwiftUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EEA86D626567A5300FF82E9 /* TGSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */; };
@@ -133,6 +136,9 @@
 		8E3DE0D5265668D900A29D7F /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtdjson.dylib; sourceTree = "<group>"; };
 		8E452FE22657CA70005C3332 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8E452FE42657D32D005C3332 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8E452FE6265A0C64005C3332 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		8E452FE8265A0E56005C3332 /* MessageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellView.swift; sourceTree = "<group>"; };
+		8E452FEA265A3941005C3332 /* ScrollViewReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewReader.swift; sourceTree = "<group>"; };
 		8EB3418925F5D0A10030F121 /* TGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGService.swift; sourceTree = "<group>"; };
 		8EB3418D25F5F9F10030F121 /* QrCode */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QrCode; path = ../QrCode; sourceTree = "<group>"; };
 		8EEA86CF26567A5300FF82E9 /* TGSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TGSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,12 +326,15 @@
 				8EEA86D126567A5300FF82E9 /* TGSwiftUI.h */,
 				8EEA86D226567A5300FF82E9 /* Info.plist */,
 				8EEA86F82656883F00FF82E9 /* ChatCellView.swift */,
+				8E452FEA265A3941005C3332 /* ScrollViewReader.swift */,
 				8EEA86E426567A8300FF82E9 /* ChatList.swift */,
+				8E452FE6265A0C64005C3332 /* ChatView.swift */,
 				8EEA86FC2656929A00FF82E9 /* Debug.swift */,
 				8EEA86E326567A8300FF82E9 /* Logger.swift */,
 				8EEA86E126567A8300FF82E9 /* LoginView.swift */,
-				8E452FE22657CA70005C3332 /* SettingsView.swift */,
+				8E452FE8265A0E56005C3332 /* MessageCellView.swift */,
 				8EEA86E226567A8300FF82E9 /* Secrets.swift */,
+				8E452FE22657CA70005C3332 /* SettingsView.swift */,
 				8EEA86E526567A8300FF82E9 /* Style.swift */,
 				8EEA86DB26567A8300FF82E9 /* Model */,
 				8E27196B25F4A14600A263D2 /* Preview Content */,
@@ -548,10 +557,13 @@
 				8EEA86EA26567A8300FF82E9 /* Client.swift in Sources */,
 				8EEA86F92656883F00FF82E9 /* ChatCellView.swift in Sources */,
 				8EEA86E726567A8300FF82E9 /* Message.swift in Sources */,
+				8E452FE9265A0E56005C3332 /* MessageCellView.swift in Sources */,
+				8E452FE7265A0C64005C3332 /* ChatView.swift in Sources */,
 				8EEA86EE26567A8300FF82E9 /* ChatList.swift in Sources */,
 				8EEA86F426567B5700FF82E9 /* Model.swift in Sources */,
 				8EEA86ED26567A8300FF82E9 /* Logger.swift in Sources */,
 				8EEA86EF26567A8300FF82E9 /* Style.swift in Sources */,
+				8E452FEB265A3941005C3332 /* ScrollViewReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

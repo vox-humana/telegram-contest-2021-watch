@@ -1,7 +1,12 @@
+import Combine
 import Foundation
 
-struct FakeFileLoader: FileLoader {
+struct FakeService: FileLoader, HistoryService {
     func downloadPhoto(for _: Chat) {}
+
+    func chatHistory(_: ChatId, from _: MessageId, limit _: Int) -> AnyPublisher<[Message], Never> {
+        Just([Message].fake()).eraseToAnyPublisher()
+    }
 }
 
 extension Array where Element == Chat {
@@ -15,7 +20,9 @@ extension Array where Element == Chat {
                 lastMessage: .init(
                     id: 1,
                     text: "🥰Sticker",
-                    date: Date()
+                    date: Date(),
+                    sender: .user(userId: 1),
+                    outgoing: false
                 ),
                 unreadCount: 0,
                 unread: true
@@ -28,7 +35,9 @@ extension Array where Element == Chat {
                 lastMessage: .init(
                     id: 3,
                     text: "We just reached",
-                    date: Date().addingTimeInterval(-3 * 60)
+                    date: Date().addingTimeInterval(-3 * 60),
+                    sender: .user(userId: 2),
+                    outgoing: false
                 ),
                 unreadCount: 6,
                 unread: false
@@ -41,10 +50,33 @@ extension Array where Element == Chat {
                 lastMessage: .init(
                     id: 2,
                     text: "I'm good thank you!",
-                    date: Date().addingTimeInterval(-3 * 60)
+                    date: Date().addingTimeInterval(-3 * 60),
+                    sender: .user(userId: 3),
+                    outgoing: false
                 ),
                 unreadCount: 0,
                 unread: true
+            ),
+        ]
+    }
+}
+
+extension Array where Element == Message {
+    static func fake() -> [Message] {
+        [
+            .init(
+                id: 0,
+                text: "Any gift ideas for mom? 🎁",
+                date: Date(),
+                sender: .user(userId: 1),
+                outgoing: false
+            ),
+            .init(
+                id: 0,
+                text: "A dog!",
+                date: Date(),
+                sender: .user(userId: 2),
+                outgoing: true
             ),
         ]
     }

@@ -128,7 +128,7 @@ enum QRCode {
     static func image(for link: String) -> UIImage? {
         let screenSize = WKInterfaceDevice.current().screenBounds.width
         let logo = UIImage(named: "Logo", in: Bundle(for: LoginViewModel.self), with: nil)
-        let (size, callback) = qrCode(string: link, color: .black, icon: .custom(logo))
+        let (_, callback) = qrCode(string: link, color: .black, icon: .custom(logo))
         let imageSize = CGSize(width: screenSize, height: screenSize)
         return callback(.init(corners: .init(radius: 10), imageSize: imageSize, boundingSize: imageSize, intrinsicInsets: .zero))?.generateImage()
     }

@@ -16,7 +16,7 @@ public struct Chat: Hashable, Identifiable {
     public let type: ChatType
     public let title: String
     public var icon: Photo
-    public var lastMessage: Message
+    public var lastMessage: Message?
     public let unreadCount: Int
     public let unread: Bool
     public var position: Int64 = 0
@@ -30,7 +30,7 @@ extension Chat: JSONDecodable {
         id = json.unwrap("id")
         title = json.unwrap("title")
         unreadCount = json.unwrap("unread_count")
-        lastMessage = .init(id: -1, text: "[TBD]", date: Date().addingTimeInterval(-3 * 60))
+        lastMessage = nil
 
         if let photoJson = json["photo"] as? JSON {
             icon = Photo(json: photoJson)
