@@ -29,9 +29,11 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
 # Tasks
 [] Check run on device
+[] Rewrite QRCode generation to match with design (corners)
 [] Remove `swift_qrcodejs` dependency
-[] Check colors in style
 [] Embed only device or simulator dylib (see warning)
+[] Build static versions of tdlib (limiting size with removing unused code)
+[] Check colors in style
 [] Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 
 # Intro

@@ -48,7 +48,7 @@ final class TGService {
 
             case "updateChatLastMessage":
                 guard let chatId = update["chat_id"] as? ChatId else {
-                    assertionFailure("empty chat_id")
+                    logger.assert("empty chat_id")
                     break
                 }
                 if let messageJSON = update["last_message"] as? JSON {
@@ -69,11 +69,16 @@ final class TGService {
                 let chatId: ChatId = update.unwrap("chat_id")
 
                 if self.chats[chatId] == nil {
-                    logger.debug("ignore position update for \(chatId)")
+                    logger.assert("ignore position update for \(chatId)")
                     break
                 }
 
                 let position = Position(json: update.unwrap("position"))
+                if position.list != .main {
+                    logger.debug("ignore non-main position update for \(chatId)")
+                    break
+                }
+
                 self.setOrder(position.order, for: chatId)
                 self.notifyChats()
 
@@ -83,7 +88,7 @@ final class TGService {
             case "updateFile":
                 let file = File(json: update.unwrap("file"))
                 guard let chatId = self.chatIcons[file.id] else {
-                    assertionFailure("Can't find chat for download \(file.id)")
+                    logger.assert("Can't find chat for download \(file.id)")
                     break
                 }
                 self.chats[chatId]?.icon.smallFile = file
@@ -91,6 +96,23 @@ final class TGService {
 
             case "updateConnectionState":
                 self.updateConnectionSate(payload: update)
+
+            case "updateChatDraftMessage":
+                let chatId: ChatId = update.unwrap("chat_id")
+                if self.chats[chatId] == nil {
+                    logger.assert("ignore position update for \(chatId)")
+                    break
+                }
+
+                if let position = update["positions"] as? [JSON] {
+                    let positions = position.map(Position.init(json:))
+                    let mainPosition = positions.first(where: { $0.list == .main })
+                    if let order = mainPosition?.order {
+                        self.setOrder(order, for: chatId)
+                    }
+                }
+                // TODO: extract "draft_message"
+                self.notifyChats()
 
             default:
                 logger.debug("Unknown update \(updateType)")
@@ -110,7 +132,7 @@ final class TGService {
     }
 
     private func requestMainChatList() {
-        let limit = 20
+        let chunkSize = 20
         logger.debug("getChats....\(mainChatList)")
 
         let offsetChatId: ChatId
@@ -125,7 +147,7 @@ final class TGService {
         }
 
         // https://core.telegram.org/tdlib/getting-started#getting-the-lists-of-chats
-        client.queryAsync(query: ["@type": "getChats", "limit": limit, "offset_chat_id": offsetChatId, "offset_order": offsetOrder]) { [weak self] response in
+        client.queryAsync(query: ["@type": "getChats", "limit": chunkSize, "offset_chat_id": offsetChatId, "offset_order": offsetOrder]) { [weak self] response in
             guard let self = self else { return }
             logger.debug(response)
 
@@ -165,7 +187,7 @@ final class TGService {
 
     private func setOrder(_ order: Int64, for chatId: ChatId) {
         guard let chat = chats[chatId] else {
-            logger.debug("Haven't found chat for \(chatId)")
+            logger.assert("Haven't found chat for \(chatId)")
             return
         }
         if let index = mainChatList.firstIndex(where: { $0.0 == chatId && $0.1 == chat.position }) {
@@ -176,9 +198,8 @@ final class TGService {
     }
 
     private func notifyChats() {
-        // TODO: sorted by position
         let filteredChats = chats.values
-            .filter { $0.lastMessage.id != -1 }
+            // .filter { $0.lastMessage.id != -1 }
             .sorted(by: Chat.compare)
         logger.debug("Sending \(filteredChats.count) of \(chats.count)")
         chatListSignal.send(filteredChats)
@@ -288,7 +309,13 @@ extension TGService: FileLoader {
 
 private extension Chat {
     static func compare(chat1: Chat, chat2: Chat) -> Bool {
-        chat1.position > chat2.position || chat1.id > chat2.id
+        if chat1.position != chat2.position {
+            return chat1.position > chat2.position
+        }
+        if chat1.id != chat2.id {
+            return chat1.id > chat2.id
+        }
+        return true
     }
 }
 
