@@ -14,7 +14,7 @@ public struct Chat: Hashable, Identifiable {
     public let id: ChatId
     public let type: ChatType
     public let title: String
-    public var icon: Photo
+    public var icon: ChatIcon
     public var lastMessage: Message?
     public let unreadCount: Int
     public let unread: Bool
@@ -32,9 +32,9 @@ extension Chat: JSONDecodable {
         lastMessage = nil
 
         if let photoJson = json["photo"] as? JSON {
-            icon = Photo(json: photoJson)
+            icon = ChatIcon(chatJson: photoJson)
         } else {
-            icon = Photo(smallFile: nil)
+            icon = ChatIcon(smallFile: nil)
         }
 
         // TODO:
@@ -42,13 +42,17 @@ extension Chat: JSONDecodable {
     }
 }
 
-extension Photo: JSONDecodable {
-    public init(json: [String: Any]) {
-        guard !json.isEmpty else {
+public struct ChatIcon: Hashable {
+    public var smallFile: File?
+}
+
+public extension ChatIcon {
+    init(chatJson: [String: Any]) {
+        guard !chatJson.isEmpty else {
             smallFile = nil
             return
         }
-        json.checkType("chatPhotoInfo")
-        smallFile = File(json: json.unwrap("small"))
+        chatJson.checkType("chatPhotoInfo")
+        smallFile = File(json: chatJson.unwrap("small"))
     }
 }

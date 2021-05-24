@@ -36,3 +36,7 @@ extension Font {
 extension Color {
     static let tgGrey = Color.secondary
 }
+
+extension CGFloat {
+    static let tgMessageCornerRadius: CGFloat = 14
+}

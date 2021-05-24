@@ -1,4 +1,4 @@
-public struct VideoNote {
+public struct VideoNote: Hashable {
     public let duration: Int
     public let length: Int
     public let thumbnail: Thumbnail
@@ -16,7 +16,7 @@ extension VideoNote: JSONDecodable {
     }
 }
 
-public struct Thumbnail {
+public struct Thumbnail: Hashable {
     public enum Format: String {
         case thumbnailFormatJpeg
         case unknown

@@ -10,7 +10,7 @@ struct ChatCellView: View {
             AvatarView(photo: chat.icon)
                 .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
                 .onAppear {
-                    self.downloadPhoto(chat)
+                    downloadPhoto(chat)
                 }
 
             VStack(alignment: .leading) {

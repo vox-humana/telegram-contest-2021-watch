@@ -15,6 +15,10 @@ public extension JSON {
         unwrap(key, empty: 13)
     }
 
+    func unwrap(_ key: String) -> Double {
+        unwrap(key, empty: 30)
+    }
+
     func unwrap(_ key: String) -> Bool {
         unwrap(key, empty: false)
     }

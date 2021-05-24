@@ -1,6 +1,6 @@
 public struct User {
     public let id: Int
-    public let photo: Photo
+    public let photo: ChatIcon
     public let name: String
     public let phone: String
 }
@@ -14,7 +14,7 @@ extension User: JSONDecodable {
 
         let profileJSON: JSON = json.unwrap("profile_photo")
         let smallFile = File(json: profileJSON.unwrap("small"))
-        photo = Photo(smallFile: smallFile)
+        photo = ChatIcon(smallFile: smallFile)
 
         phone = json.unwrap("phone_number")
     }

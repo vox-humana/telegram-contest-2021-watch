@@ -9,11 +9,11 @@ import Foundation
                     id: 0,
                     type: .chatTypePrivate,
                     title: "Alicia Torreaux",
-                    icon: Photo(smallFile: .userAvatar),
+                    icon: ChatIcon(smallFile: .userAvatar),
                     lastMessage: .init(
                         id: 1,
-                        type: .messageText,
                         text: "🥰Sticker",
+                        content: .unsupported,
                         date: Date(),
                         sender: .user(userId: 1),
                         outgoing: false
@@ -25,11 +25,11 @@ import Foundation
                     id: 1,
                     type: .chatTypeSupergroup,
                     title: "Digital Nomads",
-                    icon: Photo(smallFile: nil),
+                    icon: ChatIcon(smallFile: nil),
                     lastMessage: .init(
                         id: 3,
-                        type: .messageText,
                         text: "We just reached",
+                        content: .text("We just reached"),
                         date: Date().addingTimeInterval(-3 * 60),
                         sender: .user(userId: 2),
                         outgoing: false
@@ -41,11 +41,11 @@ import Foundation
                     id: 2,
                     type: .chatTypeSecret,
                     title: "James",
-                    icon: Photo(smallFile: nil),
+                    icon: ChatIcon(smallFile: nil),
                     lastMessage: .init(
                         id: 2,
-                        type: .messageText,
                         text: "I'm good thank you!",
+                        content: .text("I'm good thank you!"),
                         date: Date().addingTimeInterval(-3 * 60),
                         sender: .user(userId: 3),
                         outgoing: false
@@ -62,16 +62,24 @@ import Foundation
             [
                 .init(
                     id: 0,
-                    type: .messageText,
                     text: "Any gift ideas for mom? 🎁",
+                    content: .text("Any gift ideas for mom? 🎁"),
                     date: Date(),
                     sender: .user(userId: 1),
                     outgoing: false
                 ),
                 .init(
-                    id: 0,
-                    type: .messageText,
+                    id: 1,
                     text: "A dog!",
+                    content: .text("A dog!"),
+                    date: Date(),
+                    sender: .user(userId: 2),
+                    outgoing: true
+                ),
+                .init(
+                    id: 2,
+                    text: "Location",
+                    content: .location(.init(latitude: 60.0, longitude: 30.0)),
                     date: Date(),
                     sender: .user(userId: 2),
                     outgoing: true
@@ -82,6 +90,9 @@ import Foundation
 
     extension File {
         static let userAvatar: File = .init(id: 1, path: imagePath("user-avatar.png"), downloaded: true, size: 0)
+
+        static let photo: File = .init(id: 1, path: imagePath("Image.png"), downloaded: true, size: 0)
+
         private static func imagePath(_ filename: String) -> String {
             URL(fileURLWithPath: #file)
                 .deletingLastPathComponent()
@@ -99,6 +110,15 @@ import Foundation
             photo: .init(smallFile: .userAvatar),
             name: "Alicia",
             phone: "123456789"
+        )
+    }
+
+    public extension Photo {
+        static let photo = Photo(
+            minithumbnail: nil,
+            sizes: [
+                PhotoSize(type: "m", width: 320, height: 240, photo: .photo),
+            ]
         )
     }
 

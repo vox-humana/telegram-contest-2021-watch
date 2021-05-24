@@ -8,35 +8,47 @@ public enum Sender: Hashable {
     case chat(chatId: Int)
 }
 
-public enum MessageType: String {
-    case messageVideo
+enum MessageRawType: String {
+    // Supported
     case messageText
+    case messageLocation
+    case messageVideoNote
+    case messageVideo
     case messagePhoto
     case messagePoll
+    case messageSticker
+    case messageAnimation
+    case messageAudio
+    case messageContact
+
+    // Known, unsupported
     case messageSupergroupChatCreate
     case messageDocument
     case messageChatAddMembers
     case messageChatDeleteMember
     case messageContactRegistered
-    case messageSticker
-    case messageAnimation
     case messageCustomServiceAction
     case messageChatChangeTitle
-    case messageAudio
-    case messageVideoNote
     case messageCall
-    case messageContact
     case messageExpiredPhoto
-
-    case messageLocation
 
     case unknown
 }
 
+public enum MessageContent: Hashable {
+    case text(String)
+    case location(Location)
+    case videoNote(VideoNote)
+    case photo(Photo)
+
+    case unsupported
+}
+
 public struct Message: Hashable {
     public let id: MessageId
-    public let type: MessageType
+    // preview text for last message rendering
     public let text: String
+    public let content: MessageContent
     public let date: Date
     public let sender: Sender
     public let outgoing: Bool
@@ -48,11 +60,14 @@ extension Message: JSONDecodable {
 
         id = json.unwrap("id")
 
-        let content: JSON = json.unwrap("content")
-        let rawType: String = content.unwrap("@type")
-        type = MessageType(rawValue: rawType) ?? .unknown
+        let jsonContent: JSON = json.unwrap("content")
+        let rawType: String = jsonContent.unwrap("@type")
+        let type = MessageRawType(rawValue: rawType) ?? .unknown
+        if type == .unknown {
+            print("Unknown type \(rawType)")
+        }
 
-        text = type.contentTextOrPlaceholder(from: content)
+        text = type.contentTextOrPlaceholder(from: jsonContent)
         let timestamp: Int64 = json.unwrap("date")
         date = Date(timeIntervalSince1970: TimeInterval(timestamp))
 
@@ -61,21 +76,79 @@ extension Message: JSONDecodable {
 
         outgoing = json.unwrap("is_outgoing")
 
-        if type == .unknown {
-            print("Unknown type \(rawType)")
+        content = MessageContent(content: jsonContent)
+    }
+}
+
+private extension MessageContent {
+    init(content: JSON) {
+        let rawType: String = content.unwrap("@type")
+        let type = MessageRawType(rawValue: rawType) ?? .unknown
+        switch type {
+        case .messageText:
+            let text = content.unwrap("text").extractMessageText()
+            self = .text(text)
+        case .messageLocation:
+            let location = Location(json: content.unwrap("location"))
+            self = .location(location)
+        case .messageVideoNote:
+            let videoNote = VideoNote(json: content.unwrap("video_note"))
+            self = .videoNote(videoNote)
+        case .messagePhoto:
+            let photo = Photo(json: content.unwrap("photo"))
+            self = .photo(photo)
+
+        // TODO: support
+        case .messageVideo:
+            self = .unsupported
+        case .messagePoll:
+            self = .unsupported
+        case .messageSticker:
+            self = .unsupported
+        case .messageAnimation:
+            self = .unsupported
+        case .messageAudio:
+            self = .unsupported
+        case .messageContact:
+            self = .unsupported
+
+        // Known, unsupported
+        case .messageSupergroupChatCreate:
+            self = .unsupported
+        case .messageDocument:
+            self = .unsupported
+        case .messageChatAddMembers:
+            self = .unsupported
+        case .messageChatDeleteMember:
+            self = .unsupported
+        case .messageContactRegistered:
+            self = .unsupported
+        case .messageCustomServiceAction:
+            self = .unsupported
+        case .messageChatChangeTitle:
+            self = .unsupported
+        case .messageCall:
+            self = .unsupported
+        case .messageExpiredPhoto:
+            self = .unsupported
+        case .unknown:
+            self = .unsupported
         }
     }
 }
 
-private extension MessageType {
+private extension MessageRawType {
     func contentTextOrPlaceholder(from content: JSON) -> String {
+        // TODO: replace with `MessageContent` and caption extractions
+        // to use caption in message cell
+        // var placeholder { type_emoji? + caption? }
         switch self {
         case .messageVideo:
-            return "🎥video"
+            return "🎥 video"
         case .messageText:
             return content.unwrap("text").extractMessageText()
         case .messagePhoto:
-            return content.unwrap("caption").extractMessageText()
+            return "📷 " + content.unwrap("caption").extractMessageText()
         case .messagePoll:
             return "📊"
         case .messageSupergroupChatCreate:
@@ -91,7 +164,7 @@ private extension MessageType {
         case .messageSticker:
             return content.unwrap("sticker").extractStickerEmoji()
         case .messageAnimation:
-            return "🎥animation"
+            return "🎥 animation"
         case .messageCustomServiceAction:
             return content.extractMessageText()
         case .messageChatChangeTitle:
@@ -99,18 +172,15 @@ private extension MessageType {
         case .messageAudio:
             return "🎵" + content.unwrap("caption").extractMessageText()
         case .messageVideoNote:
-            let videoNote = VideoNote(json: content["video_note"])
-            return "🎥videonote"
+            return "🎥 videonote"
         case .messageCall:
             return "📞"
         case .messageContact:
             return "👤"
         case .messageExpiredPhoto:
             return "⌛️"
-
         case .messageLocation:
-            // TODO: Location
-            return "🌏"
+            return "🌏 location"
         case .unknown:
             return "🖼"
         }

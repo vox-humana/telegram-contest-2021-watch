@@ -13,7 +13,15 @@
    "proximity_alert_radius": 0
  }
  */
-public struct Location {
+public struct Location: Hashable {
     public let latitude: Double
     public let longitude: Double
+}
+
+extension Location: JSONDecodable {
+    public init(json: JSON) {
+        json.checkType("location")
+        latitude = json.unwrap("latitude")
+        longitude = json.unwrap("longitude")
+    }
 }

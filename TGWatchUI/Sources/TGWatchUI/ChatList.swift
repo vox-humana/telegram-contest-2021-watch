@@ -49,7 +49,7 @@ public struct ChatListView: View {
                     )
                 ) {
                     ChatCellView(chat: chat) { chat in
-                        self.vm.fileLoader.downloadPhoto(for: chat)
+                        vm.fileLoader.downloadPhoto(for: chat)
                     }
                 }
                 .listRowInsets(EdgeInsets())
@@ -73,6 +73,7 @@ extension DateFormatter {
     }()
 }
 
+// TODO: Capsule?
 struct UnreadBadge: View {
     let count: Int
     var body: some View {
@@ -95,7 +96,7 @@ struct UnreadBadge_Previews: PreviewProvider {
 }
 
 struct AvatarView: View {
-    let photo: Photo
+    let photo: ChatIcon
     private let size: CGFloat = 24
 
     var body: some View {
@@ -135,6 +136,8 @@ public final class ChatListViewModel: ObservableObject {
 }
 
 struct LocalPhotoView: View {
+    let placeholderName: String
+
     private class LocalLoader: ObservableObject {
         var image: Image?
 
@@ -161,18 +164,21 @@ struct LocalPhotoView: View {
     @ObservedObject private var loader: LocalLoader
 
     var body: some View {
-        image.resizable()
+        image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
     }
 
-    init(file: File?) {
+    init(file: File?, placeholderName: String = "person") {
         _loader = ObservedObject(wrappedValue: LocalLoader(file: file))
+        self.placeholderName = placeholderName
     }
 
     private var image: Image {
         if let image = loader.image {
             return image
         } else {
-            return Image(systemName: "person")
+            return Image(systemName: placeholderName)
         }
     }
 }
