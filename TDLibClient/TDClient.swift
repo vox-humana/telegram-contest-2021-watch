@@ -1,51 +1,47 @@
-// from https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
+// Based on https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
 
 import Foundation
 
-final class TdClient {
-    var client_id = td_create_client_id()
-    let tdlibMainLoop = DispatchQueue(label: "TDLib")
-    let tdlibQueryQueue = DispatchQueue(label: "TDLibQuery")
-    var queryF = [Int64: ([String: Any]) -> Void]()
-    var updateF: (([String: Any]) -> Void)?
-    var queryId: Int64 = 0
+final class TDCLient {
+    typealias CompletionHandler = (Data) -> Void
 
-    func queryAsync(query: [String: Any], f: (([String: Any]) -> Void)? = nil) {
+    // TODO: replace with td_json_*
+    private var client_id = td_create_client_id()
+    private let tdlibMainLoop = DispatchQueue(label: "TDLib")
+    private let tdlibQueryQueue = DispatchQueue(label: "TDLibQuery")
+    private var queryF = [Int64: CompletionHandler]()
+    private var updateF: CompletionHandler?
+    private var queryId: Int64 = 0
+
+    private func queryResultAsync(_ result: String) {
         tdlibQueryQueue.async {
-            var newQuery = query
-
-            if f != nil {
-                let nextQueryId = self.queryId + 1
-                newQuery["@extra"] = nextQueryId
-                self.queryF[nextQueryId] = f
-                self.queryId = nextQueryId
+            let data = result.data(using: .utf8)!
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let dictionary = json as? [String: Any] {
+                if
+                    let extraStr = dictionary["@extra"] as? String,
+                    let extra = Int64(extraStr)
+                {
+                    let index = self.queryF.index(forKey: extra)!
+                    self.queryF[index].value(data)
+                    self.queryF.remove(at: index)
+                } else {
+                    self.updateF!(data)
+                }
             }
-            td_send(self.client_id, to_json(newQuery))
         }
     }
+}
 
-    func querySync(query: [String: Any]) -> [String: Any] {
-        let semaphore = DispatchSemaphore(value: 0)
-        var result = [String: Any]()
-        queryAsync(query: query) {
-            result = $0
-            semaphore.signal()
-        }
-        semaphore.wait()
-        return result
-    }
-
-    init() {}
-
-    deinit {}
-
-    func run(updateHandler: @escaping ([String: Any]) -> Void) {
+extension TDCLient: TdClient {
+    func run(updateHandler: @escaping CompletionHandler) {
         updateF = updateHandler
         tdlibMainLoop.async { [weak self] in
             while true {
                 if let s = self {
                     if let res = td_receive(10) {
                         let event = String(cString: res)
+
                         s.queryResultAsync(event)
                     }
                 } else {
@@ -55,27 +51,34 @@ final class TdClient {
         }
     }
 
-    private func queryResultAsync(_ result: String) {
+    func send(query: TdQuery, completion: CompletionHandler?) {
         tdlibQueryQueue.async {
-            let json = try? JSONSerialization.jsonObject(with: result.data(using: .utf8)!, options: [])
-            if let dictionary = json as? [String: Any] {
-                if let extra = dictionary["@extra"] as? Int64 {
-                    let index = self.queryF.index(forKey: extra)!
-                    self.queryF[index].value(dictionary)
-                    self.queryF.remove(at: index)
-                } else {
-                    self.updateF!(dictionary)
-                }
+            var extra: String?
+            if completion != nil {
+                let nextQueryId = self.queryId + 1
+                extra = String(nextQueryId)
+                self.queryF[nextQueryId] = completion
+                self.queryId = nextQueryId
+            }
+
+            if let data = try? query.make(with: extra),
+               let str = String(data: data, encoding: .utf8)
+            {
+                td_send(self.client_id, str)
             }
         }
     }
-}
 
-private func to_json(_ obj: Any) -> String {
-    do {
-        let obj = try JSONSerialization.data(withJSONObject: obj)
-        return String(data: obj, encoding: .utf8)!
-    } catch {
-        return ""
+    func execute(query: TdQuery) {
+        if
+            let data = try? query.make(with: nil),
+            let str = String(data: data, encoding: .utf8)
+        {
+            td_execute(str)
+        }
+    }
+
+    func close() {
+        assertionFailure("not implemented")
     }
 }

@@ -1,5 +1,5 @@
+import Combine
 import SwiftUI
-import TGWatchUI
 
 struct ContentView: View {
     @State var showLoginFlow: Bool = true
@@ -8,11 +8,11 @@ struct ContentView: View {
         if showLoginFlow {
             let login = LoginView(
                 LoginViewModel(
-                    signal: service.authStateSignal.eraseToAnyPublisher(),
-                    sendPassword: service.sendAuthentication(password:)
+                    signal: service.authService.authStateSignal.eraseToAnyPublisher(),
+                    sendPassword: service.authService.sendAuthentication(password:)
                 )
             )
-            .onReceive(service.authStateSignal, perform: { state in
+            .onReceive(service.authService.authStateSignal, perform: { state in
                 switch state {
                 case .initial:
                     showLoginFlow = true
@@ -36,8 +36,8 @@ struct ContentView: View {
         } else {
             let chatList = ChatListView(
                 .init(
-                    fileLoader: service,
-                    listPublisher: service.chatListSignal.eraseToAnyPublisher()
+                    fileLoader: service.chatListService,
+                    listPublisher: service.chatListService.chatListSignal.eraseToAnyPublisher()
                 )
             )
             .environment(\.historyService, service)
@@ -47,7 +47,7 @@ struct ContentView: View {
                     chatList
                     SettingsView(
                         SettingsViewModel(
-                            profile: service.requestMe()
+                            profile: service.authService.requestMe()
                         )
                     )
                 }
