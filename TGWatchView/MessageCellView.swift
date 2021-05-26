@@ -10,24 +10,29 @@ public struct MessageCellView: View {
             switch message.content {
             case let .messageText(text):
                 Text(text.text.text)
+                    .padding(.tgTextPadding)
             case let .messageLocation(location):
                 LocationContentView(location: location.location)
                     .disabled(true)
             case let .messageVideoNote(note):
                 Text("Video: \(note.videoNote.duration)")
             case let .messagePhoto(photo):
-                PhotoContentView(photo: photo.photo)
+                MessagePhotoContentView(photo: photo)
+            case let .messageVideo(video):
+                MessageVieoContentView(video: video)
             default:
                 Text(message.lastMessageText)
+                    .padding(.tgTextPadding)
             }
         }
-        .padding()
         .foregroundColor(message.contentColor)
-        .background(
-            RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
-                .foregroundColor(message.backgroundColor)
-        )
+        .background(message.backgroundColor)
+        .clipShape(RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular))
     }
+}
+
+extension EdgeInsets {
+    static let tgTextPadding = EdgeInsets(top: 3, leading: 9, bottom: 5, trailing: 9)
 }
 
 private extension Message {
@@ -40,15 +45,17 @@ private extension Message {
     }
 }
 
-struct MessageCellView_Previews: PreviewProvider {
-    static let messages: [Message] = .preview()
+#if DEBUG
+    struct MessageCellView_Previews: PreviewProvider {
+        static let messages: [Message] = .preview()
 
-    static var previews: some View {
-        ScrollView {
-            ForEach(0 ..< messages.count) { idx in
-                MessageCellView(message: messages[idx])
+        static var previews: some View {
+            ScrollView {
+                ForEach(0 ..< messages.count) { idx in
+                    MessageCellView(message: messages[idx])
+                }
             }
+            .accentColor(.blue)
         }
-        .accentColor(.blue)
     }
-}
+#endif

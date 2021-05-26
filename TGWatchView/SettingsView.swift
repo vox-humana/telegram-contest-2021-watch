@@ -22,15 +22,17 @@ public struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(
-            SettingsViewModel(
-                profile: CurrentValueSubject(.profile).eraseToAnyPublisher()
+#if DEBUG
+    struct SettingsView_Previews: PreviewProvider {
+        static var previews: some View {
+            SettingsView(
+                SettingsViewModel(
+                    profile: CurrentValueSubject(.profile).eraseToAnyPublisher()
+                )
             )
-        )
+        }
     }
-}
+#endif
 
 struct ProfileLabel: View {
     let profile: User

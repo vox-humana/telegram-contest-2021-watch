@@ -1,6 +1,7 @@
 // Based on https://github.com/tdlib/td/blob/master/example/swift/src/main.swift
 
 import Foundation
+import tdjson
 
 final class TDCLient {
     typealias CompletionHandler = (Data) -> Void

@@ -51,20 +51,22 @@ public struct ChatView: View {
 
 extension Message: Identifiable {}
 
-struct ChatView_Previews: PreviewProvider {
-    static let messages: [Message] = .preview()
+#if DEBUG
+    struct ChatView_Previews: PreviewProvider {
+        static let messages: [Message] = .preview()
 
-    static var previews: some View {
-        ChatView(
-            ChatViewModel(
-                chat: .preview(id: 0, title: "Alicia", lastMessage: nil),
-                service: DummyService(),
-                messages: messages
+        static var previews: some View {
+            ChatView(
+                ChatViewModel(
+                    chat: .preview(id: 0, title: "Alicia", lastMessage: nil),
+                    service: DummyService(),
+                    messages: messages
+                )
             )
-        )
-        .accentColor(.blue)
+            .accentColor(.blue)
+        }
     }
-}
+#endif
 
 import Combine
 

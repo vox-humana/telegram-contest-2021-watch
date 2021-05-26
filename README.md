@@ -33,15 +33,17 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 [] Remove `swift_qrcodejs` dependency
 [] Embed only device or simulator dylib (see warning) or use XCFramework
 [] Build static versions of tdlib (limiting size with removing unused code)
-[] Check colors in style
+[] Check colors codes in style
 [] Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
 [] Add Model layer with subset of used in UI properties, keep TDLibSwift generated model in the package with TDLibClient (TGWatchView doesn't depend on TDLib)
 
 # External libraries
-https://github.com/modestman/tl2swift
+Making xcframework from tdjson https://github.com/oboupo/tdlib-spm
+
+Generating swift models from TL interface: https://github.com/modestman/tl2swift
 - There are too many public names (for 32bit platform) to put it into a separate library
 - Renamed `Date` to `DateContent` & `Text` to `TextContent`
-- 
+- Make several properties mutable (`var` instead of `let`) for now to use the same models in business logic
 
 # Intro
 https://t.me/contest/258

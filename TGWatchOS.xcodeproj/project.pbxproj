@@ -14,7 +14,7 @@
 		8E119720265CF96E0042A874 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119711265CF96E0042A874 /* ChatListView.swift */; };
 		8E119721265CF96E0042A874 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119712265CF96E0042A874 /* LoginView.swift */; };
 		8E119722265CF96E0042A874 /* LocationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119713265CF96E0042A874 /* LocationContentView.swift */; };
-		8E119723265CF96E0042A874 /* PhotoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119714265CF96E0042A874 /* PhotoContentView.swift */; };
+		8E119723265CF96E0042A874 /* MessagePhotoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119714265CF96E0042A874 /* MessagePhotoContentView.swift */; };
 		8E119724265CF96E0042A874 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119715265CF96E0042A874 /* Client.swift */; };
 		8E119725265CF96E0042A874 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119716265CF96E0042A874 /* AvatarView.swift */; };
 		8E119727265CF96E0042A874 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119718265CF96E0042A874 /* Style.swift */; };
@@ -760,10 +760,10 @@
 		8E27196425F4A14600A263D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196325F4A14600A263D2 /* ContentView.swift */; };
 		8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */; };
 		8E27196A25F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196925F4A14600A263D2 /* Assets.xcassets */; };
-		8E3DE0D6265668E100A29D7F /* libtdjson.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E3DE0D5265668D900A29D7F /* libtdjson.dylib */; };
-		8E3DE0D7265668E100A29D7F /* libtdjson.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8E3DE0D5265668D900A29D7F /* libtdjson.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8ECD9535265A5B0900F6B600 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD9534265A5B0900F6B600 /* Logger.swift */; };
 		8ECD9537265A5BF500F6B600 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD9536265A5BF500F6B600 /* Secrets.swift */; };
+		8ECDC0B3265E79CE0075BAB6 /* tdjson.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; };
+		8ECDC0B4265E79CE0075BAB6 /* tdjson.xcframework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EE0BA31265D24BC00A9FC39 /* TGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418925F5D0A10030F121 /* TGService.swift */; };
 		8EE0BA33265D2C8000A9FC39 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA32265D2C8000A9FC39 /* AuthService.swift */; };
 		8EE0BA35265D31B000A9FC39 /* ChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA34265D31B000A9FC39 /* ChatListService.swift */; };
@@ -815,7 +815,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E3DE0D7265668E100A29D7F /* libtdjson.dylib in Embed Libraries */,
+				8ECDC0B4265E79CE0075BAB6 /* tdjson.xcframework in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -830,7 +830,7 @@
 		8E119711265CF96E0042A874 /* ChatListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		8E119712265CF96E0042A874 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8E119713265CF96E0042A874 /* LocationContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationContentView.swift; sourceTree = "<group>"; };
-		8E119714265CF96E0042A874 /* PhotoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoContentView.swift; sourceTree = "<group>"; };
+		8E119714265CF96E0042A874 /* MessagePhotoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePhotoContentView.swift; sourceTree = "<group>"; };
 		8E119715265CF96E0042A874 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		8E119716265CF96E0042A874 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		8E119718265CF96E0042A874 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -1567,17 +1567,8 @@
 		8E119A07265CF9A50042A874 /* JSONDecoder+Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Result.swift"; sourceTree = "<group>"; };
 		8E119A08265CF9A50042A874 /* TdInt64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TdInt64.swift; sourceTree = "<group>"; };
 		8E119CE3265CF9B70042A874 /* QrCode */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QrCode; path = ../QrCode; sourceTree = "<group>"; };
-		8E18ED8725F4A2A80049554A /* TDLibBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDLibBridgingHeader.h; sourceTree = "<group>"; };
 		8E18ED8925F4A2A80049554A /* TDClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDClient.swift; sourceTree = "<group>"; };
 		8E18ED9925F4A3030049554A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8E18EDBD25F4B3E00049554A /* TlObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TlObject.h; sourceTree = "<group>"; };
-		8E18EDBF25F4B3E00049554A /* tdjson_export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tdjson_export.h; sourceTree = "<group>"; };
-		8E18EDC025F4B3E00049554A /* td_json_client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_json_client.h; sourceTree = "<group>"; };
-		8E18EDC125F4B3E00049554A /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
-		8E18EDC225F4B3E00049554A /* td_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_api.h; sourceTree = "<group>"; };
-		8E18EDC325F4B3E00049554A /* td_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = td_log.h; sourceTree = "<group>"; };
-		8E18EDC425F4B3E00049554A /* td_api.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = td_api.hpp; sourceTree = "<group>"; };
-		8E18EDC525F4B3E00049554A /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		8E27194925F4A14400A263D2 /* TGWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TGWatchOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27195325F4A14500A263D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1589,10 +1580,10 @@
 		8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		8E27196925F4A14600A263D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E27196E25F4A14600A263D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8E3DE0D5265668D900A29D7F /* libtdjson.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libtdjson.dylib; sourceTree = "<group>"; };
 		8EB3418925F5D0A10030F121 /* TGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGService.swift; sourceTree = "<group>"; };
 		8ECD9534265A5B0900F6B600 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8ECD9536265A5BF500F6B600 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = tdjson.xcframework; sourceTree = "<group>"; };
 		8EE0BA32265D2C8000A9FC39 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		8EE0BA34265D31B000A9FC39 /* ChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1603,7 +1594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E119CE5265CFA580042A874 /* QrCode in Frameworks */,
-				8E3DE0D6265668E100A29D7F /* libtdjson.dylib in Frameworks */,
+				8ECDC0B3265E79CE0075BAB6 /* tdjson.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,7 +1611,7 @@
 				8E119711265CF96E0042A874 /* ChatListView.swift */,
 				8E119712265CF96E0042A874 /* LoginView.swift */,
 				8E119713265CF96E0042A874 /* LocationContentView.swift */,
-				8E119714265CF96E0042A874 /* PhotoContentView.swift */,
+				8E119714265CF96E0042A874 /* MessagePhotoContentView.swift */,
 				8E119715265CF96E0042A874 /* Client.swift */,
 				8E119716265CF96E0042A874 /* AvatarView.swift */,
 				8E119718265CF96E0042A874 /* Style.swift */,
@@ -2391,15 +2382,6 @@
 			path = Supporting;
 			sourceTree = "<group>";
 		};
-		8E18ED4925F4A2A80049554A /* tdjson */ = {
-			isa = PBXGroup;
-			children = (
-				8E18EDB925F4B3E00049554A /* watchOS */,
-				8E18ED8725F4A2A80049554A /* TDLibBridgingHeader.h */,
-			);
-			path = tdjson;
-			sourceTree = "<group>";
-		};
 		8E18ED8825F4A2A80049554A /* TDLibClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -2413,70 +2395,14 @@
 			path = TDLibClient;
 			sourceTree = "<group>";
 		};
-		8E18EDB925F4B3E00049554A /* watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				8E18EDBA25F4B3E00049554A /* include */,
-				8E18EDC625F4B3E00049554A /* lib */,
-			);
-			path = watchOS;
-			sourceTree = "<group>";
-		};
-		8E18EDBA25F4B3E00049554A /* include */ = {
-			isa = PBXGroup;
-			children = (
-				8E18EDBB25F4B3E00049554A /* td */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		8E18EDBB25F4B3E00049554A /* td */ = {
-			isa = PBXGroup;
-			children = (
-				8E18EDBC25F4B3E00049554A /* tl */,
-				8E18EDBE25F4B3E00049554A /* telegram */,
-			);
-			path = td;
-			sourceTree = "<group>";
-		};
-		8E18EDBC25F4B3E00049554A /* tl */ = {
-			isa = PBXGroup;
-			children = (
-				8E18EDBD25F4B3E00049554A /* TlObject.h */,
-			);
-			path = tl;
-			sourceTree = "<group>";
-		};
-		8E18EDBE25F4B3E00049554A /* telegram */ = {
-			isa = PBXGroup;
-			children = (
-				8E18EDBF25F4B3E00049554A /* tdjson_export.h */,
-				8E18EDC025F4B3E00049554A /* td_json_client.h */,
-				8E18EDC125F4B3E00049554A /* Client.h */,
-				8E18EDC225F4B3E00049554A /* td_api.h */,
-				8E18EDC325F4B3E00049554A /* td_log.h */,
-				8E18EDC425F4B3E00049554A /* td_api.hpp */,
-				8E18EDC525F4B3E00049554A /* Log.h */,
-			);
-			path = telegram;
-			sourceTree = "<group>";
-		};
-		8E18EDC625F4B3E00049554A /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				8E3DE0D5265668D900A29D7F /* libtdjson.dylib */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
 		8E27194225F4A14400A263D2 = {
 			isa = PBXGroup;
 			children = (
+				8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */,
 				8E119CE3265CF9B70042A874 /* QrCode */,
 				8E11972B265CF9A20042A874 /* TDLib */,
 				8E11970C265CF96E0042A874 /* TGWatchView */,
 				8E18ED9925F4A3030049554A /* README.md */,
-				8E18ED4925F4A2A80049554A /* tdjson */,
 				8E18ED8825F4A2A80049554A /* TDLibClient */,
 				8E27195125F4A14500A263D2 /* TGWatchOS WatchKit App */,
 				8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */,
@@ -2721,7 +2647,7 @@
 				8E119BC0265CF9A60042A874 /* SharePhoneNumber.swift in Sources */,
 				8E119B87265CF9A60042A874 /* SetStickerPositionInSet.swift in Sources */,
 				8E119C38265CF9A60042A874 /* LanguagePackStrings.swift in Sources */,
-				8E119723265CF96E0042A874 /* PhotoContentView.swift in Sources */,
+				8E119723265CF96E0042A874 /* MessagePhotoContentView.swift in Sources */,
 				8E119B9D265CF9A60042A874 /* InputPassportElementErrorSource.swift in Sources */,
 				8E119C9B265CF9A60042A874 /* MessageInteractionInfo.swift in Sources */,
 				8E119CAE265CF9A60042A874 /* TextParseMode.swift in Sources */,
@@ -3567,19 +3493,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/tdjson/watchOS/lib",
-				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = tdjson/TDLibBridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/tdjson/watchOS/include";
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
@@ -3599,18 +3519,12 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/tdjson/watchOS/lib",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = tdjson/TDLibBridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/tdjson/watchOS/include";
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;

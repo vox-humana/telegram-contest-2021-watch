@@ -146,15 +146,17 @@ extension Message {
     }
 }
 
-import Combine
+#if DEBUG
+    import Combine
 
-struct ChatListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatListView(
-            ChatListViewModel(
-                fileLoader: DummyService(),
-                listPublisher: Just([Chat].preview()).eraseToAnyPublisher()
+    struct ChatListView_Previews: PreviewProvider {
+        static var previews: some View {
+            ChatListView(
+                ChatListViewModel(
+                    fileLoader: DummyService(),
+                    listPublisher: Just([Chat].preview()).eraseToAnyPublisher()
+                )
             )
-        )
+        }
     }
-}
+#endif

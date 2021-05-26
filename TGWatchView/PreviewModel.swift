@@ -60,11 +60,16 @@ import Foundation
         static func preview() -> [Message] {
             [
                 .preview(
-                    id: 2,
+                    id: 3,
                     content: .messageLocation(
                         MessageLocation(expiresIn: 0, heading: 0, livePeriod: 0, location: Location(horizontalAccuracy: 0, latitude: 60, longitude: 30), proximityAlertRadius: 0)
                     ),
                     outgoing: true
+                ),
+                .preview(
+                    id: 2,
+                    content: .messagePhoto(.withCaption),
+                    outgoing: false
                 ),
                 .preview(
                     id: 1,
@@ -130,8 +135,19 @@ import Foundation
 
     extension MessageText {
         static func preview(_ text: String) -> MessageText {
-            MessageText(text: FormattedText(entities: [], text: text), webPage: nil)
+            MessageText(text: .preview(text), webPage: nil)
         }
     }
 
+    extension FormattedText {
+        static func preview(_ text: String) -> FormattedText {
+            FormattedText(entities: [], text: text)
+        }
+    }
+
+    extension MessagePhoto {
+        static let withCaption = MessagePhoto(
+            caption: .preview("🛰 Ocean clouds seen from space"), isSecret: false, photo: .photo
+        )
+    }
 #endif
