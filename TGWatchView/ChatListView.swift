@@ -1,5 +1,6 @@
 import Combine
 import SwiftUI
+import TGWatchUI
 
 public struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel

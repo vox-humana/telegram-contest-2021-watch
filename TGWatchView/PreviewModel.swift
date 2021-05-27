@@ -150,4 +150,17 @@ import Foundation
             caption: .preview("🛰 Ocean clouds seen from space"), isSecret: false, photo: .photo
         )
     }
+
+    extension MessageVideo {
+        static let withCaption = MessageVideo(
+            caption: .preview("Text Message"),
+            isSecret: false,
+            video: Video(duration: 26, fileName: "", hasStickers: false, height: 0, mimeType: "", minithumbnail: nil, supportsStreaming: false, thumbnail: .jpeg, video: .localFile("Thumbnail.jpg"), width: 0)
+        )
+    }
+
+    extension Thumbnail {
+        static let jpeg = Thumbnail(file: .localFile("Thumbnail.jpg"), format: .thumbnailFormatJpeg, height: 0, width: 0)
+    }
+
 #endif
