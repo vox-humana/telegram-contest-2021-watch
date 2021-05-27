@@ -36,8 +36,7 @@ struct ContentView: View {
         } else {
             let chatList = ChatListView(
                 .init(
-                    fileLoader: service.chatListService,
-                    listPublisher: service.chatListService.chatListSignal.eraseToAnyPublisher()
+                    chatListService: service.mainChatListService
                 )
             )
             .environment(\.historyService, service)
@@ -48,7 +47,8 @@ struct ContentView: View {
                     SettingsView(
                         SettingsViewModel(
                             profile: service.authService.requestMe()
-                        )
+                        ),
+                        archiveListService: service.archiveChatListService
                     )
                 }
             } else {

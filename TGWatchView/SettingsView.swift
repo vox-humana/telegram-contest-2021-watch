@@ -2,9 +2,11 @@ import SwiftUI
 
 public struct SettingsView: View {
     @ObservedObject var vm: SettingsViewModel
+    private let archiveListService: ChatListService
 
-    public init(_ vm: SettingsViewModel) {
+    public init(_ vm: SettingsViewModel, archiveListService: ChatListService) {
         self.vm = vm
+        self.archiveListService = archiveListService
     }
 
     public var body: some View {
@@ -12,7 +14,12 @@ public struct SettingsView: View {
             if let profile = vm.profile {
                 ProfileLabel(profile: profile) { _ in }
             }
-            SettingsLabel(name: "Archive", text: "Archive")
+            NavigationLink(
+                destination:
+                ChatListView(.init(chatListService: archiveListService), showNewMessage: false)
+            ) {
+                SettingsLabel(name: "Archive", text: "Archive")
+            }
             SettingsLabel(name: "SavedMessages", text: "Saved Messages")
             SettingsLabel(name: "Notifications", text: "Notifications")
             SettingsLabel(name: "Devices", text: "Devices")
@@ -28,7 +35,8 @@ public struct SettingsView: View {
             SettingsView(
                 SettingsViewModel(
                     profile: CurrentValueSubject(.profile).eraseToAnyPublisher()
-                )
+                ),
+                archiveListService: DummyService()
             )
         }
     }

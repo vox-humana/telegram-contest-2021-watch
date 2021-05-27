@@ -1,43 +1,26 @@
 import Combine
 import SwiftUI
 
-struct FileServiceEnvironment: EnvironmentKey {
-    static var defaultValue: FileLoader = DummyService()
-}
-
-struct HistoryServiceEnvironment: EnvironmentKey {
-    static var defaultValue: HistoryService = DummyService()
-}
-
-extension EnvironmentValues {
-    var fileService: FileLoader {
-        get { self[FileServiceEnvironment.self] }
-        set { self[FileServiceEnvironment.self] = newValue }
-    }
-}
-
-public extension EnvironmentValues {
-    var historyService: HistoryService {
-        get { self[HistoryServiceEnvironment.self] }
-        set { self[HistoryServiceEnvironment.self] = newValue }
-    }
-}
-
 public struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
     @Environment(\.historyService) var historyService
+    private let showNewMessage: Bool
 
-    public init(_ vm: ChatListViewModel) {
+    public init(_ vm: ChatListViewModel, showNewMessage: Bool = true) {
         self.vm = vm
+        self.showNewMessage = showNewMessage
     }
 
     public var body: some View {
         List {
-            Button("New Message") {}
+            if showNewMessage {
+                Button("New Message") {
+                    // TODO:
+                }
                 .buttonStyle(AccentStyle())
                 .listRowBackground(Color.clear)
                 .listRowInsets(EdgeInsets())
-
+            }
             ForEach(vm.list) { chat in
                 chatCell(chat)
             }
@@ -55,7 +38,7 @@ public struct ChatListView: View {
             )
         ) {
             ChatCellView(chat: chat) { chat in
-                vm.fileLoader.downloadPhoto(for: chat)
+                vm.downloadPhoto(for: chat)
             }
         }
         .listRowInsets(EdgeInsets())
@@ -103,9 +86,9 @@ struct UnreadBadge_Previews: PreviewProvider {
 public final class ChatListViewModel: ObservableObject {
     @Published var list: [Chat] = []
     private var subscription: AnyCancellable?
-    let fileLoader: FileLoader
+    let chatListService: ChatListService
 
-    // watchOS6 no StateObject
+    // watchOS6 has no StateObject
     private var chatVMCache: [ChatId: ChatViewModel] = [:]
     func chatViewModel(for chat: Chat, historyService: HistoryService) -> ChatViewModel {
         if let existed = chatVMCache[chat.id] {
@@ -119,13 +102,17 @@ public final class ChatListViewModel: ObservableObject {
         return created
     }
 
-    public init(fileLoader: FileLoader, listPublisher: AnyPublisher<[Chat], Never>) {
-        self.fileLoader = fileLoader
-        subscription = listPublisher.receive(on: DispatchQueue.main).sink { [weak self] chats in
-            // TODO: test only
-            // self?.list = Array(chats.prefix(1))
-            self?.list = chats
-        }
+    public init(chatListService: ChatListService) {
+        self.chatListService = chatListService
+        subscription = chatListService.chatListSignal
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] chats in
+                self?.list = chats
+            }
+    }
+
+    public func downloadPhoto(for chat: Chat) {
+        chatListService.downloadPhoto(for: chat)
     }
 }
 

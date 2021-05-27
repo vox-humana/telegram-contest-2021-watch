@@ -5,13 +5,15 @@ final class TGService {
     private let client = TDCLient()
     private let api: TdApi
 
-    let chatListService: ChatListService
+    let mainChatListService: TGChatListService
+    let archiveChatListService: TGChatListService
     let authService: AuthService
 
     init() {
         api = TdApi(client: client)
-        chatListService = ChatListService(api: api)
         authService = AuthService(api: api)
+        mainChatListService = TGChatListService(api: api, list: .chatListMain)
+        archiveChatListService = TGChatListService(api: api, list: .chatListArchive)
     }
 
     func start() {
@@ -45,13 +47,16 @@ final class TGService {
             logger.debug("Network state: \(state.state)")
         case let .updateAuthorizationState(state):
             if case .authorizationStateReady = state.authorizationState {
-                self.chatListService.requestMainChatList()
+                self.mainChatListService.requestChatList()
+                // TODO: delay it
+                self.archiveChatListService.requestChatList()
             }
         default:
             break
         }
 
-        chatListService.process(update: update)
+        mainChatListService.process(update: update)
+        archiveChatListService.process(update: update)
         authService.process(update: update)
     }
 }

@@ -2,17 +2,19 @@ import Combine
 
 // Based on https://github.com/tdlib/td/blob/9293f07464276d58974164e41a4bb57d3362a258/example/java/org/drinkless/tdlib/example/Example.java#L235
 
-final class ChatListService {
+final class TGChatListService: ChatListService {
     let chatListSignal = CurrentValueSubject<[Chat], Never>([])
 
     private let api: TdApi
-    private var mainChatList: [OrderedChat] = []
+    private let list: ChatList
+    private var chatList: [OrderedChat] = []
     private var chats: [Int64: Chat] = [:]
 
     private var chatIcons: [Int: ChatId] = [:]
 
-    init(api: TdApi) {
+    init(api: TdApi, list: ChatList) {
         self.api = api
+        self.list = list
     }
 
     func process(update: Update) {
@@ -96,7 +98,7 @@ final class ChatListService {
         case let .updateFile(state):
             let file = state.file
             guard let chatId = chatIcons[file.id] else {
-                logger.assert("Can't find chat for download \(file.id)")
+                logger.debug("Can't find chat for download \(file.id) for \(list)")
                 break
             }
             chats[chatId]?.photo?.small = state.file
@@ -107,14 +109,14 @@ final class ChatListService {
         }
     }
 
-    func requestMainChatList() {
+    func requestChatList() {
         let chunkSize = 20
-        logger.debug("getChats....\(mainChatList)")
+        logger.debug("getChats... \(chatList.count)")
 
         let offsetChatId: ChatId
         let offsetOrder: TdInt64
-        if !mainChatList.isEmpty {
-            let last = mainChatList.last!
+        if !chatList.isEmpty {
+            let last = chatList.last!
             offsetChatId = last.chatId
             offsetOrder = last.position.order
         } else {
@@ -123,7 +125,7 @@ final class ChatListService {
         }
 
         // https://core.telegram.org/tdlib/getting-started#getting-the-lists-of-chats
-        try! api.getChats(chatList: .chatListMain, limit: chunkSize, offsetChatId: offsetChatId, offsetOrder: offsetOrder) { [weak self] response in
+        try! api.getChats(chatList: list, limit: chunkSize, offsetChatId: offsetChatId, offsetOrder: offsetOrder) { [weak self] response in
             guard let self = self else { return }
 
             guard let chats = try? response.get() else {
@@ -133,34 +135,34 @@ final class ChatListService {
 
             let chatIds: [ChatId] = chats.chatIds
             if chatIds.isEmpty {
-                logger.debug("getChats done \(self.mainChatList.count) total: \(chats.totalCount)")
+                logger.debug("getChats done \(self.chatList.count) total: \(chats.totalCount)")
                 return
             }
 
-            logger.debug("getChats more \(self.mainChatList.count) total: \(chats.totalCount)")
-            self.requestMainChatList()
+            logger.debug("getChats more \(self.chatList.count) total: \(chats.totalCount)")
+            self.requestChatList()
         }
     }
 
     private func setChatOrder(_ chat: Chat, _ positions: [ChatPosition]) {
         var chatModel = chat
         for position in positions {
-            if case .chatListMain = position.list, let idx = mainChatList.firstIndex(where: { $0.chatId == chat.id }) {
-                mainChatList.remove(at: idx)
+            if position.list == list, let idx = chatList.firstIndex(where: { $0.chatId == chat.id }) {
+                chatList.remove(at: idx)
             }
         }
         chatModel.positions = positions
         chats[chatModel.id] = chatModel
         for position in positions {
-            if case .chatListMain = position.list {
-                mainChatList.append(OrderedChat(chatId: chat.id, position: position))
+            if position.list == list {
+                chatList.append(OrderedChat(chatId: chat.id, position: position))
             }
         }
-        mainChatList.sort()
+        chatList.sort()
     }
 
     private func notifyChats() {
-        let chatList = mainChatList.compactMap {
+        let chatList = chatList.compactMap {
             self.chats[$0.chatId]
         }
         logger.debug("Sending \(chatList.count) of \(chats.count)")
@@ -168,7 +170,22 @@ final class ChatListService {
     }
 }
 
-extension ChatListService: FileLoader {
+extension ChatList: Equatable {
+    public static func == (lhs: ChatList, rhs: ChatList) -> Bool {
+        switch (lhs, rhs) {
+        case (.chatListMain, .chatListMain):
+            return true
+        case (.chatListArchive, .chatListArchive):
+            return true
+        case let (.chatListFilter(lhsFilter), .chatListFilter(rhsFilter)):
+            return lhsFilter.chatFilterId == rhsFilter.chatFilterId
+        default:
+            return false
+        }
+    }
+}
+
+extension TGChatListService {
     func downloadPhoto(for chat: Chat) {
         guard let file = chat.photo?.small, !file.local.isDownloadingCompleted else {
             return

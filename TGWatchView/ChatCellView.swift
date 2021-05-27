@@ -52,16 +52,6 @@ struct ChatCellView: View {
     }
 }
 
-protocol Captionable {
-    var caption: FormattedText { get }
-}
-
-extension Captionable {
-    var captionText: String {
-        caption.text
-    }
-}
-
 extension Message {
     var foundationDate: Date {
         Date(timeIntervalSince1970: TimeInterval(date))
@@ -153,8 +143,7 @@ extension Message {
         static var previews: some View {
             ChatListView(
                 ChatListViewModel(
-                    fileLoader: DummyService(),
-                    listPublisher: Just([Chat].preview()).eraseToAnyPublisher()
+                    chatListService: DummyService()
                 )
             )
         }
