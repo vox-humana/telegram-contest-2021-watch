@@ -39,7 +39,6 @@ struct ContentView: View {
                     chatListService: service.mainChatListService
                 )
             )
-            .environment(\.historyService, service)
 
             if #available(watchOS 7.0, *) {
                 TabView {

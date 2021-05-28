@@ -760,9 +760,10 @@
 		8ECD9537265A5BF500F6B600 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD9536265A5BF500F6B600 /* Secrets.swift */; };
 		8ECDC0B3265E79CE0075BAB6 /* tdjson.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; };
 		8ECDC0B4265E79CE0075BAB6 /* tdjson.xcframework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8ED51EE2266115EF008E519A /* TGMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED51EE1266115EF008E519A /* TGMessageService.swift */; };
 		8EE0BA31265D24BC00A9FC39 /* TGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418925F5D0A10030F121 /* TGService.swift */; };
-		8EE0BA33265D2C8000A9FC39 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA32265D2C8000A9FC39 /* AuthService.swift */; };
-		8EE0BA35265D31B000A9FC39 /* ChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA34265D31B000A9FC39 /* ChatListService.swift */; };
+		8EE0BA33265D2C8000A9FC39 /* TGAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */; };
+		8EE0BA35265D31B000A9FC39 /* TGChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */; };
 		8EE3726E265FD2F0007D2A47 /* TGWatchUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE3726D265FD2F0007D2A47 /* TGWatchUI */; };
 /* End PBXBuildFile section */
 
@@ -1577,8 +1578,9 @@
 		8ECD9534265A5B0900F6B600 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8ECD9536265A5BF500F6B600 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = tdjson.xcframework; sourceTree = "<group>"; };
-		8EE0BA32265D2C8000A9FC39 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		8EE0BA34265D31B000A9FC39 /* ChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListService.swift; sourceTree = "<group>"; };
+		8ED51EE1266115EF008E519A /* TGMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGMessageService.swift; sourceTree = "<group>"; };
+		8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGAuthService.swift; sourceTree = "<group>"; };
+		8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGChatListService.swift; sourceTree = "<group>"; };
 		8EE3726C265FD2E8007D2A47 /* TGWatchUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TGWatchUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2380,8 +2382,9 @@
 				8ECD9534265A5B0900F6B600 /* Logger.swift */,
 				8E18ED8925F4A2A80049554A /* TDClient.swift */,
 				8EB3418925F5D0A10030F121 /* TGService.swift */,
-				8EE0BA34265D31B000A9FC39 /* ChatListService.swift */,
-				8EE0BA32265D2C8000A9FC39 /* AuthService.swift */,
+				8ED51EE1266115EF008E519A /* TGMessageService.swift */,
+				8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */,
+				8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */,
 			);
 			path = TDLibClient;
 			sourceTree = "<group>";
@@ -2581,7 +2584,7 @@
 				8E119B3C265CF9A60042A874 /* GetUser.swift in Sources */,
 				8E119B8A265CF9A60042A874 /* GetRecentInlineBots.swift in Sources */,
 				8E119B41265CF9A60042A874 /* AccountTtl.swift in Sources */,
-				8EE0BA33265D2C8000A9FC39 /* AuthService.swift in Sources */,
+				8EE0BA33265D2C8000A9FC39 /* TGAuthService.swift in Sources */,
 				8E119C0D265CF9A60042A874 /* GetLogTags.swift in Sources */,
 				8E119CA6265CF9A60042A874 /* GetChatEventLog.swift in Sources */,
 				8E119A43265CF9A50042A874 /* SetCommands.swift in Sources */,
@@ -2966,7 +2969,7 @@
 				8E119AF2265CF9A60042A874 /* OpenChat.swift in Sources */,
 				8E119A2F265CF9A50042A874 /* SetRecoveryEmailAddress.swift in Sources */,
 				8E119B7E265CF9A60042A874 /* PassportElementsWithErrors.swift in Sources */,
-				8EE0BA35265D31B000A9FC39 /* ChatListService.swift in Sources */,
+				8EE0BA35265D31B000A9FC39 /* TGChatListService.swift in Sources */,
 				8E119A54265CF9A50042A874 /* ClearImportedContacts.swift in Sources */,
 				8E119A82265CF9A50042A874 /* GetAutoDownloadSettingsPresets.swift in Sources */,
 				8E119A32265CF9A50042A874 /* CreatePrivateChat.swift in Sources */,
@@ -3252,6 +3255,7 @@
 				8E119AD3265CF9A60042A874 /* ResendRecoveryEmailAddressCode.swift in Sources */,
 				8E119A6A265CF9A50042A874 /* GetAllPassportElements.swift in Sources */,
 				8E119C9C265CF9A60042A874 /* AddLocalMessage.swift in Sources */,
+				8ED51EE2266115EF008E519A /* TGMessageService.swift in Sources */,
 				8E119A91265CF9A50042A874 /* TerminateSession.swift in Sources */,
 				8E119BF1265CF9A60042A874 /* ToggleGroupCallEnabledStartNotification.swift in Sources */,
 				8E119C25265CF9A60042A874 /* GetCurrentState.swift in Sources */,

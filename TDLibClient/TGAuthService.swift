@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-final class AuthService {
+final class TGAuthService {
     let authStateSignal = CurrentValueSubject<AuthState, Never>(.initial)
     private let api: TdApi
 

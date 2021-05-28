@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchUI
 
 public struct ChatView: View {
     @ObservedObject var vm: ChatViewModel
@@ -40,6 +41,7 @@ public struct ChatView: View {
                         }
                     }
                 }
+                ReplyPanelView()
             }
         }
         .navigationBarTitle(vm.chat.title)
@@ -83,6 +85,10 @@ public final class ChatViewModel: ObservableObject {
         self.messages = messages
         // TODO: preheat
         // loadMoreHistory()
+    }
+
+    deinit {
+        logger.debug("")
     }
 
     func loadMoreHistory() {

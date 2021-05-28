@@ -9,8 +9,12 @@ public struct MessageCellView: View {
         Group {
             switch message.content {
             case let .messageText(text):
-                Text(text.text.text)
-                    .padding(.tgTextPadding)
+                if EmojiContentView.canRender(text.text.text) {
+                    EmojiContentView(text.text.text)
+                } else {
+                    Text(text.text.text)
+                        .padding(.tgTextPadding)
+                }
             case let .messageLocation(content):
                 LocationContentView(.init(content))
                     .disabled(true)
@@ -31,7 +35,20 @@ public struct MessageCellView: View {
                     .padding(.tgTextPadding)
             }
         }
-        .tgMessageStyle(isOutgoing: message.isOutgoing)
+        .tgMessageStyle(isOutgoing: message.isOutgoing, hideBackground: message.content.hiddenBackground)
+    }
+}
+
+private extension MessageContent {
+    var hiddenBackground: Bool {
+        switch self {
+        case let .messageText(text) where EmojiContentView.canRender(text.text.text):
+            return true
+        case .messageVideoNote:
+            return true
+        default:
+            return false
+        }
     }
 }
 

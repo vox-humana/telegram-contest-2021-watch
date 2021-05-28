@@ -33,9 +33,7 @@ public struct ChatListView: View {
         NavigationLink(
             destination:
             NavigationLazyView(
-                ChatView(
-                    vm.chatViewModel(for: chat, historyService: historyService)
-                )
+                makeChatView(chat)
             )
         ) {
             ChatCellView(chat: chat) { chat in
@@ -43,6 +41,14 @@ public struct ChatListView: View {
             }
         }
         .listRowInsets(EdgeInsets())
+    }
+
+    private func makeChatView(_ chat: Chat) -> some View {
+        let chatService = TGChatService(api: service.api, chatId: chat.id)
+        return ChatView(
+            vm.chatViewModel(for: chat, historyService: chatService)
+        )
+        .environment(\.messageService, chatService)
     }
 }
 

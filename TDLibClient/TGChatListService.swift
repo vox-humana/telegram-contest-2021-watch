@@ -2,7 +2,7 @@ import Combine
 
 // Based on https://github.com/tdlib/td/blob/9293f07464276d58974164e41a4bb57d3362a258/example/java/org/drinkless/tdlib/example/Example.java#L235
 
-final class TGChatListService: ChatListService {
+final class TGChatListService {
     let chatListSignal = CurrentValueSubject<[Chat], Never>([])
 
     private let api: TdApi
@@ -109,41 +109,6 @@ final class TGChatListService: ChatListService {
         }
     }
 
-    func requestChatList() {
-        let chunkSize = 20
-        logger.debug("getChats... \(chatList.count)")
-
-        let offsetChatId: ChatId
-        let offsetOrder: TdInt64
-        if !chatList.isEmpty {
-            let last = chatList.last!
-            offsetChatId = last.chatId
-            offsetOrder = last.position.order
-        } else {
-            offsetChatId = 0
-            offsetOrder = TdInt64.max
-        }
-
-        // https://core.telegram.org/tdlib/getting-started#getting-the-lists-of-chats
-        try! api.getChats(chatList: list, limit: chunkSize, offsetChatId: offsetChatId, offsetOrder: offsetOrder) { [weak self] response in
-            guard let self = self else { return }
-
-            guard let chats = try? response.get() else {
-                logger.assert("got error")
-                return
-            }
-
-            let chatIds: [ChatId] = chats.chatIds
-            if chatIds.isEmpty {
-                logger.debug("getChats done \(self.chatList.count) total: \(chats.totalCount)")
-                return
-            }
-
-            logger.debug("getChats more \(self.chatList.count) total: \(chats.totalCount)")
-            self.requestChatList()
-        }
-    }
-
     private func setChatOrder(_ chat: Chat, _ positions: [ChatPosition]) {
         var chatModel = chat
         for position in positions {
@@ -185,7 +150,42 @@ extension ChatList: Equatable {
     }
 }
 
-extension TGChatListService {
+extension TGChatListService: ChatListService {
+    func requestChatList() {
+        let chunkSize = 20
+        logger.debug("getChats... \(chatList.count)")
+
+        let offsetChatId: ChatId
+        let offsetOrder: TdInt64
+        if !chatList.isEmpty {
+            let last = chatList.last!
+            offsetChatId = last.chatId
+            offsetOrder = last.position.order
+        } else {
+            offsetChatId = 0
+            offsetOrder = TdInt64.max
+        }
+
+        // https://core.telegram.org/tdlib/getting-started#getting-the-lists-of-chats
+        try! api.getChats(chatList: list, limit: chunkSize, offsetChatId: offsetChatId, offsetOrder: offsetOrder) { [weak self] response in
+            guard let self = self else { return }
+
+            guard let chats = try? response.get() else {
+                logger.assert("got error")
+                return
+            }
+
+            let chatIds: [ChatId] = chats.chatIds
+            if chatIds.isEmpty {
+                logger.debug("getChats done \(self.chatList.count) total: \(chats.totalCount)")
+                return
+            }
+
+            logger.debug("getChats more \(self.chatList.count) total: \(chats.totalCount)")
+            self.requestChatList()
+        }
+    }
+
     func downloadPhoto(for chat: Chat) {
         guard let file = chat.photo?.small, !file.local.isDownloadingCompleted else {
             return

@@ -43,22 +43,30 @@ extension CGFloat {
     static let tgMessageCornerRadius: CGFloat = 14
 }
 
-public struct TGMessage: ViewModifier {
+struct TGMessage: ViewModifier {
     let isOutgoing: Bool
+    let hideBackground: Bool
 
-    public func body(content: Content) -> some View {
-        content
-            .foregroundColor(isOutgoing ? Color.white : Color.tgBlack)
-            .background(isOutgoing ? Color.accentColor : Color.white)
-            .clipShape(
-                RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
-            )
+    func body(content: Content) -> some View {
+        if !hideBackground {
+            content
+                .foregroundColor(isOutgoing ? Color.white : Color.tgBlack)
+                .background(isOutgoing ? Color.accentColor : Color.white)
+                .clipShape(
+                    RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
+                )
+        } else {
+            content
+                .clipShape(
+                    RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
+                )
+        }
     }
 }
 
 public extension View {
-    func tgMessageStyle(isOutgoing: Bool) -> some View {
-        modifier(TGMessage(isOutgoing: isOutgoing))
+    func tgMessageStyle(isOutgoing: Bool, hideBackground: Bool = false) -> some View {
+        modifier(TGMessage(isOutgoing: isOutgoing, hideBackground: hideBackground))
     }
 }
 

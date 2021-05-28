@@ -3,15 +3,15 @@ import Foundation
 
 final class TGService {
     private let client = TDCLient()
-    private let api: TdApi
+    let api: TdApi
 
     let mainChatListService: TGChatListService
     let archiveChatListService: TGChatListService
-    let authService: AuthService
+    let authService: TGAuthService
 
     init() {
         api = TdApi(client: client)
-        authService = AuthService(api: api)
+        authService = TGAuthService(api: api)
         mainChatListService = TGChatListService(api: api, list: .chatListMain)
         archiveChatListService = TGChatListService(api: api, list: .chatListArchive)
     }
@@ -58,22 +58,5 @@ final class TGService {
         mainChatListService.process(update: update)
         archiveChatListService.process(update: update)
         authService.process(update: update)
-    }
-}
-
-// TODO: extract
-extension TGService: HistoryService {
-    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int = 20) -> AnyPublisher<[Message], Never> {
-        Future<[Message], Never> { [api] promise in
-            try? api.getChatHistory(
-                chatId: chatId, fromMessageId: from, limit: limit, offset: 0, onlyLocal: false
-            ) { response in
-                logger.debug("GOT respone \(response)")
-                if let messages = (try? response.get())?.messages {
-                    promise(.success(messages))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
     }
 }
