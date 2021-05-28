@@ -48,20 +48,6 @@ public struct ChatListView: View {
 
 extension Chat: Identifiable {}
 
-// watchOS7+ 'Text(_:style:)'
-extension DateFormatter {
-    static func time(from date: Date) -> String {
-        timeFormatter.string(from: date)
-    }
-
-    static var timeFormatter: DateFormatter = {
-        var formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        return formatter
-    }()
-}
-
 // TODO: Capsule?
 struct UnreadBadge: View {
     let count: Int

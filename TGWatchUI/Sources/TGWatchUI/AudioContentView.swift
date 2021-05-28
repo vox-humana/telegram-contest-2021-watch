@@ -1,4 +1,3 @@
-import MapKit
 import SwiftUI
 
 public class AudioState {
@@ -15,28 +14,41 @@ public class AudioState {
 
 public struct AudioContentView: View {
     let state: AudioState
+    let keepImageColors: Bool
 
-    public init(state: AudioState) {
+    public init(_ state: AudioState, keepImageColors: Bool) {
         self.state = state
+        self.keepImageColors = keepImageColors
     }
-    
+
     public var body: some View {
         HStack(alignment: .center, spacing: 8) {
-            Image("Play", bundle: .module)
-                .renderingMode(.template)
+            image("Play")
+
             VStack(alignment: .leading) {
                 if !state.caption.isEmpty {
                     Text(state.caption)
                 } else {
-                    Image("WavesFilled", bundle: .module)
-                        .renderingMode(.template)
+                    image("WavesFilled")
                 }
                 Text(state.duration.durationString)
             }
+            .padding(contentPagging)
             .font(.tgTitle)
             Spacer()
         }
         .padding(8)
+    }
+
+    private func image(_ name: String) -> some View {
+        let image = Image(name, bundle: .module)
+        return keepImageColors ? image : image.renderingMode(.template)
+    }
+
+    private var contentPagging: EdgeInsets {
+        state.caption.isEmpty
+            ? EdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 0)
+            : EdgeInsets(top: 1, leading: 0, bottom: 3, trailing: 0)
     }
 }
 
@@ -50,21 +62,21 @@ extension AudioState {
 }
 
 struct AudioContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            AudioContentView(state: .preview)
-                .tgMessageStyle(isOutgoing: true)
-            AudioContentView(state: .previewWithCaption)
-                .tgMessageStyle(isOutgoing: true)
-        }
-        .accentColor(.blue)
+    private static let outgoing = [true, false]
 
-        VStack {
-            AudioContentView(state: .preview)
-                .tgMessageStyle(isOutgoing: false)
-            AudioContentView(state: .previewWithCaption)
-                .tgMessageStyle(isOutgoing: false)
+    static var previews: some View {
+        ForEach(outgoing) { flag in
+            VStack {
+                AudioContentView(.preview, keepImageColors: !flag)
+                    .tgMessageStyle(isOutgoing: flag)
+                AudioContentView(.previewWithCaption, keepImageColors:!flag)
+                    .tgMessageStyle(isOutgoing: flag)
+            }
+            .accentColor(.blue)
         }
-        .accentColor(.blue)
     }
+}
+
+extension Bool: Identifiable {
+    public var id: Bool { self }
 }

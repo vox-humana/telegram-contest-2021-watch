@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchUI
 
 struct ChatCellView: View {
     let chat: Chat
@@ -6,7 +7,7 @@ struct ChatCellView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            AvatarView(photo: chat.photo)
+            AvatarView(chat.photo.map(LocalPhotoState.init(chatPhoto:)))
                 .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
                 .onAppear {
                     downloadPhoto(chat)
@@ -33,11 +34,7 @@ struct ChatCellView: View {
 
                     // TODO: or onplayed?
                     if chat.unreadMentionCount > 0 {
-                        Circle()
-                            .size(.init(width: 6, height: 6))
-                            .fixedSize()
-                            .frame(width: 6, height: 6, alignment: .center)
-                            .foregroundColor(.accentColor)
+                        UnreadIndicator()
                     }
 
                     Spacer()
@@ -134,6 +131,20 @@ extension Message {
             return ""
         }
     }
+}
+
+// watchOS7+ 'Text(_:style:)'
+extension DateFormatter {
+    static func time(from date: Date) -> String {
+        timeFormatter.string(from: date)
+    }
+
+    static var timeFormatter: DateFormatter = {
+        var formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter
+    }()
 }
 
 #if DEBUG

@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "TGWatchUI",
     platforms: [
-        .watchOS(.v6)
+        .watchOS(.v6),
     ],
     products: [
         .library(

@@ -1,4 +1,5 @@
 import SwiftUI
+import TGWatchUI
 
 public struct SettingsView: View {
     @ObservedObject var vm: SettingsViewModel
@@ -48,7 +49,7 @@ struct ProfileLabel: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 8) {
-            AvatarView(photo: profile.profilePhoto)
+            AvatarView(profile.profilePhoto.map(LocalPhotoState.init(profilePhoto:)))
                 .onAppear {
                     downloadPhoto(profile)
                 }

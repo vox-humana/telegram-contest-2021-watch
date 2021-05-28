@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension View {
+public extension View {
     func debugBorder() -> some View {
         border(Color.random, width: 1)
     }
@@ -20,8 +20,10 @@ private extension Color {
     }
 }
 
-struct ConstructionView: View {
-    var body: some View {
+public struct ConstructionView: View {
+    public init() {}
+
+    public var body: some View {
         Text("🚧 Under construction 🚧")
     }
 }

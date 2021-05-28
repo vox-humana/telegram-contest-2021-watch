@@ -1,12 +1,11 @@
 import SwiftUI
 
 public struct AccentStyle: ButtonStyle {
-    // watchOS6
     private let color = Color.accentColor // doesn't work on watchOS 6
     // private let color = Color("AccentColor") // doesn't work on watchOS 6
 
     public init() {}
-    
+
     public func makeBody(configuration: ButtonStyleConfiguration) -> some View {
         configuration.label
             .font(.tgTitle)
@@ -71,7 +70,7 @@ extension Int {
         if hours > 0 {
             return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
         }
-        return String(format: "%2i:%02i", minutes, seconds)
+        return String(format: "%i:%02i", minutes, seconds)
     }
 }
 

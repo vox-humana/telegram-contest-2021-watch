@@ -11,15 +11,21 @@ public struct MessageCellView: View {
             case let .messageText(text):
                 Text(text.text.text)
                     .padding(.tgTextPadding)
-            case let .messageLocation(location):
-                LocationContentView(state: .init(location))
+            case let .messageLocation(content):
+                LocationContentView(.init(content))
                     .disabled(true)
-            case let .messageVideoNote(note):
-                Text("Video: \(note.videoNote.duration)")
-            case let .messagePhoto(photo):
-                MessagePhotoContentView(photo: photo)
-            case let .messageVideo(video):
-                MessageVideoContentView(video: video)
+            case let .messageVideoNote(content):
+                VideoNoteContentView(.init(content))
+            case let .messagePhoto(content):
+                PhotoContentView(.init(content))
+            case let .messageVideo(content):
+                VideoContentView(.init(content))
+            case let .messageContact(content):
+                ContactContentView(.init(content), keepImageColors: !message.isOutgoing)
+            case let .messageDocument(content):
+                DocumentContentView(.init(content), keepImageColors: !message.isOutgoing)
+            case let .messageAudio(content):
+                AudioContentView(.init(content), keepImageColors: !message.isOutgoing)
             default:
                 Text(message.lastMessageText)
                     .padding(.tgTextPadding)

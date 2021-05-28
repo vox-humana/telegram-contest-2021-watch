@@ -13,10 +13,7 @@
 		8E11971F265CF96E0042A874 /* ScrollViewReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119710265CF96E0042A874 /* ScrollViewReader.swift */; };
 		8E119720265CF96E0042A874 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119711265CF96E0042A874 /* ChatListView.swift */; };
 		8E119721265CF96E0042A874 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119712265CF96E0042A874 /* LoginView.swift */; };
-		8E119723265CF96E0042A874 /* MessagePhotoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119714265CF96E0042A874 /* MessagePhotoContentView.swift */; };
 		8E119724265CF96E0042A874 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119715265CF96E0042A874 /* Client.swift */; };
-		8E119725265CF96E0042A874 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119716265CF96E0042A874 /* AvatarView.swift */; };
-		8E119728265CF96E0042A874 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119719265CF96E0042A874 /* Debug.swift */; };
 		8E119729265CF96E0042A874 /* PreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11971A265CF96E0042A874 /* PreviewModel.swift */; };
 		8E11972A265CF96E0042A874 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11971B265CF96E0042A874 /* ChatView.swift */; };
 		8E119A09265CF9A50042A874 /* DisableProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11972D265CF9A20042A874 /* DisableProxy.swift */; };
@@ -829,10 +826,7 @@
 		8E119710265CF96E0042A874 /* ScrollViewReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewReader.swift; sourceTree = "<group>"; };
 		8E119711265CF96E0042A874 /* ChatListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		8E119712265CF96E0042A874 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		8E119714265CF96E0042A874 /* MessagePhotoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePhotoContentView.swift; sourceTree = "<group>"; };
 		8E119715265CF96E0042A874 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
-		8E119716265CF96E0042A874 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
-		8E119719265CF96E0042A874 /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		8E11971A265CF96E0042A874 /* PreviewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewModel.swift; sourceTree = "<group>"; };
 		8E11971B265CF96E0042A874 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		8E11972D265CF9A20042A874 /* DisableProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisableProxy.swift; sourceTree = "<group>"; };
@@ -1605,15 +1599,12 @@
 		8E11970C265CF96E0042A874 /* TGWatchView */ = {
 			isa = PBXGroup;
 			children = (
-				8E119716265CF96E0042A874 /* AvatarView.swift */,
 				8E11970F265CF96E0042A874 /* ChatCellView.swift */,
 				8E119711265CF96E0042A874 /* ChatListView.swift */,
 				8E11971B265CF96E0042A874 /* ChatView.swift */,
 				8E119715265CF96E0042A874 /* Client.swift */,
-				8E119719265CF96E0042A874 /* Debug.swift */,
 				8E119712265CF96E0042A874 /* LoginView.swift */,
 				8E11970E265CF96E0042A874 /* MessageCellView.swift */,
-				8E119714265CF96E0042A874 /* MessagePhotoContentView.swift */,
 				8E1E5272265FBA2700D6AD12 /* Model.swift */,
 				8E11971A265CF96E0042A874 /* PreviewModel.swift */,
 				8E119710265CF96E0042A874 /* ScrollViewReader.swift */,
@@ -2649,7 +2640,6 @@
 				8E119BC0265CF9A60042A874 /* SharePhoneNumber.swift in Sources */,
 				8E119B87265CF9A60042A874 /* SetStickerPositionInSet.swift in Sources */,
 				8E119C38265CF9A60042A874 /* LanguagePackStrings.swift in Sources */,
-				8E119723265CF96E0042A874 /* MessagePhotoContentView.swift in Sources */,
 				8E119B9D265CF9A60042A874 /* InputPassportElementErrorSource.swift in Sources */,
 				8E119C9B265CF9A60042A874 /* MessageInteractionInfo.swift in Sources */,
 				8E119CAE265CF9A60042A874 /* TextParseMode.swift in Sources */,
@@ -2706,7 +2696,6 @@
 				8E119B0B265CF9A60042A874 /* Background.swift in Sources */,
 				8E119BAD265CF9A60042A874 /* HideSuggestedAction.swift in Sources */,
 				8E119C41265CF9A60042A874 /* RemoveProxy.swift in Sources */,
-				8E119725265CF96E0042A874 /* AvatarView.swift in Sources */,
 				8E119CC4265CF9A60042A874 /* SetPassportElement.swift in Sources */,
 				8E119CCE265CF9A60042A874 /* VideoNote.swift in Sources */,
 				8E119BB1265CF9A60042A874 /* SavedCredentials.swift in Sources */,
@@ -3057,7 +3046,6 @@
 				8E119A2B265CF9A50042A874 /* CleanFileName.swift in Sources */,
 				8E119B90265CF9A60042A874 /* CheckChatUsername.swift in Sources */,
 				8E119BD6265CF9A60042A874 /* ReportChat.swift in Sources */,
-				8E119728265CF96E0042A874 /* Debug.swift in Sources */,
 				8E119CCC265CF9A60042A874 /* Contact.swift in Sources */,
 				8E119C3B265CF9A60042A874 /* CreateCall.swift in Sources */,
 				8E119AF7265CF9A60042A874 /* PassportRequiredElement.swift in Sources */,
