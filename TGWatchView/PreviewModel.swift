@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import TGWatchUI // TODO: extract model
 
 #if DEBUG
     extension ChatNotificationSettings {
@@ -51,35 +52,6 @@ import Foundation
                         content: .messageText(.preview("I'm good thank you!")),
                         outgoing: false
                     )
-                ),
-            ]
-        }
-    }
-
-    public extension Array where Element == Message {
-        static func preview() -> [Message] {
-            [
-                .preview(
-                    id: 3,
-                    content: .messageLocation(
-                        MessageLocation(expiresIn: 0, heading: 0, livePeriod: 0, location: Location(horizontalAccuracy: 0, latitude: 60, longitude: 30), proximityAlertRadius: 0)
-                    ),
-                    outgoing: true
-                ),
-                .preview(
-                    id: 2,
-                    content: .messagePhoto(.withCaption),
-                    outgoing: false
-                ),
-                .preview(
-                    id: 1,
-                    content: .messageText(.preview("A dog!")),
-                    outgoing: true
-                ),
-                .preview(
-                    id: 0,
-                    content: .messageText(.preview("Any gift ideas for mom? 🎁")),
-                    outgoing: false
                 ),
             ]
         }
@@ -145,22 +117,22 @@ import Foundation
         }
     }
 
-    extension MessagePhoto {
-        static let withCaption = MessagePhoto(
-            caption: .preview("🛰 Ocean clouds seen from space"), isSecret: false, photo: .photo
-        )
-    }
-
-    extension MessageVideo {
-        static let withCaption = MessageVideo(
-            caption: .preview("Text Message"),
-            isSecret: false,
-            video: Video(duration: 26, fileName: "", hasStickers: false, height: 0, mimeType: "", minithumbnail: nil, supportsStreaming: false, thumbnail: .jpeg, video: .localFile("Thumbnail.jpg"), width: 0)
-        )
-    }
-
-    extension Thumbnail {
-        static let jpeg = Thumbnail(file: .localFile("Thumbnail.jpg"), format: .thumbnailFormatJpeg, height: 0, width: 0)
-    }
+//    extension MessagePhoto {
+//        static let withCaption = MessagePhoto(
+//            caption: .preview("🛰 Ocean clouds seen from space"), isSecret: false, photo: .photo
+//        )
+//    }
+//
+//    extension MessageVideo {
+//        static let withCaption = MessageVideo(
+//            caption: .preview("Text Message"),
+//            isSecret: false,
+//            video: Video(duration: 26, fileName: "", hasStickers: false, height: 0, mimeType: "", minithumbnail: nil, supportsStreaming: false, thumbnail: .jpeg, video: .localFile("Thumbnail.jpg"), width: 0)
+//        )
+//    }
+//
+//    extension Thumbnail {
+//        static let jpeg = Thumbnail(file: .localFile("Thumbnail.jpg"), format: .thumbnailFormatJpeg, height: 0, width: 0)
+//    }
 
 #endif

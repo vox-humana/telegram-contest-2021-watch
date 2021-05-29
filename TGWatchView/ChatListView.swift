@@ -2,9 +2,10 @@ import Combine
 import SwiftUI
 import TGWatchUI
 
+// TODO: move to TGWatchUI
 public struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
-    @Environment(\.historyService) var historyService
+    @Environment(\.chatService) var chatService
     private let showNewMessage: Bool
 
     public init(_ vm: ChatListViewModel, showNewMessage: Bool = true) {
@@ -19,8 +20,7 @@ public struct ChatListView: View {
                     // TODO:
                 }
                 .buttonStyle(AccentStyle())
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
+                .clearedListStyle()
             }
             ForEach(vm.list) { chat in
                 chatCell(chat)
@@ -44,37 +44,15 @@ public struct ChatListView: View {
     }
 
     private func makeChatView(_ chat: Chat) -> some View {
-        let chatService = TGChatService(api: service.api, chatId: chat.id)
+        let chatService = service.chatService
         return ChatView(
             vm.chatViewModel(for: chat, historyService: chatService)
         )
-        .environment(\.messageService, chatService)
+        .environment(\.chatService, chatService)
     }
 }
 
 extension Chat: Identifiable {}
-
-// TODO: Capsule?
-struct UnreadBadge: View {
-    let count: Int
-    var body: some View {
-        Text("\(count)")
-            .font(.tgBadgeCount)
-            .padding(.horizontal, 5)
-            .padding(.vertical, 1)
-            .background(
-                RoundedRectangle(cornerRadius: 10, style: .circular)
-                    .foregroundColor(.accentColor)
-            )
-    }
-}
-
-struct UnreadBadge_Previews: PreviewProvider {
-    static var previews: some View {
-        UnreadBadge(count: 99)
-        UnreadBadge(count: 6)
-    }
-}
 
 public final class ChatListViewModel: ObservableObject {
     @Published var list: [Chat] = []
@@ -83,7 +61,7 @@ public final class ChatListViewModel: ObservableObject {
 
     // watchOS6 has no StateObject
     private var chatVMCache: [ChatId: ChatViewModel] = [:]
-    func chatViewModel(for chat: Chat, historyService: HistoryService) -> ChatViewModel {
+    func chatViewModel(for chat: Chat, historyService: ChatService) -> ChatViewModel {
         if let existed = chatVMCache[chat.id] {
             return existed
         }

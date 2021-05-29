@@ -1,5 +1,6 @@
 import SwiftUI
 
+// TODO: use for watchOS 6
 struct MapView: WKInterfaceObjectRepresentable {
     let location: CLLocationCoordinate2D
 

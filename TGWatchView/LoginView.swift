@@ -2,6 +2,7 @@ import Combine
 import QrCode
 import SwiftUI
 
+// TODO: move to TGWatchUI
 public struct LoginView: View {
     @ObservedObject var vm: LoginViewModel
     @State var password: String = ""

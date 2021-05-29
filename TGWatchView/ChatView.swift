@@ -9,39 +9,49 @@ public struct ChatView: View {
     }
 
     public var body: some View {
-        ScrollView {
-            if vm.messages.isEmpty {
-                if vm.isLoading {
-                    ActivityIndicator()
-                        .padding()
+        CompatibleScrollViewReader { _ in
+            List { // To override list style that NavigationLink adds :facepalm:
+                if vm.messages.isEmpty {
+                    if vm.isLoading {
+                        ActivityIndicator()
+                            .padding()
+                    } else {
+                        Text("No messages\nhere yet")
+                            .font(.tgTitle)
+                            .multilineTextAlignment(.center)
+                    }
                 } else {
-                    Text("No messages\nhere yet")
-                        .font(.tgTitle)
-                        .multilineTextAlignment(.center)
-                }
-            } else {
-                if vm.isLoading {
-                    ActivityIndicator()
-                }
-                ForEach(vm.messages.reversed()) { message in
-                    HStack {
-                        if message.isOutgoing {
-                            Spacer()
-                        }
+                    if vm.isLoading {
+                        ActivityIndicator()
+                    }
 
-                        MessageCellView(message: message)
-                            .onAppear {
-                                if vm.messages.first?.id == message.id {
-                                    vm.loadMoreHistory()
+                    ForEach(vm.messages.reversed()) { message in
+                        NavigationLink(destination: MessageFullView(message)) {
+                            HStack {
+                                if message.isOutgoing {
+                                    Spacer()
+                                }
+
+                                MessageCellView(message)
+                                    .tgMessageStyle(
+                                        isOutgoing: message.isOutgoing,
+                                        hideBackground: message.content.hiddenBackground
+                                    )
+                                    .onAppear {
+                                        if vm.messages.first?.id == message.id {
+                                            vm.loadMoreHistory()
+                                        }
+                                    }
+
+                                if !message.isOutgoing {
+                                    Spacer()
                                 }
                             }
-
-                        if !message.isOutgoing {
-                            Spacer()
                         }
+                        .clearedListStyle()
                     }
+                    ReplyPanelView(chatId: vm.chat.id)
                 }
-                ReplyPanelView()
             }
         }
         .navigationBarTitle(vm.chat.title)
@@ -51,37 +61,36 @@ public struct ChatView: View {
     }
 }
 
-extension Message: Identifiable {}
+extension MessageState: Identifiable {}
 
-#if DEBUG
-    struct ChatView_Previews: PreviewProvider {
-        static let messages: [Message] = .preview()
+struct ChatView_Previews: PreviewProvider {
+    static let messages: [MessageState] = .preview
 
-        static var previews: some View {
-            ChatView(
-                ChatViewModel(
-                    chat: .preview(id: 0, title: "Alicia", lastMessage: nil),
-                    service: DummyService(),
-                    messages: messages
-                )
+    static var previews: some View {
+        ChatView(
+            ChatViewModel(
+                chat: .preview(id: 0, title: "Alicia", lastMessage: nil),
+                service: DummyChatService(),
+                messages: messages
             )
-            .accentColor(.blue)
-        }
+        )
+        .accentColor(.blue)
     }
-#endif
+}
 
 import Combine
 
 public final class ChatViewModel: ObservableObject {
     let chat: Chat
-    let historyService: HistoryService
-    @Published var messages: [Message]
+    let service: ChatService
+    private var lastMessageId: MessageId?
+    @Published var messages: [MessageState]
     @Published var isLoading = false
     private var subscription: AnyCancellable?
 
-    public init(chat: Chat, service: HistoryService, messages: [Message] = []) {
+    public init(chat: Chat, service: ChatService, messages: [MessageState] = []) {
         self.chat = chat
-        historyService = service
+        self.service = service
         self.messages = messages
         // TODO: preheat
         // loadMoreHistory()
@@ -97,16 +106,16 @@ public final class ChatViewModel: ObservableObject {
         }
 
         isLoading = true
-        subscription = historyService
-            .chatHistory(chat.id, from: lastMessageId, limit: 20)
+        subscription = service
+            .chatHistory(chat.id, from: lastMessageId ?? 0, limit: 20)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] messages in
-                self?.messages += messages
+            .sink(receiveCompletion: { [weak self] error in
+                logger.debug(error)
                 self?.isLoading = false
-            }
-    }
-
-    private var lastMessageId: MessageId {
-        messages.last?.id ?? 0
+            }, receiveValue: { [weak self] tuple in
+                self?.lastMessageId = tuple.0
+                self?.messages += tuple.1
+                self?.isLoading = false
+            })
     }
 }

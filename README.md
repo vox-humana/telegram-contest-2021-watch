@@ -22,20 +22,22 @@ Xcode 12.5-RC (App Store version)
 Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
 # Notes watchOS 6 limitiations
-- No SwiftUI LifeStyle (@main)
 - Check `watchOS6` & `#available(watchOS 7.0` for watchOS 6 API limitations
+- No SwiftUI LifeStyle (@main)
 - No navigationTitle (use navigationBarTitle)
 - No @StateObject
+- No MapView
+- No ScrollViewReader
 
 # Tasks
 [] Check run on device
 [] Rewrite QRCode generation to match with design (corners)
 [] Remove `swift_qrcodejs` dependency
-[] Build static versions of tdlib (limiting size with removing unused code)
-[] Limit number of classes in TDLibSwift generation to limit the size of the app
+[] Limit number of classes in TDLibSwift generation to limit the size of the app, or replace `public` with `internal` (will linker strip them?)
+[] Extract model (states) library to reuse in TGWatchUI and TDLibClient
 [] Check colors codes in style
+[] Extract Views that use Chat (replace with ChatState) 
 [] Build TDLib with WatchOS6.0 SDK (Xcode 11.5 has 6.2)
-[] Add Model layer with subset of used in UI properties, keep TDLibSwift generated model in the package with TDLibClient (TGWatchView doesn't depend on TDLib)
 
 # External libraries
 Making xcframework from tdjson https://github.com/oboupo/tdlib-spm

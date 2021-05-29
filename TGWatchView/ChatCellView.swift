@@ -40,7 +40,7 @@ struct ChatCellView: View {
                     Spacer()
 
                     if chat.unreadCount > 0 {
-                        UnreadBadge(count: chat.unreadCount)
+                        UnreadBadge(chat.unreadCount)
                     }
                 }
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 4, trailing: 4))
@@ -131,20 +131,6 @@ extension Message {
             return ""
         }
     }
-}
-
-// watchOS7+ 'Text(_:style:)'
-extension DateFormatter {
-    static func time(from date: Date) -> String {
-        timeFormatter.string(from: date)
-    }
-
-    static var timeFormatter: DateFormatter = {
-        var formatter = DateFormatter()
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        return formatter
-    }()
 }
 
 #if DEBUG

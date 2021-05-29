@@ -85,3 +85,28 @@ extension Int {
 public extension EdgeInsets {
     static let tgTextPadding = EdgeInsets(top: 3, leading: 9, bottom: 5, trailing: 9)
 }
+
+// watchOS7+ 'Text(_:style:)'
+extension DateFormatter {
+    public static func time(from date: Date) -> String {
+        timeFormatter.string(from: date)
+    }
+
+    public static func date(from date: Date) -> String {
+        dateFormatter.string(from: date)
+    }
+
+    private static var timeFormatter: DateFormatter = {
+        var formatter = DateFormatter()
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter
+    }()
+
+    private static var dateFormatter: DateFormatter = {
+        var formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter
+    }()
+}

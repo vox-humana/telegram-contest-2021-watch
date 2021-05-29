@@ -8,14 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8E11971C265CF96E0042A874 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11970D265CF96E0042A874 /* SettingsView.swift */; };
-		8E11971D265CF96E0042A874 /* MessageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11970E265CF96E0042A874 /* MessageCellView.swift */; };
 		8E11971E265CF96E0042A874 /* ChatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11970F265CF96E0042A874 /* ChatCellView.swift */; };
-		8E11971F265CF96E0042A874 /* ScrollViewReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119710265CF96E0042A874 /* ScrollViewReader.swift */; };
 		8E119720265CF96E0042A874 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119711265CF96E0042A874 /* ChatListView.swift */; };
 		8E119721265CF96E0042A874 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119712265CF96E0042A874 /* LoginView.swift */; };
 		8E119724265CF96E0042A874 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119715265CF96E0042A874 /* Client.swift */; };
 		8E119729265CF96E0042A874 /* PreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11971A265CF96E0042A874 /* PreviewModel.swift */; };
-		8E11972A265CF96E0042A874 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11971B265CF96E0042A874 /* ChatView.swift */; };
 		8E119A09265CF9A50042A874 /* DisableProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11972D265CF9A20042A874 /* DisableProxy.swift */; };
 		8E119A0A265CF9A50042A874 /* EditCustomLanguagePackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11972E265CF9A20042A874 /* EditCustomLanguagePackInfo.swift */; };
 		8E119A0B265CF9A50042A874 /* StorageStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11972F265CF9A20042A874 /* StorageStatistics.swift */; };
@@ -747,7 +744,7 @@
 		8E119CE2265CF9A60042A874 /* TdInt64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E119A08265CF9A50042A874 /* TdInt64.swift */; };
 		8E119CE5265CFA580042A874 /* QrCode in Frameworks */ = {isa = PBXBuildFile; productRef = 8E119CE4265CFA580042A874 /* QrCode */; };
 		8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E18ED8925F4A2A80049554A /* TDClient.swift */; };
-		8E1E5273265FBA2700D6AD12 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1E5272265FBA2700D6AD12 /* Model.swift */; };
+		8E1E5273265FBA2700D6AD12 /* State+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1E5272265FBA2700D6AD12 /* State+Response.swift */; };
 		8E27194E25F4A14500A263D2 /* TGWatchOS WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E27195425F4A14500A263D2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195225F4A14500A263D2 /* Interface.storyboard */; };
 		8E27195625F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27195525F4A14600A263D2 /* Assets.xcassets */; };
@@ -760,7 +757,8 @@
 		8ECD9537265A5BF500F6B600 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD9536265A5BF500F6B600 /* Secrets.swift */; };
 		8ECDC0B3265E79CE0075BAB6 /* tdjson.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; };
 		8ECDC0B4265E79CE0075BAB6 /* tdjson.xcframework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8ED51EE2266115EF008E519A /* TGMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED51EE1266115EF008E519A /* TGMessageService.swift */; };
+		8ED51EE2266115EF008E519A /* TGChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED51EE1266115EF008E519A /* TGChatService.swift */; };
+		8ED51EE4266231F6008E519A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED51EE3266231F6008E519A /* ChatView.swift */; };
 		8EE0BA31265D24BC00A9FC39 /* TGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB3418925F5D0A10030F121 /* TGService.swift */; };
 		8EE0BA33265D2C8000A9FC39 /* TGAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */; };
 		8EE0BA35265D31B000A9FC39 /* TGChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */; };
@@ -822,14 +820,11 @@
 
 /* Begin PBXFileReference section */
 		8E11970D265CF96E0042A874 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		8E11970E265CF96E0042A874 /* MessageCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCellView.swift; sourceTree = "<group>"; };
 		8E11970F265CF96E0042A874 /* ChatCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCellView.swift; sourceTree = "<group>"; };
-		8E119710265CF96E0042A874 /* ScrollViewReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewReader.swift; sourceTree = "<group>"; };
 		8E119711265CF96E0042A874 /* ChatListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
 		8E119712265CF96E0042A874 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8E119715265CF96E0042A874 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		8E11971A265CF96E0042A874 /* PreviewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewModel.swift; sourceTree = "<group>"; };
-		8E11971B265CF96E0042A874 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		8E11972D265CF9A20042A874 /* DisableProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisableProxy.swift; sourceTree = "<group>"; };
 		8E11972E265CF9A20042A874 /* EditCustomLanguagePackInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCustomLanguagePackInfo.swift; sourceTree = "<group>"; };
 		8E11972F265CF9A20042A874 /* StorageStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageStatistics.swift; sourceTree = "<group>"; };
@@ -1562,7 +1557,7 @@
 		8E119CE3265CF9B70042A874 /* QrCode */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QrCode; path = ../QrCode; sourceTree = "<group>"; };
 		8E18ED8925F4A2A80049554A /* TDClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TDClient.swift; sourceTree = "<group>"; };
 		8E18ED9925F4A3030049554A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8E1E5272265FBA2700D6AD12 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8E1E5272265FBA2700D6AD12 /* State+Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "State+Response.swift"; sourceTree = "<group>"; };
 		8E27194925F4A14400A263D2 /* TGWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27194D25F4A14500A263D2 /* TGWatchOS WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TGWatchOS WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E27195325F4A14500A263D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -1578,7 +1573,8 @@
 		8ECD9534265A5B0900F6B600 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8ECD9536265A5BF500F6B600 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = tdjson.xcframework; sourceTree = "<group>"; };
-		8ED51EE1266115EF008E519A /* TGMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGMessageService.swift; sourceTree = "<group>"; };
+		8ED51EE1266115EF008E519A /* TGChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGChatService.swift; sourceTree = "<group>"; };
+		8ED51EE3266231F6008E519A /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGAuthService.swift; sourceTree = "<group>"; };
 		8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGChatListService.swift; sourceTree = "<group>"; };
 		8EE3726C265FD2E8007D2A47 /* TGWatchUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TGWatchUI; sourceTree = "<group>"; };
@@ -1603,13 +1599,11 @@
 			children = (
 				8E11970F265CF96E0042A874 /* ChatCellView.swift */,
 				8E119711265CF96E0042A874 /* ChatListView.swift */,
-				8E11971B265CF96E0042A874 /* ChatView.swift */,
+				8ED51EE3266231F6008E519A /* ChatView.swift */,
 				8E119715265CF96E0042A874 /* Client.swift */,
 				8E119712265CF96E0042A874 /* LoginView.swift */,
-				8E11970E265CF96E0042A874 /* MessageCellView.swift */,
-				8E1E5272265FBA2700D6AD12 /* Model.swift */,
+				8E1E5272265FBA2700D6AD12 /* State+Response.swift */,
 				8E11971A265CF96E0042A874 /* PreviewModel.swift */,
-				8E119710265CF96E0042A874 /* ScrollViewReader.swift */,
 				8E11970D265CF96E0042A874 /* SettingsView.swift */,
 			);
 			path = TGWatchView;
@@ -2382,7 +2376,7 @@
 				8ECD9534265A5B0900F6B600 /* Logger.swift */,
 				8E18ED8925F4A2A80049554A /* TDClient.swift */,
 				8EB3418925F5D0A10030F121 /* TGService.swift */,
-				8ED51EE1266115EF008E519A /* TGMessageService.swift */,
+				8ED51EE1266115EF008E519A /* TGChatService.swift */,
 				8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */,
 				8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */,
 			);
@@ -2589,6 +2583,7 @@
 				8E119CA6265CF9A60042A874 /* GetChatEventLog.swift in Sources */,
 				8E119A43265CF9A50042A874 /* SetCommands.swift in Sources */,
 				8E119B91265CF9A60042A874 /* SetAuthenticationPhoneNumber.swift in Sources */,
+				8ED51EE4266231F6008E519A /* ChatView.swift in Sources */,
 				8E119BBC265CF9A60042A874 /* GetChatMember.swift in Sources */,
 				8E119C7E265CF9A60042A874 /* ChatInviteLinkCounts.swift in Sources */,
 				8E119C7D265CF9A60042A874 /* Text.swift in Sources */,
@@ -2803,7 +2798,6 @@
 				8E119AFA265CF9A60042A874 /* MessageStatistics.swift in Sources */,
 				8E119A20265CF9A50042A874 /* UserType.swift in Sources */,
 				8E119C6B265CF9A60042A874 /* GetChatListsToAddChat.swift in Sources */,
-				8E11971D265CF96E0042A874 /* MessageCellView.swift in Sources */,
 				8E11971E265CF96E0042A874 /* ChatCellView.swift in Sources */,
 				8E119B79265CF9A60042A874 /* DisconnectAllWebsites.swift in Sources */,
 				8E119ABC265CF9A60042A874 /* GetBankCardInfo.swift in Sources */,
@@ -2844,7 +2838,6 @@
 				8E119C0A265CF9A60042A874 /* MessageSendingState.swift in Sources */,
 				8E119B0F265CF9A60042A874 /* OptimizeStorage.swift in Sources */,
 				8E119CD5265CF9A60042A874 /* LocalFile.swift in Sources */,
-				8E11971F265CF96E0042A874 /* ScrollViewReader.swift in Sources */,
 				8E119C1F265CF9A60042A874 /* SetVoiceChatDefaultParticipant.swift in Sources */,
 				8E119C61265CF9A60042A874 /* HttpUrl.swift in Sources */,
 				8E119AB3265CF9A50042A874 /* GetLocalizationTargetInfo.swift in Sources */,
@@ -3237,7 +3230,7 @@
 				8E119B29265CF9A60042A874 /* ChatStatisticsAdministratorActionsInfo.swift in Sources */,
 				8E119A61265CF9A50042A874 /* RequestQrCodeAuthentication.swift in Sources */,
 				8E119A7E265CF9A50042A874 /* ResendPhoneNumberConfirmationCode.swift in Sources */,
-				8E1E5273265FBA2700D6AD12 /* Model.swift in Sources */,
+				8E1E5273265FBA2700D6AD12 /* State+Response.swift in Sources */,
 				8E18EDC925F4B3EC0049554A /* TDClient.swift in Sources */,
 				8E119B31265CF9A60042A874 /* GetLoginUrl.swift in Sources */,
 				8E119A55265CF9A50042A874 /* MessageFileType.swift in Sources */,
@@ -3255,7 +3248,7 @@
 				8E119AD3265CF9A60042A874 /* ResendRecoveryEmailAddressCode.swift in Sources */,
 				8E119A6A265CF9A50042A874 /* GetAllPassportElements.swift in Sources */,
 				8E119C9C265CF9A60042A874 /* AddLocalMessage.swift in Sources */,
-				8ED51EE2266115EF008E519A /* TGMessageService.swift in Sources */,
+				8ED51EE2266115EF008E519A /* TGChatService.swift in Sources */,
 				8E119A91265CF9A50042A874 /* TerminateSession.swift in Sources */,
 				8E119BF1265CF9A60042A874 /* ToggleGroupCallEnabledStartNotification.swift in Sources */,
 				8E119C25265CF9A60042A874 /* GetCurrentState.swift in Sources */,
@@ -3292,7 +3285,6 @@
 				8E119AD5265CF9A60042A874 /* GetGroupCall.swift in Sources */,
 				8E119C57265CF9A60042A874 /* SetUserPrivacySettingRules.swift in Sources */,
 				8E119C4A265CF9A60042A874 /* NotificationSettingsScope.swift in Sources */,
-				8E11972A265CF96E0042A874 /* ChatView.swift in Sources */,
 				8E119A77265CF9A50042A874 /* UserPrivacySetting.swift in Sources */,
 				8E119BF3265CF9A60042A874 /* OrderInfo.swift in Sources */,
 				8E119C27265CF9A60042A874 /* CheckChangePhoneNumberCode.swift in Sources */,

@@ -1,5 +1,6 @@
 import Combine
 import SwiftUI
+import TGWatchUI // TODO: extract model
 
 public enum AuthState {
     case initial
@@ -15,39 +16,21 @@ public protocol ChatListService {
     var chatListSignal: CurrentValueSubject<[Chat], Never> { get }
 }
 
-public protocol HistoryService {
-    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int) -> AnyPublisher<[Message], Never>
+public struct ChatListServiceEnvironment: EnvironmentKey {
+    public static var defaultValue: ChatListService = DummyService()
 }
 
-struct ChatListServiceEnvironment: EnvironmentKey {
-    static var defaultValue: ChatListService = DummyService()
-}
-
-struct HistoryServiceEnvironment: EnvironmentKey {
-    static var defaultValue: HistoryService = DummyService()
-}
-
-extension EnvironmentValues {
+public extension EnvironmentValues {
     var chatListService: ChatListService {
         get { self[ChatListServiceEnvironment.self] }
         set { self[ChatListServiceEnvironment.self] = newValue }
     }
 }
 
-public extension EnvironmentValues {
-    var historyService: HistoryService {
-        get { self[HistoryServiceEnvironment.self] }
-        set { self[HistoryServiceEnvironment.self] = newValue }
-    }
-}
-
-public typealias ChatId = Int64
-public typealias MessageId = Int64
-
-public struct DummyService: ChatListService, HistoryService {
+public struct DummyService: ChatListService {
     private let chatHistory: [Message]
 
-    public let chatListSignal = CurrentValueSubject<[Chat], Never>([])
+    public let chatListSignal = CurrentValueSubject<[Chat], Never>(.preview())
 
     public init(chatHistory: [Message] = []) {
         self.chatHistory = chatHistory
@@ -56,8 +39,4 @@ public struct DummyService: ChatListService, HistoryService {
     public func requestChatList() {}
 
     public func downloadPhoto(for _: Chat) {}
-
-    public func chatHistory(_: ChatId, from _: MessageId, limit _: Int) -> AnyPublisher<[Message], Never> {
-        Just(chatHistory).eraseToAnyPublisher()
-    }
 }
