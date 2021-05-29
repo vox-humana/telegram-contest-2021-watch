@@ -8,23 +8,23 @@
 import Foundation
 
 /// Represents a file
-public struct File: Codable {
+internal struct File: Codable {
     /// Expected file size in case the exact file size is unknown, but an approximate size is known. Can be used to show download/upload progress
-    public let expectedSize: Int
+    internal let expectedSize: Int
 
     /// Unique file identifier
-    public let id: Int
+    internal let id: Int
 
     /// Information about the local copy of the file
-    public let local: LocalFile
+    internal let local: LocalFile
 
     /// Information about the remote copy of the file
-    public let remote: RemoteFile
+    internal let remote: RemoteFile
 
     /// File size; 0 if unknown
-    public let size: Int
+    internal let size: Int
 
-    public init(
+    internal init(
         expectedSize: Int,
         id: Int,
         local: LocalFile,

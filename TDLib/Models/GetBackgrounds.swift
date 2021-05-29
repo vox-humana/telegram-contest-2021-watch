@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns backgrounds installed by the user
-public struct GetBackgrounds: Codable {
+internal struct GetBackgrounds: Codable {
     /// True, if the backgrounds must be ordered for dark theme
-    public let forDarkTheme: Bool
+    internal let forDarkTheme: Bool
 
-    public init(forDarkTheme: Bool) {
+    internal init(forDarkTheme: Bool) {
         self.forDarkTheme = forDarkTheme
     }
 }

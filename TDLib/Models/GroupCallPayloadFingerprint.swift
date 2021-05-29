@@ -8,17 +8,17 @@
 import Foundation
 
 /// Describes a payload fingerprint for interaction with tgcalls
-public struct GroupCallPayloadFingerprint: Codable {
+internal struct GroupCallPayloadFingerprint: Codable {
     /// Value of the field fingerprint
-    public let fingerprint: String
+    internal let fingerprint: String
 
     /// Value of the field hash
-    public let hash: String
+    internal let hash: String
 
     /// Value of the field setup
-    public let setup: String
+    internal let setup: String
 
-    public init(
+    internal init(
         fingerprint: String,
         hash: String,
         setup: String

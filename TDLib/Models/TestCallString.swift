@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns the received string; for testing only. This is an offline method. Can be called before authorization
-public struct TestCallString: Codable {
+internal struct TestCallString: Codable {
     /// String to return
-    public let x: String
+    internal let x: String
 
-    public init(x: String) {
+    internal init(x: String) {
         self.x = x
     }
 }

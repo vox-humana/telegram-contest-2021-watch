@@ -8,20 +8,20 @@
 import Foundation
 
 /// Validates the order information provided by a user and returns the available shipping options for a flexible invoice
-public struct ValidateOrderInfo: Codable {
+internal struct ValidateOrderInfo: Codable {
     /// True, if the order information can be saved
-    public let allowSave: Bool
+    internal let allowSave: Bool
 
     /// Chat identifier of the Invoice message
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// The order information, provided by the user
-    public let orderInfo: OrderInfo
+    internal let orderInfo: OrderInfo
 
-    public init(
+    internal init(
         allowSave: Bool,
         chatId: Int64,
         messageId: Int64,

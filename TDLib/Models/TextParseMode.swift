@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the way the text should be parsed for TextEntities
-public enum TextParseMode: Codable {
+internal enum TextParseMode: Codable {
     /// The text uses Markdown-style formatting
     case textParseModeMarkdown(TextParseModeMarkdown)
 
@@ -20,7 +20,7 @@ public enum TextParseMode: Codable {
         case textParseModeHTML
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -32,7 +32,7 @@ public enum TextParseMode: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .textParseModeMarkdown(value):
@@ -45,11 +45,11 @@ public enum TextParseMode: Codable {
 }
 
 /// The text uses Markdown-style formatting
-public struct TextParseModeMarkdown: Codable {
+internal struct TextParseModeMarkdown: Codable {
     /// Version of the parser: 0 or 1 - Telegram Bot API "Markdown" parse mode, 2 - Telegram Bot API "MarkdownV2" parse mode
-    public let version: Int
+    internal let version: Int
 
-    public init(version: Int) {
+    internal init(version: Int) {
         self.version = version
     }
 }

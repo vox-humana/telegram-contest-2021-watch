@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns current verbosity level for a specified TDLib internal log tag. Can be called synchronously
-public struct GetLogTagVerbosityLevel: Codable {
+internal struct GetLogTagVerbosityLevel: Codable {
     /// Logging tag to change verbosity level
-    public let tag: String
+    internal let tag: String
 
-    public init(tag: String) {
+    internal init(tag: String) {
         self.tag = tag
     }
 }

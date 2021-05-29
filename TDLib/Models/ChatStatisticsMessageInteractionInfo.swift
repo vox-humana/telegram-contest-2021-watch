@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains statistics about interactions with a message
-public struct ChatStatisticsMessageInteractionInfo: Codable {
+internal struct ChatStatisticsMessageInteractionInfo: Codable {
     /// Number of times the message was forwarded
-    public let forwardCount: Int
+    internal let forwardCount: Int
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// Number of times the message was viewed
-    public let viewCount: Int
+    internal let viewCount: Int
 
-    public init(
+    internal init(
         forwardCount: Int,
         messageId: Int64,
         viewCount: Int

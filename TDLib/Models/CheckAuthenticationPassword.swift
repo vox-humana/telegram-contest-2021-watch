@@ -8,11 +8,11 @@
 import Foundation
 
 /// Checks the authentication password for correctness. Works only when the current authorization state is authorizationStateWaitPassword
-public struct CheckAuthenticationPassword: Codable {
+internal struct CheckAuthenticationPassword: Codable {
     /// The password to check
-    public let password: String
+    internal let password: String
 
-    public init(password: String) {
+    internal init(password: String) {
         self.password = password
     }
 }

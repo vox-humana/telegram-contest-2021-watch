@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns information about a message
-public struct GetMessage: Codable {
+internal struct GetMessage: Codable {
     /// Identifier of the chat the message belongs to
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of the message to get
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {

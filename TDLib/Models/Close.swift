@@ -8,6 +8,6 @@
 import Foundation
 
 /// Closes the TDLib instance. All databases will be flushed to disk and properly closed. After the close completes, updateAuthorizationState with authorizationStateClosed will be sent. Can be called before initialization
-public struct Close: Codable {
-    public init() {}
+internal struct Close: Codable {
+    internal init() {}
 }

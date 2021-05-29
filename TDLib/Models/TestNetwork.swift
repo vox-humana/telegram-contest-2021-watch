@@ -8,6 +8,6 @@
 import Foundation
 
 /// Sends a simple network request to the Telegram servers; for testing only. Can be called before authorization
-public struct TestNetwork: Codable {
-    public init() {}
+internal struct TestNetwork: Codable {
+    internal init() {}
 }

@@ -8,83 +8,83 @@
 import Foundation
 
 /// A chat. (Can be a private chat, basic group, supergroup, or secret chat)
-public struct Chat: Codable {
+internal struct Chat: Codable {
     /// Describes actions which should be possible to do through a chat action bar; may be null
-    public let actionBar: ChatActionBar?
+    internal let actionBar: ChatActionBar?
 
     /// True, if the chat messages can be deleted for all users
-    public let canBeDeletedForAllUsers: Bool
+    internal let canBeDeletedForAllUsers: Bool
 
     /// True, if the chat messages can be deleted only for the current user while other users will continue to see the messages
-    public let canBeDeletedOnlyForSelf: Bool
+    internal let canBeDeletedOnlyForSelf: Bool
 
     /// True, if the chat can be reported to Telegram moderators through reportChat or reportChatPhoto
-    public let canBeReported: Bool
+    internal let canBeReported: Bool
 
     /// Contains application-specific data associated with the chat. (For example, the chat scroll position or local chat notification settings can be stored here.) Persistent if the message database is used
-    public let clientData: String
+    internal let clientData: String
 
     /// Default value of the disable_notification parameter, used when a message is sent to the chat
-    public let defaultDisableNotification: Bool
+    internal let defaultDisableNotification: Bool
 
     /// A draft of a message in the chat; may be null
-    public var draftMessage: DraftMessage?
+    internal var draftMessage: DraftMessage?
 
     /// True, if the chat has scheduled messages
-    public let hasScheduledMessages: Bool
+    internal let hasScheduledMessages: Bool
 
     /// Chat unique identifier
-    public let id: Int64
+    internal let id: Int64
 
     /// True, if the chat is blocked by the current user and private messages from the chat can't be received
-    public let isBlocked: Bool
+    internal let isBlocked: Bool
 
     /// True, if the chat is marked as unread
-    public var isMarkedAsUnread: Bool
+    internal var isMarkedAsUnread: Bool
 
     /// Last message in the chat; may be null
-    public var lastMessage: Message?
+    internal var lastMessage: Message?
 
     /// Identifier of the last read incoming message
-    public var lastReadInboxMessageId: Int64
+    internal var lastReadInboxMessageId: Int64
 
     /// Identifier of the last read outgoing message
-    public var lastReadOutboxMessageId: Int64
+    internal var lastReadOutboxMessageId: Int64
 
     /// Current message Time To Live setting (self-destruct timer) for the chat; 0 if not defined. TTL is counted from the time message or its content is viewed in secret chats and from the send date in other chats
-    public let messageTtlSetting: Int
+    internal let messageTtlSetting: Int
 
     /// Notification settings for this chat
-    public let notificationSettings: ChatNotificationSettings
+    internal let notificationSettings: ChatNotificationSettings
 
     /// Actions that non-administrator chat members are allowed to take in the chat
-    public let permissions: ChatPermissions
+    internal let permissions: ChatPermissions
 
     /// Chat photo; may be null
-    public var photo: ChatPhotoInfo?
+    internal var photo: ChatPhotoInfo?
 
     /// Positions of the chat in chat lists
-    public var positions: [ChatPosition]
+    internal var positions: [ChatPosition]
 
     /// Identifier of the message from which reply markup needs to be used; 0 if there is no default custom reply markup in the chat
-    public let replyMarkupMessageId: Int64
+    internal let replyMarkupMessageId: Int64
 
     /// Chat title
-    public var title: String
+    internal var title: String
 
     /// Type of the chat
-    public let type: ChatType
+    internal let type: ChatType
 
     /// Number of unread messages in the chat
-    public var unreadCount: Int
+    internal var unreadCount: Int
 
     /// Number of unread messages with a mention/reply in the chat
-    public var unreadMentionCount: Int
+    internal var unreadMentionCount: Int
 
     /// Contains information about voice chat of the chat
-    public let voiceChat: VoiceChat
+    internal let voiceChat: VoiceChat
 
-    public init(
+    internal init(
         actionBar: ChatActionBar?,
         canBeDeletedForAllUsers: Bool,
         canBeDeletedOnlyForSelf: Bool,

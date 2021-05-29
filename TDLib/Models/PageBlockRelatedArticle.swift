@@ -8,25 +8,25 @@
 import Foundation
 
 /// Contains information about a related article
-public struct PageBlockRelatedArticle: Codable {
+internal struct PageBlockRelatedArticle: Codable {
     /// Article author; may be empty
-    public let author: String
+    internal let author: String
 
-    public let description: String
+    internal let description: String
 
     /// Article photo; may be null
-    public let photo: Photo?
+    internal let photo: Photo?
 
     /// Point in time (Unix timestamp) when the article was published; 0 if unknown
-    public let publishDate: Int
+    internal let publishDate: Int
 
     /// Article title; may be empty
-    public let title: String
+    internal let title: String
 
     /// Related article URL
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         author: String,
         description: String,
         photo: Photo?,

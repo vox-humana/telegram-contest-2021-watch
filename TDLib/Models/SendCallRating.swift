@@ -8,20 +8,20 @@
 import Foundation
 
 /// Sends a call rating
-public struct SendCallRating: Codable {
+internal struct SendCallRating: Codable {
     /// Call identifier
-    public let callId: Int
+    internal let callId: Int
 
     /// An optional user comment if the rating is less than 5
-    public let comment: String
+    internal let comment: String
 
     /// List of the exact types of problems with the call, specified by the user
-    public let problems: [CallProblem]
+    internal let problems: [CallProblem]
 
     /// Call rating; 1-5
-    public let rating: Int
+    internal let rating: Int
 
-    public init(
+    internal init(
         callId: Int,
         comment: String,
         problems: [CallProblem],

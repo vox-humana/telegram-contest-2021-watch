@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a JSON value
-public enum JsonValue: Codable {
+internal enum JsonValue: Codable {
     /// Represents a null JSON value
     case jsonValueNull
 
@@ -36,7 +36,7 @@ public enum JsonValue: Codable {
         case jsonValueObject
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -60,7 +60,7 @@ public enum JsonValue: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .jsonValueNull:
@@ -85,51 +85,51 @@ public enum JsonValue: Codable {
 }
 
 /// Represents a boolean JSON value
-public struct JsonValueBoolean: Codable {
+internal struct JsonValueBoolean: Codable {
     /// The value
-    public let value: Bool
+    internal let value: Bool
 
-    public init(value: Bool) {
+    internal init(value: Bool) {
         self.value = value
     }
 }
 
 /// Represents a numeric JSON value
-public struct JsonValueNumber: Codable {
+internal struct JsonValueNumber: Codable {
     /// The value
-    public let value: Double
+    internal let value: Double
 
-    public init(value: Double) {
+    internal init(value: Double) {
         self.value = value
     }
 }
 
 /// Represents a string JSON value
-public struct JsonValueString: Codable {
+internal struct JsonValueString: Codable {
     /// The value
-    public let value: String
+    internal let value: String
 
-    public init(value: String) {
+    internal init(value: String) {
         self.value = value
     }
 }
 
 /// Represents a JSON array
-public struct JsonValueArray: Codable {
+internal struct JsonValueArray: Codable {
     /// The list of array elements
-    public let values: [JsonValue]
+    internal let values: [JsonValue]
 
-    public init(values: [JsonValue]) {
+    internal init(values: [JsonValue]) {
         self.values = values
     }
 }
 
 /// Represents a JSON object
-public struct JsonValueObject: Codable {
+internal struct JsonValueObject: Codable {
     /// The list of object members
-    public let members: [JsonObjectMember]
+    internal let members: [JsonObjectMember]
 
-    public init(members: [JsonObjectMember]) {
+    internal init(members: [JsonObjectMember]) {
         self.members = members
     }
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a list of chats
-public struct Chats: Codable {
+internal struct Chats: Codable {
     /// List of chat identifiers
-    public let chatIds: [Int64]
+    internal let chatIds: [Int64]
 
     /// Approximate total count of chats found
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         chatIds: [Int64],
         totalCount: Int
     ) {

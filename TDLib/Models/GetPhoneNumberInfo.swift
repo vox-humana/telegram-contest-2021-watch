@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a phone number by its prefix. Can be called before authorization
-public struct GetPhoneNumberInfo: Codable {
+internal struct GetPhoneNumberInfo: Codable {
     /// The phone number prefix
-    public let phoneNumberPrefix: String
+    internal let phoneNumberPrefix: String
 
-    public init(phoneNumberPrefix: String) {
+    internal init(phoneNumberPrefix: String) {
         self.phoneNumberPrefix = phoneNumberPrefix
     }
 }

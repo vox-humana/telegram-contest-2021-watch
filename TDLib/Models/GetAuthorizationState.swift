@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns the current authorization state; this is an offline request. For informational purposes only. Use updateAuthorizationState instead to maintain the current authorization state. Can be called before initialization
-public struct GetAuthorizationState: Codable {
-    public init() {}
+internal struct GetAuthorizationState: Codable {
+    internal init() {}
 }

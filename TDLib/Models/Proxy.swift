@@ -8,26 +8,26 @@
 import Foundation
 
 /// Contains information about a proxy server
-public struct Proxy: Codable {
+internal struct Proxy: Codable {
     /// Unique identifier of the proxy
-    public let id: Int
+    internal let id: Int
 
     /// True, if the proxy is enabled now
-    public let isEnabled: Bool
+    internal let isEnabled: Bool
 
     /// Point in time (Unix timestamp) when the proxy was last used; 0 if never
-    public let lastUsedDate: Int
+    internal let lastUsedDate: Int
 
     /// Proxy server port
-    public let port: Int
+    internal let port: Int
 
     /// Proxy server IP address
-    public let server: String
+    internal let server: String
 
     /// Type of the proxy
-    public let type: ProxyType
+    internal let type: ProxyType
 
-    public init(
+    internal init(
         id: Int,
         isEnabled: Bool,
         lastUsedDate: Int,

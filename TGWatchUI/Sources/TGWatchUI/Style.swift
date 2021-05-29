@@ -1,5 +1,7 @@
 import SwiftUI
 
+// All screen sizes https://developer.apple.com/design/human-interface-guidelines/watchos/visual/layout/
+
 public struct AccentStyle: ButtonStyle {
     private let color = Color.accentColor // doesn't work on watchOS 6
     // private let color = Color("AccentColor") // doesn't work on watchOS 6
@@ -41,6 +43,7 @@ public extension Color {
 
 extension CGFloat {
     static let tgMessageCornerRadius: CGFloat = 14
+    static let tgMessageWidth: CGFloat = 160
 }
 
 struct TGMessage: ViewModifier {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class DTO<T: Codable>: Codable {
+internal final class DTO<T: Codable>: Codable {
     let type: String
     var extra: String?
     let payload: T

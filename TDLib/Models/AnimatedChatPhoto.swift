@@ -8,17 +8,17 @@
 import Foundation
 
 /// Animated variant of a chat photo in MPEG4 format
-public struct AnimatedChatPhoto: Codable {
+internal struct AnimatedChatPhoto: Codable {
     /// Information about the animation file
-    public let file: File
+    internal let file: File
 
     /// Animation width and height
-    public let length: Int
+    internal let length: Int
 
     /// Timestamp of the frame, used as a static chat photo
-    public let mainFrameTimestamp: Double
+    internal let mainFrameTimestamp: Double
 
-    public init(
+    internal init(
         file: File,
         length: Int,
         mainFrameTimestamp: Double

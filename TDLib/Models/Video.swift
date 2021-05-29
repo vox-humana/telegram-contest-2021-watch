@@ -8,38 +8,38 @@
 import Foundation
 
 /// Describes a video file
-public struct Video: Codable {
+internal struct Video: Codable {
     /// Duration of the video, in seconds; as defined by the sender
-    public let duration: Int
+    internal let duration: Int
 
     /// Original name of the file; as defined by the sender
-    public let fileName: String
+    internal let fileName: String
 
     /// True, if stickers were added to the video. The list of corresponding sticker sets can be received using getAttachedStickerSets
-    public let hasStickers: Bool
+    internal let hasStickers: Bool
 
     /// Video height; as defined by the sender
-    public let height: Int
+    internal let height: Int
 
     /// MIME type of the file; as defined by the sender
-    public let mimeType: String
+    internal let mimeType: String
 
     /// Video minithumbnail; may be null
-    public let minithumbnail: Minithumbnail?
+    internal let minithumbnail: Minithumbnail?
 
     /// True, if the video should be tried to be streamed
-    public let supportsStreaming: Bool
+    internal let supportsStreaming: Bool
 
     /// Video thumbnail in JPEG or MPEG4 format; as defined by the sender; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// File containing the video
-    public let video: File
+    internal let video: File
 
     /// Video width; as defined by the sender
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         duration: Int,
         fileName: String,
         hasStickers: Bool,

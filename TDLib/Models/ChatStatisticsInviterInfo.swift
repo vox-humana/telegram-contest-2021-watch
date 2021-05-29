@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains statistics about number of new members invited by a user
-public struct ChatStatisticsInviterInfo: Codable {
+internal struct ChatStatisticsInviterInfo: Codable {
     /// Number of new members invited by the user
-    public let addedMemberCount: Int
+    internal let addedMemberCount: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         addedMemberCount: Int,
         userId: Int
     ) {

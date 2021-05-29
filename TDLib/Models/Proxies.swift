@@ -8,11 +8,11 @@
 import Foundation
 
 /// Represents a list of proxy servers
-public struct Proxies: Codable {
+internal struct Proxies: Codable {
     /// List of proxy servers
-    public let proxies: [Proxy]
+    internal let proxies: [Proxy]
 
-    public init(proxies: [Proxy]) {
+    internal init(proxies: [Proxy]) {
         self.proxies = proxies
     }
 }

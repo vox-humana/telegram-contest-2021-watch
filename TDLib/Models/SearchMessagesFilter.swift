@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a filter for message search results
-public enum SearchMessagesFilter: Codable {
+internal enum SearchMessagesFilter: Codable {
     /// Returns all found messages, no filter is applied
     case searchMessagesFilterEmpty
 
@@ -84,7 +84,7 @@ public enum SearchMessagesFilter: Codable {
         case searchMessagesFilterPinned
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -127,7 +127,7 @@ public enum SearchMessagesFilter: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .searchMessagesFilterEmpty:

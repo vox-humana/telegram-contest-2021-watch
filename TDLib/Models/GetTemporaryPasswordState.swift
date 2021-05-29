@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns information about the current temporary password
-public struct GetTemporaryPasswordState: Codable {
-    public init() {}
+internal struct GetTemporaryPasswordState: Codable {
+    internal init() {}
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns full information about a user by their identifier
-public struct GetUserFullInfo: Codable {
+internal struct GetUserFullInfo: Codable {
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(userId: Int) {
+    internal init(userId: Int) {
         self.userId = userId
     }
 }

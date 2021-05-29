@@ -8,14 +8,14 @@
 import Foundation
 
 /// Describes a chat located nearby
-public struct ChatNearby: Codable {
+internal struct ChatNearby: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Distance to the chat location, in meters
-    public let distance: Int
+    internal let distance: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         distance: Int
     ) {

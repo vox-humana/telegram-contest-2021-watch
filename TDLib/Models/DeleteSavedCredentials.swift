@@ -8,6 +8,6 @@
 import Foundation
 
 /// Deletes saved credentials for all payment provider bots
-public struct DeleteSavedCredentials: Codable {
-    public init() {}
+internal struct DeleteSavedCredentials: Codable {
+    internal init() {}
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns all entities (mentions, hashtags, cashtags, bot commands, bank card numbers, URLs, and email addresses) contained in the text. Can be called synchronously
-public struct GetTextEntities: Codable {
+internal struct GetTextEntities: Codable {
     /// The text in which to look for entites
-    public let text: String
+    internal let text: String
 
-    public init(text: String) {
+    internal init(text: String) {
         self.text = text
     }
 }

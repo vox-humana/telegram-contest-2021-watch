@@ -8,17 +8,17 @@
 import Foundation
 
 /// Informs TDLib that a participant of an active group call speaking state has changed
-public struct SetGroupCallParticipantIsSpeaking: Codable {
+internal struct SetGroupCallParticipantIsSpeaking: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// True, if the user is speaking
-    public let isSpeaking: Bool
+    internal let isSpeaking: Bool
 
     /// Group call participant's synchronization source identifier, or 0 for the current user
-    public let source: Int
+    internal let source: Int
 
-    public init(
+    internal init(
         groupCallId: Int,
         isSpeaking: Bool,
         source: Int

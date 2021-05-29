@@ -8,20 +8,20 @@
 import Foundation
 
 /// Returns a string stored in the local database from the specified localization target and language pack by its key. Returns a 404 error if the string is not found. Can be called synchronously
-public struct GetLanguagePackString: Codable {
+internal struct GetLanguagePackString: Codable {
     /// Language pack key of the string to be returned
-    public let key: String
+    internal let key: String
 
     /// Path to the language pack database in which strings are stored
-    public let languagePackDatabasePath: String
+    internal let languagePackDatabasePath: String
 
     /// Language pack identifier
-    public let languagePackId: String
+    internal let languagePackId: String
 
     /// Localization target to which the language pack belongs
-    public let localizationTarget: String
+    internal let localizationTarget: String
 
-    public init(
+    internal init(
         key: String,
         languagePackDatabasePath: String,
         languagePackId: String,

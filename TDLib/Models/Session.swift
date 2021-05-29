@@ -8,53 +8,53 @@
 import Foundation
 
 /// Contains information about one session in a Telegram application used by the current user. Sessions should be shown to the user in the returned order
-public struct Session: Codable {
+internal struct Session: Codable {
     /// Telegram API identifier, as provided by the application
-    public let apiId: Int
+    internal let apiId: Int
 
     /// Name of the application, as provided by the application
-    public let applicationName: String
+    internal let applicationName: String
 
     /// The version of the application, as provided by the application
-    public let applicationVersion: String
+    internal let applicationVersion: String
 
     /// A two-letter country code for the country from which the session was created, based on the IP address
-    public let country: String
+    internal let country: String
 
     /// Model of the device the application has been run or is running on, as provided by the application
-    public let deviceModel: String
+    internal let deviceModel: String
 
     /// Session identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// IP address from which the session was created, in human-readable format
-    public let ip: String
+    internal let ip: String
 
     /// True, if this session is the current session
-    public let isCurrent: Bool
+    internal let isCurrent: Bool
 
     /// True, if the application is an official application or uses the api_id of an official application
-    public let isOfficialApplication: Bool
+    internal let isOfficialApplication: Bool
 
     /// True, if a password is needed to complete authorization of the session
-    public let isPasswordPending: Bool
+    internal let isPasswordPending: Bool
 
     /// Point in time (Unix timestamp) when the session was last used
-    public let lastActiveDate: Int
+    internal let lastActiveDate: Int
 
     /// Point in time (Unix timestamp) when the user has logged in
-    public let logInDate: Int
+    internal let logInDate: Int
 
     /// Operating system the application has been run or is running on, as provided by the application
-    public let platform: String
+    internal let platform: String
 
     /// Region code from which the session was created, based on the IP address
-    public let region: String
+    internal let region: String
 
     /// Version of the operating system the application has been run or is running on, as provided by the application
-    public let systemVersion: String
+    internal let systemVersion: String
 
-    public init(
+    internal init(
         apiId: Int,
         applicationName: String,
         applicationVersion: String,

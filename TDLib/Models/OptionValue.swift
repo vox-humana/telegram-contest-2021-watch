@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the value of an option
-public enum OptionValue: Codable {
+internal enum OptionValue: Codable {
     /// Represents a boolean option
     case optionValueBoolean(OptionValueBoolean)
 
@@ -28,7 +28,7 @@ public enum OptionValue: Codable {
         case optionValueString
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -46,7 +46,7 @@ public enum OptionValue: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .optionValueBoolean(value):
@@ -65,31 +65,31 @@ public enum OptionValue: Codable {
 }
 
 /// Represents a boolean option
-public struct OptionValueBoolean: Codable {
+internal struct OptionValueBoolean: Codable {
     /// The value of the option
-    public let value: Bool
+    internal let value: Bool
 
-    public init(value: Bool) {
+    internal init(value: Bool) {
         self.value = value
     }
 }
 
 /// Represents an integer option
-public struct OptionValueInteger: Codable {
+internal struct OptionValueInteger: Codable {
     /// The value of the option
-    public let value: TdInt64
+    internal let value: TdInt64
 
-    public init(value: TdInt64) {
+    internal init(value: TdInt64) {
         self.value = value
     }
 }
 
 /// Represents a string option
-public struct OptionValueString: Codable {
+internal struct OptionValueString: Codable {
     /// The value of the option
-    public let value: String
+    internal let value: String
 
-    public init(value: String) {
+    internal init(value: String) {
         self.value = value
     }
 }

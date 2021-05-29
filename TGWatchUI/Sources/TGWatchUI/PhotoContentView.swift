@@ -18,7 +18,7 @@ public struct PhotoContentView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .center, spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             image
             if !state.caption.isEmpty {
                 Text(state.caption)

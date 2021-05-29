@@ -8,17 +8,17 @@
 import Foundation
 
 /// Returns approximate number of messages of the specified type in the chat
-public struct GetChatMessageCount: Codable {
+internal struct GetChatMessageCount: Codable {
     /// Identifier of the chat in which to count messages
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Filter for message content; searchMessagesFilterEmpty is unsupported in this function
-    public let filter: SearchMessagesFilter
+    internal let filter: SearchMessagesFilter
 
     /// If true, returns count that is available locally without sending network requests, returning -1 if the number of messages is unknown
-    public let returnLocal: Bool
+    internal let returnLocal: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         filter: SearchMessagesFilter,
         returnLocal: Bool

@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns the current state of 2-step verification
-public struct GetPasswordState: Codable {
-    public init() {}
+internal struct GetPasswordState: Codable {
+    internal init() {}
 }

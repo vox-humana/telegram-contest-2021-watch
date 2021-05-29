@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns auto-download settings presets for the current user
-public struct GetAutoDownloadSettingsPresets: Codable {
-    public init() {}
+internal struct GetAutoDownloadSettingsPresets: Codable {
+    internal init() {}
 }

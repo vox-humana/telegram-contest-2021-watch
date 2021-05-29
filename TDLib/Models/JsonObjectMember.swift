@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents one member of a JSON object
-public struct JsonObjectMember: Codable {
+internal struct JsonObjectMember: Codable {
     /// Member's key
-    public let key: String
+    internal let key: String
 
     /// Member's value
-    public let value: JsonValue
+    internal let value: JsonValue
 
-    public init(
+    internal init(
         key: String,
         value: JsonValue
     ) {

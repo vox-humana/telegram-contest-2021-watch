@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a single result of an inline query
-public enum InlineQueryResult: Codable {
+internal enum InlineQueryResult: Codable {
     /// Represents a link to an article or web page
     case inlineQueryResultArticle(InlineQueryResultArticle)
 
@@ -60,7 +60,7 @@ public enum InlineQueryResult: Codable {
         case inlineQueryResultVoiceNote
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -103,7 +103,7 @@ public enum InlineQueryResult: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inlineQueryResultArticle(value):
@@ -147,25 +147,25 @@ public enum InlineQueryResult: Codable {
 }
 
 /// Represents a link to an article or web page
-public struct InlineQueryResultArticle: Codable {
-    public let description: String
+internal struct InlineQueryResultArticle: Codable {
+    internal let description: String
 
     /// True, if the URL must be not shown
-    public let hideUrl: Bool
+    internal let hideUrl: Bool
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Result thumbnail in JPEG format; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// Title of the result
-    public let title: String
+    internal let title: String
 
     /// URL of the result, if it exists
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         description: String,
         hideUrl: Bool,
         id: String,
@@ -183,17 +183,17 @@ public struct InlineQueryResultArticle: Codable {
 }
 
 /// Represents a user contact
-public struct InlineQueryResultContact: Codable {
+internal struct InlineQueryResultContact: Codable {
     /// A user contact
-    public let contact: Contact
+    internal let contact: Contact
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Result thumbnail in JPEG format; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
-    public init(
+    internal init(
         contact: Contact,
         id: String,
         thumbnail: Thumbnail?
@@ -205,20 +205,20 @@ public struct InlineQueryResultContact: Codable {
 }
 
 /// Represents a point on the map
-public struct InlineQueryResultLocation: Codable {
+internal struct InlineQueryResultLocation: Codable {
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Location result
-    public let location: Location
+    internal let location: Location
 
     /// Result thumbnail in JPEG format; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// Title of the result
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         id: String,
         location: Location,
         thumbnail: Thumbnail?,
@@ -232,17 +232,17 @@ public struct InlineQueryResultLocation: Codable {
 }
 
 /// Represents information about a venue
-public struct InlineQueryResultVenue: Codable {
+internal struct InlineQueryResultVenue: Codable {
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Result thumbnail in JPEG format; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// Venue result
-    public let venue: Venue
+    internal let venue: Venue
 
-    public init(
+    internal init(
         id: String,
         thumbnail: Thumbnail?,
         venue: Venue
@@ -254,14 +254,14 @@ public struct InlineQueryResultVenue: Codable {
 }
 
 /// Represents information about a game
-public struct InlineQueryResultGame: Codable {
+internal struct InlineQueryResultGame: Codable {
     /// Game result
-    public let game: Game
+    internal let game: Game
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
-    public init(
+    internal init(
         game: Game,
         id: String
     ) {
@@ -271,17 +271,17 @@ public struct InlineQueryResultGame: Codable {
 }
 
 /// Represents an animation file
-public struct InlineQueryResultAnimation: Codable {
+internal struct InlineQueryResultAnimation: Codable {
     /// Animation file
-    public let animation: Animation
+    internal let animation: Animation
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Animation title
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         animation: Animation,
         id: String,
         title: String
@@ -293,14 +293,14 @@ public struct InlineQueryResultAnimation: Codable {
 }
 
 /// Represents an audio file
-public struct InlineQueryResultAudio: Codable {
+internal struct InlineQueryResultAudio: Codable {
     /// Audio file
-    public let audio: Audio
+    internal let audio: Audio
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
-    public init(
+    internal init(
         audio: Audio,
         id: String
     ) {
@@ -310,19 +310,19 @@ public struct InlineQueryResultAudio: Codable {
 }
 
 /// Represents a document
-public struct InlineQueryResultDocument: Codable {
-    public let description: String
+internal struct InlineQueryResultDocument: Codable {
+    internal let description: String
 
     /// Document
-    public let document: Document
+    internal let document: Document
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Document title
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         description: String,
         document: Document,
         id: String,
@@ -336,19 +336,19 @@ public struct InlineQueryResultDocument: Codable {
 }
 
 /// Represents a photo
-public struct InlineQueryResultPhoto: Codable {
-    public let description: String
+internal struct InlineQueryResultPhoto: Codable {
+    internal let description: String
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Photo
-    public let photo: Photo
+    internal let photo: Photo
 
     /// Title of the result, if known
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         description: String,
         id: String,
         photo: Photo,
@@ -362,14 +362,14 @@ public struct InlineQueryResultPhoto: Codable {
 }
 
 /// Represents a sticker
-public struct InlineQueryResultSticker: Codable {
+internal struct InlineQueryResultSticker: Codable {
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Sticker
-    public let sticker: Sticker
+    internal let sticker: Sticker
 
-    public init(
+    internal init(
         id: String,
         sticker: Sticker
     ) {
@@ -379,19 +379,19 @@ public struct InlineQueryResultSticker: Codable {
 }
 
 /// Represents a video
-public struct InlineQueryResultVideo: Codable {
-    public let description: String
+internal struct InlineQueryResultVideo: Codable {
+    internal let description: String
 
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Title of the video
-    public let title: String
+    internal let title: String
 
     /// Video
-    public let video: Video
+    internal let video: Video
 
-    public init(
+    internal init(
         description: String,
         id: String,
         title: String,
@@ -405,17 +405,17 @@ public struct InlineQueryResultVideo: Codable {
 }
 
 /// Represents a voice note
-public struct InlineQueryResultVoiceNote: Codable {
+internal struct InlineQueryResultVoiceNote: Codable {
     /// Unique identifier of the query result
-    public let id: String
+    internal let id: String
 
     /// Title of the voice note
-    public let title: String
+    internal let title: String
 
     /// Voice note
-    public let voiceNote: VoiceNote
+    internal let voiceNote: VoiceNote
 
-    public init(
+    internal init(
         id: String,
         title: String,
         voiceNote: VoiceNote

@@ -8,17 +8,17 @@
 import Foundation
 
 /// Returns the profile photos of a user. The result of this query may be outdated: some photos might have been deleted already
-public struct GetUserProfilePhotos: Codable {
+internal struct GetUserProfilePhotos: Codable {
     /// The maximum number of photos to be returned; up to 100
-    public let limit: Int
+    internal let limit: Int
 
     /// The number of photos to skip; must be non-negative
-    public let offset: Int
+    internal let offset: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         limit: Int,
         offset: Int,
         userId: Int

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Basic protocol for communicate with TdLib.
-public protocol TdClient {
+internal protocol TdClient {
     /// Receives incoming updates and request responses from the TDLib client
     func run(updateHandler: @escaping (Data) -> Void)
 
@@ -22,6 +22,6 @@ public protocol TdClient {
     func close()
 }
 
-public protocol TdQuery {
+internal protocol TdQuery {
     func make(with extra: String?) throws -> Data
 }

@@ -8,17 +8,17 @@
 import Foundation
 
 /// Returns information about a button of type inlineKeyboardButtonTypeLoginUrl. The method needs to be called when the user presses the button
-public struct GetLoginUrlInfo: Codable {
+internal struct GetLoginUrlInfo: Codable {
     /// Button identifier
-    public let buttonId: Int
+    internal let buttonId: Int
 
     /// Chat identifier of the message with the button
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier of the message with the button
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         buttonId: Int,
         chatId: Int64,
         messageId: Int64

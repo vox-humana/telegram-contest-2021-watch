@@ -8,14 +8,14 @@
 import Foundation
 
 /// Creates a new temporary password for processing payments
-public struct CreateTemporaryPassword: Codable {
+internal struct CreateTemporaryPassword: Codable {
     /// Persistent user password
-    public let password: String
+    internal let password: String
 
     /// Time during which the temporary password will be valid, in seconds; should be between 60 and 86400
-    public let validFor: Int
+    internal let validFor: Int
 
-    public init(
+    internal init(
         password: String,
         validFor: Int
     ) {

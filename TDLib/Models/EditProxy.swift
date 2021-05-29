@@ -8,23 +8,23 @@
 import Foundation
 
 /// Edits an existing proxy server for network requests. Can be called before authorization
-public struct EditProxy: Codable {
+internal struct EditProxy: Codable {
     /// True, if the proxy should be enabled
-    public let enable: Bool
+    internal let enable: Bool
 
     /// Proxy server port
-    public let port: Int
+    internal let port: Int
 
     /// Proxy identifier
-    public let proxyId: Int
+    internal let proxyId: Int
 
     /// Proxy server IP address
-    public let server: String
+    internal let server: String
 
     /// Proxy type
-    public let type: ProxyType
+    internal let type: ProxyType
 
-    public init(
+    internal init(
         enable: Bool,
         port: Int,
         proxyId: Int,

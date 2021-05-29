@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the current state of the connection to Telegram servers
-public enum ConnectionState: Codable {
+internal enum ConnectionState: Codable {
     /// Currently waiting for the network to become available. Use setNetworkType to change the available network type
     case connectionStateWaitingForNetwork
 
@@ -32,7 +32,7 @@ public enum ConnectionState: Codable {
         case connectionStateReady
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -49,7 +49,7 @@ public enum ConnectionState: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .connectionStateWaitingForNetwork:

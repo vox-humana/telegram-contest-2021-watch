@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents result of checking whether the current session can be used to transfer a chat ownership to another user
-public enum CanTransferOwnershipResult: Codable {
+internal enum CanTransferOwnershipResult: Codable {
     /// The session can be used
     case canTransferOwnershipResultOk
 
@@ -28,7 +28,7 @@ public enum CanTransferOwnershipResult: Codable {
         case canTransferOwnershipResultSessionTooFresh
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -45,7 +45,7 @@ public enum CanTransferOwnershipResult: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .canTransferOwnershipResultOk:
@@ -63,21 +63,21 @@ public enum CanTransferOwnershipResult: Codable {
 }
 
 /// The 2-step verification was enabled recently, user needs to wait
-public struct CanTransferOwnershipResultPasswordTooFresh: Codable {
+internal struct CanTransferOwnershipResultPasswordTooFresh: Codable {
     /// Time left before the session can be used to transfer ownership of a chat, in seconds
-    public let retryAfter: Int
+    internal let retryAfter: Int
 
-    public init(retryAfter: Int) {
+    internal init(retryAfter: Int) {
         self.retryAfter = retryAfter
     }
 }
 
 /// The session was created recently, user needs to wait
-public struct CanTransferOwnershipResultSessionTooFresh: Codable {
+internal struct CanTransferOwnershipResultSessionTooFresh: Codable {
     /// Time left before the session can be used to transfer ownership of a chat, in seconds
-    public let retryAfter: Int
+    internal let retryAfter: Int
 
-    public init(retryAfter: Int) {
+    internal init(retryAfter: Int) {
         self.retryAfter = retryAfter
     }
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Deletes revoked chat invite links. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links
-public struct DeleteRevokedChatInviteLink: Codable {
+internal struct DeleteRevokedChatInviteLink: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Invite link to revoke
-    public let inviteLink: String
+    internal let inviteLink: String
 
-    public init(
+    internal init(
         chatId: Int64,
         inviteLink: String
     ) {

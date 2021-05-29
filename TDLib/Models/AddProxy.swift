@@ -8,20 +8,20 @@
 import Foundation
 
 /// Adds a proxy server for network requests. Can be called before authorization
-public struct AddProxy: Codable {
+internal struct AddProxy: Codable {
     /// True, if the proxy should be enabled
-    public let enable: Bool
+    internal let enable: Bool
 
     /// Proxy server port
-    public let port: Int
+    internal let port: Int
 
     /// Proxy server IP address
-    public let server: String
+    internal let server: String
 
     /// Proxy type
-    public let type: ProxyType
+    internal let type: ProxyType
 
-    public init(
+    internal init(
         enable: Bool,
         port: Int,
         server: String,

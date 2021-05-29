@@ -8,6 +8,6 @@
 import Foundation
 
 /// Deletes saved order info
-public struct DeleteSavedOrderInfo: Codable {
-    public init() {}
+internal struct DeleteSavedOrderInfo: Codable {
+    internal init() {}
 }

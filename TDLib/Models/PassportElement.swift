@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about a Telegram Passport element
-public enum PassportElement: Codable {
+internal enum PassportElement: Codable {
     /// A Telegram Passport element containing the user's personal details
     case passportElementPersonalDetails(PassportElementPersonalDetails)
 
@@ -64,7 +64,7 @@ public enum PassportElement: Codable {
         case passportElementEmailAddress
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -110,7 +110,7 @@ public enum PassportElement: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .passportElementPersonalDetails(value):
@@ -157,131 +157,131 @@ public enum PassportElement: Codable {
 }
 
 /// A Telegram Passport element containing the user's personal details
-public struct PassportElementPersonalDetails: Codable {
+internal struct PassportElementPersonalDetails: Codable {
     /// Personal details of the user
-    public let personalDetails: PersonalDetails
+    internal let personalDetails: PersonalDetails
 
-    public init(personalDetails: PersonalDetails) {
+    internal init(personalDetails: PersonalDetails) {
         self.personalDetails = personalDetails
     }
 }
 
 /// A Telegram Passport element containing the user's passport
-public struct PassportElementPassport: Codable {
+internal struct PassportElementPassport: Codable {
     /// Passport
-    public let passport: IdentityDocument
+    internal let passport: IdentityDocument
 
-    public init(passport: IdentityDocument) {
+    internal init(passport: IdentityDocument) {
         self.passport = passport
     }
 }
 
 /// A Telegram Passport element containing the user's driver license
-public struct PassportElementDriverLicense: Codable {
+internal struct PassportElementDriverLicense: Codable {
     /// Driver license
-    public let driverLicense: IdentityDocument
+    internal let driverLicense: IdentityDocument
 
-    public init(driverLicense: IdentityDocument) {
+    internal init(driverLicense: IdentityDocument) {
         self.driverLicense = driverLicense
     }
 }
 
 /// A Telegram Passport element containing the user's identity card
-public struct PassportElementIdentityCard: Codable {
+internal struct PassportElementIdentityCard: Codable {
     /// Identity card
-    public let identityCard: IdentityDocument
+    internal let identityCard: IdentityDocument
 
-    public init(identityCard: IdentityDocument) {
+    internal init(identityCard: IdentityDocument) {
         self.identityCard = identityCard
     }
 }
 
 /// A Telegram Passport element containing the user's internal passport
-public struct PassportElementInternalPassport: Codable {
+internal struct PassportElementInternalPassport: Codable {
     /// Internal passport
-    public let internalPassport: IdentityDocument
+    internal let internalPassport: IdentityDocument
 
-    public init(internalPassport: IdentityDocument) {
+    internal init(internalPassport: IdentityDocument) {
         self.internalPassport = internalPassport
     }
 }
 
 /// A Telegram Passport element containing the user's address
-public struct PassportElementAddress: Codable {
+internal struct PassportElementAddress: Codable {
     /// Address
-    public let address: Address
+    internal let address: Address
 
-    public init(address: Address) {
+    internal init(address: Address) {
         self.address = address
     }
 }
 
 /// A Telegram Passport element containing the user's utility bill
-public struct PassportElementUtilityBill: Codable {
+internal struct PassportElementUtilityBill: Codable {
     /// Utility bill
-    public let utilityBill: PersonalDocument
+    internal let utilityBill: PersonalDocument
 
-    public init(utilityBill: PersonalDocument) {
+    internal init(utilityBill: PersonalDocument) {
         self.utilityBill = utilityBill
     }
 }
 
 /// A Telegram Passport element containing the user's bank statement
-public struct PassportElementBankStatement: Codable {
+internal struct PassportElementBankStatement: Codable {
     /// Bank statement
-    public let bankStatement: PersonalDocument
+    internal let bankStatement: PersonalDocument
 
-    public init(bankStatement: PersonalDocument) {
+    internal init(bankStatement: PersonalDocument) {
         self.bankStatement = bankStatement
     }
 }
 
 /// A Telegram Passport element containing the user's rental agreement
-public struct PassportElementRentalAgreement: Codable {
+internal struct PassportElementRentalAgreement: Codable {
     /// Rental agreement
-    public let rentalAgreement: PersonalDocument
+    internal let rentalAgreement: PersonalDocument
 
-    public init(rentalAgreement: PersonalDocument) {
+    internal init(rentalAgreement: PersonalDocument) {
         self.rentalAgreement = rentalAgreement
     }
 }
 
 /// A Telegram Passport element containing the user's passport registration pages
-public struct PassportElementPassportRegistration: Codable {
+internal struct PassportElementPassportRegistration: Codable {
     /// Passport registration pages
-    public let passportRegistration: PersonalDocument
+    internal let passportRegistration: PersonalDocument
 
-    public init(passportRegistration: PersonalDocument) {
+    internal init(passportRegistration: PersonalDocument) {
         self.passportRegistration = passportRegistration
     }
 }
 
 /// A Telegram Passport element containing the user's temporary registration
-public struct PassportElementTemporaryRegistration: Codable {
+internal struct PassportElementTemporaryRegistration: Codable {
     /// Temporary registration
-    public let temporaryRegistration: PersonalDocument
+    internal let temporaryRegistration: PersonalDocument
 
-    public init(temporaryRegistration: PersonalDocument) {
+    internal init(temporaryRegistration: PersonalDocument) {
         self.temporaryRegistration = temporaryRegistration
     }
 }
 
 /// A Telegram Passport element containing the user's phone number
-public struct PassportElementPhoneNumber: Codable {
+internal struct PassportElementPhoneNumber: Codable {
     /// Phone number
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
-    public init(phoneNumber: String) {
+    internal init(phoneNumber: String) {
         self.phoneNumber = phoneNumber
     }
 }
 
 /// A Telegram Passport element containing the user's email address
-public struct PassportElementEmailAddress: Codable {
+internal struct PassportElementEmailAddress: Codable {
     /// Email address
-    public let emailAddress: String
+    internal let emailAddress: String
 
-    public init(emailAddress: String) {
+    internal init(emailAddress: String) {
         self.emailAddress = emailAddress
     }
 }

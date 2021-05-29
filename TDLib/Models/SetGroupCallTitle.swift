@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sets group call title. Requires groupCall.can_be_managed group call flag
-public struct SetGroupCallTitle: Codable {
+internal struct SetGroupCallTitle: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// New group call title; 1-64 characters
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         groupCallId: Int,
         title: String
     ) {

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sends debug information for a call
-public struct SendCallDebugInformation: Codable {
+internal struct SendCallDebugInformation: Codable {
     /// Call identifier
-    public let callId: Int
+    internal let callId: Int
 
     /// Debug information in application-specific format
-    public let debugInformation: String
+    internal let debugInformation: String
 
-    public init(
+    internal init(
         callId: Int,
         debugInformation: String
     ) {

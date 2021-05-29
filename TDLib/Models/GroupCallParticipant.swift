@@ -8,53 +8,53 @@
 import Foundation
 
 /// Represents a group call participant
-public struct GroupCallParticipant: Codable {
+internal struct GroupCallParticipant: Codable {
     /// The participant user's bio or the participant chat's description
-    public let bio: String
+    internal let bio: String
 
     /// True, if the current user can mute the participant for all other group call participants
-    public let canBeMutedForAllUsers: Bool
+    internal let canBeMutedForAllUsers: Bool
 
     /// True, if the current user can mute the participant only for self
-    public let canBeMutedForCurrentUser: Bool
+    internal let canBeMutedForCurrentUser: Bool
 
     /// True, if the current user can allow the participant to unmute themself or unmute the participant (if the participant is the current user)
-    public let canBeUnmutedForAllUsers: Bool
+    internal let canBeUnmutedForAllUsers: Bool
 
     /// True, if the current user can unmute the participant for self
-    public let canBeUnmutedForCurrentUser: Bool
+    internal let canBeUnmutedForCurrentUser: Bool
 
     /// True, if the participant is muted for all users, but can unmute themself
-    public let canUnmuteSelf: Bool
+    internal let canUnmuteSelf: Bool
 
     /// True, if the participant is the current user
-    public let isCurrentUser: Bool
+    internal let isCurrentUser: Bool
 
     /// True, if the participant hand is raised
-    public let isHandRaised: Bool
+    internal let isHandRaised: Bool
 
     /// True, if the participant is muted for all users
-    public let isMutedForAllUsers: Bool
+    internal let isMutedForAllUsers: Bool
 
     /// True, if the participant is muted for the current user
-    public let isMutedForCurrentUser: Bool
+    internal let isMutedForCurrentUser: Bool
 
     /// True, if the participant is speaking as set by setGroupCallParticipantIsSpeaking
-    public let isSpeaking: Bool
+    internal let isSpeaking: Bool
 
     /// User's order in the group call participant list. Orders must be compared lexicographically. The bigger is order, the higher is user in the list. If order is empty, the user must be removed from the participant list
-    public let order: String
+    internal let order: String
 
     /// Identifier of the group call participant
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
     /// User's synchronization source
-    public let source: Int
+    internal let source: Int
 
     /// Participant's volume level; 1-20000 in hundreds of percents
-    public let volumeLevel: Int
+    internal let volumeLevel: Int
 
-    public init(
+    internal init(
         bio: String,
         canBeMutedForAllUsers: Bool,
         canBeMutedForCurrentUser: Bool,

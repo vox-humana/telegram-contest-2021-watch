@@ -8,17 +8,17 @@
 import Foundation
 
 /// Changes volume level of a participant of an active group call. If the current user can manage the group call, then the participant's volume level will be changed for all users with default volume level
-public struct SetGroupCallParticipantVolumeLevel: Codable {
+internal struct SetGroupCallParticipantVolumeLevel: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// Participant identifier
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
     /// New participant's volume level; 1-20000 in hundreds of percents
-    public let volumeLevel: Int
+    internal let volumeLevel: Int
 
-    public init(
+    internal init(
         groupCallId: Int,
         participantId: MessageSender,
         volumeLevel: Int

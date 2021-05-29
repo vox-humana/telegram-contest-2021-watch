@@ -8,11 +8,11 @@
 import Foundation
 
 /// Represents a list of stickers
-public struct Stickers: Codable {
+internal struct Stickers: Codable {
     /// List of stickers
-    public let stickers: [Sticker]
+    internal let stickers: [Sticker]
 
-    public init(stickers: [Sticker]) {
+    internal init(stickers: [Sticker]) {
         self.stickers = stickers
     }
 }

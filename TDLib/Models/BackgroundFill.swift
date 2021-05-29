@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a fill of a background
-public enum BackgroundFill: Codable {
+internal enum BackgroundFill: Codable {
     /// Describes a solid fill of a background
     case backgroundFillSolid(BackgroundFillSolid)
 
@@ -20,7 +20,7 @@ public enum BackgroundFill: Codable {
         case backgroundFillGradient
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum BackgroundFill: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .backgroundFillSolid(value):
@@ -47,27 +47,27 @@ public enum BackgroundFill: Codable {
 }
 
 /// Describes a solid fill of a background
-public struct BackgroundFillSolid: Codable {
+internal struct BackgroundFillSolid: Codable {
     /// A color of the background in the RGB24 format
-    public let color: Int
+    internal let color: Int
 
-    public init(color: Int) {
+    internal init(color: Int) {
         self.color = color
     }
 }
 
 /// Describes a gradient fill of a background
-public struct BackgroundFillGradient: Codable {
+internal struct BackgroundFillGradient: Codable {
     /// A bottom color of the background in the RGB24 format
-    public let bottomColor: Int
+    internal let bottomColor: Int
 
     /// Clockwise rotation angle of the gradient, in degrees; 0-359. Should be always divisible by 45
-    public let rotationAngle: Int
+    internal let rotationAngle: Int
 
     /// A top color of the background in the RGB24 format
-    public let topColor: Int
+    internal let topColor: Int
 
-    public init(
+    internal init(
         bottomColor: Int,
         rotationAngle: Int,
         topColor: Int

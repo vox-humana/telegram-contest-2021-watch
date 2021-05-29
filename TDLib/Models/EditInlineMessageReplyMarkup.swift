@@ -8,14 +8,14 @@
 import Foundation
 
 /// Edits the reply markup of an inline message sent via a bot; for bots only
-public struct EditInlineMessageReplyMarkup: Codable {
+internal struct EditInlineMessageReplyMarkup: Codable {
     /// Inline message identifier
-    public let inlineMessageId: String
+    internal let inlineMessageId: String
 
     /// The new message reply markup
-    public let replyMarkup: ReplyMarkup
+    internal let replyMarkup: ReplyMarkup
 
-    public init(
+    internal init(
         inlineMessageId: String,
         replyMarkup: ReplyMarkup
     ) {

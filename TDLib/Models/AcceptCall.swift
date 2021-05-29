@@ -8,14 +8,14 @@
 import Foundation
 
 /// Accepts an incoming call
-public struct AcceptCall: Codable {
+internal struct AcceptCall: Codable {
     /// Call identifier
-    public let callId: Int
+    internal let callId: Int
 
     /// Description of the call protocols supported by the application
-    public let `protocol`: CallProtocol
+    internal let `protocol`: CallProtocol
 
-    public init(
+    internal init(
         callId: Int,
         protocol: CallProtocol
     ) {

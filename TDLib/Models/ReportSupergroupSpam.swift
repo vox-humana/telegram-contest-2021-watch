@@ -8,17 +8,17 @@
 import Foundation
 
 /// Reports some messages from a user in a supergroup as spam; requires administrator rights in the supergroup
-public struct ReportSupergroupSpam: Codable {
+internal struct ReportSupergroupSpam: Codable {
     /// Identifiers of messages sent in the supergroup by the user. This list must be non-empty
-    public let messageIds: [Int64]
+    internal let messageIds: [Int64]
 
     /// Supergroup identifier
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         messageIds: [Int64],
         supergroupId: Int,
         userId: Int

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Describes a chat member joined a chat by an invite link
-public struct ChatInviteLinkMember: Codable {
+internal struct ChatInviteLinkMember: Codable {
     /// Point in time (Unix timestamp) when the user joined the chat
-    public let joinedChatDate: Int
+    internal let joinedChatDate: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         joinedChatDate: Int,
         userId: Int
     ) {

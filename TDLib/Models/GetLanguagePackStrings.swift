@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns strings from a language pack in the current localization target by their keys. Can be called before authorization
-public struct GetLanguagePackStrings: Codable {
+internal struct GetLanguagePackStrings: Codable {
     /// Language pack keys of the strings to be returned; leave empty to request all available strings
-    public let keys: [String]
+    internal let keys: [String]
 
     /// Language pack identifier of the strings to be returned
-    public let languagePackId: String
+    internal let languagePackId: String
 
-    public init(
+    internal init(
         keys: [String],
         languagePackId: String
     ) {

@@ -8,26 +8,26 @@
 import Foundation
 
 /// Returns invite links for a chat created by specified administrator. Requires administrator privileges and can_invite_users right in the chat to get own links and owner privileges to get other links
-public struct GetChatInviteLinks: Codable {
+internal struct GetChatInviteLinks: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// User identifier of a chat administrator. Must be an identifier of the current user for non-owner
-    public let creatorUserId: Int
+    internal let creatorUserId: Int
 
     /// Pass true if revoked links needs to be returned instead of active or expired
-    public let isRevoked: Bool
+    internal let isRevoked: Bool
 
     /// The maximum number of invite links to return
-    public let limit: Int
+    internal let limit: Int
 
     /// Creation date of an invite link starting after which to return invite links; use 0 to get results from the beginning
-    public let offsetDate: Int
+    internal let offsetDate: Int
 
     /// Invite link starting after which to return invite links; use empty string to get results from the beginning
-    public let offsetInviteLink: String
+    internal let offsetInviteLink: String
 
-    public init(
+    internal init(
         chatId: Int64,
         creatorUserId: Int,
         isRevoked: Bool,

@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns information about existing countries. Can be called before authorization
-public struct GetCountries: Codable {
-    public init() {}
+internal struct GetCountries: Codable {
+    internal init() {}
 }

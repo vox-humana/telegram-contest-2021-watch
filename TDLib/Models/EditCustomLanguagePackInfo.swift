@@ -8,11 +8,11 @@
 import Foundation
 
 /// Edits information about a custom local language pack in the current localization target. Can be called before authorization
-public struct EditCustomLanguagePackInfo: Codable {
+internal struct EditCustomLanguagePackInfo: Codable {
     /// New information about the custom local language pack
-    public let info: LanguagePackInfo
+    internal let info: LanguagePackInfo
 
-    public init(info: LanguagePackInfo) {
+    internal init(info: LanguagePackInfo) {
         self.info = info
     }
 }

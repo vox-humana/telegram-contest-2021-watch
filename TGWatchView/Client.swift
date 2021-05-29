@@ -10,33 +10,33 @@ public enum AuthState {
     case authorized
 }
 
-public protocol ChatListService {
+protocol ChatListService {
     func downloadPhoto(for chat: Chat)
     func requestChatList()
     var chatListSignal: CurrentValueSubject<[Chat], Never> { get }
 }
 
-public struct ChatListServiceEnvironment: EnvironmentKey {
-    public static var defaultValue: ChatListService = DummyService()
+struct ChatListServiceEnvironment: EnvironmentKey {
+    static var defaultValue: ChatListService = DummyService()
 }
 
-public extension EnvironmentValues {
+extension EnvironmentValues {
     var chatListService: ChatListService {
         get { self[ChatListServiceEnvironment.self] }
         set { self[ChatListServiceEnvironment.self] = newValue }
     }
 }
 
-public struct DummyService: ChatListService {
+struct DummyService: ChatListService {
     private let chatHistory: [Message]
 
-    public let chatListSignal = CurrentValueSubject<[Chat], Never>(.preview())
+    let chatListSignal = CurrentValueSubject<[Chat], Never>(.preview())
 
-    public init(chatHistory: [Message] = []) {
+    init(chatHistory: [Message] = []) {
         self.chatHistory = chatHistory
     }
 
-    public func requestChatList() {}
+    func requestChatList() {}
 
-    public func downloadPhoto(for _: Chat) {}
+    func downloadPhoto(for _: Chat) {}
 }

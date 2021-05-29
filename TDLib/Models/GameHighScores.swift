@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of game high scores
-public struct GameHighScores: Codable {
+internal struct GameHighScores: Codable {
     /// A list of game high scores
-    public let scores: [GameHighScore]
+    internal let scores: [GameHighScore]
 
-    public init(scores: [GameHighScore]) {
+    internal init(scores: [GameHighScore]) {
         self.scores = scores
     }
 }

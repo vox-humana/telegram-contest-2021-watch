@@ -8,7 +8,7 @@
 import Foundation
 
 /// The content of a message to send
-public enum InputMessageContent: Codable {
+internal enum InputMessageContent: Codable {
     /// A text message
     case inputMessageText(InputMessageText)
 
@@ -80,7 +80,7 @@ public enum InputMessageContent: Codable {
         case inputMessageForwarded
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -138,7 +138,7 @@ public enum InputMessageContent: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inputMessageText(value):
@@ -197,17 +197,17 @@ public enum InputMessageContent: Codable {
 }
 
 /// A text message
-public struct InputMessageText: Codable {
+internal struct InputMessageText: Codable {
     /// True, if a chat message draft should be deleted
-    public let clearDraft: Bool
+    internal let clearDraft: Bool
 
     /// True, if rich web page previews for URLs in the message text should be disabled
-    public let disableWebPagePreview: Bool
+    internal let disableWebPagePreview: Bool
 
     /// Formatted text to be sent; 1-GetOption("message_text_length_max") characters. Only Bold, Italic, Underline, Strikethrough, Code, Pre, PreCode, TextUrl and MentionName entities are allowed to be specified manually
-    public let text: FormattedText
+    internal let text: FormattedText
 
-    public init(
+    internal init(
         clearDraft: Bool,
         disableWebPagePreview: Bool,
         text: FormattedText
@@ -219,29 +219,29 @@ public struct InputMessageText: Codable {
 }
 
 /// An animation message (GIF-style).
-public struct InputMessageAnimation: Codable {
+internal struct InputMessageAnimation: Codable {
     /// File identifiers of the stickers added to the animation, if applicable
-    public let addedStickerFileIds: [Int]
+    internal let addedStickerFileIds: [Int]
 
     /// Animation file to be sent
-    public let animation: InputFile
+    internal let animation: InputFile
 
     /// Animation caption; 0-GetOption("message_caption_length_max") characters
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// Duration of the animation, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// Height of the animation; may be replaced by the server
-    public let height: Int
+    internal let height: Int
 
     /// Animation thumbnail, if available
-    public let thumbnail: InputThumbnail
+    internal let thumbnail: InputThumbnail
 
     /// Width of the animation; may be replaced by the server
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         addedStickerFileIds: [Int],
         animation: InputFile,
         caption: FormattedText,
@@ -261,26 +261,26 @@ public struct InputMessageAnimation: Codable {
 }
 
 /// An audio message
-public struct InputMessageAudio: Codable {
+internal struct InputMessageAudio: Codable {
     /// Thumbnail of the cover for the album, if available
-    public let albumCoverThumbnail: InputThumbnail
+    internal let albumCoverThumbnail: InputThumbnail
 
     /// Audio file to be sent
-    public let audio: InputFile
+    internal let audio: InputFile
 
     /// Audio caption; 0-GetOption("message_caption_length_max") characters
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// Duration of the audio, in seconds; may be replaced by the server
-    public let duration: Int
+    internal let duration: Int
 
     /// Performer of the audio; 0-64 characters, may be replaced by the server
-    public let performer: String
+    internal let performer: String
 
     /// Title of the audio; 0-64 characters; may be replaced by the server
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         albumCoverThumbnail: InputThumbnail,
         audio: InputFile,
         caption: FormattedText,
@@ -298,20 +298,20 @@ public struct InputMessageAudio: Codable {
 }
 
 /// A document message (general file)
-public struct InputMessageDocument: Codable {
+internal struct InputMessageDocument: Codable {
     /// Document caption; 0-GetOption("message_caption_length_max") characters
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// If true, automatic file type detection will be disabled and the document will be always sent as file. Always true for files sent to secret chats
-    public let disableContentTypeDetection: Bool
+    internal let disableContentTypeDetection: Bool
 
     /// Document to be sent
-    public let document: InputFile
+    internal let document: InputFile
 
     /// Document thumbnail, if available
-    public let thumbnail: InputThumbnail
+    internal let thumbnail: InputThumbnail
 
-    public init(
+    internal init(
         caption: FormattedText,
         disableContentTypeDetection: Bool,
         document: InputFile,
@@ -325,29 +325,29 @@ public struct InputMessageDocument: Codable {
 }
 
 /// A photo message
-public struct InputMessagePhoto: Codable {
+internal struct InputMessagePhoto: Codable {
     /// File identifiers of the stickers added to the photo, if applicable
-    public let addedStickerFileIds: [Int]
+    internal let addedStickerFileIds: [Int]
 
     /// Photo caption; 0-GetOption("message_caption_length_max") characters
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// Photo height
-    public let height: Int
+    internal let height: Int
 
     /// Photo to send
-    public let photo: InputFile
+    internal let photo: InputFile
 
     /// Photo thumbnail to be sent, this is sent to the other party in secret chats only
-    public let thumbnail: InputThumbnail
+    internal let thumbnail: InputThumbnail
 
     /// Photo TTL (Time To Live), in seconds (0-60). A non-zero TTL can be specified only in private chats
-    public let ttl: Int
+    internal let ttl: Int
 
     /// Photo width
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         addedStickerFileIds: [Int],
         caption: FormattedText,
         height: Int,
@@ -367,23 +367,23 @@ public struct InputMessagePhoto: Codable {
 }
 
 /// A sticker message
-public struct InputMessageSticker: Codable {
+internal struct InputMessageSticker: Codable {
     /// Emoji used to choose the sticker
-    public let emoji: String
+    internal let emoji: String
 
     /// Sticker height
-    public let height: Int
+    internal let height: Int
 
     /// Sticker to be sent
-    public let sticker: InputFile
+    internal let sticker: InputFile
 
     /// Sticker thumbnail, if available
-    public let thumbnail: InputThumbnail
+    internal let thumbnail: InputThumbnail
 
     /// Sticker width
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         emoji: String,
         height: Int,
         sticker: InputFile,
@@ -399,35 +399,35 @@ public struct InputMessageSticker: Codable {
 }
 
 /// A video message
-public struct InputMessageVideo: Codable {
+internal struct InputMessageVideo: Codable {
     /// File identifiers of the stickers added to the video, if applicable
-    public let addedStickerFileIds: [Int]
+    internal let addedStickerFileIds: [Int]
 
     /// Video caption; 0-GetOption("message_caption_length_max") characters
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// Duration of the video, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// Video height
-    public let height: Int
+    internal let height: Int
 
     /// True, if the video should be tried to be streamed
-    public let supportsStreaming: Bool
+    internal let supportsStreaming: Bool
 
     /// Video thumbnail, if available
-    public let thumbnail: InputThumbnail
+    internal let thumbnail: InputThumbnail
 
     /// Video TTL (Time To Live), in seconds (0-60). A non-zero TTL can be specified only in private chats
-    public let ttl: Int
+    internal let ttl: Int
 
     /// Video to be sent
-    public let video: InputFile
+    internal let video: InputFile
 
     /// Video width
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         addedStickerFileIds: [Int],
         caption: FormattedText,
         duration: Int,
@@ -451,20 +451,20 @@ public struct InputMessageVideo: Codable {
 }
 
 /// A video note message
-public struct InputMessageVideoNote: Codable {
+internal struct InputMessageVideoNote: Codable {
     /// Duration of the video, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// Video width and height; must be positive and not greater than 640
-    public let length: Int
+    internal let length: Int
 
     /// Video thumbnail, if available
-    public let thumbnail: InputThumbnail
+    internal let thumbnail: InputThumbnail
 
     /// Video note to be sent
-    public let videoNote: InputFile
+    internal let videoNote: InputFile
 
-    public init(
+    internal init(
         duration: Int,
         length: Int,
         thumbnail: InputThumbnail,
@@ -478,20 +478,20 @@ public struct InputMessageVideoNote: Codable {
 }
 
 /// A voice note message
-public struct InputMessageVoiceNote: Codable {
+internal struct InputMessageVoiceNote: Codable {
     /// Voice note caption; 0-GetOption("message_caption_length_max") characters
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// Duration of the voice note, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// Voice note to be sent
-    public let voiceNote: InputFile
+    internal let voiceNote: InputFile
 
     /// Waveform representation of the voice note, in 5-bit format
-    public let waveform: Data
+    internal let waveform: Data
 
-    public init(
+    internal init(
         caption: FormattedText,
         duration: Int,
         voiceNote: InputFile,
@@ -505,20 +505,20 @@ public struct InputMessageVoiceNote: Codable {
 }
 
 /// A message with a location
-public struct InputMessageLocation: Codable {
+internal struct InputMessageLocation: Codable {
     /// For live locations, a direction in which the location moves, in degrees; 1-360. Pass 0 if unknown
-    public let heading: Int
+    internal let heading: Int
 
     /// Period for which the location can be updated, in seconds; should be between 60 and 86400 for a live location and 0 otherwise
-    public let livePeriod: Int
+    internal let livePeriod: Int
 
     /// Location to be sent
-    public let location: Location
+    internal let location: Location
 
     /// For live locations, a maximum distance to another chat member for proximity alerts, in meters (0-100000). Pass 0 if the notification is disabled. Can't be enabled in channels and Saved Messages
-    public let proximityAlertRadius: Int
+    internal let proximityAlertRadius: Int
 
-    public init(
+    internal init(
         heading: Int,
         livePeriod: Int,
         location: Location,
@@ -532,34 +532,34 @@ public struct InputMessageLocation: Codable {
 }
 
 /// A message with information about a venue
-public struct InputMessageVenue: Codable {
+internal struct InputMessageVenue: Codable {
     /// Venue to send
-    public let venue: Venue
+    internal let venue: Venue
 
-    public init(venue: Venue) {
+    internal init(venue: Venue) {
         self.venue = venue
     }
 }
 
 /// A message containing a user contact
-public struct InputMessageContact: Codable {
+internal struct InputMessageContact: Codable {
     /// Contact to send
-    public let contact: Contact
+    internal let contact: Contact
 
-    public init(contact: Contact) {
+    internal init(contact: Contact) {
         self.contact = contact
     }
 }
 
 /// A dice message
-public struct InputMessageDice: Codable {
+internal struct InputMessageDice: Codable {
     /// True, if a chat message draft should be deleted
-    public let clearDraft: Bool
+    internal let clearDraft: Bool
 
     /// Emoji on which the dice throw animation is based
-    public let emoji: String
+    internal let emoji: String
 
-    public init(
+    internal init(
         clearDraft: Bool,
         emoji: String
     ) {
@@ -569,14 +569,14 @@ public struct InputMessageDice: Codable {
 }
 
 /// A message with a game; not supported for channels or secret chats
-public struct InputMessageGame: Codable {
+internal struct InputMessageGame: Codable {
     /// User identifier of the bot that owns the game
-    public let botUserId: Int
+    internal let botUserId: Int
 
     /// Short name of the game
-    public let gameShortName: String
+    internal let gameShortName: String
 
-    public init(
+    internal init(
         botUserId: Int,
         gameShortName: String
     ) {
@@ -586,40 +586,40 @@ public struct InputMessageGame: Codable {
 }
 
 /// A message with an invoice; can be used only by bots
-public struct InputMessageInvoice: Codable {
-    public let description: String
+internal struct InputMessageInvoice: Codable {
+    internal let description: String
 
     /// Invoice
-    public let invoice: Invoice
+    internal let invoice: Invoice
 
     /// The invoice payload
-    public let payload: Data
+    internal let payload: Data
 
     /// Product photo height
-    public let photoHeight: Int
+    internal let photoHeight: Int
 
     /// Product photo size
-    public let photoSize: Int
+    internal let photoSize: Int
 
     /// Product photo URL; optional
-    public let photoUrl: String
+    internal let photoUrl: String
 
     /// Product photo width
-    public let photoWidth: Int
+    internal let photoWidth: Int
 
     /// JSON-encoded data about the invoice, which will be shared with the payment provider
-    public let providerData: String
+    internal let providerData: String
 
     /// Payment provider token
-    public let providerToken: String
+    internal let providerToken: String
 
     /// Unique invoice bot deep link parameter for the generation of this invoice. If empty, it would be possible to pay directly from forwards of the invoice message
-    public let startParameter: String
+    internal let startParameter: String
 
     /// Product title; 1-32 characters
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         description: String,
         invoice: Invoice,
         payload: Data,
@@ -647,29 +647,29 @@ public struct InputMessageInvoice: Codable {
 }
 
 /// A message with a poll. Polls can't be sent to secret chats. Polls can be sent only to a private chat with a bot
-public struct InputMessagePoll: Codable {
+internal struct InputMessagePoll: Codable {
     /// Point in time (Unix timestamp) when the poll will be automatically closed; for bots only
-    public let closeDate: Int
+    internal let closeDate: Int
 
     /// True, if the poll voters are anonymous. Non-anonymous polls can't be sent or forwarded to channels
-    public let isAnonymous: Bool
+    internal let isAnonymous: Bool
 
     /// True, if the poll needs to be sent already closed; for bots only
-    public let isClosed: Bool
+    internal let isClosed: Bool
 
     /// Amount of time the poll will be active after creation, in seconds; for bots only
-    public let openPeriod: Int
+    internal let openPeriod: Int
 
     /// List of poll answer options, 2-10 strings 1-100 characters each
-    public let options: [String]
+    internal let options: [String]
 
     /// Poll question; 1-255 characters (up to 300 characters for bots)
-    public let question: String
+    internal let question: String
 
     /// Type of the poll
-    public let type: PollType
+    internal let type: PollType
 
-    public init(
+    internal init(
         closeDate: Int,
         isAnonymous: Bool,
         isClosed: Bool,
@@ -689,20 +689,20 @@ public struct InputMessagePoll: Codable {
 }
 
 /// A forwarded message
-public struct InputMessageForwarded: Codable {
+internal struct InputMessageForwarded: Codable {
     /// Options to be used to copy content of the message without a link to the original message
-    public let copyOptions: MessageCopyOptions
+    internal let copyOptions: MessageCopyOptions
 
     /// Identifier for the chat this forwarded message came from
-    public let fromChatId: Int64
+    internal let fromChatId: Int64
 
     /// True, if a game message should be shared within a launched game; applies only to game messages
-    public let inGameShare: Bool
+    internal let inGameShare: Bool
 
     /// Identifier of the message to forward
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         copyOptions: MessageCopyOptions,
         fromChatId: Int64,
         inGameShare: Bool,

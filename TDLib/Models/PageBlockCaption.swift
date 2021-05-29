@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains a caption of an instant view web page block, consisting of a text and a trailing credit
-public struct PageBlockCaption: Codable {
+internal struct PageBlockCaption: Codable {
     /// Block credit (like HTML tag <cite>)
-    public let credit: RichText
+    internal let credit: RichText
 
     /// Content of the caption
-    public let text: RichText
+    internal let text: RichText
 
-    public init(
+    internal init(
         credit: RichText,
         text: RichText
     ) {

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sends a custom request; for bots only
-public struct SendCustomRequest: Codable {
+internal struct SendCustomRequest: Codable {
     /// The method name
-    public let method: String
+    internal let method: String
 
     /// JSON-serialized method parameters
-    public let parameters: String
+    internal let parameters: String
 
-    public init(
+    internal init(
         method: String,
         parameters: String
     ) {

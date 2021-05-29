@@ -8,26 +8,26 @@
 import Foundation
 
 /// Describes a venue
-public struct Venue: Codable {
+internal struct Venue: Codable {
     /// Venue address; as defined by the sender
-    public let address: String
+    internal let address: String
 
     /// Identifier of the venue in the provider database; as defined by the sender
-    public let id: String
+    internal let id: String
 
     /// Venue location; as defined by the sender
-    public let location: Location
+    internal let location: Location
 
     /// Provider of the venue database; as defined by the sender. Currently only "foursquare" and "gplaces" (Google Places) need to be supported
-    public let provider: String
+    internal let provider: String
 
     /// Venue name; as defined by the sender
-    public let title: String
+    internal let title: String
 
     /// Type of the venue in the provider database; as defined by the sender
-    public let type: String
+    internal let type: String
 
-    public init(
+    internal init(
         address: String,
         id: String,
         location: Location,

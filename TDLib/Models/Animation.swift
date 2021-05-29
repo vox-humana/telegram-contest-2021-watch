@@ -8,35 +8,35 @@
 import Foundation
 
 /// Describes an animation file. The animation must be encoded in GIF or MPEG4 format
-public struct Animation: Codable {
+internal struct Animation: Codable {
     /// File containing the animation
-    public let animation: File
+    internal let animation: File
 
     /// Duration of the animation, in seconds; as defined by the sender
-    public let duration: Int
+    internal let duration: Int
 
     /// Original name of the file; as defined by the sender
-    public let fileName: String
+    internal let fileName: String
 
     /// True, if stickers were added to the animation. The list of corresponding sticker set can be received using getAttachedStickerSets
-    public let hasStickers: Bool
+    internal let hasStickers: Bool
 
     /// Height of the animation
-    public let height: Int
+    internal let height: Int
 
     /// MIME type of the file, usually "image/gif" or "video/mp4"
-    public let mimeType: String
+    internal let mimeType: String
 
     /// Animation minithumbnail; may be null
-    public let minithumbnail: Minithumbnail?
+    internal let minithumbnail: Minithumbnail?
 
     /// Animation thumbnail in JPEG or MPEG4 format; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// Width of the animation
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         animation: File,
         duration: Int,
         fileName: String,

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Edits existing chat filter. Returns information about the edited chat filter
-public struct EditChatFilter: Codable {
+internal struct EditChatFilter: Codable {
     /// Chat filter identifier
-    public let chatFilterId: Int
+    internal let chatFilterId: Int
 
     /// The edited chat filter
-    public let filter: ChatFilter
+    internal let filter: ChatFilter
 
-    public init(
+    internal init(
         chatFilterId: Int,
         filter: ChatFilter
     ) {

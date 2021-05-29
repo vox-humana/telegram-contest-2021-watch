@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of a poll
-public enum PollType: Codable {
+internal enum PollType: Codable {
     /// A regular poll
     case pollTypeRegular(PollTypeRegular)
 
@@ -20,7 +20,7 @@ public enum PollType: Codable {
         case pollTypeQuiz
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum PollType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .pollTypeRegular(value):
@@ -47,24 +47,24 @@ public enum PollType: Codable {
 }
 
 /// A regular poll
-public struct PollTypeRegular: Codable {
+internal struct PollTypeRegular: Codable {
     /// True, if multiple answer options can be chosen simultaneously
-    public let allowMultipleAnswers: Bool
+    internal let allowMultipleAnswers: Bool
 
-    public init(allowMultipleAnswers: Bool) {
+    internal init(allowMultipleAnswers: Bool) {
         self.allowMultipleAnswers = allowMultipleAnswers
     }
 }
 
 /// A poll in quiz mode, which has exactly one correct answer option and can be answered only once
-public struct PollTypeQuiz: Codable {
+internal struct PollTypeQuiz: Codable {
     /// 0-based identifier of the correct answer option; -1 for a yet unanswered poll
-    public let correctOptionId: Int
+    internal let correctOptionId: Int
 
     /// Text that is shown when the user chooses an incorrect answer or taps on the lamp icon; 0-200 characters with at most 2 line feeds; empty for a yet unanswered poll
-    public let explanation: FormattedText
+    internal let explanation: FormattedText
 
-    public init(
+    internal init(
         correctOptionId: Int,
         explanation: FormattedText
     ) {

@@ -8,20 +8,20 @@
 import Foundation
 
 /// Represents a thumbnail
-public struct Thumbnail: Codable {
+internal struct Thumbnail: Codable {
     /// The thumbnail
-    public let file: File
+    internal let file: File
 
     /// Thumbnail format
-    public let format: ThumbnailFormat
+    internal let format: ThumbnailFormat
 
     /// Thumbnail height
-    public let height: Int
+    internal let height: Int
 
     /// Thumbnail width
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         file: File,
         format: ThumbnailFormat,
         height: Int,

@@ -37,15 +37,17 @@ public enum MessageSenderState {
 }
 
 public struct ChatState {
-    public init(id: ChatId, title: String, photo: LocalPhotoState?) {
+    public init(id: ChatId, title: String, photo: LocalPhotoState?, lastMessageText: String) {
         self.id = id
         self.title = title
         self.photo = photo
+        self.lastMessageText = lastMessageText
     }
 
     let id: ChatId
     let title: String
     let photo: LocalPhotoState?
+    let lastMessageText: String
 }
 
 public struct MessageState {

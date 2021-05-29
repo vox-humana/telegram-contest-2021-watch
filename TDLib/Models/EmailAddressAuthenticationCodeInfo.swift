@@ -8,14 +8,14 @@
 import Foundation
 
 /// Information about the email address authentication code that was sent
-public struct EmailAddressAuthenticationCodeInfo: Codable {
+internal struct EmailAddressAuthenticationCodeInfo: Codable {
     /// Pattern of the email address to which an authentication code was sent
-    public let emailAddressPattern: String
+    internal let emailAddressPattern: String
 
     /// Length of the code; 0 if unknown
-    public let length: Int
+    internal let length: Int
 
-    public init(
+    internal init(
         emailAddressPattern: String,
         length: Int
     ) {

@@ -2,10 +2,12 @@ import MapKit
 import SwiftUI
 
 public struct MessageCellView: View {
-    let message: MessageState
+    private let message: MessageState
+    private let fullView: Bool
 
-    public init(_ message: MessageState) {
+    public init(_ message: MessageState, fullView: Bool = false) {
         self.message = message
+        self.fullView = fullView // TODO: use for limiting width in chat
     }
 
     public var body: some View {

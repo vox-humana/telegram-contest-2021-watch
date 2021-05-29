@@ -8,14 +8,14 @@
 import Foundation
 
 /// Toggles whether the current user will receive a notification when the group call will start; scheduled group calls only
-public struct ToggleGroupCallEnabledStartNotification: Codable {
+internal struct ToggleGroupCallEnabledStartNotification: Codable {
     /// New value of the enabled_start_notification setting
-    public let enabledStartNotification: Bool
+    internal let enabledStartNotification: Bool
 
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(
+    internal init(
         enabledStartNotification: Bool,
         groupCallId: Int
     ) {

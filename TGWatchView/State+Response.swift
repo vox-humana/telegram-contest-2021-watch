@@ -145,7 +145,8 @@ extension ChatState {
         self.init(
             id: response.id,
             title: response.title,
-            photo: response.photo.map(LocalPhotoState.init(chatPhoto:))
+            photo: response.photo.map(LocalPhotoState.init(chatPhoto:)),
+            lastMessageText: response.lastMessage?.lastMessageText ?? ""
         )
     }
 }
@@ -183,11 +184,13 @@ extension MessageState {
 }
 
 extension MessageContentState {
+    // > Viewing messages in chats, including text messages and all types of attachments:
+    // > photos, videos, files, voice and video messages, locations, contacts, static and animated stickers, polls and quizzes.
     init?(_ message: MessageContent) {
         switch message {
         case let .messageText(text):
             self = .text(text.text.text)
-        case let .messageAnimation:
+        case .messageAnimation:
             return nil
         case let .messageAudio(audio):
             self = .audio(.init(audio))

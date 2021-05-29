@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a group call join response
-public enum GroupCallJoinResponse: Codable {
+internal enum GroupCallJoinResponse: Codable {
     /// Contains data needed to join the group call with WebRTC
     case groupCallJoinResponseWebrtc(GroupCallJoinResponseWebrtc)
 
@@ -20,7 +20,7 @@ public enum GroupCallJoinResponse: Codable {
         case groupCallJoinResponseStream
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -32,7 +32,7 @@ public enum GroupCallJoinResponse: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .groupCallJoinResponseWebrtc(value):
@@ -45,14 +45,14 @@ public enum GroupCallJoinResponse: Codable {
 }
 
 /// Contains data needed to join the group call with WebRTC
-public struct GroupCallJoinResponseWebrtc: Codable {
+internal struct GroupCallJoinResponseWebrtc: Codable {
     /// Join response candidates to pass to tgcalls
-    public let candidates: [GroupCallJoinResponseCandidate]
+    internal let candidates: [GroupCallJoinResponseCandidate]
 
     /// Group call payload to pass to tgcalls
-    public let payload: GroupCallPayload
+    internal let payload: GroupCallPayload
 
-    public init(
+    internal init(
         candidates: [GroupCallJoinResponseCandidate],
         payload: GroupCallPayload
     ) {

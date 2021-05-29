@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a part of a file
-public struct FilePart: Codable {
+internal struct FilePart: Codable {
     /// File bytes
-    public let data: Data
+    internal let data: Data
 
-    public init(data: Data) {
+    internal init(data: Data) {
         self.data = data
     }
 }

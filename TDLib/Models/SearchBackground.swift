@@ -8,11 +8,11 @@
 import Foundation
 
 /// Searches for a background by its name
-public struct SearchBackground: Codable {
+internal struct SearchBackground: Codable {
     /// The name of the background
-    public let name: String
+    internal let name: String
 
-    public init(name: String) {
+    internal init(name: String) {
         self.name = name
     }
 }

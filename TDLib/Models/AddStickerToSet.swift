@@ -8,17 +8,17 @@
 import Foundation
 
 /// Adds a new sticker to a set; for bots only. Returns the sticker set
-public struct AddStickerToSet: Codable {
+internal struct AddStickerToSet: Codable {
     /// Sticker set name
-    public let name: String
+    internal let name: String
 
     /// Sticker to add to the set
-    public let sticker: InputSticker
+    internal let sticker: InputSticker
 
     /// Sticker set owner
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         name: String,
         sticker: InputSticker,
         userId: Int

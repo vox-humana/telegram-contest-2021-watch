@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a user contact
-public struct Contact: Codable {
+internal struct Contact: Codable {
     /// First name of the user; 1-255 characters in length
-    public let firstName: String
+    internal let firstName: String
 
     /// Last name of the user
-    public let lastName: String
+    internal let lastName: String
 
     /// Phone number of the user
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Identifier of the user, if known; otherwise 0
-    public let userId: Int
+    internal let userId: Int
 
     /// Additional data about the user in a form of vCard; 0-2048 bytes in length
-    public let vcard: String
+    internal let vcard: String
 
-    public init(
+    internal init(
         firstName: String,
         lastName: String,
         phoneNumber: String,

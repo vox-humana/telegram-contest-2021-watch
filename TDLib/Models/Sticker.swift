@@ -8,38 +8,38 @@
 import Foundation
 
 /// Describes a sticker
-public struct Sticker: Codable {
+internal struct Sticker: Codable {
     /// Emoji corresponding to the sticker
-    public let emoji: String
+    internal let emoji: String
 
     /// Sticker height; as defined by the sender
-    public let height: Int
+    internal let height: Int
 
     /// True, if the sticker is an animated sticker in TGS format
-    public let isAnimated: Bool
+    internal let isAnimated: Bool
 
     /// True, if the sticker is a mask
-    public let isMask: Bool
+    internal let isMask: Bool
 
     /// Position where the mask should be placed; may be null
-    public let maskPosition: MaskPosition?
+    internal let maskPosition: MaskPosition?
 
     /// Sticker's outline represented as a list of closed vector paths; may be empty. The coordinate system origin is in the upper-left corner
-    public let outline: [ClosedVectorPath]
+    internal let outline: [ClosedVectorPath]
 
     /// The identifier of the sticker set to which the sticker belongs; 0 if none
-    public let setId: TdInt64
+    internal let setId: TdInt64
 
     /// File containing the sticker
-    public let sticker: File
+    internal let sticker: File
 
     /// Sticker thumbnail in WEBP or JPEG format; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// Sticker width; as defined by the sender
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         emoji: String,
         height: Int,
         isAnimated: Bool,

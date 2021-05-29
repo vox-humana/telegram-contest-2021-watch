@@ -8,13 +8,13 @@
 import Foundation
 
 /// Describes a recommended chat filter
-public struct RecommendedChatFilter: Codable {
-    public let description: String
+internal struct RecommendedChatFilter: Codable {
+    internal let description: String
 
     /// The chat filter
-    public let filter: ChatFilter
+    internal let filter: ChatFilter
 
-    public init(
+    internal init(
         description: String,
         filter: ChatFilter
     ) {

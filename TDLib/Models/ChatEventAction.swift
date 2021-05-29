@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a chat event
-public enum ChatEventAction: Codable {
+internal enum ChatEventAction: Codable {
     /// A message was edited
     case chatEventMessageEdited(ChatEventMessageEdited)
 
@@ -140,7 +140,7 @@ public enum ChatEventAction: Codable {
         case chatEventVoiceChatMuteNewParticipantsToggled
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -241,7 +241,7 @@ public enum ChatEventAction: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .chatEventMessageEdited(value):
@@ -343,14 +343,14 @@ public enum ChatEventAction: Codable {
 }
 
 /// A message was edited
-public struct ChatEventMessageEdited: Codable {
+internal struct ChatEventMessageEdited: Codable {
     /// The message after it was edited
-    public let newMessage: Message
+    internal let newMessage: Message
 
     /// The original message before the edit
-    public let oldMessage: Message
+    internal let oldMessage: Message
 
-    public init(
+    internal init(
         newMessage: Message,
         oldMessage: Message
     ) {
@@ -360,64 +360,64 @@ public struct ChatEventMessageEdited: Codable {
 }
 
 /// A message was deleted
-public struct ChatEventMessageDeleted: Codable {
+internal struct ChatEventMessageDeleted: Codable {
     /// Deleted message
-    public let message: Message
+    internal let message: Message
 
-    public init(message: Message) {
+    internal init(message: Message) {
         self.message = message
     }
 }
 
 /// A poll in a message was stopped
-public struct ChatEventPollStopped: Codable {
+internal struct ChatEventPollStopped: Codable {
     /// The message with the poll
-    public let message: Message
+    internal let message: Message
 
-    public init(message: Message) {
+    internal init(message: Message) {
         self.message = message
     }
 }
 
 /// A message was pinned
-public struct ChatEventMessagePinned: Codable {
+internal struct ChatEventMessagePinned: Codable {
     /// Pinned message
-    public let message: Message
+    internal let message: Message
 
-    public init(message: Message) {
+    internal init(message: Message) {
         self.message = message
     }
 }
 
 /// A message was unpinned
-public struct ChatEventMessageUnpinned: Codable {
+internal struct ChatEventMessageUnpinned: Codable {
     /// Unpinned message
-    public let message: Message
+    internal let message: Message
 
-    public init(message: Message) {
+    internal init(message: Message) {
         self.message = message
     }
 }
 
 /// A new member joined the chat by an invite link
-public struct ChatEventMemberJoinedByInviteLink: Codable {
+internal struct ChatEventMemberJoinedByInviteLink: Codable {
     /// Invite link used to join the chat
-    public let inviteLink: ChatInviteLink
+    internal let inviteLink: ChatInviteLink
 
-    public init(inviteLink: ChatInviteLink) {
+    internal init(inviteLink: ChatInviteLink) {
         self.inviteLink = inviteLink
     }
 }
 
 /// A new chat member was invited
-public struct ChatEventMemberInvited: Codable {
+internal struct ChatEventMemberInvited: Codable {
     /// New member status
-    public let status: ChatMemberStatus
+    internal let status: ChatMemberStatus
 
     /// New member user identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         status: ChatMemberStatus,
         userId: Int
     ) {
@@ -427,17 +427,17 @@ public struct ChatEventMemberInvited: Codable {
 }
 
 /// A chat member has gained/lost administrator status, or the list of their administrator privileges has changed
-public struct ChatEventMemberPromoted: Codable {
+internal struct ChatEventMemberPromoted: Codable {
     /// New status of the chat member
-    public let newStatus: ChatMemberStatus
+    internal let newStatus: ChatMemberStatus
 
     /// Previous status of the chat member
-    public let oldStatus: ChatMemberStatus
+    internal let oldStatus: ChatMemberStatus
 
     /// Affected chat member user identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         newStatus: ChatMemberStatus,
         oldStatus: ChatMemberStatus,
         userId: Int
@@ -449,17 +449,17 @@ public struct ChatEventMemberPromoted: Codable {
 }
 
 /// A chat member was restricted/unrestricted or banned/unbanned, or the list of their restrictions has changed
-public struct ChatEventMemberRestricted: Codable {
+internal struct ChatEventMemberRestricted: Codable {
     /// Affected chat member identifier
-    public let memberId: MessageSender
+    internal let memberId: MessageSender
 
     /// New status of the chat member
-    public let newStatus: ChatMemberStatus
+    internal let newStatus: ChatMemberStatus
 
     /// Previous status of the chat member
-    public let oldStatus: ChatMemberStatus
+    internal let oldStatus: ChatMemberStatus
 
-    public init(
+    internal init(
         memberId: MessageSender,
         newStatus: ChatMemberStatus,
         oldStatus: ChatMemberStatus
@@ -471,14 +471,14 @@ public struct ChatEventMemberRestricted: Codable {
 }
 
 /// The chat title was changed
-public struct ChatEventTitleChanged: Codable {
+internal struct ChatEventTitleChanged: Codable {
     /// New chat title
-    public let newTitle: String
+    internal let newTitle: String
 
     /// Previous chat title
-    public let oldTitle: String
+    internal let oldTitle: String
 
-    public init(
+    internal init(
         newTitle: String,
         oldTitle: String
     ) {
@@ -488,14 +488,14 @@ public struct ChatEventTitleChanged: Codable {
 }
 
 /// The chat permissions was changed
-public struct ChatEventPermissionsChanged: Codable {
+internal struct ChatEventPermissionsChanged: Codable {
     /// New chat permissions
-    public let newPermissions: ChatPermissions
+    internal let newPermissions: ChatPermissions
 
     /// Previous chat permissions
-    public let oldPermissions: ChatPermissions
+    internal let oldPermissions: ChatPermissions
 
-    public init(
+    internal init(
         newPermissions: ChatPermissions,
         oldPermissions: ChatPermissions
     ) {
@@ -505,14 +505,14 @@ public struct ChatEventPermissionsChanged: Codable {
 }
 
 /// The chat description was changed
-public struct ChatEventDescriptionChanged: Codable {
+internal struct ChatEventDescriptionChanged: Codable {
     /// New chat description
-    public let newDescription: String
+    internal let newDescription: String
 
     /// Previous chat description
-    public let oldDescription: String
+    internal let oldDescription: String
 
-    public init(
+    internal init(
         newDescription: String,
         oldDescription: String
     ) {
@@ -522,14 +522,14 @@ public struct ChatEventDescriptionChanged: Codable {
 }
 
 /// The chat username was changed
-public struct ChatEventUsernameChanged: Codable {
+internal struct ChatEventUsernameChanged: Codable {
     /// New chat username
-    public let newUsername: String
+    internal let newUsername: String
 
     /// Previous chat username
-    public let oldUsername: String
+    internal let oldUsername: String
 
-    public init(
+    internal init(
         newUsername: String,
         oldUsername: String
     ) {
@@ -539,14 +539,14 @@ public struct ChatEventUsernameChanged: Codable {
 }
 
 /// The chat photo was changed
-public struct ChatEventPhotoChanged: Codable {
+internal struct ChatEventPhotoChanged: Codable {
     /// New chat photo value; may be null
-    public let newPhoto: ChatPhoto?
+    internal let newPhoto: ChatPhoto?
 
     /// Previous chat photo value; may be null
-    public let oldPhoto: ChatPhoto?
+    internal let oldPhoto: ChatPhoto?
 
-    public init(
+    internal init(
         newPhoto: ChatPhoto?,
         oldPhoto: ChatPhoto?
     ) {
@@ -556,24 +556,24 @@ public struct ChatEventPhotoChanged: Codable {
 }
 
 /// The can_invite_users permission of a supergroup chat was toggled
-public struct ChatEventInvitesToggled: Codable {
+internal struct ChatEventInvitesToggled: Codable {
     /// New value of can_invite_users permission
-    public let canInviteUsers: Bool
+    internal let canInviteUsers: Bool
 
-    public init(canInviteUsers: Bool) {
+    internal init(canInviteUsers: Bool) {
         self.canInviteUsers = canInviteUsers
     }
 }
 
 /// The linked chat of a supergroup was changed
-public struct ChatEventLinkedChatChanged: Codable {
+internal struct ChatEventLinkedChatChanged: Codable {
     /// New supergroup linked chat identifier
-    public let newLinkedChatId: Int64
+    internal let newLinkedChatId: Int64
 
     /// Previous supergroup linked chat identifier
-    public let oldLinkedChatId: Int64
+    internal let oldLinkedChatId: Int64
 
-    public init(
+    internal init(
         newLinkedChatId: Int64,
         oldLinkedChatId: Int64
     ) {
@@ -583,14 +583,14 @@ public struct ChatEventLinkedChatChanged: Codable {
 }
 
 /// The slow_mode_delay setting of a supergroup was changed
-public struct ChatEventSlowModeDelayChanged: Codable {
+internal struct ChatEventSlowModeDelayChanged: Codable {
     /// New value of slow_mode_delay
-    public let newSlowModeDelay: Int
+    internal let newSlowModeDelay: Int
 
     /// Previous value of slow_mode_delay
-    public let oldSlowModeDelay: Int
+    internal let oldSlowModeDelay: Int
 
-    public init(
+    internal init(
         newSlowModeDelay: Int,
         oldSlowModeDelay: Int
     ) {
@@ -600,14 +600,14 @@ public struct ChatEventSlowModeDelayChanged: Codable {
 }
 
 /// The message TTL setting was changed
-public struct ChatEventMessageTtlSettingChanged: Codable {
+internal struct ChatEventMessageTtlSettingChanged: Codable {
     /// New value of message_ttl_setting
-    public let newMessageTtlSetting: Int
+    internal let newMessageTtlSetting: Int
 
     /// Previous value of message_ttl_setting
-    public let oldMessageTtlSetting: Int
+    internal let oldMessageTtlSetting: Int
 
-    public init(
+    internal init(
         newMessageTtlSetting: Int,
         oldMessageTtlSetting: Int
     ) {
@@ -617,24 +617,24 @@ public struct ChatEventMessageTtlSettingChanged: Codable {
 }
 
 /// The sign_messages setting of a channel was toggled
-public struct ChatEventSignMessagesToggled: Codable {
+internal struct ChatEventSignMessagesToggled: Codable {
     /// New value of sign_messages
-    public let signMessages: Bool
+    internal let signMessages: Bool
 
-    public init(signMessages: Bool) {
+    internal init(signMessages: Bool) {
         self.signMessages = signMessages
     }
 }
 
 /// The supergroup sticker set was changed
-public struct ChatEventStickerSetChanged: Codable {
+internal struct ChatEventStickerSetChanged: Codable {
     /// New identifier of the chat sticker set; 0 if none
-    public let newStickerSetId: TdInt64
+    internal let newStickerSetId: TdInt64
 
     /// Previous identifier of the chat sticker set; 0 if none
-    public let oldStickerSetId: TdInt64
+    internal let oldStickerSetId: TdInt64
 
-    public init(
+    internal init(
         newStickerSetId: TdInt64,
         oldStickerSetId: TdInt64
     ) {
@@ -644,14 +644,14 @@ public struct ChatEventStickerSetChanged: Codable {
 }
 
 /// The supergroup location was changed
-public struct ChatEventLocationChanged: Codable {
+internal struct ChatEventLocationChanged: Codable {
     /// New location; may be null
-    public let newLocation: ChatLocation?
+    internal let newLocation: ChatLocation?
 
     /// Previous location; may be null
-    public let oldLocation: ChatLocation?
+    internal let oldLocation: ChatLocation?
 
-    public init(
+    internal init(
         newLocation: ChatLocation?,
         oldLocation: ChatLocation?
     ) {
@@ -661,24 +661,24 @@ public struct ChatEventLocationChanged: Codable {
 }
 
 /// The is_all_history_available setting of a supergroup was toggled
-public struct ChatEventIsAllHistoryAvailableToggled: Codable {
+internal struct ChatEventIsAllHistoryAvailableToggled: Codable {
     /// New value of is_all_history_available
-    public let isAllHistoryAvailable: Bool
+    internal let isAllHistoryAvailable: Bool
 
-    public init(isAllHistoryAvailable: Bool) {
+    internal init(isAllHistoryAvailable: Bool) {
         self.isAllHistoryAvailable = isAllHistoryAvailable
     }
 }
 
 /// A chat invite link was edited
-public struct ChatEventInviteLinkEdited: Codable {
+internal struct ChatEventInviteLinkEdited: Codable {
     /// New information about the invite link
-    public let newInviteLink: ChatInviteLink
+    internal let newInviteLink: ChatInviteLink
 
     /// Previous information about the invite link
-    public let oldInviteLink: ChatInviteLink
+    internal let oldInviteLink: ChatInviteLink
 
-    public init(
+    internal init(
         newInviteLink: ChatInviteLink,
         oldInviteLink: ChatInviteLink
     ) {
@@ -688,54 +688,54 @@ public struct ChatEventInviteLinkEdited: Codable {
 }
 
 /// A chat invite link was revoked
-public struct ChatEventInviteLinkRevoked: Codable {
+internal struct ChatEventInviteLinkRevoked: Codable {
     /// The invite link
-    public let inviteLink: ChatInviteLink
+    internal let inviteLink: ChatInviteLink
 
-    public init(inviteLink: ChatInviteLink) {
+    internal init(inviteLink: ChatInviteLink) {
         self.inviteLink = inviteLink
     }
 }
 
 /// A revoked chat invite link was deleted
-public struct ChatEventInviteLinkDeleted: Codable {
+internal struct ChatEventInviteLinkDeleted: Codable {
     /// The invite link
-    public let inviteLink: ChatInviteLink
+    internal let inviteLink: ChatInviteLink
 
-    public init(inviteLink: ChatInviteLink) {
+    internal init(inviteLink: ChatInviteLink) {
         self.inviteLink = inviteLink
     }
 }
 
 /// A voice chat was created
-public struct ChatEventVoiceChatCreated: Codable {
+internal struct ChatEventVoiceChatCreated: Codable {
     /// Identifier of the voice chat. The voice chat can be received through the method getGroupCall
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(groupCallId: Int) {
+    internal init(groupCallId: Int) {
         self.groupCallId = groupCallId
     }
 }
 
 /// A voice chat was discarded
-public struct ChatEventVoiceChatDiscarded: Codable {
+internal struct ChatEventVoiceChatDiscarded: Codable {
     /// Identifier of the voice chat. The voice chat can be received through the method getGroupCall
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(groupCallId: Int) {
+    internal init(groupCallId: Int) {
         self.groupCallId = groupCallId
     }
 }
 
 /// A voice chat participant was muted or unmuted
-public struct ChatEventVoiceChatParticipantIsMutedToggled: Codable {
+internal struct ChatEventVoiceChatParticipantIsMutedToggled: Codable {
     /// New value of is_muted
-    public let isMuted: Bool
+    internal let isMuted: Bool
 
     /// Identifier of the affected group call participant
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
-    public init(
+    internal init(
         isMuted: Bool,
         participantId: MessageSender
     ) {
@@ -745,14 +745,14 @@ public struct ChatEventVoiceChatParticipantIsMutedToggled: Codable {
 }
 
 /// A voice chat participant volume level was changed
-public struct ChatEventVoiceChatParticipantVolumeLevelChanged: Codable {
+internal struct ChatEventVoiceChatParticipantVolumeLevelChanged: Codable {
     /// Identifier of the affected group call participant
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
     /// New value of volume_level; 1-20000 in hundreds of percents
-    public let volumeLevel: Int
+    internal let volumeLevel: Int
 
-    public init(
+    internal init(
         participantId: MessageSender,
         volumeLevel: Int
     ) {
@@ -762,11 +762,11 @@ public struct ChatEventVoiceChatParticipantVolumeLevelChanged: Codable {
 }
 
 /// The mute_new_participants setting of a voice chat was toggled
-public struct ChatEventVoiceChatMuteNewParticipantsToggled: Codable {
+internal struct ChatEventVoiceChatMuteNewParticipantsToggled: Codable {
     /// New value of the mute_new_participants setting
-    public let muteNewParticipants: Bool
+    internal let muteNewParticipants: Bool
 
-    public init(muteNewParticipants: Bool) {
+    internal init(muteNewParticipants: Bool) {
         self.muteNewParticipants = muteNewParticipants
     }
 }

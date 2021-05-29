@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns up to 20 recently used inline bots in the order of their last usage
-public struct GetRecentInlineBots: Codable {
-    public init() {}
+internal struct GetRecentInlineBots: Codable {
+    internal init() {}
 }

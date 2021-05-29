@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents result of checking whether a username can be set for a chat
-public enum CheckChatUsernameResult: Codable {
+internal enum CheckChatUsernameResult: Codable {
     /// The username can be set
     case checkChatUsernameResultOk
 
@@ -32,7 +32,7 @@ public enum CheckChatUsernameResult: Codable {
         case checkChatUsernameResultPublicGroupsUnavailable
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -49,7 +49,7 @@ public enum CheckChatUsernameResult: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .checkChatUsernameResultOk:

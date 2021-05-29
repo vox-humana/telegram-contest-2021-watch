@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of a proxy server
-public enum ProxyType: Codable {
+internal enum ProxyType: Codable {
     /// A SOCKS5 proxy server
     case proxyTypeSocks5(ProxyTypeSocks5)
 
@@ -24,7 +24,7 @@ public enum ProxyType: Codable {
         case proxyTypeMtproto
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -40,7 +40,7 @@ public enum ProxyType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .proxyTypeSocks5(value):
@@ -57,14 +57,14 @@ public enum ProxyType: Codable {
 }
 
 /// A SOCKS5 proxy server
-public struct ProxyTypeSocks5: Codable {
+internal struct ProxyTypeSocks5: Codable {
     /// Password for logging in; may be empty
-    public let password: String
+    internal let password: String
 
     /// Username for logging in; may be empty
-    public let username: String
+    internal let username: String
 
-    public init(
+    internal init(
         password: String,
         username: String
     ) {
@@ -74,17 +74,17 @@ public struct ProxyTypeSocks5: Codable {
 }
 
 /// A HTTP transparent proxy server
-public struct ProxyTypeHttp: Codable {
+internal struct ProxyTypeHttp: Codable {
     /// Pass true if the proxy supports only HTTP requests and doesn't support transparent TCP connections via HTTP CONNECT method
-    public let httpOnly: Bool
+    internal let httpOnly: Bool
 
     /// Password for logging in; may be empty
-    public let password: String
+    internal let password: String
 
     /// Username for logging in; may be empty
-    public let username: String
+    internal let username: String
 
-    public init(
+    internal init(
         httpOnly: Bool,
         password: String,
         username: String
@@ -96,11 +96,11 @@ public struct ProxyTypeHttp: Codable {
 }
 
 /// An MTProto proxy server
-public struct ProxyTypeMtproto: Codable {
+internal struct ProxyTypeMtproto: Codable {
     /// The proxy's secret in hexadecimal encoding
-    public let secret: String
+    internal let secret: String
 
-    public init(secret: String) {
+    internal init(secret: String) {
         self.secret = secret
     }
 }

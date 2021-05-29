@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns full information about a supergroup or a channel by its identifier, cached for up to 1 minute
-public struct GetSupergroupFullInfo: Codable {
+internal struct GetSupergroupFullInfo: Codable {
     /// Supergroup or channel identifier
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(supergroupId: Int) {
+    internal init(supergroupId: Int) {
         self.supergroupId = supergroupId
     }
 }

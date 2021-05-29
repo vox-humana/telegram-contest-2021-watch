@@ -8,17 +8,17 @@
 import Foundation
 
 /// Describes a voice chat
-public struct VoiceChat: Codable {
+internal struct VoiceChat: Codable {
     /// Default group call participant identifier to join the voice chat; may be null
-    public let defaultParticipantId: MessageSender?
+    internal let defaultParticipantId: MessageSender?
 
     /// Group call identifier of an active voice chat; 0 if none. Full informationa about the voice chat can be received through the method getGroupCall
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// True, if the voice chat has participants
-    public let hasParticipants: Bool
+    internal let hasParticipants: Bool
 
-    public init(
+    internal init(
         defaultParticipantId: MessageSender?,
         groupCallId: Int,
         hasParticipants: Bool

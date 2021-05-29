@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a block of an instant view web page
-public indirect enum PageBlock: Codable {
+internal indirect enum PageBlock: Codable {
     /// The title of a page
     case pageBlockTitle(PageBlockTitle)
 
@@ -128,7 +128,7 @@ public indirect enum PageBlock: Codable {
         case pageBlockMap
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -221,7 +221,7 @@ public indirect enum PageBlock: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .pageBlockTitle(value):
@@ -315,34 +315,34 @@ public indirect enum PageBlock: Codable {
 }
 
 /// The title of a page
-public struct PageBlockTitle: Codable {
+internal struct PageBlockTitle: Codable {
     /// Title
-    public let title: RichText
+    internal let title: RichText
 
-    public init(title: RichText) {
+    internal init(title: RichText) {
         self.title = title
     }
 }
 
 /// The subtitle of a page
-public struct PageBlockSubtitle: Codable {
+internal struct PageBlockSubtitle: Codable {
     /// Subtitle
-    public let subtitle: RichText
+    internal let subtitle: RichText
 
-    public init(subtitle: RichText) {
+    internal init(subtitle: RichText) {
         self.subtitle = subtitle
     }
 }
 
 /// The author and publishing date of a page
-public struct PageBlockAuthorDate: Codable {
+internal struct PageBlockAuthorDate: Codable {
     /// Author
-    public let author: RichText
+    internal let author: RichText
 
     /// Point in time (Unix timestamp) when the article was published; 0 if unknown
-    public let publishDate: Int
+    internal let publishDate: Int
 
-    public init(
+    internal init(
         author: RichText,
         publishDate: Int
     ) {
@@ -352,54 +352,54 @@ public struct PageBlockAuthorDate: Codable {
 }
 
 /// A header
-public struct PageBlockHeader: Codable {
+internal struct PageBlockHeader: Codable {
     /// Header
-    public let header: RichText
+    internal let header: RichText
 
-    public init(header: RichText) {
+    internal init(header: RichText) {
         self.header = header
     }
 }
 
 /// A subheader
-public struct PageBlockSubheader: Codable {
+internal struct PageBlockSubheader: Codable {
     /// Subheader
-    public let subheader: RichText
+    internal let subheader: RichText
 
-    public init(subheader: RichText) {
+    internal init(subheader: RichText) {
         self.subheader = subheader
     }
 }
 
 /// A kicker
-public struct PageBlockKicker: Codable {
+internal struct PageBlockKicker: Codable {
     /// Kicker
-    public let kicker: RichText
+    internal let kicker: RichText
 
-    public init(kicker: RichText) {
+    internal init(kicker: RichText) {
         self.kicker = kicker
     }
 }
 
 /// A text paragraph
-public struct PageBlockParagraph: Codable {
+internal struct PageBlockParagraph: Codable {
     /// Paragraph text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A preformatted text paragraph
-public struct PageBlockPreformatted: Codable {
+internal struct PageBlockPreformatted: Codable {
     /// Programming language for which the text should be formatted
-    public let language: String
+    internal let language: String
 
     /// Paragraph text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(
+    internal init(
         language: String,
         text: RichText
     ) {
@@ -409,44 +409,44 @@ public struct PageBlockPreformatted: Codable {
 }
 
 /// The footer of a page
-public struct PageBlockFooter: Codable {
+internal struct PageBlockFooter: Codable {
     /// Footer
-    public let footer: RichText
+    internal let footer: RichText
 
-    public init(footer: RichText) {
+    internal init(footer: RichText) {
         self.footer = footer
     }
 }
 
 /// An invisible anchor on a page, which can be used in a URL to open the page from the specified anchor
-public struct PageBlockAnchor: Codable {
+internal struct PageBlockAnchor: Codable {
     /// Name of the anchor
-    public let name: String
+    internal let name: String
 
-    public init(name: String) {
+    internal init(name: String) {
         self.name = name
     }
 }
 
 /// A list of data blocks
-public struct PageBlockList: Codable {
+internal struct PageBlockList: Codable {
     /// The items of the list
-    public let items: [PageBlockListItem]
+    internal let items: [PageBlockListItem]
 
-    public init(items: [PageBlockListItem]) {
+    internal init(items: [PageBlockListItem]) {
         self.items = items
     }
 }
 
 /// A block quote
-public struct PageBlockBlockQuote: Codable {
+internal struct PageBlockBlockQuote: Codable {
     /// Quote credit
-    public let credit: RichText
+    internal let credit: RichText
 
     /// Quote text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(
+    internal init(
         credit: RichText,
         text: RichText
     ) {
@@ -456,14 +456,14 @@ public struct PageBlockBlockQuote: Codable {
 }
 
 /// A pull quote
-public struct PageBlockPullQuote: Codable {
+internal struct PageBlockPullQuote: Codable {
     /// Quote credit
-    public let credit: RichText
+    internal let credit: RichText
 
     /// Quote text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(
+    internal init(
         credit: RichText,
         text: RichText
     ) {
@@ -473,17 +473,17 @@ public struct PageBlockPullQuote: Codable {
 }
 
 /// An animation
-public struct PageBlockAnimation: Codable {
+internal struct PageBlockAnimation: Codable {
     /// Animation file; may be null
-    public let animation: Animation?
+    internal let animation: Animation?
 
     /// Animation caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// True, if the animation should be played automatically
-    public let needAutoplay: Bool
+    internal let needAutoplay: Bool
 
-    public init(
+    internal init(
         animation: Animation?,
         caption: PageBlockCaption,
         needAutoplay: Bool
@@ -495,14 +495,14 @@ public struct PageBlockAnimation: Codable {
 }
 
 /// An audio file
-public struct PageBlockAudio: Codable {
+internal struct PageBlockAudio: Codable {
     /// Audio file; may be null
-    public let audio: Audio?
+    internal let audio: Audio?
 
     /// Audio file caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
-    public init(
+    internal init(
         audio: Audio?,
         caption: PageBlockCaption
     ) {
@@ -512,17 +512,17 @@ public struct PageBlockAudio: Codable {
 }
 
 /// A photo
-public struct PageBlockPhoto: Codable {
+internal struct PageBlockPhoto: Codable {
     /// Photo caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Photo file; may be null
-    public let photo: Photo?
+    internal let photo: Photo?
 
     /// URL that needs to be opened when the photo is clicked
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         caption: PageBlockCaption,
         photo: Photo?,
         url: String
@@ -534,20 +534,20 @@ public struct PageBlockPhoto: Codable {
 }
 
 /// A video
-public struct PageBlockVideo: Codable {
+internal struct PageBlockVideo: Codable {
     /// Video caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// True, if the video should be looped
-    public let isLooped: Bool
+    internal let isLooped: Bool
 
     /// True, if the video should be played automatically
-    public let needAutoplay: Bool
+    internal let needAutoplay: Bool
 
     /// Video file; may be null
-    public let video: Video?
+    internal let video: Video?
 
-    public init(
+    internal init(
         caption: PageBlockCaption,
         isLooped: Bool,
         needAutoplay: Bool,
@@ -561,14 +561,14 @@ public struct PageBlockVideo: Codable {
 }
 
 /// A voice note
-public struct PageBlockVoiceNote: Codable {
+internal struct PageBlockVoiceNote: Codable {
     /// Voice note caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Voice note; may be null
-    public let voiceNote: VoiceNote?
+    internal let voiceNote: VoiceNote?
 
-    public init(
+    internal init(
         caption: PageBlockCaption,
         voiceNote: VoiceNote?
     ) {
@@ -578,42 +578,42 @@ public struct PageBlockVoiceNote: Codable {
 }
 
 /// A page cover
-public struct PageBlockCover: Codable {
+internal struct PageBlockCover: Codable {
     /// Cover
-    public let cover: PageBlock
+    internal let cover: PageBlock
 
-    public init(cover: PageBlock) {
+    internal init(cover: PageBlock) {
         self.cover = cover
     }
 }
 
 /// An embedded web page
-public struct PageBlockEmbedded: Codable {
+internal struct PageBlockEmbedded: Codable {
     /// True, if scrolling should be allowed
-    public let allowScrolling: Bool
+    internal let allowScrolling: Bool
 
     /// Block caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Block height; 0 if unknown
-    public let height: Int
+    internal let height: Int
 
     /// HTML-markup of the embedded page
-    public let html: String
+    internal let html: String
 
     /// True, if the block should be full width
-    public let isFullWidth: Bool
+    internal let isFullWidth: Bool
 
     /// Poster photo, if available; may be null
-    public let posterPhoto: Photo?
+    internal let posterPhoto: Photo?
 
     /// Web page URL, if available
-    public let url: String
+    internal let url: String
 
     /// Block width; 0 if unknown
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         allowScrolling: Bool,
         caption: PageBlockCaption,
         height: Int,
@@ -635,26 +635,26 @@ public struct PageBlockEmbedded: Codable {
 }
 
 /// An embedded post
-public struct PageBlockEmbeddedPost: Codable {
+internal struct PageBlockEmbeddedPost: Codable {
     /// Post author
-    public let author: String
+    internal let author: String
 
     /// Post author photo; may be null
-    public let authorPhoto: Photo?
+    internal let authorPhoto: Photo?
 
     /// Post caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Point in time (Unix timestamp) when the post was created; 0 if unknown
-    public let date: Int
+    internal let date: Int
 
     /// Post content
-    public let pageBlocks: [PageBlock]
+    internal let pageBlocks: [PageBlock]
 
     /// Web page URL
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         author: String,
         authorPhoto: Photo?,
         caption: PageBlockCaption,
@@ -672,14 +672,14 @@ public struct PageBlockEmbeddedPost: Codable {
 }
 
 /// A collage
-public struct PageBlockCollage: Codable {
+internal struct PageBlockCollage: Codable {
     /// Block caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Collage item contents
-    public let pageBlocks: [PageBlock]
+    internal let pageBlocks: [PageBlock]
 
-    public init(
+    internal init(
         caption: PageBlockCaption,
         pageBlocks: [PageBlock]
     ) {
@@ -689,14 +689,14 @@ public struct PageBlockCollage: Codable {
 }
 
 /// A slideshow
-public struct PageBlockSlideshow: Codable {
+internal struct PageBlockSlideshow: Codable {
     /// Block caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Slideshow item contents
-    public let pageBlocks: [PageBlock]
+    internal let pageBlocks: [PageBlock]
 
-    public init(
+    internal init(
         caption: PageBlockCaption,
         pageBlocks: [PageBlock]
     ) {
@@ -706,17 +706,17 @@ public struct PageBlockSlideshow: Codable {
 }
 
 /// A link to a chat
-public struct PageBlockChatLink: Codable {
+internal struct PageBlockChatLink: Codable {
     /// Chat photo; may be null
-    public let photo: ChatPhotoInfo?
+    internal let photo: ChatPhotoInfo?
 
     /// Chat title
-    public let title: String
+    internal let title: String
 
     /// Chat username, by which all other information about the chat should be resolved
-    public let username: String
+    internal let username: String
 
-    public init(
+    internal init(
         photo: ChatPhotoInfo?,
         title: String,
         username: String
@@ -728,20 +728,20 @@ public struct PageBlockChatLink: Codable {
 }
 
 /// A table
-public struct PageBlockTable: Codable {
+internal struct PageBlockTable: Codable {
     /// Table caption
-    public let caption: RichText
+    internal let caption: RichText
 
     /// Table cells
-    public let cells: [[PageBlockTableCell]]
+    internal let cells: [[PageBlockTableCell]]
 
     /// True, if the table is bordered
-    public let isBordered: Bool
+    internal let isBordered: Bool
 
     /// True, if the table is striped
-    public let isStriped: Bool
+    internal let isStriped: Bool
 
-    public init(
+    internal init(
         caption: RichText,
         cells: [[PageBlockTableCell]],
         isBordered: Bool,
@@ -755,17 +755,17 @@ public struct PageBlockTable: Codable {
 }
 
 /// A collapsible block
-public struct PageBlockDetails: Codable {
+internal struct PageBlockDetails: Codable {
     /// Always visible heading for the block
-    public let header: RichText
+    internal let header: RichText
 
     /// True, if the block is open by default
-    public let isOpen: Bool
+    internal let isOpen: Bool
 
     /// Block contents
-    public let pageBlocks: [PageBlock]
+    internal let pageBlocks: [PageBlock]
 
-    public init(
+    internal init(
         header: RichText,
         isOpen: Bool,
         pageBlocks: [PageBlock]
@@ -777,14 +777,14 @@ public struct PageBlockDetails: Codable {
 }
 
 /// Related articles
-public struct PageBlockRelatedArticles: Codable {
+internal struct PageBlockRelatedArticles: Codable {
     /// List of related articles
-    public let articles: [PageBlockRelatedArticle]
+    internal let articles: [PageBlockRelatedArticle]
 
     /// Block header
-    public let header: RichText
+    internal let header: RichText
 
-    public init(
+    internal init(
         articles: [PageBlockRelatedArticle],
         header: RichText
     ) {
@@ -794,23 +794,23 @@ public struct PageBlockRelatedArticles: Codable {
 }
 
 /// A map
-public struct PageBlockMap: Codable {
+internal struct PageBlockMap: Codable {
     /// Block caption
-    public let caption: PageBlockCaption
+    internal let caption: PageBlockCaption
 
     /// Map height
-    public let height: Int
+    internal let height: Int
 
     /// Location of the map center
-    public let location: Location
+    internal let location: Location
 
     /// Map width
-    public let width: Int
+    internal let width: Int
 
     /// Map zoom level
-    public let zoom: Int
+    internal let zoom: Int
 
-    public init(
+    internal init(
         caption: PageBlockCaption,
         height: Int,
         location: Location,

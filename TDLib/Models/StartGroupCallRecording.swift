@@ -8,14 +8,14 @@
 import Foundation
 
 /// Starts recording of an active group call. Requires groupCall.can_be_managed group call flag
-public struct StartGroupCallRecording: Codable {
+internal struct StartGroupCallRecording: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// Group call recording title; 0-64 characters
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         groupCallId: Int,
         title: String
     ) {

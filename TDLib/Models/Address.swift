@@ -8,26 +8,26 @@
 import Foundation
 
 /// Describes an address
-public struct Address: Codable {
+internal struct Address: Codable {
     /// City
-    public let city: String
+    internal let city: String
 
     /// A two-letter ISO 3166-1 alpha-2 country code
-    public let countryCode: String
+    internal let countryCode: String
 
     /// Address postal code
-    public let postalCode: String
+    internal let postalCode: String
 
     /// State, if applicable
-    public let state: String
+    internal let state: String
 
     /// First line of the address
-    public let streetLine1: String
+    internal let streetLine1: String
 
     /// Second line of the address
-    public let streetLine2: String
+    internal let streetLine2: String
 
-    public init(
+    internal init(
         city: String,
         countryCode: String,
         postalCode: String,

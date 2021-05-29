@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the different types of activity in a chat
-public enum ChatAction: Codable {
+internal enum ChatAction: Codable {
     /// The user is typing a message
     case chatActionTyping
 
@@ -64,7 +64,7 @@ public enum ChatAction: Codable {
         case chatActionCancel
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -102,7 +102,7 @@ public enum ChatAction: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .chatActionTyping:
@@ -141,51 +141,51 @@ public enum ChatAction: Codable {
 }
 
 /// The user is uploading a video
-public struct ChatActionUploadingVideo: Codable {
+internal struct ChatActionUploadingVideo: Codable {
     /// Upload progress, as a percentage
-    public let progress: Int
+    internal let progress: Int
 
-    public init(progress: Int) {
+    internal init(progress: Int) {
         self.progress = progress
     }
 }
 
 /// The user is uploading a voice note
-public struct ChatActionUploadingVoiceNote: Codable {
+internal struct ChatActionUploadingVoiceNote: Codable {
     /// Upload progress, as a percentage
-    public let progress: Int
+    internal let progress: Int
 
-    public init(progress: Int) {
+    internal init(progress: Int) {
         self.progress = progress
     }
 }
 
 /// The user is uploading a photo
-public struct ChatActionUploadingPhoto: Codable {
+internal struct ChatActionUploadingPhoto: Codable {
     /// Upload progress, as a percentage
-    public let progress: Int
+    internal let progress: Int
 
-    public init(progress: Int) {
+    internal init(progress: Int) {
         self.progress = progress
     }
 }
 
 /// The user is uploading a document
-public struct ChatActionUploadingDocument: Codable {
+internal struct ChatActionUploadingDocument: Codable {
     /// Upload progress, as a percentage
-    public let progress: Int
+    internal let progress: Int
 
-    public init(progress: Int) {
+    internal init(progress: Int) {
         self.progress = progress
     }
 }
 
 /// The user is uploading a video note
-public struct ChatActionUploadingVideoNote: Codable {
+internal struct ChatActionUploadingVideoNote: Codable {
     /// Upload progress, as a percentage
-    public let progress: Int
+    internal let progress: Int
 
-    public init(progress: Int) {
+    internal init(progress: Int) {
         self.progress = progress
     }
 }

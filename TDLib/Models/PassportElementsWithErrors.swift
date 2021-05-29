@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains information about a Telegram Passport elements and corresponding errors
-public struct PassportElementsWithErrors: Codable {
+internal struct PassportElementsWithErrors: Codable {
     /// Telegram Passport elements
-    public let elements: [PassportElement]
+    internal let elements: [PassportElement]
 
     /// Errors in the elements that are already available
-    public let errors: [PassportElementError]
+    internal let errors: [PassportElementError]
 
-    public init(
+    internal init(
         elements: [PassportElement],
         errors: [PassportElementError]
     ) {

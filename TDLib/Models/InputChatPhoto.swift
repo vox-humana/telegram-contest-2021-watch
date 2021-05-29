@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a photo to be set as a user profile or chat photo
-public enum InputChatPhoto: Codable {
+internal enum InputChatPhoto: Codable {
     /// A previously used profile photo of the current user
     case inputChatPhotoPrevious(InputChatPhotoPrevious)
 
@@ -24,7 +24,7 @@ public enum InputChatPhoto: Codable {
         case inputChatPhotoAnimation
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -40,7 +40,7 @@ public enum InputChatPhoto: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inputChatPhotoPrevious(value):
@@ -57,34 +57,34 @@ public enum InputChatPhoto: Codable {
 }
 
 /// A previously used profile photo of the current user
-public struct InputChatPhotoPrevious: Codable {
+internal struct InputChatPhotoPrevious: Codable {
     /// Identifier of the current user's profile photo to reuse
-    public let chatPhotoId: TdInt64
+    internal let chatPhotoId: TdInt64
 
-    public init(chatPhotoId: TdInt64) {
+    internal init(chatPhotoId: TdInt64) {
         self.chatPhotoId = chatPhotoId
     }
 }
 
 /// A static photo in JPEG format
-public struct InputChatPhotoStatic: Codable {
+internal struct InputChatPhotoStatic: Codable {
     /// Photo to be set as profile photo. Only inputFileLocal and inputFileGenerated are allowed
-    public let photo: InputFile
+    internal let photo: InputFile
 
-    public init(photo: InputFile) {
+    internal init(photo: InputFile) {
         self.photo = photo
     }
 }
 
 /// An animation in MPEG4 format; must be square, at most 10 seconds long, have width between 160 and 800 and be at most 2MB in size
-public struct InputChatPhotoAnimation: Codable {
+internal struct InputChatPhotoAnimation: Codable {
     /// Animation to be set as profile photo. Only inputFileLocal and inputFileGenerated are allowed
-    public let animation: InputFile
+    internal let animation: InputFile
 
     /// Timestamp of the frame, which will be used as static chat photo
-    public let mainFrameTimestamp: Double
+    internal let mainFrameTimestamp: Double
 
-    public init(
+    internal init(
         animation: InputFile,
         mainFrameTimestamp: Double
     ) {

@@ -8,38 +8,38 @@
 import Foundation
 
 /// Contains information about an invoice payment form
-public struct PaymentForm: Codable {
+internal struct PaymentForm: Codable {
     /// True, if the user can choose to save credentials
-    public let canSaveCredentials: Bool
+    internal let canSaveCredentials: Bool
 
     /// The payment form identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Full information of the invoice
-    public let invoice: Invoice
+    internal let invoice: Invoice
 
     /// True, if the user will be able to save credentials protected by a password they set up
-    public let needPassword: Bool
+    internal let needPassword: Bool
 
     /// Contains information about the payment provider, if available, to support it natively without the need for opening the URL; may be null
-    public let paymentsProvider: PaymentsProviderStripe?
+    internal let paymentsProvider: PaymentsProviderStripe?
 
     /// User identifier of the payment provider bot
-    public let paymentsProviderUserId: Int
+    internal let paymentsProviderUserId: Int
 
     /// Contains information about saved card credentials; may be null
-    public let savedCredentials: SavedCredentials?
+    internal let savedCredentials: SavedCredentials?
 
     /// Saved server-side order information; may be null
-    public let savedOrderInfo: OrderInfo?
+    internal let savedOrderInfo: OrderInfo?
 
     /// User identifier of the seller bot
-    public let sellerBotUserId: Int
+    internal let sellerBotUserId: Int
 
     /// Payment form URL
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         canSaveCredentials: Bool,
         id: TdInt64,
         invoice: Invoice,

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains information about saved Telegram Passport elements
-public struct PassportElements: Codable {
+internal struct PassportElements: Codable {
     /// Telegram Passport elements
-    public let elements: [PassportElement]
+    internal let elements: [PassportElement]
 
-    public init(elements: [PassportElement]) {
+    internal init(elements: [PassportElement]) {
         self.elements = elements
     }
 }

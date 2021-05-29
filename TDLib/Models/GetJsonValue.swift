@@ -8,11 +8,11 @@
 import Foundation
 
 /// Converts a JSON-serialized string to corresponding JsonValue object. Can be called synchronously
-public struct GetJsonValue: Codable {
+internal struct GetJsonValue: Codable {
     /// The JSON-serialized string
-    public let json: String
+    internal let json: String
 
-    public init(json: String) {
+    internal init(json: String) {
         self.json = json
     }
 }

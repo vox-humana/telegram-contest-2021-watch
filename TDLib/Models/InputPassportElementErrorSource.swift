@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains the description of an error in a Telegram Passport element; for bots only
-public enum InputPassportElementErrorSource: Codable {
+internal enum InputPassportElementErrorSource: Codable {
     /// The element contains an error in an unspecified place. The error will be considered resolved when new data is added
     case inputPassportElementErrorSourceUnspecified(InputPassportElementErrorSourceUnspecified)
 
@@ -48,7 +48,7 @@ public enum InputPassportElementErrorSource: Codable {
         case inputPassportElementErrorSourceFiles
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -82,7 +82,7 @@ public enum InputPassportElementErrorSource: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inputPassportElementErrorSourceUnspecified(value):
@@ -117,24 +117,24 @@ public enum InputPassportElementErrorSource: Codable {
 }
 
 /// The element contains an error in an unspecified place. The error will be considered resolved when new data is added
-public struct InputPassportElementErrorSourceUnspecified: Codable {
+internal struct InputPassportElementErrorSourceUnspecified: Codable {
     /// Current hash of the entire element
-    public let elementHash: Data
+    internal let elementHash: Data
 
-    public init(elementHash: Data) {
+    internal init(elementHash: Data) {
         self.elementHash = elementHash
     }
 }
 
 /// A data field contains an error. The error is considered resolved when the field's value changes
-public struct InputPassportElementErrorSourceDataField: Codable {
+internal struct InputPassportElementErrorSourceDataField: Codable {
     /// Current data hash
-    public let dataHash: Data
+    internal let dataHash: Data
 
     /// Field name
-    public let fieldName: String
+    internal let fieldName: String
 
-    public init(
+    internal init(
         dataHash: Data,
         fieldName: String
     ) {
@@ -144,71 +144,71 @@ public struct InputPassportElementErrorSourceDataField: Codable {
 }
 
 /// The front side of the document contains an error. The error is considered resolved when the file with the front side of the document changes
-public struct InputPassportElementErrorSourceFrontSide: Codable {
+internal struct InputPassportElementErrorSourceFrontSide: Codable {
     /// Current hash of the file containing the front side
-    public let fileHash: Data
+    internal let fileHash: Data
 
-    public init(fileHash: Data) {
+    internal init(fileHash: Data) {
         self.fileHash = fileHash
     }
 }
 
 /// The reverse side of the document contains an error. The error is considered resolved when the file with the reverse side of the document changes
-public struct InputPassportElementErrorSourceReverseSide: Codable {
+internal struct InputPassportElementErrorSourceReverseSide: Codable {
     /// Current hash of the file containing the reverse side
-    public let fileHash: Data
+    internal let fileHash: Data
 
-    public init(fileHash: Data) {
+    internal init(fileHash: Data) {
         self.fileHash = fileHash
     }
 }
 
 /// The selfie contains an error. The error is considered resolved when the file with the selfie changes
-public struct InputPassportElementErrorSourceSelfie: Codable {
+internal struct InputPassportElementErrorSourceSelfie: Codable {
     /// Current hash of the file containing the selfie
-    public let fileHash: Data
+    internal let fileHash: Data
 
-    public init(fileHash: Data) {
+    internal init(fileHash: Data) {
         self.fileHash = fileHash
     }
 }
 
 /// One of the files containing the translation of the document contains an error. The error is considered resolved when the file with the translation changes
-public struct InputPassportElementErrorSourceTranslationFile: Codable {
+internal struct InputPassportElementErrorSourceTranslationFile: Codable {
     /// Current hash of the file containing the translation
-    public let fileHash: Data
+    internal let fileHash: Data
 
-    public init(fileHash: Data) {
+    internal init(fileHash: Data) {
         self.fileHash = fileHash
     }
 }
 
 /// The translation of the document contains an error. The error is considered resolved when the list of files changes
-public struct InputPassportElementErrorSourceTranslationFiles: Codable {
+internal struct InputPassportElementErrorSourceTranslationFiles: Codable {
     /// Current hashes of all files with the translation
-    public let fileHashes: [Data]
+    internal let fileHashes: [Data]
 
-    public init(fileHashes: [Data]) {
+    internal init(fileHashes: [Data]) {
         self.fileHashes = fileHashes
     }
 }
 
 /// The file contains an error. The error is considered resolved when the file changes
-public struct InputPassportElementErrorSourceFile: Codable {
+internal struct InputPassportElementErrorSourceFile: Codable {
     /// Current hash of the file which has the error
-    public let fileHash: Data
+    internal let fileHash: Data
 
-    public init(fileHash: Data) {
+    internal init(fileHash: Data) {
         self.fileHash = fileHash
     }
 }
 
 /// The list of attached files contains an error. The error is considered resolved when the file list changes
-public struct InputPassportElementErrorSourceFiles: Codable {
+internal struct InputPassportElementErrorSourceFiles: Codable {
     /// Current hashes of all attached files
-    public let fileHashes: [Data]
+    internal let fileHashes: [Data]
 
-    public init(fileHashes: [Data]) {
+    internal init(fileHashes: [Data]) {
         self.fileHashes = fileHashes
     }
 }

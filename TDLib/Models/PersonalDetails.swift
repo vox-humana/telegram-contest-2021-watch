@@ -8,38 +8,38 @@
 import Foundation
 
 /// Contains the user's personal details
-public struct PersonalDetails: Codable {
+internal struct PersonalDetails: Codable {
     /// Birthdate of the user
-    public let birthdate: Date
+    internal let birthdate: Date
 
     /// A two-letter ISO 3166-1 alpha-2 country code of the user's country
-    public let countryCode: String
+    internal let countryCode: String
 
     /// First name of the user written in English; 1-255 characters
-    public let firstName: String
+    internal let firstName: String
 
     /// Gender of the user, "male" or "female"
-    public let gender: String
+    internal let gender: String
 
     /// Last name of the user written in English; 1-255 characters
-    public let lastName: String
+    internal let lastName: String
 
     /// Middle name of the user written in English; 0-255 characters
-    public let middleName: String
+    internal let middleName: String
 
     /// Native first name of the user; 1-255 characters
-    public let nativeFirstName: String
+    internal let nativeFirstName: String
 
     /// Native last name of the user; 1-255 characters
-    public let nativeLastName: String
+    internal let nativeLastName: String
 
     /// Native middle name of the user; 0-255 characters
-    public let nativeMiddleName: String
+    internal let nativeMiddleName: String
 
     /// A two-letter ISO 3166-1 alpha-2 country code of the user's residence country
-    public let residenceCountryCode: String
+    internal let residenceCountryCode: String
 
-    public init(
+    internal init(
         birthdate: Date,
         countryCode: String,
         firstName: String,

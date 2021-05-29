@@ -8,6 +8,6 @@
 import Foundation
 
 /// Disables the currently enabled proxy. Can be called before authorization
-public struct DisableProxy: Codable {
-    public init() {}
+internal struct DisableProxy: Codable {
+    internal init() {}
 }

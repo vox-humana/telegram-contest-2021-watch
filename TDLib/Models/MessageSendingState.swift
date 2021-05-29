@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about the sending state of the message
-public enum MessageSendingState: Codable {
+internal enum MessageSendingState: Codable {
     /// The message is being sent now, but has not yet been delivered to the server
     case messageSendingStatePending
 
@@ -20,7 +20,7 @@ public enum MessageSendingState: Codable {
         case messageSendingStateFailed
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -32,7 +32,7 @@ public enum MessageSendingState: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .messageSendingStatePending:
@@ -45,20 +45,20 @@ public enum MessageSendingState: Codable {
 }
 
 /// The message failed to be sent
-public struct MessageSendingStateFailed: Codable {
+internal struct MessageSendingStateFailed: Codable {
     /// True, if the message can be re-sent
-    public let canRetry: Bool
+    internal let canRetry: Bool
 
     /// An error code; 0 if unknown
-    public let errorCode: Int
+    internal let errorCode: Int
 
     /// Error message
-    public let errorMessage: String
+    internal let errorMessage: String
 
     /// Time left before the message can be re-sent, in seconds. No update is sent when this field changes
-    public let retryAfter: Double
+    internal let retryAfter: Double
 
-    public init(
+    internal init(
         canRetry: Bool,
         errorCode: Int,
         errorMessage: String,

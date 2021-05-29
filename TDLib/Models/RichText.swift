@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a text object inside an instant-view web page
-public indirect enum RichText: Codable {
+internal indirect enum RichText: Codable {
     /// A plain text
     case richTextPlain(RichTextPlain)
 
@@ -80,7 +80,7 @@ public indirect enum RichText: Codable {
         case richTexts
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -138,7 +138,7 @@ public indirect enum RichText: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .richTextPlain(value):
@@ -197,77 +197,77 @@ public indirect enum RichText: Codable {
 }
 
 /// A plain text
-public struct RichTextPlain: Codable {
+internal struct RichTextPlain: Codable {
     /// Text
-    public let text: String
+    internal let text: String
 
-    public init(text: String) {
+    internal init(text: String) {
         self.text = text
     }
 }
 
 /// A bold rich text
-public struct RichTextBold: Codable {
+internal struct RichTextBold: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// An italicized rich text
-public struct RichTextItalic: Codable {
+internal struct RichTextItalic: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// An underlined rich text
-public struct RichTextUnderline: Codable {
+internal struct RichTextUnderline: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A strikethrough rich text
-public struct RichTextStrikethrough: Codable {
+internal struct RichTextStrikethrough: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A fixed-width rich text
-public struct RichTextFixed: Codable {
+internal struct RichTextFixed: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A rich text URL link
-public struct RichTextUrl: Codable {
+internal struct RichTextUrl: Codable {
     /// True, if the URL has cached instant view server-side
-    public let isCached: Bool
+    internal let isCached: Bool
 
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
     /// URL
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         isCached: Bool,
         text: RichText,
         url: String
@@ -279,14 +279,14 @@ public struct RichTextUrl: Codable {
 }
 
 /// A rich text email link
-public struct RichTextEmailAddress: Codable {
+internal struct RichTextEmailAddress: Codable {
     /// Email address
-    public let emailAddress: String
+    internal let emailAddress: String
 
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(
+    internal init(
         emailAddress: String,
         text: RichText
     ) {
@@ -296,44 +296,44 @@ public struct RichTextEmailAddress: Codable {
 }
 
 /// A subscript rich text
-public struct RichTextSubscript: Codable {
+internal struct RichTextSubscript: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A superscript rich text
-public struct RichTextSuperscript: Codable {
+internal struct RichTextSuperscript: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A marked rich text
-public struct RichTextMarked: Codable {
+internal struct RichTextMarked: Codable {
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(text: RichText) {
+    internal init(text: RichText) {
         self.text = text
     }
 }
 
 /// A rich text phone number
-public struct RichTextPhoneNumber: Codable {
+internal struct RichTextPhoneNumber: Codable {
     /// Phone number
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Text
-    public let text: RichText
+    internal let text: RichText
 
-    public init(
+    internal init(
         phoneNumber: String,
         text: RichText
     ) {
@@ -343,17 +343,17 @@ public struct RichTextPhoneNumber: Codable {
 }
 
 /// A small image inside the text
-public struct RichTextIcon: Codable {
+internal struct RichTextIcon: Codable {
     /// The image represented as a document. The image can be in GIF, JPEG or PNG format
-    public let document: Document
+    internal let document: Document
 
     /// Height of a bounding box in which the image should be shown; 0 if unknown
-    public let height: Int
+    internal let height: Int
 
     /// Width of a bounding box in which the image should be shown; 0 if unknown
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         document: Document,
         height: Int,
         width: Int
@@ -365,17 +365,17 @@ public struct RichTextIcon: Codable {
 }
 
 /// A reference to a richTexts object on the same web page
-public struct RichTextReference: Codable {
+internal struct RichTextReference: Codable {
     /// The name of a richTextAnchor object, which is the first element of the target richTexts object
-    public let anchorName: String
+    internal let anchorName: String
 
     /// The text
-    public let text: RichText
+    internal let text: RichText
 
     /// An HTTP URL, opening the reference
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         anchorName: String,
         text: RichText,
         url: String
@@ -387,27 +387,27 @@ public struct RichTextReference: Codable {
 }
 
 /// An anchor
-public struct RichTextAnchor: Codable {
+internal struct RichTextAnchor: Codable {
     /// Anchor name
-    public let name: String
+    internal let name: String
 
-    public init(name: String) {
+    internal init(name: String) {
         self.name = name
     }
 }
 
 /// A link to an anchor on the same web page
-public struct RichTextAnchorLink: Codable {
+internal struct RichTextAnchorLink: Codable {
     /// The anchor name. If the name is empty, the link should bring back to top
-    public let anchorName: String
+    internal let anchorName: String
 
     /// The link text
-    public let text: RichText
+    internal let text: RichText
 
     /// An HTTP URL, opening the anchor
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         anchorName: String,
         text: RichText,
         url: String
@@ -419,11 +419,11 @@ public struct RichTextAnchorLink: Codable {
 }
 
 /// A concatenation of rich texts
-public struct RichTexts: Codable {
+internal struct RichTexts: Codable {
     /// Texts
-    public let texts: [RichText]
+    internal let texts: [RichText]
 
-    public init(texts: [RichText]) {
+    internal init(texts: [RichText]) {
         self.texts = texts
     }
 }

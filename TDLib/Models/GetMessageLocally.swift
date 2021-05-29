@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns information about a message, if it is available locally without sending network request. This is an offline request
-public struct GetMessageLocally: Codable {
+internal struct GetMessageLocally: Codable {
     /// Identifier of the chat the message belongs to
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of the message to get
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {

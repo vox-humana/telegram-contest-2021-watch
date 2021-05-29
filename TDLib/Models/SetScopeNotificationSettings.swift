@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes notification settings for chats of a given type
-public struct SetScopeNotificationSettings: Codable {
+internal struct SetScopeNotificationSettings: Codable {
     /// The new notification settings for the given scope
-    public let notificationSettings: ScopeNotificationSettings
+    internal let notificationSettings: ScopeNotificationSettings
 
     /// Types of chats for which to change the notification settings
-    public let scope: NotificationSettingsScope
+    internal let scope: NotificationSettingsScope
 
-    public init(
+    internal init(
         notificationSettings: ScopeNotificationSettings,
         scope: NotificationSettingsScope
     ) {

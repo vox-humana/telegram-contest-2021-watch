@@ -8,38 +8,38 @@
 import Foundation
 
 /// Contains information about notification settings for a chat
-public struct ChatNotificationSettings: Codable {
+internal struct ChatNotificationSettings: Codable {
     /// If true, notifications for messages with mentions will be created as for an ordinary unread message
-    public let disableMentionNotifications: Bool
+    internal let disableMentionNotifications: Bool
 
     /// If true, notifications for incoming pinned messages will be created as for an ordinary unread message
-    public let disablePinnedMessageNotifications: Bool
+    internal let disablePinnedMessageNotifications: Bool
 
     /// Time left before notifications will be unmuted, in seconds
-    public let muteFor: Int
+    internal let muteFor: Int
 
     /// True, if message content should be displayed in notifications
-    public let showPreview: Bool
+    internal let showPreview: Bool
 
     /// The name of an audio file to be used for notification sounds; only applies to iOS applications
-    public let sound: String
+    internal let sound: String
 
     /// If true, disable_mention_notifications is ignored and the value for the relevant type of chat is used instead
-    public let useDefaultDisableMentionNotifications: Bool
+    internal let useDefaultDisableMentionNotifications: Bool
 
     /// If true, disable_pinned_message_notifications is ignored and the value for the relevant type of chat is used instead
-    public let useDefaultDisablePinnedMessageNotifications: Bool
+    internal let useDefaultDisablePinnedMessageNotifications: Bool
 
     /// If true, mute_for is ignored and the value for the relevant type of chat is used instead
-    public let useDefaultMuteFor: Bool
+    internal let useDefaultMuteFor: Bool
 
     /// If true, show_preview is ignored and the value for the relevant type of chat is used instead
-    public let useDefaultShowPreview: Bool
+    internal let useDefaultShowPreview: Bool
 
     /// If true, sound is ignored and the value for the relevant type of chat is used instead
-    public let useDefaultSound: Bool
+    internal let useDefaultSound: Bool
 
-    public init(
+    internal init(
         disableMentionNotifications: Bool,
         disablePinnedMessageNotifications: Bool,
         muteFor: Int,

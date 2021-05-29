@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about the origin of a forwarded message
-public enum MessageForwardOrigin: Codable {
+internal enum MessageForwardOrigin: Codable {
     /// The message was originally sent by a known user
     case messageForwardOriginUser(MessageForwardOriginUser)
 
@@ -32,7 +32,7 @@ public enum MessageForwardOrigin: Codable {
         case messageForwardOriginMessageImport
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -54,7 +54,7 @@ public enum MessageForwardOrigin: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .messageForwardOriginUser(value):
@@ -77,24 +77,24 @@ public enum MessageForwardOrigin: Codable {
 }
 
 /// The message was originally sent by a known user
-public struct MessageForwardOriginUser: Codable {
+internal struct MessageForwardOriginUser: Codable {
     /// Identifier of the user that originally sent the message
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
-    public init(senderUserId: Int) {
+    internal init(senderUserId: Int) {
         self.senderUserId = senderUserId
     }
 }
 
 /// The message was originally sent by an anonymous chat administrator on behalf of the chat
-public struct MessageForwardOriginChat: Codable {
+internal struct MessageForwardOriginChat: Codable {
     /// Original message author signature
-    public let authorSignature: String
+    internal let authorSignature: String
 
     /// Identifier of the chat that originally sent the message
-    public let senderChatId: Int64
+    internal let senderChatId: Int64
 
-    public init(
+    internal init(
         authorSignature: String,
         senderChatId: Int64
     ) {
@@ -104,27 +104,27 @@ public struct MessageForwardOriginChat: Codable {
 }
 
 /// The message was originally sent by a user, which is hidden by their privacy settings
-public struct MessageForwardOriginHiddenUser: Codable {
+internal struct MessageForwardOriginHiddenUser: Codable {
     /// Name of the sender
-    public let senderName: String
+    internal let senderName: String
 
-    public init(senderName: String) {
+    internal init(senderName: String) {
         self.senderName = senderName
     }
 }
 
 /// The message was originally a post in a channel
-public struct MessageForwardOriginChannel: Codable {
+internal struct MessageForwardOriginChannel: Codable {
     /// Original post author signature
-    public let authorSignature: String
+    internal let authorSignature: String
 
     /// Identifier of the chat from which the message was originally forwarded
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier of the original message
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         authorSignature: String,
         chatId: Int64,
         messageId: Int64
@@ -136,11 +136,11 @@ public struct MessageForwardOriginChannel: Codable {
 }
 
 /// The message was imported from an exported message history
-public struct MessageForwardOriginMessageImport: Codable {
+internal struct MessageForwardOriginMessageImport: Codable {
     /// Name of the sender
-    public let senderName: String
+    internal let senderName: String
 
-    public init(senderName: String) {
+    internal init(senderName: String) {
         self.senderName = senderName
     }
 }

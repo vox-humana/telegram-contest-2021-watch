@@ -8,20 +8,20 @@
 import Foundation
 
 /// Contains statistics about administrator actions done by a user
-public struct ChatStatisticsAdministratorActionsInfo: Codable {
+internal struct ChatStatisticsAdministratorActionsInfo: Codable {
     /// Number of users banned by the administrator
-    public let bannedUserCount: Int
+    internal let bannedUserCount: Int
 
     /// Number of messages deleted by the administrator
-    public let deletedMessageCount: Int
+    internal let deletedMessageCount: Int
 
     /// Number of users restricted by the administrator
-    public let restrictedUserCount: Int
+    internal let restrictedUserCount: Int
 
     /// Administrator user identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         bannedUserCount: Int,
         deletedMessageCount: Int,
         restrictedUserCount: Int,

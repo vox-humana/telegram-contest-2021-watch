@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a sticker that needs to be added to a sticker set
-public enum InputSticker: Codable {
+internal enum InputSticker: Codable {
     /// A static sticker in PNG format, which will be converted to WEBP server-side
     case inputStickerStatic(InputStickerStatic)
 
@@ -20,7 +20,7 @@ public enum InputSticker: Codable {
         case inputStickerAnimated
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum InputSticker: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inputStickerStatic(value):
@@ -47,17 +47,17 @@ public enum InputSticker: Codable {
 }
 
 /// A static sticker in PNG format, which will be converted to WEBP server-side
-public struct InputStickerStatic: Codable {
+internal struct InputStickerStatic: Codable {
     /// Emojis corresponding to the sticker
-    public let emojis: String
+    internal let emojis: String
 
     /// For masks, position where the mask should be placed; may be null
-    public let maskPosition: MaskPosition?
+    internal let maskPosition: MaskPosition?
 
     /// PNG image with the sticker; must be up to 512 KB in size and fit in a 512x512 square
-    public let sticker: InputFile
+    internal let sticker: InputFile
 
-    public init(
+    internal init(
         emojis: String,
         maskPosition: MaskPosition?,
         sticker: InputFile
@@ -69,14 +69,14 @@ public struct InputStickerStatic: Codable {
 }
 
 /// An animated sticker in TGS format
-public struct InputStickerAnimated: Codable {
+internal struct InputStickerAnimated: Codable {
     /// Emojis corresponding to the sticker
-    public let emojis: String
+    internal let emojis: String
 
     /// File with the animated sticker. Only local or uploaded within a week files are supported. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements
-    public let sticker: InputFile
+    internal let sticker: InputFile
 
-    public init(
+    internal init(
         emojis: String,
         sticker: InputFile
     ) {

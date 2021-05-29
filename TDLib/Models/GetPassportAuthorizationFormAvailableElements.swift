@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns already available Telegram Passport elements suitable for completing a Telegram Passport authorization form. Result can be received only once for each authorization form
-public struct GetPassportAuthorizationFormAvailableElements: Codable {
+internal struct GetPassportAuthorizationFormAvailableElements: Codable {
     /// Authorization form identifier
-    public let autorizationFormId: Int
+    internal let autorizationFormId: Int
 
     /// Password of the current user
-    public let password: String
+    internal let password: String
 
-    public init(
+    internal init(
         autorizationFormId: Int,
         password: String
     ) {

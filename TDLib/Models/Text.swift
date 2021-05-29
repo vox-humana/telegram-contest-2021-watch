@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains some text
-public struct TextContent: Codable {
+internal struct TextContent: Codable {
     /// Text
-    public let text: String
+    internal let text: String
 
-    public init(text: String) {
+    internal init(text: String) {
         self.text = text
     }
 }

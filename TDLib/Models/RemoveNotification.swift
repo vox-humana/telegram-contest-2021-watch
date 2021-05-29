@@ -8,14 +8,14 @@
 import Foundation
 
 /// Removes an active notification from notification list. Needs to be called only if the notification is removed by the current user
-public struct RemoveNotification: Codable {
+internal struct RemoveNotification: Codable {
     /// Identifier of notification group to which the notification belongs
-    public let notificationGroupId: Int
+    internal let notificationGroupId: Int
 
     /// Identifier of removed notification
-    public let notificationId: Int
+    internal let notificationId: Int
 
-    public init(
+    internal init(
         notificationGroupId: Int,
         notificationId: Int
     ) {

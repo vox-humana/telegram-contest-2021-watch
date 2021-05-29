@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a single button in a bot keyboard
-public struct KeyboardButton: Codable {
+internal struct KeyboardButton: Codable {
     /// Text of the button
-    public let text: String
+    internal let text: String
 
     /// Type of the button
-    public let type: KeyboardButtonType
+    internal let type: KeyboardButtonType
 
-    public init(
+    internal init(
         text: String,
         type: KeyboardButtonType
     ) {

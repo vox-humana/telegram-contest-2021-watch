@@ -8,11 +8,11 @@
 import Foundation
 
 /// Removes a hashtag from the list of recently used hashtags
-public struct RemoveRecentHashtag: Codable {
+internal struct RemoveRecentHashtag: Codable {
     /// Hashtag to delete
-    public let hashtag: String
+    internal let hashtag: String
 
-    public init(hashtag: String) {
+    internal init(hashtag: String) {
         self.hashtag = hashtag
     }
 }

@@ -3,17 +3,17 @@ import SwiftUI
 import TGWatchUI
 
 // TODO: move to TGWatchUI
-public struct ChatListView: View {
+struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
     @Environment(\.chatService) var chatService
     private let showNewMessage: Bool
 
-    public init(_ vm: ChatListViewModel, showNewMessage: Bool = true) {
+    init(_ vm: ChatListViewModel, showNewMessage: Bool = true) {
         self.vm = vm
         self.showNewMessage = showNewMessage
     }
 
-    public var body: some View {
+    var body: some View {
         List {
             if showNewMessage {
                 Button("New Message") {
@@ -54,7 +54,7 @@ public struct ChatListView: View {
 
 extension Chat: Identifiable {}
 
-public final class ChatListViewModel: ObservableObject {
+final class ChatListViewModel: ObservableObject {
     @Published var list: [Chat] = []
     private var subscription: AnyCancellable?
     let chatListService: ChatListService
@@ -73,7 +73,7 @@ public final class ChatListViewModel: ObservableObject {
         return created
     }
 
-    public init(chatListService: ChatListService) {
+    init(chatListService: ChatListService) {
         self.chatListService = chatListService
         subscription = chatListService.chatListSignal
             .receive(on: DispatchQueue.main)
@@ -82,7 +82,7 @@ public final class ChatListViewModel: ObservableObject {
             }
     }
 
-    public func downloadPhoto(for chat: Chat) {
+    func downloadPhoto(for chat: Chat) {
         chatListService.downloadPhoto(for: chat)
     }
 }

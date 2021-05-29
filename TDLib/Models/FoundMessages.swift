@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains a list of messages found by a search
-public struct FoundMessages: Codable {
+internal struct FoundMessages: Codable {
     /// List of messages
-    public let messages: [Message]
+    internal let messages: [Message]
 
     /// The offset for the next request. If empty, there are no more results
-    public let nextOffset: String
+    internal let nextOffset: String
 
     /// Approximate total count of messages found; -1 if unknown
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         messages: [Message],
         nextOffset: String,
         totalCount: Int

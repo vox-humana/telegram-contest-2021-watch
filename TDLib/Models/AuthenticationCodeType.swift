@@ -8,7 +8,7 @@
 import Foundation
 
 /// Provides information about the method by which an authentication code is delivered to the user
-public enum AuthenticationCodeType: Codable {
+internal enum AuthenticationCodeType: Codable {
     /// An authentication code is delivered via a private Telegram message, which can be viewed from another active session
     case authenticationCodeTypeTelegramMessage(AuthenticationCodeTypeTelegramMessage)
 
@@ -28,7 +28,7 @@ public enum AuthenticationCodeType: Codable {
         case authenticationCodeTypeFlashCall
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -47,7 +47,7 @@ public enum AuthenticationCodeType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .authenticationCodeTypeTelegramMessage(value):
@@ -67,41 +67,41 @@ public enum AuthenticationCodeType: Codable {
 }
 
 /// An authentication code is delivered via a private Telegram message, which can be viewed from another active session
-public struct AuthenticationCodeTypeTelegramMessage: Codable {
+internal struct AuthenticationCodeTypeTelegramMessage: Codable {
     /// Length of the code
-    public let length: Int
+    internal let length: Int
 
-    public init(length: Int) {
+    internal init(length: Int) {
         self.length = length
     }
 }
 
 /// An authentication code is delivered via an SMS message to the specified phone number
-public struct AuthenticationCodeTypeSms: Codable {
+internal struct AuthenticationCodeTypeSms: Codable {
     /// Length of the code
-    public let length: Int
+    internal let length: Int
 
-    public init(length: Int) {
+    internal init(length: Int) {
         self.length = length
     }
 }
 
 /// An authentication code is delivered via a phone call to the specified phone number
-public struct AuthenticationCodeTypeCall: Codable {
+internal struct AuthenticationCodeTypeCall: Codable {
     /// Length of the code
-    public let length: Int
+    internal let length: Int
 
-    public init(length: Int) {
+    internal init(length: Int) {
         self.length = length
     }
 }
 
 /// An authentication code is delivered by an immediately cancelled call to the specified phone number. The number from which the call was made is the code
-public struct AuthenticationCodeTypeFlashCall: Codable {
+internal struct AuthenticationCodeTypeFlashCall: Codable {
     /// Pattern of the phone number from which the call will be made
-    public let pattern: String
+    internal let pattern: String
 
-    public init(pattern: String) {
+    internal init(pattern: String) {
         self.pattern = pattern
     }
 }

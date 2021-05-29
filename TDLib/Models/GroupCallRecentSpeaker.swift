@@ -8,14 +8,14 @@
 import Foundation
 
 /// Describes a recently speaking participant in a group call
-public struct GroupCallRecentSpeaker: Codable {
+internal struct GroupCallRecentSpeaker: Codable {
     /// True, is the user has spoken recently
-    public let isSpeaking: Bool
+    internal let isSpeaking: Bool
 
     /// Group call participant identifier
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
-    public init(
+    internal init(
         isSpeaking: Bool,
         participantId: MessageSender
     ) {

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains animated stickers which should be used for dice animation rendering
-public enum DiceStickers: Codable {
+internal enum DiceStickers: Codable {
     /// A regular animated sticker
     case diceStickersRegular(DiceStickersRegular)
 
@@ -20,7 +20,7 @@ public enum DiceStickers: Codable {
         case diceStickersSlotMachine
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum DiceStickers: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .diceStickersRegular(value):
@@ -47,33 +47,33 @@ public enum DiceStickers: Codable {
 }
 
 /// A regular animated sticker
-public struct DiceStickersRegular: Codable {
+internal struct DiceStickersRegular: Codable {
     /// The animated sticker with the dice animation
-    public let sticker: Sticker
+    internal let sticker: Sticker
 
-    public init(sticker: Sticker) {
+    internal init(sticker: Sticker) {
         self.sticker = sticker
     }
 }
 
 /// Animated stickers to be combined into a slot machine
-public struct DiceStickersSlotMachine: Codable {
+internal struct DiceStickersSlotMachine: Codable {
     /// The animated sticker with the slot machine background. The background animation must start playing after all reel animations finish
-    public let background: Sticker
+    internal let background: Sticker
 
     /// The animated sticker with the center reel
-    public let centerReel: Sticker
+    internal let centerReel: Sticker
 
     /// The animated sticker with the left reel
-    public let leftReel: Sticker
+    internal let leftReel: Sticker
 
     /// The animated sticker with the lever animation. The lever animation must play once in the initial dice state
-    public let lever: Sticker
+    internal let lever: Sticker
 
     /// The animated sticker with the right reel
-    public let rightReel: Sticker
+    internal let rightReel: Sticker
 
-    public init(
+    internal init(
         background: Sticker,
         centerReel: Sticker,
         leftReel: Sticker,

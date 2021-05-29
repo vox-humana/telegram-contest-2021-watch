@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains the content of a message
-public enum MessageContent: Codable {
+internal enum MessageContent: Codable {
     /// A text message
     case messageText(MessageText)
 
@@ -196,7 +196,7 @@ public enum MessageContent: Codable {
         case messageUnsupported
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -334,7 +334,7 @@ public enum MessageContent: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .messageText(value):
@@ -473,14 +473,14 @@ public enum MessageContent: Codable {
 }
 
 /// A text message
-public struct MessageText: Codable {
+internal struct MessageText: Codable {
     /// Text of the message
-    public let text: FormattedText
+    internal let text: FormattedText
 
     /// A preview of the web page that's mentioned in the text; may be null
-    public let webPage: WebPage?
+    internal let webPage: WebPage?
 
-    public init(
+    internal init(
         text: FormattedText,
         webPage: WebPage?
     ) {
@@ -490,17 +490,17 @@ public struct MessageText: Codable {
 }
 
 /// An animation message (GIF-style).
-public struct MessageAnimation: Codable {
+internal struct MessageAnimation: Codable {
     /// The animation description
-    public let animation: Animation
+    internal let animation: Animation
 
     /// Animation caption
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// True, if the animation thumbnail must be blurred and the animation must be shown only while tapped
-    public let isSecret: Bool
+    internal let isSecret: Bool
 
-    public init(
+    internal init(
         animation: Animation,
         caption: FormattedText,
         isSecret: Bool
@@ -512,14 +512,14 @@ public struct MessageAnimation: Codable {
 }
 
 /// An audio message
-public struct MessageAudio: Codable {
+internal struct MessageAudio: Codable {
     /// The audio description
-    public let audio: Audio
+    internal let audio: Audio
 
     /// Audio caption
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
-    public init(
+    internal init(
         audio: Audio,
         caption: FormattedText
     ) {
@@ -529,14 +529,14 @@ public struct MessageAudio: Codable {
 }
 
 /// A document message (general file)
-public struct MessageDocument: Codable {
+internal struct MessageDocument: Codable {
     /// Document caption
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// The document description
-    public let document: Document
+    internal let document: Document
 
-    public init(
+    internal init(
         caption: FormattedText,
         document: Document
     ) {
@@ -546,17 +546,17 @@ public struct MessageDocument: Codable {
 }
 
 /// A photo message
-public struct MessagePhoto: Codable {
+internal struct MessagePhoto: Codable {
     /// Photo caption
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// True, if the photo must be blurred and must be shown only while tapped
-    public let isSecret: Bool
+    internal let isSecret: Bool
 
     /// The photo description
-    public let photo: Photo
+    internal let photo: Photo
 
-    public init(
+    internal init(
         caption: FormattedText,
         isSecret: Bool,
         photo: Photo
@@ -568,27 +568,27 @@ public struct MessagePhoto: Codable {
 }
 
 /// A sticker message
-public struct MessageSticker: Codable {
+internal struct MessageSticker: Codable {
     /// The sticker description
-    public let sticker: Sticker
+    internal let sticker: Sticker
 
-    public init(sticker: Sticker) {
+    internal init(sticker: Sticker) {
         self.sticker = sticker
     }
 }
 
 /// A video message
-public struct MessageVideo: Codable {
+internal struct MessageVideo: Codable {
     /// Video caption
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// True, if the video thumbnail must be blurred and the video must be shown only while tapped
-    public let isSecret: Bool
+    internal let isSecret: Bool
 
     /// The video description
-    public let video: Video
+    internal let video: Video
 
-    public init(
+    internal init(
         caption: FormattedText,
         isSecret: Bool,
         video: Video
@@ -600,17 +600,17 @@ public struct MessageVideo: Codable {
 }
 
 /// A video note message
-public struct MessageVideoNote: Codable {
+internal struct MessageVideoNote: Codable {
     /// True, if the video note thumbnail must be blurred and the video note must be shown only while tapped
-    public let isSecret: Bool
+    internal let isSecret: Bool
 
     /// True, if at least one of the recipients has viewed the video note
-    public let isViewed: Bool
+    internal let isViewed: Bool
 
     /// The video note description
-    public let videoNote: VideoNote
+    internal let videoNote: VideoNote
 
-    public init(
+    internal init(
         isSecret: Bool,
         isViewed: Bool,
         videoNote: VideoNote
@@ -622,17 +622,17 @@ public struct MessageVideoNote: Codable {
 }
 
 /// A voice note message
-public struct MessageVoiceNote: Codable {
+internal struct MessageVoiceNote: Codable {
     /// Voice note caption
-    public let caption: FormattedText
+    internal let caption: FormattedText
 
     /// True, if at least one of the recipients has listened to the voice note
-    public let isListened: Bool
+    internal let isListened: Bool
 
     /// The voice note description
-    public let voiceNote: VoiceNote
+    internal let voiceNote: VoiceNote
 
-    public init(
+    internal init(
         caption: FormattedText,
         isListened: Bool,
         voiceNote: VoiceNote
@@ -644,23 +644,23 @@ public struct MessageVoiceNote: Codable {
 }
 
 /// A message with a location
-public struct MessageLocation: Codable {
+internal struct MessageLocation: Codable {
     /// Left time for which the location can be updated, in seconds. updateMessageContent is not sent when this field changes
-    public let expiresIn: Int
+    internal let expiresIn: Int
 
     /// For live locations, a direction in which the location moves, in degrees; 1-360. If 0 the direction is unknown
-    public let heading: Int
+    internal let heading: Int
 
     /// Time relative to the message send date, for which the location can be updated, in seconds
-    public let livePeriod: Int
+    internal let livePeriod: Int
 
     /// The location description
-    public let location: Location
+    internal let location: Location
 
     /// For live locations, a maximum distance to another chat member for proximity alerts, in meters (0-100000). 0 if the notification is disabled. Available only for the message sender
-    public let proximityAlertRadius: Int
+    internal let proximityAlertRadius: Int
 
-    public init(
+    internal init(
         expiresIn: Int,
         heading: Int,
         livePeriod: Int,
@@ -676,43 +676,43 @@ public struct MessageLocation: Codable {
 }
 
 /// A message with information about a venue
-public struct MessageVenue: Codable {
+internal struct MessageVenue: Codable {
     /// The venue description
-    public let venue: Venue
+    internal let venue: Venue
 
-    public init(venue: Venue) {
+    internal init(venue: Venue) {
         self.venue = venue
     }
 }
 
 /// A message with a user contact
-public struct MessageContact: Codable {
+internal struct MessageContact: Codable {
     /// The contact description
-    public let contact: Contact
+    internal let contact: Contact
 
-    public init(contact: Contact) {
+    internal init(contact: Contact) {
         self.contact = contact
     }
 }
 
 /// A dice message. The dice value is randomly generated by the server
-public struct MessageDice: Codable {
+internal struct MessageDice: Codable {
     /// Emoji on which the dice throw animation is based
-    public let emoji: String
+    internal let emoji: String
 
     /// The animated stickers with the final dice animation; may be null if unknown. updateMessageContent will be sent when the sticker became known
-    public let finalState: DiceStickers?
+    internal let finalState: DiceStickers?
 
     /// The animated stickers with the initial dice animation; may be null if unknown. updateMessageContent will be sent when the sticker became known
-    public let initialState: DiceStickers?
+    internal let initialState: DiceStickers?
 
     /// Number of frame after which a success animation like a shower of confetti needs to be shown on updateMessageSendSucceeded
-    public let successAnimationFrameNumber: Int
+    internal let successAnimationFrameNumber: Int
 
     /// The dice value. If the value is 0, the dice don't have final state yet
-    public let value: Int
+    internal let value: Int
 
-    public init(
+    internal init(
         emoji: String,
         finalState: DiceStickers?,
         initialState: DiceStickers?,
@@ -728,54 +728,54 @@ public struct MessageDice: Codable {
 }
 
 /// A message with a game
-public struct MessageGame: Codable {
+internal struct MessageGame: Codable {
     /// The game description
-    public let game: Game
+    internal let game: Game
 
-    public init(game: Game) {
+    internal init(game: Game) {
         self.game = game
     }
 }
 
 /// A message with a poll
-public struct MessagePoll: Codable {
+internal struct MessagePoll: Codable {
     /// The poll description
-    public let poll: Poll
+    internal let poll: Poll
 
-    public init(poll: Poll) {
+    internal init(poll: Poll) {
         self.poll = poll
     }
 }
 
 /// A message with an invoice from a bot
-public struct MessageInvoice: Codable {
+internal struct MessageInvoice: Codable {
     /// Currency for the product price
-    public let currency: String
+    internal let currency: String
 
-    public let description: String
+    internal let description: String
 
     /// True, if the invoice is a test invoice
-    public let isTest: Bool
+    internal let isTest: Bool
 
     /// True, if the shipping address should be specified
-    public let needShippingAddress: Bool
+    internal let needShippingAddress: Bool
 
     /// Product photo; may be null
-    public let photo: Photo?
+    internal let photo: Photo?
 
     /// The identifier of the message with the receipt, after the product has been purchased
-    public let receiptMessageId: Int64
+    internal let receiptMessageId: Int64
 
     /// Unique invoice bot start_parameter. To share an invoice use the URL https://t.me/{bot_username}?start={start_parameter}
-    public let startParameter: String
+    internal let startParameter: String
 
     /// Product title
-    public let title: String
+    internal let title: String
 
     /// Product total price in the smallest units of the currency
-    public let totalAmount: Int64
+    internal let totalAmount: Int64
 
-    public init(
+    internal init(
         currency: String,
         description: String,
         isTest: Bool,
@@ -799,17 +799,17 @@ public struct MessageInvoice: Codable {
 }
 
 /// A message with information about an ended call
-public struct MessageCall: Codable {
+internal struct MessageCall: Codable {
     /// Reason why the call was discarded
-    public let discardReason: CallDiscardReason
+    internal let discardReason: CallDiscardReason
 
     /// Call duration, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// True, if the call was a video call
-    public let isVideo: Bool
+    internal let isVideo: Bool
 
-    public init(
+    internal init(
         discardReason: CallDiscardReason,
         duration: Int,
         isVideo: Bool
@@ -821,14 +821,14 @@ public struct MessageCall: Codable {
 }
 
 /// A new voice chat was scheduled
-public struct MessageVoiceChatScheduled: Codable {
+internal struct MessageVoiceChatScheduled: Codable {
     /// Identifier of the voice chat. The voice chat can be received through the method getGroupCall
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// Point in time (Unix timestamp) when the group call is supposed to be started by an administrator
-    public let startDate: Int
+    internal let startDate: Int
 
-    public init(
+    internal init(
         groupCallId: Int,
         startDate: Int
     ) {
@@ -838,34 +838,34 @@ public struct MessageVoiceChatScheduled: Codable {
 }
 
 /// A newly created voice chat
-public struct MessageVoiceChatStarted: Codable {
+internal struct MessageVoiceChatStarted: Codable {
     /// Identifier of the voice chat. The voice chat can be received through the method getGroupCall
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(groupCallId: Int) {
+    internal init(groupCallId: Int) {
         self.groupCallId = groupCallId
     }
 }
 
 /// A message with information about an ended voice chat
-public struct MessageVoiceChatEnded: Codable {
+internal struct MessageVoiceChatEnded: Codable {
     /// Call duration
-    public let duration: Int
+    internal let duration: Int
 
-    public init(duration: Int) {
+    internal init(duration: Int) {
         self.duration = duration
     }
 }
 
 /// A message with information about an invite to a voice chat
-public struct MessageInviteVoiceChatParticipants: Codable {
+internal struct MessageInviteVoiceChatParticipants: Codable {
     /// Identifier of the voice chat. The voice chat can be received through the method getGroupCall
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// Invited user identifiers
-    public let userIds: [Int]
+    internal let userIds: [Int]
 
-    public init(
+    internal init(
         groupCallId: Int,
         userIds: [Int]
     ) {
@@ -875,14 +875,14 @@ public struct MessageInviteVoiceChatParticipants: Codable {
 }
 
 /// A newly created basic group
-public struct MessageBasicGroupChatCreate: Codable {
+internal struct MessageBasicGroupChatCreate: Codable {
     /// User identifiers of members in the basic group
-    public let memberUserIds: [Int]
+    internal let memberUserIds: [Int]
 
     /// Title of the basic group
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         memberUserIds: [Int],
         title: String
     ) {
@@ -892,74 +892,74 @@ public struct MessageBasicGroupChatCreate: Codable {
 }
 
 /// A newly created supergroup or channel
-public struct MessageSupergroupChatCreate: Codable {
+internal struct MessageSupergroupChatCreate: Codable {
     /// Title of the supergroup or channel
-    public let title: String
+    internal let title: String
 
-    public init(title: String) {
+    internal init(title: String) {
         self.title = title
     }
 }
 
 /// An updated chat title
-public struct MessageChatChangeTitle: Codable {
+internal struct MessageChatChangeTitle: Codable {
     /// New chat title
-    public let title: String
+    internal let title: String
 
-    public init(title: String) {
+    internal init(title: String) {
         self.title = title
     }
 }
 
 /// An updated chat photo
-public struct MessageChatChangePhoto: Codable {
+internal struct MessageChatChangePhoto: Codable {
     /// New chat photo
-    public let photo: ChatPhoto
+    internal let photo: ChatPhoto
 
-    public init(photo: ChatPhoto) {
+    internal init(photo: ChatPhoto) {
         self.photo = photo
     }
 }
 
 /// New chat members were added
-public struct MessageChatAddMembers: Codable {
+internal struct MessageChatAddMembers: Codable {
     /// User identifiers of the new members
-    public let memberUserIds: [Int]
+    internal let memberUserIds: [Int]
 
-    public init(memberUserIds: [Int]) {
+    internal init(memberUserIds: [Int]) {
         self.memberUserIds = memberUserIds
     }
 }
 
 /// A chat member was deleted
-public struct MessageChatDeleteMember: Codable {
+internal struct MessageChatDeleteMember: Codable {
     /// User identifier of the deleted chat member
-    public let userId: Int
+    internal let userId: Int
 
-    public init(userId: Int) {
+    internal init(userId: Int) {
         self.userId = userId
     }
 }
 
 /// A basic group was upgraded to a supergroup and was deactivated as the result
-public struct MessageChatUpgradeTo: Codable {
+internal struct MessageChatUpgradeTo: Codable {
     /// Identifier of the supergroup to which the basic group was upgraded
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(supergroupId: Int) {
+    internal init(supergroupId: Int) {
         self.supergroupId = supergroupId
     }
 }
 
 /// A supergroup has been created from a basic group
-public struct MessageChatUpgradeFrom: Codable {
+internal struct MessageChatUpgradeFrom: Codable {
     /// The identifier of the original basic group
-    public let basicGroupId: Int
+    internal let basicGroupId: Int
 
     /// Title of the newly created supergroup
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         basicGroupId: Int,
         title: String
     ) {
@@ -969,47 +969,47 @@ public struct MessageChatUpgradeFrom: Codable {
 }
 
 /// A message has been pinned
-public struct MessagePinMessage: Codable {
+internal struct MessagePinMessage: Codable {
     /// Identifier of the pinned message, can be an identifier of a deleted message or 0
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(messageId: Int64) {
+    internal init(messageId: Int64) {
         self.messageId = messageId
     }
 }
 
 /// The TTL (Time To Live) setting for messages in the chat has been changed
-public struct MessageChatSetTtl: Codable {
+internal struct MessageChatSetTtl: Codable {
     /// New message TTL setting
-    public let ttl: Int
+    internal let ttl: Int
 
-    public init(ttl: Int) {
+    internal init(ttl: Int) {
         self.ttl = ttl
     }
 }
 
 /// A non-standard action has happened in the chat
-public struct MessageCustomServiceAction: Codable {
+internal struct MessageCustomServiceAction: Codable {
     /// Message text to be shown in the chat
-    public let text: String
+    internal let text: String
 
-    public init(text: String) {
+    internal init(text: String) {
         self.text = text
     }
 }
 
 /// A new high score was achieved in a game
-public struct MessageGameScore: Codable {
+internal struct MessageGameScore: Codable {
     /// Identifier of the game; may be different from the games presented in the message with the game
-    public let gameId: TdInt64
+    internal let gameId: TdInt64
 
     /// Identifier of the message with the game, can be an identifier of a deleted message
-    public let gameMessageId: Int64
+    internal let gameMessageId: Int64
 
     /// New score
-    public let score: Int
+    internal let score: Int
 
-    public init(
+    internal init(
         gameId: TdInt64,
         gameMessageId: Int64,
         score: Int
@@ -1021,20 +1021,20 @@ public struct MessageGameScore: Codable {
 }
 
 /// A payment has been completed
-public struct MessagePaymentSuccessful: Codable {
+internal struct MessagePaymentSuccessful: Codable {
     /// Currency for the price of the product
-    public let currency: String
+    internal let currency: String
 
     /// Identifier of the chat, containing the corresponding invoice message; 0 if unknown
-    public let invoiceChatId: Int64
+    internal let invoiceChatId: Int64
 
     /// Identifier of the message with the corresponding invoice; can be an identifier of a deleted message
-    public let invoiceMessageId: Int64
+    internal let invoiceMessageId: Int64
 
     /// Total price for the product, in the smallest units of the currency
-    public let totalAmount: Int64
+    internal let totalAmount: Int64
 
-    public init(
+    internal init(
         currency: String,
         invoiceChatId: Int64,
         invoiceMessageId: Int64,
@@ -1048,29 +1048,29 @@ public struct MessagePaymentSuccessful: Codable {
 }
 
 /// A payment has been completed; for bots only
-public struct MessagePaymentSuccessfulBot: Codable {
+internal struct MessagePaymentSuccessfulBot: Codable {
     /// Currency for price of the product
-    public let currency: String
+    internal let currency: String
 
     /// Invoice payload
-    public let invoicePayload: Data
+    internal let invoicePayload: Data
 
     /// Information about the order; may be null
-    public let orderInfo: OrderInfo?
+    internal let orderInfo: OrderInfo?
 
     /// Provider payment identifier
-    public let providerPaymentChargeId: String
+    internal let providerPaymentChargeId: String
 
     /// Identifier of the shipping option chosen by the user; may be empty if not applicable
-    public let shippingOptionId: String
+    internal let shippingOptionId: String
 
     /// Telegram payment identifier
-    public let telegramPaymentChargeId: String
+    internal let telegramPaymentChargeId: String
 
     /// Total price for the product, in the smallest units of the currency
-    public let totalAmount: Int64
+    internal let totalAmount: Int64
 
-    public init(
+    internal init(
         currency: String,
         invoicePayload: Data,
         orderInfo: OrderInfo?,
@@ -1090,34 +1090,34 @@ public struct MessagePaymentSuccessfulBot: Codable {
 }
 
 /// The current user has connected a website by logging in using Telegram Login Widget on it
-public struct MessageWebsiteConnected: Codable {
+internal struct MessageWebsiteConnected: Codable {
     /// Domain name of the connected website
-    public let domainName: String
+    internal let domainName: String
 
-    public init(domainName: String) {
+    internal init(domainName: String) {
         self.domainName = domainName
     }
 }
 
 /// Telegram Passport data has been sent
-public struct MessagePassportDataSent: Codable {
+internal struct MessagePassportDataSent: Codable {
     /// List of Telegram Passport element types sent
-    public let types: [PassportElementType]
+    internal let types: [PassportElementType]
 
-    public init(types: [PassportElementType]) {
+    internal init(types: [PassportElementType]) {
         self.types = types
     }
 }
 
 /// Telegram Passport data has been received; for bots only
-public struct MessagePassportDataReceived: Codable {
+internal struct MessagePassportDataReceived: Codable {
     /// Encrypted data credentials
-    public let credentials: EncryptedCredentials
+    internal let credentials: EncryptedCredentials
 
     /// List of received Telegram Passport elements
-    public let elements: [EncryptedPassportElement]
+    internal let elements: [EncryptedPassportElement]
 
-    public init(
+    internal init(
         credentials: EncryptedCredentials,
         elements: [EncryptedPassportElement]
     ) {
@@ -1127,17 +1127,17 @@ public struct MessagePassportDataReceived: Codable {
 }
 
 /// A user in the chat came within proximity alert range
-public struct MessageProximityAlertTriggered: Codable {
+internal struct MessageProximityAlertTriggered: Codable {
     /// The distance between the users
-    public let distance: Int
+    internal let distance: Int
 
     /// The user or chat, which triggered the proximity alert
-    public let traveler: MessageSender
+    internal let traveler: MessageSender
 
     /// The user or chat, which subscribed for the proximity alert
-    public let watcher: MessageSender
+    internal let watcher: MessageSender
 
-    public init(
+    internal init(
         distance: Int,
         traveler: MessageSender,
         watcher: MessageSender

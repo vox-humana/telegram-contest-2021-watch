@@ -8,17 +8,17 @@
 import Foundation
 
 /// Represents a date according to the Gregorian calendar
-public struct DateContent: Codable {
+internal struct DateContent: Codable {
     /// Day of the month; 1-31
-    public let day: Int
+    internal let day: Int
 
     /// Month; 1-12
-    public let month: Int
+    internal let month: Int
 
     /// Year; 1-9999
-    public let year: Int
+    internal let year: Int
 
-    public init(
+    internal init(
         day: Int,
         month: Int,
         year: Int

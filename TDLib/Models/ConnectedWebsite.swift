@@ -8,35 +8,35 @@
 import Foundation
 
 /// Contains information about one website the current user is logged in with Telegram
-public struct ConnectedWebsite: Codable {
+internal struct ConnectedWebsite: Codable {
     /// User identifier of a bot linked with the website
-    public let botUserId: Int
+    internal let botUserId: Int
 
     /// The version of a browser used to log in
-    public let browser: String
+    internal let browser: String
 
     /// The domain name of the website
-    public let domainName: String
+    internal let domainName: String
 
     /// Website identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// IP address from which the user was logged in, in human-readable format
-    public let ip: String
+    internal let ip: String
 
     /// Point in time (Unix timestamp) when obtained authorization was last used
-    public let lastActiveDate: Int
+    internal let lastActiveDate: Int
 
     /// Human-readable description of a country and a region, from which the user was logged in, based on the IP address
-    public let location: String
+    internal let location: String
 
     /// Point in time (Unix timestamp) when the user was logged in
-    public let logInDate: Int
+    internal let logInDate: Int
 
     /// Operating system the browser is running on
-    public let platform: String
+    internal let platform: String
 
-    public init(
+    internal init(
         botUserId: Int,
         browser: String,
         domainName: String,

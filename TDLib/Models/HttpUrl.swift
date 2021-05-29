@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains an HTTP URL
-public struct HttpUrl: Codable {
+internal struct HttpUrl: Codable {
     /// The URL
-    public let url: String
+    internal let url: String
 
-    public init(url: String) {
+    internal init(url: String) {
         self.url = url
     }
 }

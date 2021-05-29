@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a sticker set by its identifier
-public struct GetStickerSet: Codable {
+internal struct GetStickerSet: Codable {
     /// Identifier of the sticker set
-    public let setId: TdInt64
+    internal let setId: TdInt64
 
-    public init(setId: TdInt64) {
+    internal init(setId: TdInt64) {
         self.setId = setId
     }
 }

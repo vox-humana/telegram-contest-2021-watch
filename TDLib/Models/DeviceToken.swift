@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a data needed to subscribe for push notifications through registerDevice method. To use specific push notification service, the correct application platform must be specified and a valid server authentication data must be uploaded at https://my.telegram.org
-public enum DeviceToken: Codable {
+internal enum DeviceToken: Codable {
     /// A token for Firebase Cloud Messaging
     case deviceTokenFirebaseCloudMessaging(DeviceTokenFirebaseCloudMessaging)
 
@@ -56,7 +56,7 @@ public enum DeviceToken: Codable {
         case deviceTokenTizenPush
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -96,7 +96,7 @@ public enum DeviceToken: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .deviceTokenFirebaseCloudMessaging(value):
@@ -137,14 +137,14 @@ public enum DeviceToken: Codable {
 }
 
 /// A token for Firebase Cloud Messaging
-public struct DeviceTokenFirebaseCloudMessaging: Codable {
+internal struct DeviceTokenFirebaseCloudMessaging: Codable {
     /// True, if push notifications should be additionally encrypted
-    public let encrypt: Bool
+    internal let encrypt: Bool
 
     /// Device registration token; may be empty to de-register a device
-    public let token: String
+    internal let token: String
 
-    public init(
+    internal init(
         encrypt: Bool,
         token: String
     ) {
@@ -154,14 +154,14 @@ public struct DeviceTokenFirebaseCloudMessaging: Codable {
 }
 
 /// A token for Apple Push Notification service
-public struct DeviceTokenApplePush: Codable {
+internal struct DeviceTokenApplePush: Codable {
     /// Device token; may be empty to de-register a device
-    public let deviceToken: String
+    internal let deviceToken: String
 
     /// True, if App Sandbox is enabled
-    public let isAppSandbox: Bool
+    internal let isAppSandbox: Bool
 
-    public init(
+    internal init(
         deviceToken: String,
         isAppSandbox: Bool
     ) {
@@ -171,17 +171,17 @@ public struct DeviceTokenApplePush: Codable {
 }
 
 /// A token for Apple Push Notification service VoIP notifications
-public struct DeviceTokenApplePushVoIP: Codable {
+internal struct DeviceTokenApplePushVoIP: Codable {
     /// Device token; may be empty to de-register a device
-    public let deviceToken: String
+    internal let deviceToken: String
 
     /// True, if push notifications should be additionally encrypted
-    public let encrypt: Bool
+    internal let encrypt: Bool
 
     /// True, if App Sandbox is enabled
-    public let isAppSandbox: Bool
+    internal let isAppSandbox: Bool
 
-    public init(
+    internal init(
         deviceToken: String,
         encrypt: Bool,
         isAppSandbox: Bool
@@ -193,47 +193,47 @@ public struct DeviceTokenApplePushVoIP: Codable {
 }
 
 /// A token for Windows Push Notification Services
-public struct DeviceTokenWindowsPush: Codable {
+internal struct DeviceTokenWindowsPush: Codable {
     /// The access token that will be used to send notifications; may be empty to de-register a device
-    public let accessToken: String
+    internal let accessToken: String
 
-    public init(accessToken: String) {
+    internal init(accessToken: String) {
         self.accessToken = accessToken
     }
 }
 
 /// A token for Microsoft Push Notification Service
-public struct DeviceTokenMicrosoftPush: Codable {
+internal struct DeviceTokenMicrosoftPush: Codable {
     /// Push notification channel URI; may be empty to de-register a device
-    public let channelUri: String
+    internal let channelUri: String
 
-    public init(channelUri: String) {
+    internal init(channelUri: String) {
         self.channelUri = channelUri
     }
 }
 
 /// A token for Microsoft Push Notification Service VoIP channel
-public struct DeviceTokenMicrosoftPushVoIP: Codable {
+internal struct DeviceTokenMicrosoftPushVoIP: Codable {
     /// Push notification channel URI; may be empty to de-register a device
-    public let channelUri: String
+    internal let channelUri: String
 
-    public init(channelUri: String) {
+    internal init(channelUri: String) {
         self.channelUri = channelUri
     }
 }
 
 /// A token for web Push API
-public struct DeviceTokenWebPush: Codable {
+internal struct DeviceTokenWebPush: Codable {
     /// Base64url-encoded authentication secret
-    public let authBase64url: String
+    internal let authBase64url: String
 
     /// Absolute URL exposed by the push service where the application server can send push messages; may be empty to de-register a device
-    public let endpoint: String
+    internal let endpoint: String
 
     /// Base64url-encoded P-256 elliptic curve Diffie-Hellman public key
-    public let p256dhBase64url: String
+    internal let p256dhBase64url: String
 
-    public init(
+    internal init(
         authBase64url: String,
         endpoint: String,
         p256dhBase64url: String
@@ -245,41 +245,41 @@ public struct DeviceTokenWebPush: Codable {
 }
 
 /// A token for Simple Push API for Firefox OS
-public struct DeviceTokenSimplePush: Codable {
+internal struct DeviceTokenSimplePush: Codable {
     /// Absolute URL exposed by the push service where the application server can send push messages; may be empty to de-register a device
-    public let endpoint: String
+    internal let endpoint: String
 
-    public init(endpoint: String) {
+    internal init(endpoint: String) {
         self.endpoint = endpoint
     }
 }
 
 /// A token for Ubuntu Push Client service
-public struct DeviceTokenUbuntuPush: Codable {
+internal struct DeviceTokenUbuntuPush: Codable {
     /// Token; may be empty to de-register a device
-    public let token: String
+    internal let token: String
 
-    public init(token: String) {
+    internal init(token: String) {
         self.token = token
     }
 }
 
 /// A token for BlackBerry Push Service
-public struct DeviceTokenBlackBerryPush: Codable {
+internal struct DeviceTokenBlackBerryPush: Codable {
     /// Token; may be empty to de-register a device
-    public let token: String
+    internal let token: String
 
-    public init(token: String) {
+    internal init(token: String) {
         self.token = token
     }
 }
 
 /// A token for Tizen Push Service
-public struct DeviceTokenTizenPush: Codable {
+internal struct DeviceTokenTizenPush: Codable {
     /// Push service registration identifier; may be empty to de-register a device
-    public let regId: String
+    internal let regId: String
 
-    public init(regId: String) {
+    internal init(regId: String) {
         self.regId = regId
     }
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns information about a successful payment
-public struct GetPaymentReceipt: Codable {
+internal struct GetPaymentReceipt: Codable {
     /// Chat identifier of the PaymentSuccessful message
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {

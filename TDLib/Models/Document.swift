@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a document of any type
-public struct Document: Codable {
+internal struct Document: Codable {
     /// File containing the document
-    public let document: File
+    internal let document: File
 
     /// Original name of the file; as defined by the sender
-    public let fileName: String
+    internal let fileName: String
 
     /// MIME type of the file; as defined by the sender
-    public let mimeType: String
+    internal let mimeType: String
 
     /// Document minithumbnail; may be null
-    public let minithumbnail: Minithumbnail?
+    internal let minithumbnail: Minithumbnail?
 
     /// Document thumbnail in JPEG or PNG format (PNG will be used only for background patterns); as defined by the sender; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
-    public init(
+    internal init(
         document: File,
         fileName: String,
         mimeType: String,

@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains auto-download settings presets for the user
-public struct AutoDownloadSettingsPresets: Codable {
+internal struct AutoDownloadSettingsPresets: Codable {
     /// Preset with highest settings; supposed to be used by default when connected on Wi-Fi
-    public let high: AutoDownloadSettings
+    internal let high: AutoDownloadSettings
 
     /// Preset with lowest settings; supposed to be used by default when roaming
-    public let low: AutoDownloadSettings
+    internal let low: AutoDownloadSettings
 
     /// Preset with medium settings; supposed to be used by default when using mobile data
-    public let medium: AutoDownloadSettings
+    internal let medium: AutoDownloadSettings
 
-    public init(
+    internal init(
         high: AutoDownloadSettings,
         low: AutoDownloadSettings,
         medium: AutoDownloadSettings

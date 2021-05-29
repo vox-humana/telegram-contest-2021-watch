@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sends a code to verify a phone number to be added to a user's Telegram Passport
-public struct SendPhoneNumberVerificationCode: Codable {
+internal struct SendPhoneNumberVerificationCode: Codable {
     /// The phone number of the user, in international format
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Settings for the authentication of the user's phone number
-    public let settings: PhoneNumberAuthenticationSettings
+    internal let settings: PhoneNumberAuthenticationSettings
 
-    public init(
+    internal init(
         phoneNumber: String,
         settings: PhoneNumberAuthenticationSettings
     ) {

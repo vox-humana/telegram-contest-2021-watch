@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a single rule for managing privacy settings
-public enum UserPrivacySettingRule: Codable {
+internal enum UserPrivacySettingRule: Codable {
     /// A rule to allow all users to do something
     case userPrivacySettingRuleAllowAll
 
@@ -44,7 +44,7 @@ public enum UserPrivacySettingRule: Codable {
         case userPrivacySettingRuleRestrictChatMembers
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -71,7 +71,7 @@ public enum UserPrivacySettingRule: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .userPrivacySettingRuleAllowAll:
@@ -99,41 +99,41 @@ public enum UserPrivacySettingRule: Codable {
 }
 
 /// A rule to allow certain specified users to do something
-public struct UserPrivacySettingRuleAllowUsers: Codable {
+internal struct UserPrivacySettingRuleAllowUsers: Codable {
     /// The user identifiers, total number of users in all rules must not exceed 1000
-    public let userIds: [Int]
+    internal let userIds: [Int]
 
-    public init(userIds: [Int]) {
+    internal init(userIds: [Int]) {
         self.userIds = userIds
     }
 }
 
 /// A rule to allow all members of certain specified basic groups and supergroups to doing something
-public struct UserPrivacySettingRuleAllowChatMembers: Codable {
+internal struct UserPrivacySettingRuleAllowChatMembers: Codable {
     /// The chat identifiers, total number of chats in all rules must not exceed 20
-    public let chatIds: [Int64]
+    internal let chatIds: [Int64]
 
-    public init(chatIds: [Int64]) {
+    internal init(chatIds: [Int64]) {
         self.chatIds = chatIds
     }
 }
 
 /// A rule to restrict all specified users from doing something
-public struct UserPrivacySettingRuleRestrictUsers: Codable {
+internal struct UserPrivacySettingRuleRestrictUsers: Codable {
     /// The user identifiers, total number of users in all rules must not exceed 1000
-    public let userIds: [Int]
+    internal let userIds: [Int]
 
-    public init(userIds: [Int]) {
+    internal init(userIds: [Int]) {
         self.userIds = userIds
     }
 }
 
 /// A rule to restrict all members of specified basic groups and supergroups from doing something
-public struct UserPrivacySettingRuleRestrictChatMembers: Codable {
+internal struct UserPrivacySettingRuleRestrictChatMembers: Codable {
     /// The chat identifiers, total number of chats in all rules must not exceed 20
-    public let chatIds: [Int64]
+    internal let chatIds: [Int64]
 
-    public init(chatIds: [Int64]) {
+    internal init(chatIds: [Int64]) {
         self.chatIds = chatIds
     }
 }

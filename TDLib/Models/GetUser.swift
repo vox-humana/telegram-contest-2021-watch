@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a user by their identifier. This is an offline request if the current user is not a bot
-public struct GetUser: Codable {
+internal struct GetUser: Codable {
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(userId: Int) {
+    internal init(userId: Int) {
         self.userId = userId
     }
 }

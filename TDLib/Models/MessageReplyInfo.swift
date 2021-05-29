@@ -8,23 +8,23 @@
 import Foundation
 
 /// Contains information about replies to a message
-public struct MessageReplyInfo: Codable {
+internal struct MessageReplyInfo: Codable {
     /// Identifier of the last reply to the message
-    public let lastMessageId: Int64
+    internal let lastMessageId: Int64
 
     /// Identifier of the last read incoming reply to the message
-    public let lastReadInboxMessageId: Int64
+    internal let lastReadInboxMessageId: Int64
 
     /// Identifier of the last read outgoing reply to the message
-    public let lastReadOutboxMessageId: Int64
+    internal let lastReadOutboxMessageId: Int64
 
     /// Recent repliers to the message; available in channels with a discussion supergroup
-    public let recentRepliers: [MessageSender]
+    internal let recentRepliers: [MessageSender]
 
     /// Number of times the message was directly or indirectly replied
-    public let replyCount: Int
+    internal let replyCount: Int
 
-    public init(
+    internal init(
         lastMessageId: Int64,
         lastReadInboxMessageId: Int64,
         lastReadOutboxMessageId: Int64,

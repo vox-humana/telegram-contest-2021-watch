@@ -8,11 +8,11 @@
 import Foundation
 
 /// Creates new chat filter. Returns information about the created chat filter
-public struct CreateChatFilter: Codable {
+internal struct CreateChatFilter: Codable {
     /// Chat filter
-    public let filter: ChatFilter
+    internal let filter: ChatFilter
 
-    public init(filter: ChatFilter) {
+    internal init(filter: ChatFilter) {
         self.filter = filter
     }
 }

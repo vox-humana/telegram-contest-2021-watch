@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the value of a string in a language pack
-public enum LanguagePackStringValue: Codable {
+internal enum LanguagePackStringValue: Codable {
     /// An ordinary language pack string
     case languagePackStringValueOrdinary(LanguagePackStringValueOrdinary)
 
@@ -24,7 +24,7 @@ public enum LanguagePackStringValue: Codable {
         case languagePackStringValueDeleted
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -39,7 +39,7 @@ public enum LanguagePackStringValue: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .languagePackStringValueOrdinary(value):
@@ -55,36 +55,36 @@ public enum LanguagePackStringValue: Codable {
 }
 
 /// An ordinary language pack string
-public struct LanguagePackStringValueOrdinary: Codable {
+internal struct LanguagePackStringValueOrdinary: Codable {
     /// String value
-    public let value: String
+    internal let value: String
 
-    public init(value: String) {
+    internal init(value: String) {
         self.value = value
     }
 }
 
 /// A language pack string which has different forms based on the number of some object it mentions. See https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html for more info
-public struct LanguagePackStringValuePluralized: Codable {
+internal struct LanguagePackStringValuePluralized: Codable {
     /// Value for few objects
-    public let fewValue: String
+    internal let fewValue: String
 
     /// Value for many objects
-    public let manyValue: String
+    internal let manyValue: String
 
     /// Value for one object
-    public let oneValue: String
+    internal let oneValue: String
 
     /// Default value
-    public let otherValue: String
+    internal let otherValue: String
 
     /// Value for two objects
-    public let twoValue: String
+    internal let twoValue: String
 
     /// Value for zero objects
-    public let zeroValue: String
+    internal let zeroValue: String
 
-    public init(
+    internal init(
         fewValue: String,
         manyValue: String,
         oneValue: String,

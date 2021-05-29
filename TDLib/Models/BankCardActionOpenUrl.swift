@@ -8,14 +8,14 @@
 import Foundation
 
 /// Describes an action associated with a bank card number
-public struct BankCardActionOpenUrl: Codable {
+internal struct BankCardActionOpenUrl: Codable {
     /// Action text
-    public let text: String
+    internal let text: String
 
     /// The URL to be opened
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         text: String,
         url: String
     ) {

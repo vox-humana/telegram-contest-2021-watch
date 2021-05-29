@@ -8,14 +8,14 @@
 import Foundation
 
 /// Adds an element to the user's Telegram Passport. May return an error with a message "PHONE_VERIFICATION_NEEDED" or "EMAIL_VERIFICATION_NEEDED" if the chosen phone number or the chosen email address must be verified first
-public struct SetPassportElement: Codable {
+internal struct SetPassportElement: Codable {
     /// Input Telegram Passport element
-    public let element: InputPassportElement
+    internal let element: InputPassportElement
 
     /// Password of the current user
-    public let password: String
+    internal let password: String
 
-    public init(
+    internal init(
         element: InputPassportElement,
         password: String
     ) {

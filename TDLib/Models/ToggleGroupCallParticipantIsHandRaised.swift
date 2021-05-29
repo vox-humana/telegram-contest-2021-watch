@@ -8,17 +8,17 @@
 import Foundation
 
 /// Toggles whether a group call participant hand is rased
-public struct ToggleGroupCallParticipantIsHandRaised: Codable {
+internal struct ToggleGroupCallParticipantIsHandRaised: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// Pass true if the user's hand should be raised. Only self hand can be raised. Requires groupCall.can_be_managed group call flag to lower other's hand
-    public let isHandRaised: Bool
+    internal let isHandRaised: Bool
 
     /// Participant identifier
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
-    public init(
+    internal init(
         groupCallId: Int,
         isHandRaised: Bool,
         participantId: MessageSender

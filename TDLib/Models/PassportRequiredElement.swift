@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a description of the required Telegram Passport element that was requested by a service
-public struct PassportRequiredElement: Codable {
+internal struct PassportRequiredElement: Codable {
     /// List of Telegram Passport elements any of which is enough to provide
-    public let suitableElements: [PassportSuitableElement]
+    internal let suitableElements: [PassportSuitableElement]
 
-    public init(suitableElements: [PassportSuitableElement]) {
+    internal init(suitableElements: [PassportSuitableElement]) {
         self.suitableElements = suitableElements
     }
 }

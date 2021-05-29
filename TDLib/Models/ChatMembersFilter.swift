@@ -8,7 +8,7 @@
 import Foundation
 
 /// Specifies the kind of chat members to return in searchChatMembers
-public enum ChatMembersFilter: Codable {
+internal enum ChatMembersFilter: Codable {
     /// Returns contacts of the user
     case chatMembersFilterContacts
 
@@ -40,7 +40,7 @@ public enum ChatMembersFilter: Codable {
         case chatMembersFilterBots
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -62,7 +62,7 @@ public enum ChatMembersFilter: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .chatMembersFilterContacts:
@@ -85,11 +85,11 @@ public enum ChatMembersFilter: Codable {
 }
 
 /// Returns users which can be mentioned in the chat
-public struct ChatMembersFilterMention: Codable {
+internal struct ChatMembersFilterMention: Codable {
     /// If non-zero, the identifier of the current message thread
-    public let messageThreadId: Int64
+    internal let messageThreadId: Int64
 
-    public init(messageThreadId: Int64) {
+    internal init(messageThreadId: Int64) {
         self.messageThreadId = messageThreadId
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a stream to which TDLib internal log is written
-public enum LogStream: Codable {
+internal enum LogStream: Codable {
     /// The log is written to stderr or an OS specific log
     case logStreamDefault
 
@@ -24,7 +24,7 @@ public enum LogStream: Codable {
         case logStreamEmpty
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -38,7 +38,7 @@ public enum LogStream: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .logStreamDefault:
@@ -53,17 +53,17 @@ public enum LogStream: Codable {
 }
 
 /// The log is written to a file
-public struct LogStreamFile: Codable {
+internal struct LogStreamFile: Codable {
     /// The maximum size of the file to where the internal TDLib log is written before the file will be auto-rotated
-    public let maxFileSize: Int64
+    internal let maxFileSize: Int64
 
     /// Path to the file to where the internal TDLib log will be written
-    public let path: String
+    internal let path: String
 
     /// Pass true to additionally redirect stderr to the log file. Ignored on Windows
-    public let redirectStderr: Bool
+    internal let redirectStderr: Bool
 
-    public init(
+    internal init(
         maxFileSize: Int64,
         path: String,
         redirectStderr: Bool

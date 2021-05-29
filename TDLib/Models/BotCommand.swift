@@ -8,13 +8,13 @@
 import Foundation
 
 /// Represents a command supported by a bot
-public struct BotCommand: Codable {
+internal struct BotCommand: Codable {
     /// Text of the bot command
-    public let command: String
+    internal let command: String
 
-    public let description: String
+    internal let description: String
 
-    public init(
+    internal init(
         command: String,
         description: String
     ) {

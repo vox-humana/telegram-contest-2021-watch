@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of a chat
-public enum ChatType: Codable {
+internal enum ChatType: Codable {
     /// An ordinary chat with a user
     case chatTypePrivate(ChatTypePrivate)
 
@@ -28,7 +28,7 @@ public enum ChatType: Codable {
         case chatTypeSecret
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -47,7 +47,7 @@ public enum ChatType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .chatTypePrivate(value):
@@ -67,34 +67,34 @@ public enum ChatType: Codable {
 }
 
 /// An ordinary chat with a user
-public struct ChatTypePrivate: Codable {
+internal struct ChatTypePrivate: Codable {
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(userId: Int) {
+    internal init(userId: Int) {
         self.userId = userId
     }
 }
 
 /// A basic group (i.e., a chat with 0-200 other users)
-public struct ChatTypeBasicGroup: Codable {
+internal struct ChatTypeBasicGroup: Codable {
     /// Basic group identifier
-    public let basicGroupId: Int
+    internal let basicGroupId: Int
 
-    public init(basicGroupId: Int) {
+    internal init(basicGroupId: Int) {
         self.basicGroupId = basicGroupId
     }
 }
 
 /// A supergroup (i.e. a chat with up to GetOption("supergroup_max_size") other users), or channel (with unlimited members)
-public struct ChatTypeSupergroup: Codable {
+internal struct ChatTypeSupergroup: Codable {
     /// True, if the supergroup is a channel
-    public let isChannel: Bool
+    internal let isChannel: Bool
 
     /// Supergroup or channel identifier
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(
+    internal init(
         isChannel: Bool,
         supergroupId: Int
     ) {
@@ -104,14 +104,14 @@ public struct ChatTypeSupergroup: Codable {
 }
 
 /// A secret chat with a user
-public struct ChatTypeSecret: Codable {
+internal struct ChatTypeSecret: Codable {
     /// Secret chat identifier
-    public let secretChatId: Int
+    internal let secretChatId: Int
 
     /// User identifier of the secret chat peer
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         secretChatId: Int,
         userId: Int
     ) {

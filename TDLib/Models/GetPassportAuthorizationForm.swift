@@ -8,20 +8,20 @@
 import Foundation
 
 /// Returns a Telegram Passport authorization form for sharing data with a service
-public struct GetPassportAuthorizationForm: Codable {
+internal struct GetPassportAuthorizationForm: Codable {
     /// User identifier of the service's bot
-    public let botUserId: Int
+    internal let botUserId: Int
 
     /// Authorization form nonce provided by the service
-    public let nonce: String
+    internal let nonce: String
 
     /// Service's public_key
-    public let publicKey: String
+    internal let publicKey: String
 
     /// Telegram Passport element types requested by the service
-    public let scope: String
+    internal let scope: String
 
-    public init(
+    internal init(
         botUserId: Int,
         nonce: String,
         publicKey: String,

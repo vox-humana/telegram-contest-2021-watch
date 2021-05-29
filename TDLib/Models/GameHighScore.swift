@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains one row of the game high score table
-public struct GameHighScore: Codable {
+internal struct GameHighScore: Codable {
     /// Position in the high score table
-    public let position: Int
+    internal let position: Int
 
     /// User score
-    public let score: Int
+    internal let score: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         position: Int,
         score: Int,
         userId: Int

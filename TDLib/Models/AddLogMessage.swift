@@ -8,14 +8,14 @@
 import Foundation
 
 /// Adds a message to TDLib internal log. Can be called synchronously
-public struct AddLogMessage: Codable {
+internal struct AddLogMessage: Codable {
     /// Text of a message to log
-    public let text: String
+    internal let text: String
 
     /// The minimum verbosity level needed for the message to be logged; 0-1023
-    public let verbosityLevel: Int
+    internal let verbosityLevel: Int
 
-    public init(
+    internal init(
         text: String,
         verbosityLevel: Int
     ) {

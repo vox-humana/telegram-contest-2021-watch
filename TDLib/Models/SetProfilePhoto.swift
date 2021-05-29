@@ -8,11 +8,11 @@
 import Foundation
 
 /// Changes a profile photo for the current user
-public struct SetProfilePhoto: Codable {
+internal struct SetProfilePhoto: Codable {
     /// Profile photo to set
-    public let photo: InputChatPhoto
+    internal let photo: InputChatPhoto
 
-    public init(photo: InputChatPhoto) {
+    internal init(photo: InputChatPhoto) {
         self.photo = photo
     }
 }

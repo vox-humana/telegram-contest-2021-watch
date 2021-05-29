@@ -8,11 +8,11 @@
 import Foundation
 
 /// A simple object containing a number; for testing only
-public struct TestInt: Codable {
+internal struct TestInt: Codable {
     /// Number
-    public let value: Int
+    internal let value: Int
 
-    public init(value: Int) {
+    internal init(value: Int) {
         self.value = value
     }
 }

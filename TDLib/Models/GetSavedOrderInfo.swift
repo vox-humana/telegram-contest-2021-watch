@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns saved order info, if any
-public struct GetSavedOrderInfo: Codable {
-    public init() {}
+internal struct GetSavedOrderInfo: Codable {
+    internal init() {}
 }

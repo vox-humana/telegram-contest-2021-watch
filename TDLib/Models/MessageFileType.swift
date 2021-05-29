@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about a file with messages exported from another app
-public enum MessageFileType: Codable {
+internal enum MessageFileType: Codable {
     /// The messages was exported from a private chat
     case messageFileTypePrivate(MessageFileTypePrivate)
 
@@ -24,7 +24,7 @@ public enum MessageFileType: Codable {
         case messageFileTypeUnknown
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -39,7 +39,7 @@ public enum MessageFileType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .messageFileTypePrivate(value):
@@ -55,21 +55,21 @@ public enum MessageFileType: Codable {
 }
 
 /// The messages was exported from a private chat
-public struct MessageFileTypePrivate: Codable {
+internal struct MessageFileTypePrivate: Codable {
     /// Name of the other party; may be empty if unrecognized
-    public let name: String
+    internal let name: String
 
-    public init(name: String) {
+    internal init(name: String) {
         self.name = name
     }
 }
 
 /// The messages was exported from a group chat
-public struct MessageFileTypeGroup: Codable {
+internal struct MessageFileTypeGroup: Codable {
     /// Title of the group chat; may be empty if unrecognized
-    public let title: String
+    internal let title: String
 
-    public init(title: String) {
+    internal init(title: String) {
         self.title = title
     }
 }

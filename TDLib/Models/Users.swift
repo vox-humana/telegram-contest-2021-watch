@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a list of users
-public struct Users: Codable {
+internal struct Users: Codable {
     /// Approximate total count of users found
-    public let totalCount: Int
+    internal let totalCount: Int
 
     /// A list of user identifiers
-    public let userIds: [Int]
+    internal let userIds: [Int]
 
-    public init(
+    internal init(
         totalCount: Int,
         userIds: [Int]
     ) {

@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a call
-public struct Call: Codable {
+internal struct Call: Codable {
     /// Call identifier, not persistent
-    public let id: Int
+    internal let id: Int
 
     /// True, if the call is outgoing
-    public let isOutgoing: Bool
+    internal let isOutgoing: Bool
 
     /// True, if the call is a video call
-    public let isVideo: Bool
+    internal let isVideo: Bool
 
     /// Call state
-    public let state: CallState
+    internal let state: CallState
 
     /// Peer user identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         id: Int,
         isOutgoing: Bool,
         isVideo: Bool,

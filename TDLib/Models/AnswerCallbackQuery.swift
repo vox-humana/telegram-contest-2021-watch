@@ -8,23 +8,23 @@
 import Foundation
 
 /// Sets the result of a callback query; for bots only
-public struct AnswerCallbackQuery: Codable {
+internal struct AnswerCallbackQuery: Codable {
     /// Time during which the result of the query can be cached, in seconds
-    public let cacheTime: Int
+    internal let cacheTime: Int
 
     /// Identifier of the callback query
-    public let callbackQueryId: TdInt64
+    internal let callbackQueryId: TdInt64
 
     /// If true, an alert should be shown to the user instead of a toast notification
-    public let showAlert: Bool
+    internal let showAlert: Bool
 
     /// Text of the answer
-    public let text: String
+    internal let text: String
 
     /// URL to be opened
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         cacheTime: Int,
         callbackQueryId: TdInt64,
         showAlert: Bool,

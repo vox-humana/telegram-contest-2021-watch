@@ -8,14 +8,14 @@
 import Foundation
 
 /// Deletes all messages sent by the specified user to a chat. Supported only for supergroups; requires can_delete_messages administrator privileges
-public struct DeleteChatMessagesFromUser: Codable {
+internal struct DeleteChatMessagesFromUser: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         userId: Int
     ) {

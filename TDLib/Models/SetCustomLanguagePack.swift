@@ -8,14 +8,14 @@
 import Foundation
 
 /// Adds or changes a custom local language pack to the current localization target
-public struct SetCustomLanguagePack: Codable {
+internal struct SetCustomLanguagePack: Codable {
     /// Information about the language pack. Language pack ID must start with 'X', consist only of English letters, digits and hyphens, and must not exceed 64 characters. Can be called before authorization
-    public let info: LanguagePackInfo
+    internal let info: LanguagePackInfo
 
     /// Strings of the new language pack
-    public let strings: [LanguagePackString]
+    internal let strings: [LanguagePackString]
 
-    public init(
+    internal init(
         info: LanguagePackInfo,
         strings: [LanguagePackString]
     ) {

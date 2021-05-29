@@ -8,14 +8,14 @@
 import Foundation
 
 /// Searches for stickers from public sticker sets that correspond to a given emoji
-public struct SearchStickers: Codable {
+internal struct SearchStickers: Codable {
     /// String representation of emoji; must be non-empty
-    public let emoji: String
+    internal let emoji: String
 
     /// The maximum number of stickers to be returned
-    public let limit: Int
+    internal let limit: Int
 
-    public init(
+    internal init(
         emoji: String,
         limit: Int
     ) {

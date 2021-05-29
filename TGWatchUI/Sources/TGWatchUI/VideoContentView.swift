@@ -20,7 +20,7 @@ public struct VideoContentView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .center, spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .center) {
                     image

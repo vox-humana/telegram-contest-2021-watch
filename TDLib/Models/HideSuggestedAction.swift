@@ -8,11 +8,11 @@
 import Foundation
 
 /// Hides a suggested action
-public struct HideSuggestedAction: Codable {
+internal struct HideSuggestedAction: Codable {
     /// Suggested action to hide
-    public let action: SuggestedAction
+    internal let action: SuggestedAction
 
-    public init(action: SuggestedAction) {
+    internal init(action: SuggestedAction) {
         self.action = action
     }
 }

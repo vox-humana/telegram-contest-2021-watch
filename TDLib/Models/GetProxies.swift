@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns list of proxies that are currently set up. Can be called before authorization
-public struct GetProxies: Codable {
-    public init() {}
+internal struct GetProxies: Codable {
+    internal init() {}
 }

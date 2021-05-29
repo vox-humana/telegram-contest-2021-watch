@@ -8,23 +8,23 @@
 import Foundation
 
 /// Changes the password for the user. If a new recovery email address is specified, then the change will not be applied until the new recovery email address is confirmed
-public struct SetPassword: Codable {
+internal struct SetPassword: Codable {
     /// New password hint; may be empty
-    public let newHint: String
+    internal let newHint: String
 
     /// New password of the user; may be empty to remove the password
-    public let newPassword: String
+    internal let newPassword: String
 
     /// New recovery email address; may be empty
-    public let newRecoveryEmailAddress: String
+    internal let newRecoveryEmailAddress: String
 
     /// Previous password of the user
-    public let oldPassword: String
+    internal let oldPassword: String
 
     /// Pass true if the recovery email address should be changed
-    public let setRecoveryEmailAddress: Bool
+    internal let setRecoveryEmailAddress: Bool
 
-    public init(
+    internal init(
         newHint: String,
         newPassword: String,
         newRecoveryEmailAddress: String,

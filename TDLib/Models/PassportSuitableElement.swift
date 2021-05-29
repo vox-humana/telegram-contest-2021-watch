@@ -8,20 +8,20 @@
 import Foundation
 
 /// Contains information about a Telegram Passport element that was requested by a service
-public struct PassportSuitableElement: Codable {
+internal struct PassportSuitableElement: Codable {
     /// True, if personal details must include the user's name in the language of their country of residence
-    public let isNativeNameRequired: Bool
+    internal let isNativeNameRequired: Bool
 
     /// True, if a selfie is required with the identity document
-    public let isSelfieRequired: Bool
+    internal let isSelfieRequired: Bool
 
     /// True, if a certified English translation is required with the document
-    public let isTranslationRequired: Bool
+    internal let isTranslationRequired: Bool
 
     /// Type of the element
-    public let type: PassportElementType
+    internal let type: PassportElementType
 
-    public init(
+    internal init(
         isNativeNameRequired: Bool,
         isSelfieRequired: Bool,
         isTranslationRequired: Bool,

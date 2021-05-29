@@ -8,17 +8,17 @@
 import Foundation
 
 /// Searches for installed sticker sets by looking for specified query in their title and name
-public struct SearchInstalledStickerSets: Codable {
+internal struct SearchInstalledStickerSets: Codable {
     /// Pass true to return mask sticker sets; pass false to return ordinary sticker sets
-    public let isMasks: Bool
+    internal let isMasks: Bool
 
     /// The maximum number of sticker sets to return
-    public let limit: Int
+    internal let limit: Int
 
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(
+    internal init(
         isMasks: Bool,
         limit: Int,
         query: String

@@ -8,47 +8,47 @@
 import Foundation
 
 /// Describes a join response candidate for interaction with tgcalls
-public struct GroupCallJoinResponseCandidate: Codable {
+internal struct GroupCallJoinResponseCandidate: Codable {
     /// Value of the field component
-    public let component: String
+    internal let component: String
 
     /// Value of the field foundation
-    public let foundation: String
+    internal let foundation: String
 
     /// Value of the field generation
-    public let generation: String
+    internal let generation: String
 
     /// Value of the field id
-    public let id: String
+    internal let id: String
 
     /// Value of the field ip
-    public let ip: String
+    internal let ip: String
 
     /// Value of the field network
-    public let network: String
+    internal let network: String
 
     /// Value of the field port
-    public let port: String
+    internal let port: String
 
     /// Value of the field priority
-    public let priority: String
+    internal let priority: String
 
     /// Value of the field protocol
-    public let `protocol`: String
+    internal let `protocol`: String
 
     /// Value of the field rel_addr
-    public let relAddr: String
+    internal let relAddr: String
 
     /// Value of the field rel_port
-    public let relPort: String
+    internal let relPort: String
 
     /// Value of the field tcp_type
-    public let tcpType: String
+    internal let tcpType: String
 
     /// Value of the field type
-    public let type: String
+    internal let type: String
 
-    public init(
+    internal init(
         component: String,
         foundation: String,
         generation: String,

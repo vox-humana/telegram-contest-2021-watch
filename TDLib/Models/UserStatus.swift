@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the last time the user was online
-public enum UserStatus: Codable {
+internal enum UserStatus: Codable {
     /// The user status was never changed
     case userStatusEmpty
 
@@ -36,7 +36,7 @@ public enum UserStatus: Codable {
         case userStatusLastMonth
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -57,7 +57,7 @@ public enum UserStatus: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .userStatusEmpty:
@@ -79,21 +79,21 @@ public enum UserStatus: Codable {
 }
 
 /// The user is online
-public struct UserStatusOnline: Codable {
+internal struct UserStatusOnline: Codable {
     /// Point in time (Unix timestamp) when the user's online status will expire
-    public let expires: Int
+    internal let expires: Int
 
-    public init(expires: Int) {
+    internal init(expires: Int) {
         self.expires = expires
     }
 }
 
 /// The user is offline
-public struct UserStatusOffline: Codable {
+internal struct UserStatusOffline: Codable {
     /// Point in time (Unix timestamp) when the user was last online
-    public let wasOnline: Int
+    internal let wasOnline: Int
 
-    public init(wasOnline: Int) {
+    internal init(wasOnline: Int) {
         self.wasOnline = wasOnline
     }
 }

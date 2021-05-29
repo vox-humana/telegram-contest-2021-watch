@@ -8,23 +8,23 @@
 import Foundation
 
 /// Represents a basic group of 0-200 users (must be upgraded to a supergroup to accommodate more than 200 users)
-public struct BasicGroup: Codable {
+internal struct BasicGroup: Codable {
     /// Group identifier
-    public let id: Int
+    internal let id: Int
 
     /// True, if the group is active
-    public let isActive: Bool
+    internal let isActive: Bool
 
     /// Number of members in the group
-    public let memberCount: Int
+    internal let memberCount: Int
 
     /// Status of the current user in the group
-    public let status: ChatMemberStatus
+    internal let status: ChatMemberStatus
 
     /// Identifier of the supergroup to which this group was upgraded; 0 if none
-    public let upgradedToSupergroupId: Int
+    internal let upgradedToSupergroupId: Int
 
-    public init(
+    internal init(
         id: Int,
         isActive: Bool,
         memberCount: Int,

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns an existing chat corresponding to a known basic group
-public struct CreateBasicGroupChat: Codable {
+internal struct CreateBasicGroupChat: Codable {
     /// Basic group identifier
-    public let basicGroupId: Int
+    internal let basicGroupId: Int
 
     /// If true, the chat will be created without network request. In this case all information about the chat except its type, title and photo can be incorrect
-    public let force: Bool
+    internal let force: Bool
 
-    public init(
+    internal init(
         basicGroupId: Int,
         force: Bool
     ) {

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Sends a code to verify an email address to be added to a user's Telegram Passport
-public struct SendEmailAddressVerificationCode: Codable {
+internal struct SendEmailAddressVerificationCode: Codable {
     /// Email address
-    public let emailAddress: String
+    internal let emailAddress: String
 
-    public init(emailAddress: String) {
+    internal init(emailAddress: String) {
         self.emailAddress = emailAddress
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 /// A detailed statistics about a message
-public struct MessageStatistics: Codable {
+internal struct MessageStatistics: Codable {
     /// A graph containing number of message views and shares
-    public let messageInteractionGraph: StatisticalGraph
+    internal let messageInteractionGraph: StatisticalGraph
 
-    public init(messageInteractionGraph: StatisticalGraph) {
+    internal init(messageInteractionGraph: StatisticalGraph) {
         self.messageInteractionGraph = messageInteractionGraph
     }
 }

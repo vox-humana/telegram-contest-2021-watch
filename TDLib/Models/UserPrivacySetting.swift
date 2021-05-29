@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes available user privacy settings
-public enum UserPrivacySetting: Codable {
+internal enum UserPrivacySetting: Codable {
     /// A privacy setting for managing whether the user's online status is visible
     case userPrivacySettingShowStatus
 
@@ -44,7 +44,7 @@ public enum UserPrivacySetting: Codable {
         case userPrivacySettingAllowFindingByPhoneNumber
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -67,7 +67,7 @@ public enum UserPrivacySetting: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .userPrivacySettingShowStatus:

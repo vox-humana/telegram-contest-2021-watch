@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of t.me URLs
-public struct TMeUrls: Codable {
+internal struct TMeUrls: Codable {
     /// List of URLs
-    public let urls: [TMeUrl]
+    internal let urls: [TMeUrl]
 
-    public init(urls: [TMeUrl]) {
+    internal init(urls: [TMeUrl]) {
         self.urls = urls
     }
 }

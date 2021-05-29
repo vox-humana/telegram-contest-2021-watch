@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns default icon name for a filter. Can be called synchronously
-public struct GetChatFilterDefaultIconName: Codable {
+internal struct GetChatFilterDefaultIconName: Codable {
     /// Chat filter
-    public let filter: ChatFilter
+    internal let filter: ChatFilter
 
-    public init(filter: ChatFilter) {
+    internal init(filter: ChatFilter) {
         self.filter = filter
     }
 }

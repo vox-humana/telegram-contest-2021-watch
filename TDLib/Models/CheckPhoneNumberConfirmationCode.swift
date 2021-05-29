@@ -8,11 +8,11 @@
 import Foundation
 
 /// Checks phone number confirmation code
-public struct CheckPhoneNumberConfirmationCode: Codable {
+internal struct CheckPhoneNumberConfirmationCode: Codable {
     /// The phone number confirmation code
-    public let code: String
+    internal let code: String
 
-    public init(code: String) {
+    internal init(code: String) {
         self.code = code
     }
 }

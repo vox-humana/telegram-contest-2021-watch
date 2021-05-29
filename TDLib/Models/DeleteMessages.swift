@@ -8,17 +8,17 @@
 import Foundation
 
 /// Deletes messages
-public struct DeleteMessages: Codable {
+internal struct DeleteMessages: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifiers of the messages to be deleted
-    public let messageIds: [Int64]
+    internal let messageIds: [Int64]
 
     /// Pass true to try to delete messages for all chat members. Always true for supergroups, channels and secret chats
-    public let revoke: Bool
+    internal let revoke: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         messageIds: [Int64],
         revoke: Bool

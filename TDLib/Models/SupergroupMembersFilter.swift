@@ -8,7 +8,7 @@
 import Foundation
 
 /// Specifies the kind of chat members to return in getSupergroupMembers
-public enum SupergroupMembersFilter: Codable {
+internal enum SupergroupMembersFilter: Codable {
     /// Returns recently active users in reverse chronological order
     case supergroupMembersFilterRecent
 
@@ -44,7 +44,7 @@ public enum SupergroupMembersFilter: Codable {
         case supergroupMembersFilterBots
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -72,7 +72,7 @@ public enum SupergroupMembersFilter: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .supergroupMembersFilterRecent:
@@ -101,54 +101,54 @@ public enum SupergroupMembersFilter: Codable {
 }
 
 /// Returns contacts of the user, which are members of the supergroup or channel
-public struct SupergroupMembersFilterContacts: Codable {
+internal struct SupergroupMembersFilterContacts: Codable {
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(query: String) {
+    internal init(query: String) {
         self.query = query
     }
 }
 
 /// Used to search for supergroup or channel members via a (string) query
-public struct SupergroupMembersFilterSearch: Codable {
+internal struct SupergroupMembersFilterSearch: Codable {
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(query: String) {
+    internal init(query: String) {
         self.query = query
     }
 }
 
 /// Returns restricted supergroup members; can be used only by administrators
-public struct SupergroupMembersFilterRestricted: Codable {
+internal struct SupergroupMembersFilterRestricted: Codable {
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(query: String) {
+    internal init(query: String) {
         self.query = query
     }
 }
 
 /// Returns users banned from the supergroup or channel; can be used only by administrators
-public struct SupergroupMembersFilterBanned: Codable {
+internal struct SupergroupMembersFilterBanned: Codable {
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(query: String) {
+    internal init(query: String) {
         self.query = query
     }
 }
 
 /// Returns users which can be mentioned in the supergroup
-public struct SupergroupMembersFilterMention: Codable {
+internal struct SupergroupMembersFilterMention: Codable {
     /// If non-zero, the identifier of the current message thread
-    public let messageThreadId: Int64
+    internal let messageThreadId: Int64
 
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(
+    internal init(
         messageThreadId: Int64,
         query: String
     ) {

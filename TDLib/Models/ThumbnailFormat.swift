@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes format of the thumbnail
-public enum ThumbnailFormat: Codable {
+internal enum ThumbnailFormat: Codable {
     /// The thumbnail is in JPEG format
     case thumbnailFormatJpeg
 
@@ -36,7 +36,7 @@ public enum ThumbnailFormat: Codable {
         case thumbnailFormatMpeg4
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -55,7 +55,7 @@ public enum ThumbnailFormat: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .thumbnailFormatJpeg:

@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes one answer option of a poll
-public struct PollOption: Codable {
+internal struct PollOption: Codable {
     /// True, if the option is being chosen by a pending setPollAnswer request
-    public let isBeingChosen: Bool
+    internal let isBeingChosen: Bool
 
     /// True, if the option was chosen by the user
-    public let isChosen: Bool
+    internal let isChosen: Bool
 
     /// Option text; 1-100 characters
-    public let text: String
+    internal let text: String
 
     /// The percentage of votes for this option; 0-100
-    public let votePercentage: Int
+    internal let votePercentage: Int
 
     /// Number of voters for this option, available only for closed or voted polls
-    public let voterCount: Int
+    internal let voterCount: Int
 
-    public init(
+    internal init(
         isBeingChosen: Bool,
         isChosen: Bool,
         text: String,

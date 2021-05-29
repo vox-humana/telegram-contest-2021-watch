@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns all active sessions of the current user
-public struct GetActiveSessions: Codable {
-    public init() {}
+internal struct GetActiveSessions: Codable {
+    internal init() {}
 }

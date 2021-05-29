@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes the position of a sticker in the set to which it belongs; for bots only. The sticker set must have been created by the bot
-public struct SetStickerPositionInSet: Codable {
+internal struct SetStickerPositionInSet: Codable {
     /// New position of the sticker in the set, zero-based
-    public let position: Int
+    internal let position: Int
 
     /// Sticker
-    public let sticker: InputFile
+    internal let sticker: InputFile
 
-    public init(
+    internal init(
         position: Int,
         sticker: InputFile
     ) {

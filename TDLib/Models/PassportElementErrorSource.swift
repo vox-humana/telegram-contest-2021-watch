@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains the description of an error in a Telegram Passport element
-public enum PassportElementErrorSource: Codable {
+internal enum PassportElementErrorSource: Codable {
     /// The element contains an error in an unspecified place. The error will be considered resolved when new data is added
     case passportElementErrorSourceUnspecified
 
@@ -48,7 +48,7 @@ public enum PassportElementErrorSource: Codable {
         case passportElementErrorSourceFiles
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -76,7 +76,7 @@ public enum PassportElementErrorSource: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .passportElementErrorSourceUnspecified:
@@ -105,31 +105,31 @@ public enum PassportElementErrorSource: Codable {
 }
 
 /// One of the data fields contains an error. The error will be considered resolved when the value of the field changes
-public struct PassportElementErrorSourceDataField: Codable {
+internal struct PassportElementErrorSourceDataField: Codable {
     /// Field name
-    public let fieldName: String
+    internal let fieldName: String
 
-    public init(fieldName: String) {
+    internal init(fieldName: String) {
         self.fieldName = fieldName
     }
 }
 
 /// One of files with the translation of the document contains an error. The error will be considered resolved when the file changes
-public struct PassportElementErrorSourceTranslationFile: Codable {
+internal struct PassportElementErrorSourceTranslationFile: Codable {
     /// Index of a file with the error
-    public let fileIndex: Int
+    internal let fileIndex: Int
 
-    public init(fileIndex: Int) {
+    internal init(fileIndex: Int) {
         self.fileIndex = fileIndex
     }
 }
 
 /// The file contains an error. The error will be considered resolved when the file changes
-public struct PassportElementErrorSourceFile: Codable {
+internal struct PassportElementErrorSourceFile: Codable {
     /// Index of a file with the error
-    public let fileIndex: Int
+    internal let fileIndex: Int
 
-    public init(fileIndex: Int) {
+    internal init(fileIndex: Int) {
         self.fileIndex = fileIndex
     }
 }

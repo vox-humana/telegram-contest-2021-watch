@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of recommended chat filters
-public struct RecommendedChatFilters: Codable {
+internal struct RecommendedChatFilters: Codable {
     /// List of recommended chat filters
-    public let chatFilters: [RecommendedChatFilter]
+    internal let chatFilters: [RecommendedChatFilter]
 
-    public init(chatFilters: [RecommendedChatFilter]) {
+    internal init(chatFilters: [RecommendedChatFilter]) {
         self.chatFilters = chatFilters
     }
 }

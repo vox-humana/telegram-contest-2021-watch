@@ -8,17 +8,17 @@
 import Foundation
 
 /// Sends phone number confirmation code. Should be called when user presses "https://t.me/confirmphone?phone=*******&hash=**********" or "tg://confirmphone?phone=*******&hash=**********" link
-public struct SendPhoneNumberConfirmationCode: Codable {
+internal struct SendPhoneNumberConfirmationCode: Codable {
     /// Value of the "hash" parameter from the link
-    public let hash: String
+    internal let hash: String
 
     /// Value of the "phone" parameter from the link
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Settings for the authentication of the user's phone number
-    public let settings: PhoneNumberAuthenticationSettings
+    internal let settings: PhoneNumberAuthenticationSettings
 
-    public init(
+    internal init(
         hash: String,
         phoneNumber: String,
         settings: PhoneNumberAuthenticationSettings

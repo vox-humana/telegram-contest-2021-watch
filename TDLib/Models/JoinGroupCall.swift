@@ -8,26 +8,26 @@
 import Foundation
 
 /// Joins an active group call
-public struct JoinGroupCall: Codable {
+internal struct JoinGroupCall: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// If non-empty, invite hash to be used to join the group call without being muted by administrators
-    public let inviteHash: String
+    internal let inviteHash: String
 
     /// True, if the user's microphone is muted
-    public let isMuted: Bool
+    internal let isMuted: Bool
 
     /// Identifier of a group call participant, which will be used to join the call; voice chats only
-    public let participantId: MessageSender
+    internal let participantId: MessageSender
 
     /// Group join payload; received from tgcalls
-    public let payload: GroupCallPayload
+    internal let payload: GroupCallPayload
 
     /// Caller synchronization source identifier; received from tgcalls
-    public let source: Int
+    internal let source: Int
 
-    public init(
+    internal init(
         groupCallId: Int,
         inviteHash: String,
         isMuted: Bool,

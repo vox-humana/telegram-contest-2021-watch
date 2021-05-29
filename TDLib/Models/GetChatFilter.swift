@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a chat filter by its identifier
-public struct GetChatFilter: Codable {
+internal struct GetChatFilter: Codable {
     /// Chat filter identifier
-    public let chatFilterId: Int
+    internal let chatFilterId: Int
 
-    public init(chatFilterId: Int) {
+    internal init(chatFilterId: Int) {
         self.chatFilterId = chatFilterId
     }
 }

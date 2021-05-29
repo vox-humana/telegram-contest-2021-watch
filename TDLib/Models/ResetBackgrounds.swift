@@ -8,6 +8,6 @@
 import Foundation
 
 /// Resets list of installed backgrounds to its default value
-public struct ResetBackgrounds: Codable {
-    public init() {}
+internal struct ResetBackgrounds: Codable {
+    internal init() {}
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Fetches the latest versions of all strings from a language pack in the current localization target from the server. This method shouldn't be called explicitly for the current used/base language packs. Can be called before authorization
-public struct SynchronizeLanguagePack: Codable {
+internal struct SynchronizeLanguagePack: Codable {
     /// Language pack identifier
-    public let languagePackId: String
+    internal let languagePackId: String
 
-    public init(languagePackId: String) {
+    internal init(languagePackId: String) {
         self.languagePackId = languagePackId
     }
 }

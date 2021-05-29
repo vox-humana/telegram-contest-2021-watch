@@ -8,59 +8,59 @@
 import Foundation
 
 /// Represents a user
-public struct User: Codable {
+internal struct User: Codable {
     /// First name of the user
-    public let firstName: String
+    internal let firstName: String
 
     /// If false, the user is inaccessible, and the only information known about the user is inside this class. It can't be passed to any method except GetUser
-    public let haveAccess: Bool
+    internal let haveAccess: Bool
 
     /// User identifier
-    public let id: Int
+    internal let id: Int
 
     /// The user is a contact of the current user
-    public let isContact: Bool
+    internal let isContact: Bool
 
     /// True, if many users reported this user as a fake account
-    public let isFake: Bool
+    internal let isFake: Bool
 
     /// The user is a contact of the current user and the current user is a contact of the user
-    public let isMutualContact: Bool
+    internal let isMutualContact: Bool
 
     /// True, if many users reported this user as a scam
-    public let isScam: Bool
+    internal let isScam: Bool
 
     /// True, if the user is Telegram support account
-    public let isSupport: Bool
+    internal let isSupport: Bool
 
     /// True, if the user is verified
-    public let isVerified: Bool
+    internal let isVerified: Bool
 
     /// IETF language tag of the user's language; only available to bots
-    public let languageCode: String
+    internal let languageCode: String
 
     /// Last name of the user
-    public let lastName: String
+    internal let lastName: String
 
     /// Phone number of the user
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Profile photo of the user; may be null
-    public let profilePhoto: ProfilePhoto?
+    internal let profilePhoto: ProfilePhoto?
 
     /// If non-empty, it contains a human-readable description of the reason why access to this user must be restricted
-    public let restrictionReason: String
+    internal let restrictionReason: String
 
     /// Current online status of the user
-    public let status: UserStatus
+    internal let status: UserStatus
 
     /// Type of the user
-    public let type: UserType
+    internal let type: UserType
 
     /// Username of the user
-    public let username: String
+    internal let username: String
 
-    public init(
+    internal init(
         firstName: String,
         haveAccess: Bool,
         id: Int,

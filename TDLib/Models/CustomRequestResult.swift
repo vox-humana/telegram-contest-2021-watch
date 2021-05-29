@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains the result of a custom request
-public struct CustomRequestResult: Codable {
+internal struct CustomRequestResult: Codable {
     /// A JSON-serialized result
-    public let result: String
+    internal let result: String
 
-    public init(result: String) {
+    internal init(result: String) {
         self.result = result
     }
 }

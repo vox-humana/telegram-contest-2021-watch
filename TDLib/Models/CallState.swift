@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the current call state
-public enum CallState: Codable {
+internal enum CallState: Codable {
     /// The call is pending, waiting to be accepted by a user
     case callStatePending(CallStatePending)
 
@@ -36,7 +36,7 @@ public enum CallState: Codable {
         case callStateError
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -59,7 +59,7 @@ public enum CallState: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .callStatePending(value):
@@ -83,14 +83,14 @@ public enum CallState: Codable {
 }
 
 /// The call is pending, waiting to be accepted by a user
-public struct CallStatePending: Codable {
+internal struct CallStatePending: Codable {
     /// True, if the call has already been created by the server
-    public let isCreated: Bool
+    internal let isCreated: Bool
 
     /// True, if the call has already been received by the other party
-    public let isReceived: Bool
+    internal let isReceived: Bool
 
-    public init(
+    internal init(
         isCreated: Bool,
         isReceived: Bool
     ) {
@@ -100,26 +100,26 @@ public struct CallStatePending: Codable {
 }
 
 /// The call is ready to use
-public struct CallStateReady: Codable {
+internal struct CallStateReady: Codable {
     /// True, if peer-to-peer connection is allowed by users privacy settings
-    public let allowP2p: Bool
+    internal let allowP2p: Bool
 
     /// A JSON-encoded call config
-    public let config: String
+    internal let config: String
 
     /// Encryption key emojis fingerprint
-    public let emojis: [String]
+    internal let emojis: [String]
 
     /// Call encryption key
-    public let encryptionKey: Data
+    internal let encryptionKey: Data
 
     /// Call protocols supported by the peer
-    public let `protocol`: CallProtocol
+    internal let `protocol`: CallProtocol
 
     /// List of available call servers
-    public let servers: [CallServer]
+    internal let servers: [CallServer]
 
-    public init(
+    internal init(
         allowP2p: Bool,
         config: String,
         emojis: [String],
@@ -137,17 +137,17 @@ public struct CallStateReady: Codable {
 }
 
 /// The call has ended successfully
-public struct CallStateDiscarded: Codable {
+internal struct CallStateDiscarded: Codable {
     /// True, if the call debug information should be sent to the server
-    public let needDebugInformation: Bool
+    internal let needDebugInformation: Bool
 
     /// True, if the call rating should be sent to the server
-    public let needRating: Bool
+    internal let needRating: Bool
 
     /// The reason, why the call has ended
-    public let reason: CallDiscardReason
+    internal let reason: CallDiscardReason
 
-    public init(
+    internal init(
         needDebugInformation: Bool,
         needRating: Bool,
         reason: CallDiscardReason
@@ -159,11 +159,11 @@ public struct CallStateDiscarded: Codable {
 }
 
 /// The call has ended with an error
-public struct CallStateError: Codable {
+internal struct CallStateError: Codable {
     /// Error. An error with the code 4005000 will be returned if an outgoing call is missed because of an expired timeout
-    public let error: Error
+    internal let error: Error
 
-    public init(error: Error) {
+    internal init(error: Error) {
         self.error = error
     }
 }

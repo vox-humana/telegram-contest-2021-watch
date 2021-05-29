@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns detailed statistics about a chat. Currently this method can be used only for supergroups and channels. Can be used only if SupergroupFullInfo.can_get_statistics == true
-public struct GetChatStatistics: Codable {
+internal struct GetChatStatistics: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Pass true if a dark theme is used by the application
-    public let isDark: Bool
+    internal let isDark: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         isDark: Bool
     ) {

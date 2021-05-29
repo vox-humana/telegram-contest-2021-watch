@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of language pack strings
-public struct LanguagePackStrings: Codable {
+internal struct LanguagePackStrings: Codable {
     /// A list of language pack strings
-    public let strings: [LanguagePackString]
+    internal let strings: [LanguagePackString]
 
-    public init(strings: [LanguagePackString]) {
+    internal init(strings: [LanguagePackString]) {
         self.strings = strings
     }
 }

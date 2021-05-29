@@ -8,40 +8,40 @@
 import Foundation
 
 /// Contains information about a successful payment
-public struct PaymentReceipt: Codable {
+internal struct PaymentReceipt: Codable {
     /// Title of the saved credentials chosen by the buyer
-    public let credentialsTitle: String
+    internal let credentialsTitle: String
 
     /// Point in time (Unix timestamp) when the payment was made
-    public let date: Int
+    internal let date: Int
 
-    public let description: String
+    internal let description: String
 
     /// Contains information about the invoice
-    public let invoice: Invoice
+    internal let invoice: Invoice
 
     /// Order information; may be null
-    public let orderInfo: OrderInfo?
+    internal let orderInfo: OrderInfo?
 
     /// User identifier of the payment provider bot
-    public let paymentsProviderUserId: Int
+    internal let paymentsProviderUserId: Int
 
     /// Product photo; may be null
-    public let photo: Photo?
+    internal let photo: Photo?
 
     /// User identifier of the seller bot
-    public let sellerBotUserId: Int
+    internal let sellerBotUserId: Int
 
     /// Chosen shipping option; may be null
-    public let shippingOption: ShippingOption?
+    internal let shippingOption: ShippingOption?
 
     /// The amount of tip chosen by the buyer in the smallest units of the currency
-    public let tipAmount: Int64
+    internal let tipAmount: Int64
 
     /// Product title
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         credentialsTitle: String,
         date: Int,
         description: String,

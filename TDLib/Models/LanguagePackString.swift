@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents one language pack string
-public struct LanguagePackString: Codable {
+internal struct LanguagePackString: Codable {
     /// String key
-    public let key: String
+    internal let key: String
 
     /// String value
-    public let value: LanguagePackStringValue
+    internal let value: LanguagePackStringValue
 
-    public init(
+    internal init(
         key: String,
         value: LanguagePackStringValue
     ) {

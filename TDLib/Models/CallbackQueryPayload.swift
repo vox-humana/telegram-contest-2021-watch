@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a payload of a callback query
-public enum CallbackQueryPayload: Codable {
+internal enum CallbackQueryPayload: Codable {
     /// The payload for a general callback button
     case callbackQueryPayloadData(CallbackQueryPayloadData)
 
@@ -24,7 +24,7 @@ public enum CallbackQueryPayload: Codable {
         case callbackQueryPayloadGame
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -40,7 +40,7 @@ public enum CallbackQueryPayload: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .callbackQueryPayloadData(value):
@@ -57,24 +57,24 @@ public enum CallbackQueryPayload: Codable {
 }
 
 /// The payload for a general callback button
-public struct CallbackQueryPayloadData: Codable {
+internal struct CallbackQueryPayloadData: Codable {
     /// Data that was attached to the callback button
-    public let data: Data
+    internal let data: Data
 
-    public init(data: Data) {
+    internal init(data: Data) {
         self.data = data
     }
 }
 
 /// The payload for a callback button requiring password
-public struct CallbackQueryPayloadDataWithPassword: Codable {
+internal struct CallbackQueryPayloadDataWithPassword: Codable {
     /// Data that was attached to the callback button
-    public let data: Data
+    internal let data: Data
 
     /// The password for the current user
-    public let password: String
+    internal let password: String
 
-    public init(
+    internal init(
         data: Data,
         password: String
     ) {
@@ -84,11 +84,11 @@ public struct CallbackQueryPayloadDataWithPassword: Codable {
 }
 
 /// The payload for a game callback button
-public struct CallbackQueryPayloadGame: Codable {
+internal struct CallbackQueryPayloadGame: Codable {
     /// A short name of the game that was attached to the callback button
-    public let gameShortName: String
+    internal let gameShortName: String
 
-    public init(gameShortName: String) {
+    internal init(gameShortName: String) {
         self.gameShortName = gameShortName
     }
 }

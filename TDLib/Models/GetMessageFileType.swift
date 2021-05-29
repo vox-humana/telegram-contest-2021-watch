@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a file with messages exported from another app
-public struct GetMessageFileType: Codable {
+internal struct GetMessageFileType: Codable {
     /// Beginning of the message file; up to 100 first lines
-    public let messageFileHead: String
+    internal let messageFileHead: String
 
-    public init(messageFileHead: String) {
+    internal init(messageFileHead: String) {
         self.messageFileHead = messageFileHead
     }
 }

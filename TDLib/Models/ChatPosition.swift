@@ -8,20 +8,20 @@
 import Foundation
 
 /// Describes a position of a chat in a chat list
-public struct ChatPosition: Codable {
+internal struct ChatPosition: Codable {
     /// True, if the chat is pinned in the chat list
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// The chat list
-    public let list: ChatList
+    internal let list: ChatList
 
     /// A parameter used to determine order of the chat in the chat list. Chats must be sorted by the pair (order, chat.id) in descending order
-    public let order: TdInt64
+    internal let order: TdInt64
 
     /// Source of the chat in the chat list; may be null
-    public let source: ChatSource?
+    internal let source: ChatSource?
 
-    public init(
+    internal init(
         isPinned: Bool,
         list: ChatList,
         order: TdInt64,

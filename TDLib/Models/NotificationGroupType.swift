@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of notifications in a notification group
-public enum NotificationGroupType: Codable {
+internal enum NotificationGroupType: Codable {
     /// A group containing notifications of type notificationTypeNewMessage and notificationTypeNewPushMessage with ordinary unread messages
     case notificationGroupTypeMessages
 
@@ -28,7 +28,7 @@ public enum NotificationGroupType: Codable {
         case notificationGroupTypeCalls
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -43,7 +43,7 @@ public enum NotificationGroupType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .notificationGroupTypeMessages:

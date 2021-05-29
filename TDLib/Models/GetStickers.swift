@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns stickers from the installed sticker sets that correspond to a given emoji. If the emoji is not empty, favorite and recently used stickers may also be returned
-public struct GetStickers: Codable {
+internal struct GetStickers: Codable {
     /// String representation of emoji. If empty, returns all known installed stickers
-    public let emoji: String
+    internal let emoji: String
 
     /// The maximum number of stickers to be returned
-    public let limit: Int
+    internal let limit: Int
 
-    public init(
+    internal init(
         emoji: String,
         limit: Int
     ) {

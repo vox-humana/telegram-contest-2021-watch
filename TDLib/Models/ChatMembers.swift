@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains a list of chat members
-public struct ChatMembers: Codable {
+internal struct ChatMembers: Codable {
     /// A list of chat members
-    public let members: [ChatMember]
+    internal let members: [ChatMember]
 
     /// Approximate total count of chat members found
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         members: [ChatMember],
         totalCount: Int
     ) {

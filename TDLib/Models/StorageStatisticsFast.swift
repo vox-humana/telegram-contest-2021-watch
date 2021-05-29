@@ -8,23 +8,23 @@
 import Foundation
 
 /// Contains approximate storage usage statistics, excluding files of unknown file type
-public struct StorageStatisticsFast: Codable {
+internal struct StorageStatisticsFast: Codable {
     /// Size of the database
-    public let databaseSize: Int64
+    internal let databaseSize: Int64
 
     /// Approximate number of files
-    public let fileCount: Int
+    internal let fileCount: Int
 
     /// Approximate total size of files
-    public let filesSize: Int64
+    internal let filesSize: Int64
 
     /// Size of the language pack database
-    public let languagePackDatabaseSize: Int64
+    internal let languagePackDatabaseSize: Int64
 
     /// Size of the TDLib internal log
-    public let logSize: Int64
+    internal let logSize: Int64
 
-    public init(
+    internal init(
         databaseSize: Int64,
         fileCount: Int,
         filesSize: Int64,

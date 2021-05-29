@@ -8,11 +8,11 @@
 import Foundation
 
 /// A simple object containing a sequence of bytes; for testing only
-public struct TestBytes: Codable {
+internal struct TestBytes: Codable {
     /// Bytes
-    public let value: Data
+    internal let value: Data
 
-    public init(value: Data) {
+    internal init(value: Data) {
         self.value = value
     }
 }

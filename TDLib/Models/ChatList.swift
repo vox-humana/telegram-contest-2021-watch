@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a list of chats
-public enum ChatList: Codable {
+internal enum ChatList: Codable {
     /// A main list of chats
     case chatListMain
 
@@ -24,7 +24,7 @@ public enum ChatList: Codable {
         case chatListFilter
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -38,7 +38,7 @@ public enum ChatList: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .chatListMain:
@@ -53,11 +53,11 @@ public enum ChatList: Codable {
 }
 
 /// A list of chats belonging to a chat filter
-public struct ChatListFilter: Codable {
+internal struct ChatListFilter: Codable {
     /// Chat filter identifier
-    public let chatFilterId: Int
+    internal let chatFilterId: Int
 
-    public init(chatFilterId: Int) {
+    internal init(chatFilterId: Int) {
         self.chatFilterId = chatFilterId
     }
 }

@@ -8,17 +8,17 @@
 import Foundation
 
 /// Options to be used when a message is sent
-public struct MessageSendOptions: Codable {
+internal struct MessageSendOptions: Codable {
     /// Pass true to disable notification for the message
-    public let disableNotification: Bool
+    internal let disableNotification: Bool
 
     /// Pass true if the message is sent from the background
-    public let fromBackground: Bool
+    internal let fromBackground: Bool
 
     /// Message scheduling state. Messages sent to a secret chat, live location messages and self-destructing messages can't be scheduled
-    public let schedulingState: MessageSchedulingState
+    internal let schedulingState: MessageSchedulingState
 
-    public init(
+    internal init(
         disableNotification: Bool,
         fromBackground: Bool,
         schedulingState: MessageSchedulingState

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains information about countries
-public struct Countries: Codable {
+internal struct Countries: Codable {
     /// The list of countries
-    public let countries: [CountryInfo]
+    internal let countries: [CountryInfo]
 
-    public init(countries: [CountryInfo]) {
+    internal init(countries: [CountryInfo]) {
         self.countries = countries
     }
 }

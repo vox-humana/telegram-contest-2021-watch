@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes user privacy settings
-public struct SetUserPrivacySettingRules: Codable {
+internal struct SetUserPrivacySettingRules: Codable {
     /// The new privacy rules
-    public let rules: UserPrivacySettingRules
+    internal let rules: UserPrivacySettingRules
 
     /// The privacy setting
-    public let setting: UserPrivacySetting
+    internal let setting: UserPrivacySetting
 
-    public init(
+    internal init(
         rules: UserPrivacySettingRules,
         setting: UserPrivacySetting
     ) {

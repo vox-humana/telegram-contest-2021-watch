@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a video note. The video must be equal in width and height, cropped to a circle, and stored in MPEG4 format
-public struct VideoNote: Codable {
+internal struct VideoNote: Codable {
     /// Duration of the video, in seconds; as defined by the sender
-    public let duration: Int
+    internal let duration: Int
 
     /// Video width and height; as defined by the sender
-    public let length: Int
+    internal let length: Int
 
     /// Video minithumbnail; may be null
-    public let minithumbnail: Minithumbnail?
+    internal let minithumbnail: Minithumbnail?
 
     /// Video thumbnail in JPEG format; as defined by the sender; may be null
-    public let thumbnail: Thumbnail?
+    internal let thumbnail: Thumbnail?
 
     /// File containing the video
-    public let video: File
+    internal let video: File
 
-    public init(
+    internal init(
         duration: Int,
         length: Int,
         minithumbnail: Minithumbnail?,

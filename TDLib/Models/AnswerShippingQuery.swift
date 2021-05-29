@@ -8,17 +8,17 @@
 import Foundation
 
 /// Sets the result of a shipping query; for bots only
-public struct AnswerShippingQuery: Codable {
+internal struct AnswerShippingQuery: Codable {
     /// An error message, empty on success
-    public let errorMessage: String
+    internal let errorMessage: String
 
     /// Available shipping options
-    public let shippingOptions: [ShippingOption]
+    internal let shippingOptions: [ShippingOption]
 
     /// Identifier of the shipping query
-    public let shippingQueryId: TdInt64
+    internal let shippingQueryId: TdInt64
 
-    public init(
+    internal init(
         errorMessage: String,
         shippingOptions: [ShippingOption],
         shippingQueryId: TdInt64

@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes an image in JPEG format
-public struct PhotoSize: Codable {
+internal struct PhotoSize: Codable {
     /// Image height
-    public let height: Int
+    internal let height: Int
 
     /// Information about the image file
-    public let photo: File
+    internal let photo: File
 
     /// Sizes of progressive JPEG file prefixes, which can be used to preliminarily show the image
-    public let progressiveSizes: [Int]
+    internal let progressiveSizes: [Int]
 
     /// Image type (see https://core.telegram.org/constructor/photoSize)
-    public let type: String
+    internal let type: String
 
     /// Image width
-    public let width: Int
+    internal let width: Int
 
-    public init(
+    internal init(
         height: Int,
         photo: File,
         progressiveSizes: [Int],

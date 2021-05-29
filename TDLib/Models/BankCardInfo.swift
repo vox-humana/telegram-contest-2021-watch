@@ -8,14 +8,14 @@
 import Foundation
 
 /// Information about a bank card
-public struct BankCardInfo: Codable {
+internal struct BankCardInfo: Codable {
     /// Actions that can be done with the bank card number
-    public let actions: [BankCardActionOpenUrl]
+    internal let actions: [BankCardActionOpenUrl]
 
     /// Title of the bank card description
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         actions: [BankCardActionOpenUrl],
         title: String
     ) {

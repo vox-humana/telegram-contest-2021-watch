@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of a background
-public enum BackgroundType: Codable {
+internal enum BackgroundType: Codable {
     /// A wallpaper in JPEG format
     case backgroundTypeWallpaper(BackgroundTypeWallpaper)
 
@@ -24,7 +24,7 @@ public enum BackgroundType: Codable {
         case backgroundTypeFill
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -40,7 +40,7 @@ public enum BackgroundType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .backgroundTypeWallpaper(value):
@@ -57,14 +57,14 @@ public enum BackgroundType: Codable {
 }
 
 /// A wallpaper in JPEG format
-public struct BackgroundTypeWallpaper: Codable {
+internal struct BackgroundTypeWallpaper: Codable {
     /// True, if the wallpaper must be downscaled to fit in 450x450 square and then box-blurred with radius 12
-    public let isBlurred: Bool
+    internal let isBlurred: Bool
 
     /// True, if the background needs to be slightly moved when device is tilted
-    public let isMoving: Bool
+    internal let isMoving: Bool
 
-    public init(
+    internal init(
         isBlurred: Bool,
         isMoving: Bool
     ) {
@@ -74,17 +74,17 @@ public struct BackgroundTypeWallpaper: Codable {
 }
 
 /// A PNG or TGV (gzipped subset of SVG with MIME type "application/x-tgwallpattern") pattern to be combined with the background fill chosen by the user
-public struct BackgroundTypePattern: Codable {
+internal struct BackgroundTypePattern: Codable {
     /// Description of the background fill
-    public let fill: BackgroundFill
+    internal let fill: BackgroundFill
 
     /// Intensity of the pattern when it is shown above the filled background; 0-100
-    public let intensity: Int
+    internal let intensity: Int
 
     /// True, if the background needs to be slightly moved when device is tilted
-    public let isMoving: Bool
+    internal let isMoving: Bool
 
-    public init(
+    internal init(
         fill: BackgroundFill,
         intensity: Int,
         isMoving: Bool
@@ -96,11 +96,11 @@ public struct BackgroundTypePattern: Codable {
 }
 
 /// A filled background
-public struct BackgroundTypeFill: Codable {
+internal struct BackgroundTypeFill: Codable {
     /// Description of the background fill
-    public let fill: BackgroundFill
+    internal let fill: BackgroundFill
 
-    public init(fill: BackgroundFill) {
+    internal init(fill: BackgroundFill) {
         self.fill = fill
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about background to set
-public enum InputBackground: Codable {
+internal enum InputBackground: Codable {
     /// A background from a local file
     case inputBackgroundLocal(InputBackgroundLocal)
 
@@ -20,7 +20,7 @@ public enum InputBackground: Codable {
         case inputBackgroundRemote
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum InputBackground: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inputBackgroundLocal(value):
@@ -47,21 +47,21 @@ public enum InputBackground: Codable {
 }
 
 /// A background from a local file
-public struct InputBackgroundLocal: Codable {
+internal struct InputBackgroundLocal: Codable {
     /// Background file to use. Only inputFileLocal and inputFileGenerated are supported. The file must be in JPEG format for wallpapers and in PNG format for patterns
-    public let background: InputFile
+    internal let background: InputFile
 
-    public init(background: InputFile) {
+    internal init(background: InputFile) {
         self.background = background
     }
 }
 
 /// A background from the server
-public struct InputBackgroundRemote: Codable {
+internal struct InputBackgroundRemote: Codable {
     /// The background identifier
-    public let backgroundId: TdInt64
+    internal let backgroundId: TdInt64
 
-    public init(backgroundId: TdInt64) {
+    internal init(backgroundId: TdInt64) {
         self.backgroundId = backgroundId
     }
 }

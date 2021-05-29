@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes the username of a supergroup or channel, requires owner privileges in the supergroup or channel
-public struct SetSupergroupUsername: Codable {
+internal struct SetSupergroupUsername: Codable {
     /// Identifier of the supergroup or channel
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
     /// New value of the username. Use an empty string to remove the username
-    public let username: String
+    internal let username: String
 
-    public init(
+    internal init(
         supergroupId: Int,
         username: String
     ) {

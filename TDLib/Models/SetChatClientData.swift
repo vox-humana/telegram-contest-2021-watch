@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes application-specific data associated with a chat
-public struct SetChatClientData: Codable {
+internal struct SetChatClientData: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of client_data
-    public let clientData: String
+    internal let clientData: String
 
-    public init(
+    internal init(
         chatId: Int64,
         clientData: String
     ) {

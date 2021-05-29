@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns database statistics
-public struct GetDatabaseStatistics: Codable {
-    public init() {}
+internal struct GetDatabaseStatistics: Codable {
+    internal init() {}
 }

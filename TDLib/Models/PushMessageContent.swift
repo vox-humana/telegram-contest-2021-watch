@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains content of a push message notification
-public enum PushMessageContent: Codable {
+internal enum PushMessageContent: Codable {
     /// A general message with hidden content
     case pushMessageContentHidden(PushMessageContentHidden)
 
@@ -116,7 +116,7 @@ public enum PushMessageContent: Codable {
         case pushMessageContentMediaAlbum
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -196,7 +196,7 @@ public enum PushMessageContent: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .pushMessageContentHidden(value):
@@ -277,27 +277,27 @@ public enum PushMessageContent: Codable {
 }
 
 /// A general message with hidden content
-public struct PushMessageContentHidden: Codable {
+internal struct PushMessageContentHidden: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
-    public init(isPinned: Bool) {
+    internal init(isPinned: Bool) {
         self.isPinned = isPinned
     }
 }
 
 /// An animation message (GIF-style).
-public struct PushMessageContentAnimation: Codable {
+internal struct PushMessageContentAnimation: Codable {
     /// Message content; may be null
-    public let animation: Animation?
+    internal let animation: Animation?
 
     /// Animation caption
-    public let caption: String
+    internal let caption: String
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
-    public init(
+    internal init(
         animation: Animation?,
         caption: String,
         isPinned: Bool
@@ -309,14 +309,14 @@ public struct PushMessageContentAnimation: Codable {
 }
 
 /// An audio message
-public struct PushMessageContentAudio: Codable {
+internal struct PushMessageContentAudio: Codable {
     /// Message content; may be null
-    public let audio: Audio?
+    internal let audio: Audio?
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
-    public init(
+    internal init(
         audio: Audio?,
         isPinned: Bool
     ) {
@@ -326,14 +326,14 @@ public struct PushMessageContentAudio: Codable {
 }
 
 /// A message with a user contact
-public struct PushMessageContentContact: Codable {
+internal struct PushMessageContentContact: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Contact's name
-    public let name: String
+    internal let name: String
 
-    public init(
+    internal init(
         isPinned: Bool,
         name: String
     ) {
@@ -343,14 +343,14 @@ public struct PushMessageContentContact: Codable {
 }
 
 /// A document message (a general file)
-public struct PushMessageContentDocument: Codable {
+internal struct PushMessageContentDocument: Codable {
     /// Message content; may be null
-    public let document: Document?
+    internal let document: Document?
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
-    public init(
+    internal init(
         document: Document?,
         isPinned: Bool
     ) {
@@ -360,14 +360,14 @@ public struct PushMessageContentDocument: Codable {
 }
 
 /// A message with a game
-public struct PushMessageContentGame: Codable {
+internal struct PushMessageContentGame: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Game title, empty for pinned game message
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         isPinned: Bool,
         title: String
     ) {
@@ -377,17 +377,17 @@ public struct PushMessageContentGame: Codable {
 }
 
 /// A new high score was achieved in a game
-public struct PushMessageContentGameScore: Codable {
+internal struct PushMessageContentGameScore: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// New score, 0 for pinned message
-    public let score: Int
+    internal let score: Int
 
     /// Game title, empty for pinned message
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         isPinned: Bool,
         score: Int,
         title: String
@@ -399,14 +399,14 @@ public struct PushMessageContentGameScore: Codable {
 }
 
 /// A message with an invoice from a bot
-public struct PushMessageContentInvoice: Codable {
+internal struct PushMessageContentInvoice: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Product price
-    public let price: String
+    internal let price: String
 
-    public init(
+    internal init(
         isPinned: Bool,
         price: String
     ) {
@@ -416,14 +416,14 @@ public struct PushMessageContentInvoice: Codable {
 }
 
 /// A message with a location
-public struct PushMessageContentLocation: Codable {
+internal struct PushMessageContentLocation: Codable {
     /// True, if the location is live
-    public let isLive: Bool
+    internal let isLive: Bool
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
-    public init(
+    internal init(
         isLive: Bool,
         isPinned: Bool
     ) {
@@ -433,20 +433,20 @@ public struct PushMessageContentLocation: Codable {
 }
 
 /// A photo message
-public struct PushMessageContentPhoto: Codable {
+internal struct PushMessageContentPhoto: Codable {
     /// Photo caption
-    public let caption: String
+    internal let caption: String
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// True, if the photo is secret
-    public let isSecret: Bool
+    internal let isSecret: Bool
 
     /// Message content; may be null
-    public let photo: Photo?
+    internal let photo: Photo?
 
-    public init(
+    internal init(
         caption: String,
         isPinned: Bool,
         isSecret: Bool,
@@ -460,17 +460,17 @@ public struct PushMessageContentPhoto: Codable {
 }
 
 /// A message with a poll
-public struct PushMessageContentPoll: Codable {
+internal struct PushMessageContentPoll: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// True, if the poll is regular and not in quiz mode
-    public let isRegular: Bool
+    internal let isRegular: Bool
 
     /// Poll question
-    public let question: String
+    internal let question: String
 
-    public init(
+    internal init(
         isPinned: Bool,
         isRegular: Bool,
         question: String
@@ -482,17 +482,17 @@ public struct PushMessageContentPoll: Codable {
 }
 
 /// A message with a sticker
-public struct PushMessageContentSticker: Codable {
+internal struct PushMessageContentSticker: Codable {
     /// Emoji corresponding to the sticker; may be empty
-    public let emoji: String
+    internal let emoji: String
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Message content; may be null
-    public let sticker: Sticker?
+    internal let sticker: Sticker?
 
-    public init(
+    internal init(
         emoji: String,
         isPinned: Bool,
         sticker: Sticker?
@@ -504,14 +504,14 @@ public struct PushMessageContentSticker: Codable {
 }
 
 /// A text message
-public struct PushMessageContentText: Codable {
+internal struct PushMessageContentText: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Message text
-    public let text: String
+    internal let text: String
 
-    public init(
+    internal init(
         isPinned: Bool,
         text: String
     ) {
@@ -521,20 +521,20 @@ public struct PushMessageContentText: Codable {
 }
 
 /// A video message
-public struct PushMessageContentVideo: Codable {
+internal struct PushMessageContentVideo: Codable {
     /// Video caption
-    public let caption: String
+    internal let caption: String
 
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// True, if the video is secret
-    public let isSecret: Bool
+    internal let isSecret: Bool
 
     /// Message content; may be null
-    public let video: Video?
+    internal let video: Video?
 
-    public init(
+    internal init(
         caption: String,
         isPinned: Bool,
         isSecret: Bool,
@@ -548,14 +548,14 @@ public struct PushMessageContentVideo: Codable {
 }
 
 /// A video note message
-public struct PushMessageContentVideoNote: Codable {
+internal struct PushMessageContentVideoNote: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Message content; may be null
-    public let videoNote: VideoNote?
+    internal let videoNote: VideoNote?
 
-    public init(
+    internal init(
         isPinned: Bool,
         videoNote: VideoNote?
     ) {
@@ -565,14 +565,14 @@ public struct PushMessageContentVideoNote: Codable {
 }
 
 /// A voice note message
-public struct PushMessageContentVoiceNote: Codable {
+internal struct PushMessageContentVoiceNote: Codable {
     /// True, if the message is a pinned message with the specified content
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// Message content; may be null
-    public let voiceNote: VoiceNote?
+    internal let voiceNote: VoiceNote?
 
-    public init(
+    internal init(
         isPinned: Bool,
         voiceNote: VoiceNote?
     ) {
@@ -582,17 +582,17 @@ public struct PushMessageContentVoiceNote: Codable {
 }
 
 /// New chat members were invited to a group
-public struct PushMessageContentChatAddMembers: Codable {
+internal struct PushMessageContentChatAddMembers: Codable {
     /// True, if the current user was added to the group
-    public let isCurrentUser: Bool
+    internal let isCurrentUser: Bool
 
     /// True, if the user has returned to the group themself
-    public let isReturned: Bool
+    internal let isReturned: Bool
 
     /// Name of the added member
-    public let memberName: String
+    internal let memberName: String
 
-    public init(
+    internal init(
         isCurrentUser: Bool,
         isReturned: Bool,
         memberName: String
@@ -604,27 +604,27 @@ public struct PushMessageContentChatAddMembers: Codable {
 }
 
 /// A chat title was edited
-public struct PushMessageContentChatChangeTitle: Codable {
+internal struct PushMessageContentChatChangeTitle: Codable {
     /// New chat title
-    public let title: String
+    internal let title: String
 
-    public init(title: String) {
+    internal init(title: String) {
         self.title = title
     }
 }
 
 /// A chat member was deleted
-public struct PushMessageContentChatDeleteMember: Codable {
+internal struct PushMessageContentChatDeleteMember: Codable {
     /// True, if the current user was deleted from the group
-    public let isCurrentUser: Bool
+    internal let isCurrentUser: Bool
 
     /// True, if the user has left the group themself
-    public let isLeft: Bool
+    internal let isLeft: Bool
 
     /// Name of the deleted member
-    public let memberName: String
+    internal let memberName: String
 
-    public init(
+    internal init(
         isCurrentUser: Bool,
         isLeft: Bool,
         memberName: String
@@ -636,33 +636,33 @@ public struct PushMessageContentChatDeleteMember: Codable {
 }
 
 /// A forwarded messages
-public struct PushMessageContentMessageForwards: Codable {
+internal struct PushMessageContentMessageForwards: Codable {
     /// Number of forwarded messages
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(totalCount: Int) {
+    internal init(totalCount: Int) {
         self.totalCount = totalCount
     }
 }
 
 /// A media album
-public struct PushMessageContentMediaAlbum: Codable {
+internal struct PushMessageContentMediaAlbum: Codable {
     /// True, if the album has at least one audio file
-    public let hasAudios: Bool
+    internal let hasAudios: Bool
 
     /// True, if the album has at least one document
-    public let hasDocuments: Bool
+    internal let hasDocuments: Bool
 
     /// True, if the album has at least one photo
-    public let hasPhotos: Bool
+    internal let hasPhotos: Bool
 
     /// True, if the album has at least one video
-    public let hasVideos: Bool
+    internal let hasVideos: Bool
 
     /// Number of messages in the album
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         hasAudios: Bool,
         hasDocuments: Bool,
         hasPhotos: Bool,

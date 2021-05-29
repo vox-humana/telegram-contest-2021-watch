@@ -8,17 +8,17 @@
 import Foundation
 
 /// Informs TDLib on a file generation progress
-public struct SetFileGenerationProgress: Codable {
+internal struct SetFileGenerationProgress: Codable {
     /// Expected size of the generated file, in bytes; 0 if unknown
-    public let expectedSize: Int
+    internal let expectedSize: Int
 
     /// The identifier of the generation process
-    public let generationId: TdInt64
+    internal let generationId: TdInt64
 
     /// The number of bytes already generated
-    public let localPrefixSize: Int
+    internal let localPrefixSize: Int
 
-    public init(
+    internal init(
         expectedSize: Int,
         generationId: TdInt64,
         localPrefixSize: Int

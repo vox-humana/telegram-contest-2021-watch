@@ -8,17 +8,17 @@
 import Foundation
 
 /// Describes a location on planet Earth
-public struct Location: Codable {
+internal struct Location: Codable {
     /// The estimated horizontal accuracy of the location, in meters; as defined by the sender. 0 if unknown
-    public let horizontalAccuracy: Double
+    internal let horizontalAccuracy: Double
 
     /// Latitude of the location in degrees; as defined by the sender
-    public let latitude: Double
+    internal let latitude: Double
 
     /// Longitude of the location, in degrees; as defined by the sender
-    public let longitude: Double
+    internal let longitude: Double
 
-    public init(
+    internal init(
         horizontalAccuracy: Double,
         latitude: Double,
         longitude: Double

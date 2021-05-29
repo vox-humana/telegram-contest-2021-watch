@@ -8,11 +8,11 @@
 import Foundation
 
 /// Represents a closed vector path. The path begins at the end point of the last command
-public struct ClosedVectorPath: Codable {
+internal struct ClosedVectorPath: Codable {
     /// List of vector path commands
-    public let commands: [VectorPathCommand]
+    internal let commands: [VectorPathCommand]
 
-    public init(commands: [VectorPathCommand]) {
+    internal init(commands: [VectorPathCommand]) {
         self.commands = commands
     }
 }

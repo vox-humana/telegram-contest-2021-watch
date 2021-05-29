@@ -8,11 +8,11 @@
 import Foundation
 
 /// Marks all mentions in a chat as read
-public struct ReadAllChatMentions: Codable {
+internal struct ReadAllChatMentions: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
-    public init(chatId: Int64) {
+    internal init(chatId: Int64) {
         self.chatId = chatId
     }
 }

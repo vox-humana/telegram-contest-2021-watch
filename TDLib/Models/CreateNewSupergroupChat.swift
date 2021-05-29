@@ -8,22 +8,22 @@
 import Foundation
 
 /// Creates a new supergroup or channel and sends a corresponding messageSupergroupChatCreate. Returns the newly created chat
-public struct CreateNewSupergroupChat: Codable {
-    public let description: String
+internal struct CreateNewSupergroupChat: Codable {
+    internal let description: String
 
     /// True, if the supergroup is created for importing messages using importMessage
-    public let forImport: Bool
+    internal let forImport: Bool
 
     /// True, if a channel chat needs to be created
-    public let isChannel: Bool
+    internal let isChannel: Bool
 
     /// Chat location if a location-based supergroup is being created
-    public let location: ChatLocation
+    internal let location: ChatLocation
 
     /// Title of the new chat; 1-128 characters
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         description: String,
         forImport: Bool,
         isChannel: Bool,

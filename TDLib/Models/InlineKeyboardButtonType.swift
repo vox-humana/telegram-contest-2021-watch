@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of an inline keyboard button
-public enum InlineKeyboardButtonType: Codable {
+internal enum InlineKeyboardButtonType: Codable {
     /// A button that opens a specified URL
     case inlineKeyboardButtonTypeUrl(InlineKeyboardButtonTypeUrl)
 
@@ -40,7 +40,7 @@ public enum InlineKeyboardButtonType: Codable {
         case inlineKeyboardButtonTypeBuy
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -66,7 +66,7 @@ public enum InlineKeyboardButtonType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inlineKeyboardButtonTypeUrl(value):
@@ -93,27 +93,27 @@ public enum InlineKeyboardButtonType: Codable {
 }
 
 /// A button that opens a specified URL
-public struct InlineKeyboardButtonTypeUrl: Codable {
+internal struct InlineKeyboardButtonTypeUrl: Codable {
     /// HTTP or tg:// URL to open
-    public let url: String
+    internal let url: String
 
-    public init(url: String) {
+    internal init(url: String) {
         self.url = url
     }
 }
 
 /// A button that opens a specified URL and automatically authorize the current user if allowed to do so
-public struct InlineKeyboardButtonTypeLoginUrl: Codable {
+internal struct InlineKeyboardButtonTypeLoginUrl: Codable {
     /// If non-empty, new text of the button in forwarded messages
-    public let forwardText: String
+    internal let forwardText: String
 
     /// Unique button identifier
-    public let id: Int
+    internal let id: Int
 
     /// An HTTP URL to open
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         forwardText: String,
         id: Int,
         url: String
@@ -125,34 +125,34 @@ public struct InlineKeyboardButtonTypeLoginUrl: Codable {
 }
 
 /// A button that sends a callback query to a bot
-public struct InlineKeyboardButtonTypeCallback: Codable {
+internal struct InlineKeyboardButtonTypeCallback: Codable {
     /// Data to be sent to the bot via a callback query
-    public let data: Data
+    internal let data: Data
 
-    public init(data: Data) {
+    internal init(data: Data) {
         self.data = data
     }
 }
 
 /// A button that asks for password of the current user and then sends a callback query to a bot
-public struct InlineKeyboardButtonTypeCallbackWithPassword: Codable {
+internal struct InlineKeyboardButtonTypeCallbackWithPassword: Codable {
     /// Data to be sent to the bot via a callback query
-    public let data: Data
+    internal let data: Data
 
-    public init(data: Data) {
+    internal init(data: Data) {
         self.data = data
     }
 }
 
 /// A button that forces an inline query to the bot to be inserted in the input field
-public struct InlineKeyboardButtonTypeSwitchInline: Codable {
+internal struct InlineKeyboardButtonTypeSwitchInline: Codable {
     /// True, if the inline query should be sent from the current chat
-    public let inCurrentChat: Bool
+    internal let inCurrentChat: Bool
 
     /// Inline query to be sent to the bot
-    public let query: String
+    internal let query: String
 
-    public init(
+    internal init(
         inCurrentChat: Bool,
         query: String
     ) {

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the type of a file
-public enum FileType: Codable {
+internal enum FileType: Codable {
     /// The data is not a file
     case fileTypeNone
 
@@ -76,7 +76,7 @@ public enum FileType: Codable {
         case fileTypeWallpaper
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -115,7 +115,7 @@ public enum FileType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .fileTypeNone:

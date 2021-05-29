@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns all user contacts
-public struct GetContacts: Codable {
-    public init() {}
+internal struct GetContacts: Codable {
+    internal init() {}
 }

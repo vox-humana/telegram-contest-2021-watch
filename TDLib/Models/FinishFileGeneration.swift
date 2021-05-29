@@ -8,14 +8,14 @@
 import Foundation
 
 /// Finishes the file generation
-public struct FinishFileGeneration: Codable {
+internal struct FinishFileGeneration: Codable {
     /// If set, means that file generation has failed and should be terminated
-    public let error: Error
+    internal let error: Error
 
     /// The identifier of the generation process
-    public let generationId: TdInt64
+    internal let generationId: TdInt64
 
-    public init(
+    internal init(
         error: Error,
         generationId: TdInt64
     ) {

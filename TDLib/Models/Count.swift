@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a counter
-public struct Count: Codable {
+internal struct Count: Codable {
     /// Count
-    public let count: Int
+    internal let count: Int
 
-    public init(count: Int) {
+    internal init(count: Int) {
         self.count = count
     }
 }

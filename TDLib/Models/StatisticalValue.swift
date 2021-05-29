@@ -8,17 +8,17 @@
 import Foundation
 
 /// A value with information about its recent changes
-public struct StatisticalValue: Codable {
+internal struct StatisticalValue: Codable {
     /// The growth rate of the value, as a percentage
-    public let growthRatePercentage: Double
+    internal let growthRatePercentage: Double
 
     /// The value for the previous day
-    public let previousValue: Double
+    internal let previousValue: Double
 
     /// The current value
-    public let value: Double
+    internal let value: Double
 
-    public init(
+    internal init(
         growthRatePercentage: Double,
         previousValue: Double,
         value: Double

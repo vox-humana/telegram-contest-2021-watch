@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the current authorization state of the TDLib client
-public enum AuthorizationState: Codable {
+internal enum AuthorizationState: Codable {
     /// TDLib needs TdlibParameters for initialization
     case authorizationStateWaitTdlibParameters
 
@@ -56,7 +56,7 @@ public enum AuthorizationState: Codable {
         case authorizationStateClosed
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -90,7 +90,7 @@ public enum AuthorizationState: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .authorizationStateWaitTdlibParameters:
@@ -125,57 +125,57 @@ public enum AuthorizationState: Codable {
 }
 
 /// TDLib needs an encryption key to decrypt the local database
-public struct AuthorizationStateWaitEncryptionKey: Codable {
+internal struct AuthorizationStateWaitEncryptionKey: Codable {
     /// True, if the database is currently encrypted
-    public let isEncrypted: Bool
+    internal let isEncrypted: Bool
 
-    public init(isEncrypted: Bool) {
+    internal init(isEncrypted: Bool) {
         self.isEncrypted = isEncrypted
     }
 }
 
 /// TDLib needs the user's authentication code to authorize
-public struct AuthorizationStateWaitCode: Codable {
+internal struct AuthorizationStateWaitCode: Codable {
     /// Information about the authorization code that was sent
-    public let codeInfo: AuthenticationCodeInfo
+    internal let codeInfo: AuthenticationCodeInfo
 
-    public init(codeInfo: AuthenticationCodeInfo) {
+    internal init(codeInfo: AuthenticationCodeInfo) {
         self.codeInfo = codeInfo
     }
 }
 
 /// The user needs to confirm authorization on another logged in device by scanning a QR code with the provided link
-public struct AuthorizationStateWaitOtherDeviceConfirmation: Codable {
+internal struct AuthorizationStateWaitOtherDeviceConfirmation: Codable {
     /// A tg:// URL for the QR code. The link will be updated frequently
-    public let link: String
+    internal let link: String
 
-    public init(link: String) {
+    internal init(link: String) {
         self.link = link
     }
 }
 
 /// The user is unregistered and need to accept terms of service and enter their first name and last name to finish registration
-public struct AuthorizationStateWaitRegistration: Codable {
+internal struct AuthorizationStateWaitRegistration: Codable {
     /// Telegram terms of service
-    public let termsOfService: TermsOfService
+    internal let termsOfService: TermsOfService
 
-    public init(termsOfService: TermsOfService) {
+    internal init(termsOfService: TermsOfService) {
         self.termsOfService = termsOfService
     }
 }
 
 /// The user has been authorized, but needs to enter a password to start using the application
-public struct AuthorizationStateWaitPassword: Codable {
+internal struct AuthorizationStateWaitPassword: Codable {
     /// True, if a recovery email address has been set up
-    public let hasRecoveryEmailAddress: Bool
+    internal let hasRecoveryEmailAddress: Bool
 
     /// Hint for the password; may be empty
-    public let passwordHint: String
+    internal let passwordHint: String
 
     /// Pattern of the email address to which the recovery email was sent; empty until a recovery email has been sent
-    public let recoveryEmailAddressPattern: String
+    internal let recoveryEmailAddressPattern: String
 
-    public init(
+    internal init(
         hasRecoveryEmailAddress: Bool,
         passwordHint: String,
         recoveryEmailAddressPattern: String

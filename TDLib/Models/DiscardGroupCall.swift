@@ -8,11 +8,11 @@
 import Foundation
 
 /// Discards a group call. Requires groupCall.can_be_managed
-public struct DiscardGroupCall: Codable {
+internal struct DiscardGroupCall: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(groupCallId: Int) {
+    internal init(groupCallId: Int) {
         self.groupCallId = groupCallId
     }
 }

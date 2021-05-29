@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of chat invite link counts
-public struct ChatInviteLinkCounts: Codable {
+internal struct ChatInviteLinkCounts: Codable {
     /// List of invite linkcounts
-    public let inviteLinkCounts: [ChatInviteLinkCount]
+    internal let inviteLinkCounts: [ChatInviteLinkCount]
 
-    public init(inviteLinkCounts: [ChatInviteLinkCount]) {
+    internal init(inviteLinkCounts: [ChatInviteLinkCount]) {
         self.inviteLinkCounts = inviteLinkCounts
     }
 }

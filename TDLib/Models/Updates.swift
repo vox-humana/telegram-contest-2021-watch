@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of updates
-public struct Updates: Codable {
+internal struct Updates: Codable {
     /// List of updates
-    public let updates: [Update]
+    internal let updates: [Update]
 
-    public init(updates: [Update]) {
+    internal init(updates: [Update]) {
         self.updates = updates
     }
 }

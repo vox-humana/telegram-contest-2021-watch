@@ -8,17 +8,17 @@
 import Foundation
 
 /// One shipping option
-public struct ShippingOption: Codable {
+internal struct ShippingOption: Codable {
     /// Shipping option identifier
-    public let id: String
+    internal let id: String
 
     /// A list of objects used to calculate the total shipping costs
-    public let priceParts: [LabeledPricePart]
+    internal let priceParts: [LabeledPricePart]
 
     /// Option title
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         id: String,
         priceParts: [LabeledPricePart],
         title: String

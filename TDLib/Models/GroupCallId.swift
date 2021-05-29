@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains the group call identifier
-public struct GroupCallId: Codable {
+internal struct GroupCallId: Codable {
     /// Group call identifier
-    public let id: Int
+    internal let id: Int
 
-    public init(id: Int) {
+    internal init(id: Int) {
         self.id = id
     }
 }

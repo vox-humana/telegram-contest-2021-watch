@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of hashtags
-public struct Hashtags: Codable {
+internal struct Hashtags: Codable {
     /// A list of hashtags
-    public let hashtags: [String]
+    internal let hashtags: [String]
 
-    public init(hashtags: [String]) {
+    internal init(hashtags: [String]) {
         self.hashtags = hashtags
     }
 }

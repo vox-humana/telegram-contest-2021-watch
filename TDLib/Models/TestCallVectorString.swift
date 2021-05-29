@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns the received vector of strings; for testing only. This is an offline method. Can be called before authorization
-public struct TestCallVectorString: Codable {
+internal struct TestCallVectorString: Codable {
     /// Vector of strings to return
-    public let x: [String]
+    internal let x: [String]
 
-    public init(x: [String]) {
+    internal init(x: [String]) {
         self.x = x
     }
 }

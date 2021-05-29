@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a statistical graph
-public enum StatisticalGraph: Codable {
+internal enum StatisticalGraph: Codable {
     /// A graph data
     case statisticalGraphData(StatisticalGraphData)
 
@@ -24,7 +24,7 @@ public enum StatisticalGraph: Codable {
         case statisticalGraphError
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -40,7 +40,7 @@ public enum StatisticalGraph: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .statisticalGraphData(value):
@@ -57,14 +57,14 @@ public enum StatisticalGraph: Codable {
 }
 
 /// A graph data
-public struct StatisticalGraphData: Codable {
+internal struct StatisticalGraphData: Codable {
     /// Graph data in JSON format
-    public let jsonData: String
+    internal let jsonData: String
 
     /// If non-empty, a token which can be used to receive a zoomed in graph
-    public let zoomToken: String
+    internal let zoomToken: String
 
-    public init(
+    internal init(
         jsonData: String,
         zoomToken: String
     ) {
@@ -74,21 +74,21 @@ public struct StatisticalGraphData: Codable {
 }
 
 /// The graph data to be asynchronously loaded through getStatisticalGraph
-public struct StatisticalGraphAsync: Codable {
+internal struct StatisticalGraphAsync: Codable {
     /// The token to use for data loading
-    public let token: String
+    internal let token: String
 
-    public init(token: String) {
+    internal init(token: String) {
         self.token = token
     }
 }
 
 /// An error message to be shown to the user instead of the graph
-public struct StatisticalGraphError: Codable {
+internal struct StatisticalGraphError: Codable {
     /// The error message
-    public let errorMessage: String
+    internal let errorMessage: String
 
-    public init(errorMessage: String) {
+    internal init(errorMessage: String) {
         self.errorMessage = errorMessage
     }
 }

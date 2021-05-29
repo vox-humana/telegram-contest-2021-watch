@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains encrypted Telegram Passport data credentials
-public struct EncryptedCredentials: Codable {
+internal struct EncryptedCredentials: Codable {
     /// The encrypted credentials
-    public let data: Data
+    internal let data: Data
 
     /// The decrypted data hash
-    public let hash: Data
+    internal let hash: Data
 
     /// Secret for data decryption, encrypted with the service's public key
-    public let secret: Data
+    internal let secret: Data
 
-    public init(
+    internal init(
         data: Data,
         hash: Data,
         secret: Data

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Removes a chat from the list of recently found chats
-public struct RemoveRecentlyFoundChat: Codable {
+internal struct RemoveRecentlyFoundChat: Codable {
     /// Identifier of the chat to be removed
-    public let chatId: Int64
+    internal let chatId: Int64
 
-    public init(chatId: Int64) {
+    internal init(chatId: Int64) {
         self.chatId = chatId
     }
 }

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains database statistics
-public struct DatabaseStatistics: Codable {
+internal struct DatabaseStatistics: Codable {
     /// Database statistics in an unspecified human-readable format
-    public let statistics: String
+    internal let statistics: String
 
-    public init(statistics: String) {
+    internal init(statistics: String) {
         self.statistics = statistics
     }
 }

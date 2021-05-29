@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes default participant identifier, which can be used to join voice chats in a chat
-public struct SetVoiceChatDefaultParticipant: Codable {
+internal struct SetVoiceChatDefaultParticipant: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Default group call participant identifier to join the voice chats
-    public let defaultParticipantId: MessageSender
+    internal let defaultParticipantId: MessageSender
 
-    public init(
+    internal init(
         chatId: Int64,
         defaultParticipantId: MessageSender
     ) {

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the type of a network
-public enum NetworkType: Codable {
+internal enum NetworkType: Codable {
     /// The network is not available
     case networkTypeNone
 
@@ -32,7 +32,7 @@ public enum NetworkType: Codable {
         case networkTypeOther
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -49,7 +49,7 @@ public enum NetworkType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .networkTypeNone:

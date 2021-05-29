@@ -8,23 +8,23 @@
 import Foundation
 
 /// Represents the results of the inline query. Use sendInlineQueryResultMessage to send the result of the query
-public struct InlineQueryResults: Codable {
+internal struct InlineQueryResults: Codable {
     /// Unique identifier of the inline query
-    public let inlineQueryId: TdInt64
+    internal let inlineQueryId: TdInt64
 
     /// The offset for the next request. If empty, there are no more results
-    public let nextOffset: String
+    internal let nextOffset: String
 
     /// Results of the query
-    public let results: [InlineQueryResult]
+    internal let results: [InlineQueryResult]
 
     /// Parameter for the bot start message
-    public let switchPmParameter: String
+    internal let switchPmParameter: String
 
     /// If non-empty, this text should be shown on the button, which opens a private chat with the bot and sends the bot a start message with the switch_pm_parameter
-    public let switchPmText: String
+    internal let switchPmText: String
 
-    public init(
+    internal init(
         inlineQueryId: TdInt64,
         nextOffset: String,
         results: [InlineQueryResult],

@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains information about a phone number
-public struct PhoneNumberInfo: Codable {
+internal struct PhoneNumberInfo: Codable {
     /// Information about the country to which the phone number belongs; may be null
-    public let country: CountryInfo?
+    internal let country: CountryInfo?
 
     /// The part of the phone number denoting country calling code or its part
-    public let countryCallingCode: String
+    internal let countryCallingCode: String
 
     /// The phone number without country calling code formatted accordingly to local rules
-    public let formattedPhoneNumber: String
+    internal let formattedPhoneNumber: String
 
-    public init(
+    internal init(
         country: CountryInfo?,
         countryCallingCode: String,
         formattedPhoneNumber: String

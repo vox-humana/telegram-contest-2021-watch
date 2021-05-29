@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a group of notifications
-public struct NotificationGroup: Codable {
+internal struct NotificationGroup: Codable {
     /// Identifier of a chat to which all notifications in the group belong
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Unique persistent auto-incremented from 1 identifier of the notification group
-    public let id: Int
+    internal let id: Int
 
     /// The list of active notifications
-    public let notifications: [Notification]
+    internal let notifications: [Notification]
 
     /// Total number of active notifications in the group
-    public let totalCount: Int
+    internal let totalCount: Int
 
     /// Type of the group
-    public let type: NotificationGroupType
+    internal let type: NotificationGroupType
 
-    public init(
+    internal init(
         chatId: Int64,
         id: Int,
         notifications: [Notification],

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a keyboard button type
-public enum KeyboardButtonType: Codable {
+internal enum KeyboardButtonType: Codable {
     /// A simple button, with text that should be sent when the button is pressed
     case keyboardButtonTypeText
 
@@ -28,7 +28,7 @@ public enum KeyboardButtonType: Codable {
         case keyboardButtonTypeRequestPoll
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -44,7 +44,7 @@ public enum KeyboardButtonType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .keyboardButtonTypeText:
@@ -61,14 +61,14 @@ public enum KeyboardButtonType: Codable {
 }
 
 /// A button that allows the user to create and send a poll when pressed; available only in private chats
-public struct KeyboardButtonTypeRequestPoll: Codable {
+internal struct KeyboardButtonTypeRequestPoll: Codable {
     /// If true, only polls in quiz mode must be allowed to create
-    public let forceQuiz: Bool
+    internal let forceQuiz: Bool
 
     /// If true, only regular polls must be allowed to create
-    public let forceRegular: Bool
+    internal let forceRegular: Bool
 
-    public init(
+    internal init(
         forceQuiz: Bool,
         forceRegular: Bool
     ) {

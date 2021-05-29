@@ -8,11 +8,11 @@
 import Foundation
 
 /// Accepts Telegram terms of services
-public struct AcceptTermsOfService: Codable {
+internal struct AcceptTermsOfService: Codable {
     /// Terms of service identifier
-    public let termsOfServiceId: String
+    internal let termsOfServiceId: String
 
-    public init(termsOfServiceId: String) {
+    internal init(termsOfServiceId: String) {
         self.termsOfServiceId = termsOfServiceId
     }
 }

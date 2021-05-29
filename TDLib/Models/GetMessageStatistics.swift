@@ -8,17 +8,17 @@
 import Foundation
 
 /// Returns detailed statistics about a message. Can be used only if Message.can_get_statistics == true
-public struct GetMessageStatistics: Codable {
+internal struct GetMessageStatistics: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Pass true if a dark theme is used by the application
-    public let isDark: Bool
+    internal let isDark: Bool
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         isDark: Bool,
         messageId: Int64

@@ -8,20 +8,20 @@
 import Foundation
 
 /// Searches for a specified query in the first name, last name and username of the members of a specified chat. Requires administrator rights in channels
-public struct SearchChatMembers: Codable {
+internal struct SearchChatMembers: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The type of users to return. By default, chatMembersFilterMembers
-    public let filter: ChatMembersFilter
+    internal let filter: ChatMembersFilter
 
     /// The maximum number of users to be returned
-    public let limit: Int
+    internal let limit: Int
 
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(
+    internal init(
         chatId: Int64,
         filter: ChatMembersFilter,
         limit: Int,

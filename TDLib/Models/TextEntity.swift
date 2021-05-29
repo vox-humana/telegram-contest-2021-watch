@@ -8,17 +8,17 @@
 import Foundation
 
 /// Represents a part of the text that needs to be formatted in some unusual way
-public struct TextEntity: Codable {
+internal struct TextEntity: Codable {
     /// Length of the entity, in UTF-16 code units
-    public let length: Int
+    internal let length: Int
 
     /// Offset of the entity, in UTF-16 code units
-    public let offset: Int
+    internal let offset: Int
 
     /// Type of the entity
-    public let type: TextEntityType
+    internal let type: TextEntityType
 
-    public init(
+    internal init(
         length: Int,
         offset: Int,
         type: TextEntityType

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns file downloaded prefix size from a given offset
-public struct GetFileDownloadedPrefixSize: Codable {
+internal struct GetFileDownloadedPrefixSize: Codable {
     /// Identifier of the file
-    public let fileId: Int
+    internal let fileId: Int
 
     /// Offset from which downloaded prefix size should be calculated
-    public let offset: Int
+    internal let offset: Int
 
-    public init(
+    internal init(
         fileId: Int,
         offset: Int
     ) {

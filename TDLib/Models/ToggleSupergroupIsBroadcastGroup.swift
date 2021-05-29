@@ -8,11 +8,11 @@
 import Foundation
 
 /// Upgrades supergroup to a broadcast group; requires owner privileges in the supergroup
-public struct ToggleSupergroupIsBroadcastGroup: Codable {
+internal struct ToggleSupergroupIsBroadcastGroup: Codable {
     /// Identifier of the supergroup
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(supergroupId: Int) {
+    internal init(supergroupId: Int) {
         self.supergroupId = supergroupId
     }
 }

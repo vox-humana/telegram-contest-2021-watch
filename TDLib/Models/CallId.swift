@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains the call identifier
-public struct CallId: Codable {
+internal struct CallId: Codable {
     /// Call identifier
-    public let id: Int
+    internal let id: Int
 
-    public init(id: Int) {
+    internal init(id: Int) {
         self.id = id
     }
 }

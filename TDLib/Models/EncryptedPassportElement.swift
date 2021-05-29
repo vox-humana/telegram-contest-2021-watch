@@ -8,35 +8,35 @@
 import Foundation
 
 /// Contains information about an encrypted Telegram Passport element; for bots only
-public struct EncryptedPassportElement: Codable {
+internal struct EncryptedPassportElement: Codable {
     /// Encrypted JSON-encoded data about the user
-    public let data: Data
+    internal let data: Data
 
     /// List of attached files
-    public let files: [DatedFile]
+    internal let files: [DatedFile]
 
     /// The front side of an identity document
-    public let frontSide: DatedFile
+    internal let frontSide: DatedFile
 
     /// Hash of the entire element
-    public let hash: String
+    internal let hash: String
 
     /// The reverse side of an identity document; may be null
-    public let reverseSide: DatedFile?
+    internal let reverseSide: DatedFile?
 
     /// Selfie with the document; may be null
-    public let selfie: DatedFile?
+    internal let selfie: DatedFile?
 
     /// List of files containing a certified English translation of the document
-    public let translation: [DatedFile]
+    internal let translation: [DatedFile]
 
     /// Type of Telegram Passport element
-    public let type: PassportElementType
+    internal let type: PassportElementType
 
     /// Unencrypted data, phone number or email address
-    public let value: String
+    internal let value: String
 
-    public init(
+    internal init(
         data: Data,
         files: [DatedFile],
         frontSide: DatedFile,

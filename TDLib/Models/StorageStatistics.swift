@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains the exact storage usage statistics split by chats and file type
-public struct StorageStatistics: Codable {
+internal struct StorageStatistics: Codable {
     /// Statistics split by chats
-    public let byChat: [StorageStatisticsByChat]
+    internal let byChat: [StorageStatisticsByChat]
 
     /// Total number of files
-    public let count: Int
+    internal let count: Int
 
     /// Total size of files
-    public let size: Int64
+    internal let size: Int64
 
-    public init(
+    internal init(
         byChat: [StorageStatisticsByChat],
         count: Int,
         size: Int64

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a part of the text which must be formatted differently
-public enum TextEntityType: Codable {
+internal enum TextEntityType: Codable {
     /// A mention of a user by their username
     case textEntityTypeMention
 
@@ -80,7 +80,7 @@ public enum TextEntityType: Codable {
         case textEntityTypeMentionName
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -124,7 +124,7 @@ public enum TextEntityType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .textEntityTypeMention:
@@ -169,31 +169,31 @@ public enum TextEntityType: Codable {
 }
 
 /// Text that must be formatted as if inside pre, and code HTML tags
-public struct TextEntityTypePreCode: Codable {
+internal struct TextEntityTypePreCode: Codable {
     /// Programming language of the code; as defined by the sender
-    public let language: String
+    internal let language: String
 
-    public init(language: String) {
+    internal init(language: String) {
         self.language = language
     }
 }
 
 /// A text description shown instead of a raw URL
-public struct TextEntityTypeTextUrl: Codable {
+internal struct TextEntityTypeTextUrl: Codable {
     /// HTTP or tg:// URL to be opened when the link is clicked
-    public let url: String
+    internal let url: String
 
-    public init(url: String) {
+    internal init(url: String) {
         self.url = url
     }
 }
 
 /// A text shows instead of a raw mention of the user (e.g., when the user has no username)
-public struct TextEntityTypeMentionName: Codable {
+internal struct TextEntityTypeMentionName: Codable {
     /// Identifier of the mentioned user
-    public let userId: Int
+    internal let userId: Int
 
-    public init(userId: Int) {
+    internal init(userId: Int) {
         self.userId = userId
     }
 }

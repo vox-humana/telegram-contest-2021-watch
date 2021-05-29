@@ -8,29 +8,29 @@
 import Foundation
 
 /// Sends a filled-out payment form to the bot for final verification
-public struct SendPaymentForm: Codable {
+internal struct SendPaymentForm: Codable {
     /// Chat identifier of the Invoice message
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The credentials chosen by user for payment
-    public let credentials: InputCredentials
+    internal let credentials: InputCredentials
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// Identifier returned by validateOrderInfo, or an empty string
-    public let orderInfoId: String
+    internal let orderInfoId: String
 
     /// Payment form identifier returned by getPaymentForm
-    public let paymentFormId: TdInt64
+    internal let paymentFormId: TdInt64
 
     /// Identifier of a chosen shipping option, if applicable
-    public let shippingOptionId: String
+    internal let shippingOptionId: String
 
     /// Chosen by the user amount of tip in the smallest units of the currency
-    public let tipAmount: Int64
+    internal let tipAmount: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         credentials: InputCredentials,
         messageId: Int64,

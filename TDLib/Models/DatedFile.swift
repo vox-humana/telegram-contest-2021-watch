@@ -8,14 +8,14 @@
 import Foundation
 
 /// File with the date it was uploaded
-public struct DatedFile: Codable {
+internal struct DatedFile: Codable {
     /// Point in time (Unix timestamp) when the file was uploaded
-    public let date: Int
+    internal let date: Int
 
     /// The file
-    public let file: File
+    internal let file: File
 
-    public init(
+    internal init(
         date: Int,
         file: File
     ) {

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a type of public chats
-public enum PublicChatType: Codable {
+internal enum PublicChatType: Codable {
     /// The chat is public, because it has username
     case publicChatTypeHasUsername
 
@@ -20,7 +20,7 @@ public enum PublicChatType: Codable {
         case publicChatTypeIsLocationBased
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -31,7 +31,7 @@ public enum PublicChatType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .publicChatTypeHasUsername:

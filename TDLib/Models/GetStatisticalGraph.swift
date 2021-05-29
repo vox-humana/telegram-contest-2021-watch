@@ -8,17 +8,17 @@
 import Foundation
 
 /// Loads an asynchronous or a zoomed in statistical graph
-public struct GetStatisticalGraph: Codable {
+internal struct GetStatisticalGraph: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The token for graph loading
-    public let token: String
+    internal let token: String
 
     /// X-value for zoomed in graph or 0 otherwise
-    public let x: Int64
+    internal let x: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         token: String,
         x: Int64

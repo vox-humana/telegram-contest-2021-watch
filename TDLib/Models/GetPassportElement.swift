@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns one of the available Telegram Passport elements
-public struct GetPassportElement: Codable {
+internal struct GetPassportElement: Codable {
     /// Password of the current user
-    public let password: String
+    internal let password: String
 
     /// Telegram Passport element type
-    public let type: PassportElementType
+    internal let type: PassportElementType
 
-    public init(
+    internal init(
         password: String,
         type: PassportElementType
     ) {

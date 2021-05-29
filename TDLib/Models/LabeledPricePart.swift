@@ -8,14 +8,14 @@
 import Foundation
 
 /// Portion of the price of a product (e.g., "delivery cost", "tax amount")
-public struct LabeledPricePart: Codable {
+internal struct LabeledPricePart: Codable {
     /// Currency amount in the smallest units of the currency
-    public let amount: Int64
+    internal let amount: Int64
 
     /// Label for this portion of the product price
-    public let label: String
+    internal let label: String
 
-    public init(
+    internal init(
         amount: Int64,
         label: String
     ) {

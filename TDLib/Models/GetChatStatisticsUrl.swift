@@ -8,17 +8,17 @@
 import Foundation
 
 /// Returns an HTTP URL with the chat statistics. Currently this method of getting the statistics are disabled and can be deleted in the future
-public struct GetChatStatisticsUrl: Codable {
+internal struct GetChatStatisticsUrl: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Pass true if a URL with the dark theme must be returned
-    public let isDark: Bool
+    internal let isDark: Bool
 
     /// Parameters from "tg://statsrefresh?params=******" link
-    public let parameters: String
+    internal let parameters: String
 
-    public init(
+    internal init(
         chatId: Int64,
         isDark: Bool,
         parameters: String

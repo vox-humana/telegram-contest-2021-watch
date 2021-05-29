@@ -8,23 +8,23 @@
 import Foundation
 
 /// Sends a simple network request to the Telegram servers via proxy; for testing only. Can be called before authorization
-public struct TestProxy: Codable {
+internal struct TestProxy: Codable {
     /// Identifier of a datacenter, with which to test connection
-    public let dcId: Int
+    internal let dcId: Int
 
     /// Proxy server port
-    public let port: Int
+    internal let port: Int
 
     /// Proxy server IP address
-    public let server: String
+    internal let server: String
 
     /// The maximum overall timeout for the request
-    public let timeout: Double
+    internal let timeout: Double
 
     /// Proxy type
-    public let type: ProxyType
+    internal let type: ProxyType
 
-    public init(
+    internal init(
         dcId: Int,
         port: Int,
         server: String,

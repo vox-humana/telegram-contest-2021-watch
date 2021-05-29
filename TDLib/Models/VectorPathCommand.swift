@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a vector path command
-public enum VectorPathCommand: Codable {
+internal enum VectorPathCommand: Codable {
     /// A straight line to a given point
     case vectorPathCommandLine(VectorPathCommandLine)
 
@@ -20,7 +20,7 @@ public enum VectorPathCommand: Codable {
         case vectorPathCommandCubicBezierCurve
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum VectorPathCommand: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .vectorPathCommandLine(value):
@@ -47,27 +47,27 @@ public enum VectorPathCommand: Codable {
 }
 
 /// A straight line to a given point
-public struct VectorPathCommandLine: Codable {
+internal struct VectorPathCommandLine: Codable {
     /// The end point of the straight line
-    public let endPoint: Point
+    internal let endPoint: Point
 
-    public init(endPoint: Point) {
+    internal init(endPoint: Point) {
         self.endPoint = endPoint
     }
 }
 
 /// A cubic Bézier curve to a given point
-public struct VectorPathCommandCubicBezierCurve: Codable {
+internal struct VectorPathCommandCubicBezierCurve: Codable {
     /// The end control point of the curve
-    public let endControlPoint: Point
+    internal let endControlPoint: Point
 
     /// The end point of the curve
-    public let endPoint: Point
+    internal let endPoint: Point
 
     /// The start control point of the curve
-    public let startControlPoint: Point
+    internal let startControlPoint: Point
 
-    public init(
+    internal init(
         endControlPoint: Point,
         endPoint: Point,
         startControlPoint: Point

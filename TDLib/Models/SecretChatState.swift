@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the current secret chat state
-public enum SecretChatState: Codable {
+internal enum SecretChatState: Codable {
     /// The secret chat is not yet created; waiting for the other user to get online
     case secretChatStatePending
 
@@ -24,7 +24,7 @@ public enum SecretChatState: Codable {
         case secretChatStateClosed
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -37,7 +37,7 @@ public enum SecretChatState: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .secretChatStatePending:

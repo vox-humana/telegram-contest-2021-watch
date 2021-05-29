@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains the storage usage statistics for a specific file type
-public struct StorageStatisticsByFileType: Codable {
+internal struct StorageStatisticsByFileType: Codable {
     /// Total number of files
-    public let count: Int
+    internal let count: Int
 
     /// File type
-    public let fileType: FileType
+    internal let fileType: FileType
 
     /// Total size of the files
-    public let size: Int64
+    internal let size: Int64
 
-    public init(
+    internal init(
         count: Int,
         fileType: FileType,
         size: Int64

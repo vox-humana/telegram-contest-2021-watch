@@ -8,11 +8,11 @@
 import Foundation
 
 /// Leaves a group call
-public struct LeaveGroupCall: Codable {
+internal struct LeaveGroupCall: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(groupCallId: Int) {
+    internal init(groupCallId: Int) {
         self.groupCallId = groupCallId
     }
 }

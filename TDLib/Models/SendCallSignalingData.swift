@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sends call signaling data
-public struct SendCallSignalingData: Codable {
+internal struct SendCallSignalingData: Codable {
     /// Call identifier
-    public let callId: Int
+    internal let callId: Int
 
     /// The data
-    public let data: Data
+    internal let data: Data
 
-    public init(
+    internal init(
         callId: Int,
         data: Data
     ) {

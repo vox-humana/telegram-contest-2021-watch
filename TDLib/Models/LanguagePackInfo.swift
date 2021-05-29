@@ -8,47 +8,47 @@
 import Foundation
 
 /// Contains information about a language pack
-public struct LanguagePackInfo: Codable {
+internal struct LanguagePackInfo: Codable {
     /// Identifier of a base language pack; may be empty. If a string is missed in the language pack, then it should be fetched from base language pack. Unsupported in custom language packs
-    public let baseLanguagePackId: String
+    internal let baseLanguagePackId: String
 
     /// Unique language pack identifier
-    public let id: String
+    internal let id: String
 
     /// True, if the language pack is a beta language pack
-    public let isBeta: Bool
+    internal let isBeta: Bool
 
     /// True, if the language pack is installed by the current user
-    public let isInstalled: Bool
+    internal let isInstalled: Bool
 
     /// True, if the language pack is official
-    public let isOfficial: Bool
+    internal let isOfficial: Bool
 
     /// True, if the language pack strings are RTL
-    public let isRtl: Bool
+    internal let isRtl: Bool
 
     /// Total number of non-deleted strings from the language pack available locally
-    public let localStringCount: Int
+    internal let localStringCount: Int
 
     /// Language name
-    public let name: String
+    internal let name: String
 
     /// Name of the language in that language
-    public let nativeName: String
+    internal let nativeName: String
 
     /// A language code to be used to apply plural forms. See https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html for more info
-    public let pluralCode: String
+    internal let pluralCode: String
 
     /// Total number of non-deleted strings from the language pack
-    public let totalStringCount: Int
+    internal let totalStringCount: Int
 
     /// Total number of translated strings from the language pack
-    public let translatedStringCount: Int
+    internal let translatedStringCount: Int
 
     /// Link to language translation interface; empty for custom local language packs
-    public let translationUrl: String
+    internal let translationUrl: String
 
-    public init(
+    internal init(
         baseLanguagePackId: String,
         id: String,
         isBeta: Bool,

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes the slow mode delay of a chat. Available only for supergroups; requires can_restrict_members rights
-public struct SetChatSlowModeDelay: Codable {
+internal struct SetChatSlowModeDelay: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New slow mode delay for the chat; must be one of 0, 10, 30, 60, 300, 900, 3600
-    public let slowModeDelay: Int
+    internal let slowModeDelay: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         slowModeDelay: Int
     ) {

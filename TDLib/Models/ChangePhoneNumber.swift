@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes the phone number of the user and sends an authentication code to the user's new phone number. On success, returns information about the sent code
-public struct ChangePhoneNumber: Codable {
+internal struct ChangePhoneNumber: Codable {
     /// The new phone number of the user in international format
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Settings for the authentication of the user's phone number
-    public let settings: PhoneNumberAuthenticationSettings
+    internal let settings: PhoneNumberAuthenticationSettings
 
-    public init(
+    internal init(
         phoneNumber: String,
         settings: PhoneNumberAuthenticationSettings
     ) {

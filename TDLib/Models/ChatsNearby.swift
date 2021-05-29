@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a list of chats located nearby
-public struct ChatsNearby: Codable {
+internal struct ChatsNearby: Codable {
     /// List of location-based supergroups nearby
-    public let supergroupsNearby: [ChatNearby]
+    internal let supergroupsNearby: [ChatNearby]
 
     /// List of users nearby
-    public let usersNearby: [ChatNearby]
+    internal let usersNearby: [ChatNearby]
 
-    public init(
+    internal init(
         supergroupsNearby: [ChatNearby],
         usersNearby: [ChatNearby]
     ) {

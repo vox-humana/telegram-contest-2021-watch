@@ -8,23 +8,23 @@
 import Foundation
 
 /// Updates the game score of the specified user in a game; for bots only
-public struct SetInlineGameScore: Codable {
+internal struct SetInlineGameScore: Codable {
     /// True, if the message should be edited
-    public let editMessage: Bool
+    internal let editMessage: Bool
 
     /// Pass true to update the score even if it decreases. If the score is 0, the user will be deleted from the high score table
-    public let force: Bool
+    internal let force: Bool
 
     /// Inline message identifier
-    public let inlineMessageId: String
+    internal let inlineMessageId: String
 
     /// The new score
-    public let score: Int
+    internal let score: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         editMessage: Bool,
         force: Bool,
         inlineMessageId: String,

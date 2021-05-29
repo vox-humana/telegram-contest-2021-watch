@@ -8,11 +8,11 @@
 import Foundation
 
 /// Confirms QR code authentication on another device. Returns created session on success
-public struct ConfirmQrCodeAuthentication: Codable {
+internal struct ConfirmQrCodeAuthentication: Codable {
     /// A link from a QR code. The link must be scanned by the in-app camera
-    public let link: String
+    internal let link: String
 
-    public init(link: String) {
+    internal init(link: String) {
         self.link = link
     }
 }

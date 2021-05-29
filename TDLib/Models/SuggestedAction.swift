@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes an action suggested to the current user
-public enum SuggestedAction: Codable {
+internal enum SuggestedAction: Codable {
     /// Suggests the user to enable "archive_and_mute_new_chats_from_unknown_users" option
     case suggestedActionEnableArchiveAndMuteNewChats
 
@@ -28,7 +28,7 @@ public enum SuggestedAction: Codable {
         case suggestedActionConvertToBroadcastGroup
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -44,7 +44,7 @@ public enum SuggestedAction: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .suggestedActionEnableArchiveAndMuteNewChats:
@@ -61,11 +61,11 @@ public enum SuggestedAction: Codable {
 }
 
 /// Suggests the user to convert specified supergroup to a broadcast group
-public struct SuggestedActionConvertToBroadcastGroup: Codable {
+internal struct SuggestedActionConvertToBroadcastGroup: Codable {
     /// Supergroup identifier
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(supergroupId: Int) {
+    internal init(supergroupId: Int) {
         self.supergroupId = supergroupId
     }
 }

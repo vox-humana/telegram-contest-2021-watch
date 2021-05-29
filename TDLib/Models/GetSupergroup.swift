@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a supergroup or a channel by its identifier. This is an offline request if the current user is not a bot
-public struct GetSupergroup: Codable {
+internal struct GetSupergroup: Codable {
     /// Supergroup or channel identifier
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(supergroupId: Int) {
+    internal init(supergroupId: Int) {
         self.supergroupId = supergroupId
     }
 }

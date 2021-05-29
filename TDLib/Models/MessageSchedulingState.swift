@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about the time when a scheduled message will be sent
-public enum MessageSchedulingState: Codable {
+internal enum MessageSchedulingState: Codable {
     /// The message will be sent at the specified date
     case messageSchedulingStateSendAtDate(MessageSchedulingStateSendAtDate)
 
@@ -20,7 +20,7 @@ public enum MessageSchedulingState: Codable {
         case messageSchedulingStateSendWhenOnline
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -32,7 +32,7 @@ public enum MessageSchedulingState: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .messageSchedulingStateSendAtDate(value):
@@ -45,11 +45,11 @@ public enum MessageSchedulingState: Codable {
 }
 
 /// The message will be sent at the specified date
-public struct MessageSchedulingStateSendAtDate: Codable {
+internal struct MessageSchedulingStateSendAtDate: Codable {
     /// Date the message will be sent. The date must be within 367 days in the future
-    public let sendDate: Int
+    internal let sendDate: Int
 
-    public init(sendDate: Int) {
+    internal init(sendDate: Int) {
         self.sendDate = sendDate
     }
 }

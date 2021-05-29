@@ -8,11 +8,11 @@
 import Foundation
 
 /// Recovers the password with a password recovery code sent to an email address that was previously set up. Works only when the current authorization state is authorizationStateWaitPassword
-public struct RecoverAuthenticationPassword: Codable {
+internal struct RecoverAuthenticationPassword: Codable {
     /// Recovery code to check
-    public let recoveryCode: String
+    internal let recoveryCode: String
 
-    public init(recoveryCode: String) {
+    internal init(recoveryCode: String) {
         self.recoveryCode = recoveryCode
     }
 }

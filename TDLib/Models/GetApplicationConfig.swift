@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns application config, provided by the server. Can be called before authorization
-public struct GetApplicationConfig: Codable {
-    public init() {}
+internal struct GetApplicationConfig: Codable {
+    internal init() {}
 }

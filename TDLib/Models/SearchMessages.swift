@@ -8,35 +8,35 @@
 import Foundation
 
 /// Searches for messages in all chats except secret chats. Returns the results in reverse chronological order (i.e., in order of decreasing (date, chat_id, message_id)). For optimal performance the number of returned messages is chosen by the library
-public struct SearchMessages: Codable {
+internal struct SearchMessages: Codable {
     /// Chat list in which to search messages; pass null to search in all chats regardless of their chat list. Only Main and Archive chat lists are supported
-    public let chatList: ChatList
+    internal let chatList: ChatList
 
     /// Filter for message content in the search results; searchMessagesFilterCall, searchMessagesFilterMissedCall, searchMessagesFilterMention, searchMessagesFilterUnreadMention, searchMessagesFilterFailedToSend and searchMessagesFilterPinned are unsupported in this function
-    public let filter: SearchMessagesFilter
+    internal let filter: SearchMessagesFilter
 
     /// The maximum number of messages to be returned; up to 100. Fewer messages may be returned than specified by the limit, even if the end of the message history has not been reached
-    public let limit: Int
+    internal let limit: Int
 
     /// If not 0, the maximum date of the messages to return
-    public let maxDate: Int
+    internal let maxDate: Int
 
     /// If not 0, the minimum date of the messages to return
-    public let minDate: Int
+    internal let minDate: Int
 
     /// The chat identifier of the last found message, or 0 for the first request
-    public let offsetChatId: Int64
+    internal let offsetChatId: Int64
 
     /// The date of the message starting from which the results should be fetched. Use 0 or any date in the future to get results from the last message
-    public let offsetDate: Int
+    internal let offsetDate: Int
 
     /// The message identifier of the last found message, or 0 for the first request
-    public let offsetMessageId: Int64
+    internal let offsetMessageId: Int64
 
     /// Query to search for
-    public let query: String
+    internal let query: String
 
-    public init(
+    internal init(
         chatList: ChatList,
         filter: SearchMessagesFilter,
         limit: Int,

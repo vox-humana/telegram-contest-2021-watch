@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains a bot's answer to a callback query
-public struct CallbackQueryAnswer: Codable {
+internal struct CallbackQueryAnswer: Codable {
     /// True, if an alert should be shown to the user instead of a toast notification
-    public let showAlert: Bool
+    internal let showAlert: Bool
 
     /// Text of the answer
-    public let text: String
+    internal let text: String
 
     /// URL to be opened
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         showAlert: Bool,
         text: String,
         url: String

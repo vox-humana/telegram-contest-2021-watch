@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns game high scores and some part of the high score table in the range of the specified user; for bots only
-public struct GetInlineGameHighScores: Codable {
+internal struct GetInlineGameHighScores: Codable {
     /// Inline message identifier
-    public let inlineMessageId: String
+    internal let inlineMessageId: String
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         inlineMessageId: String,
         userId: Int
     ) {

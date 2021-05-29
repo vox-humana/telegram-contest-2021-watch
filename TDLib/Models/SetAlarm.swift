@@ -8,11 +8,11 @@
 import Foundation
 
 /// Succeeds after a specified amount of time has passed. Can be called before initialization
-public struct SetAlarm: Codable {
+internal struct SetAlarm: Codable {
     /// Number of seconds before the function returns
-    public let seconds: Double
+    internal let seconds: Double
 
-    public init(seconds: Double) {
+    internal init(seconds: Double) {
         self.seconds = seconds
     }
 }

@@ -8,20 +8,20 @@
 import Foundation
 
 /// Returns an HTTPS link to a message in a chat. Available only for already sent messages in supergroups and channels. This is an offline request
-public struct GetMessageLink: Codable {
+internal struct GetMessageLink: Codable {
     /// Identifier of the chat to which the message belongs
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Pass true to create a link for the whole media album
-    public let forAlbum: Bool
+    internal let forAlbum: Bool
 
     /// Pass true to create a link to the message as a channel post comment, or from a message thread
-    public let forComment: Bool
+    internal let forComment: Bool
 
     /// Identifier of the message
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         forAlbum: Bool,
         forComment: Bool,

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of text entities
-public struct TextEntities: Codable {
+internal struct TextEntities: Codable {
     /// List of text entities
-    public let entities: [TextEntity]
+    internal let entities: [TextEntity]
 
-    public init(entities: [TextEntity]) {
+    internal init(entities: [TextEntity]) {
         self.entities = entities
     }
 }

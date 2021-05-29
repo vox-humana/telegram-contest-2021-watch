@@ -8,11 +8,11 @@
 import Foundation
 
 /// Represents a list of chat administrators
-public struct ChatAdministrators: Codable {
+internal struct ChatAdministrators: Codable {
     /// A list of chat administrators
-    public let administrators: [ChatAdministrator]
+    internal let administrators: [ChatAdministrator]
 
-    public init(administrators: [ChatAdministrator]) {
+    internal init(administrators: [ChatAdministrator]) {
         self.administrators = administrators
     }
 }

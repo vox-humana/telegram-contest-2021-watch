@@ -8,14 +8,14 @@
 import Foundation
 
 /// Searches for the specified query in the first names, last names and usernames of the known user contacts
-public struct SearchContacts: Codable {
+internal struct SearchContacts: Codable {
     /// The maximum number of users to be returned
-    public let limit: Int
+    internal let limit: Int
 
     /// Query to search for; may be empty to return all contacts
-    public let query: String
+    internal let query: String
 
-    public init(
+    internal init(
         limit: Int,
         query: String
     ) {

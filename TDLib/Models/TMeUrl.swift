@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a URL linking to an internal Telegram entity
-public struct TMeUrl: Codable {
+internal struct TMeUrl: Codable {
     /// Type of the URL
-    public let type: TMeUrlType
+    internal let type: TMeUrlType
 
     /// URL
-    public let url: String
+    internal let url: String
 
-    public init(
+    internal init(
         type: TMeUrlType,
         url: String
     ) {

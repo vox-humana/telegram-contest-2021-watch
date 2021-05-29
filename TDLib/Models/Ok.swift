@@ -8,6 +8,6 @@
 import Foundation
 
 /// An object of this type is returned on a successful function call for certain functions
-public struct Ok: Codable {
-    public init() {}
+internal struct Ok: Codable {
+    internal init() {}
 }

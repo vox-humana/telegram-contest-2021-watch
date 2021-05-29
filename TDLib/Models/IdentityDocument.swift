@@ -8,26 +8,26 @@
 import Foundation
 
 /// An identity document
-public struct IdentityDocument: Codable {
+internal struct IdentityDocument: Codable {
     /// Document expiry date; may be null
-    public let expiryDate: Date?
+    internal let expiryDate: Date?
 
     /// Front side of the document
-    public let frontSide: DatedFile
+    internal let frontSide: DatedFile
 
     /// Document number; 1-24 characters
-    public let number: String
+    internal let number: String
 
     /// Reverse side of the document; only for driver license and identity card
-    public let reverseSide: DatedFile
+    internal let reverseSide: DatedFile
 
     /// Selfie with the document; may be null
-    public let selfie: DatedFile?
+    internal let selfie: DatedFile?
 
     /// List of files containing a certified English translation of the document
-    public let translation: [DatedFile]
+    internal let translation: [DatedFile]
 
-    public init(
+    internal init(
         expiryDate: Date?,
         frontSide: DatedFile,
         number: String,

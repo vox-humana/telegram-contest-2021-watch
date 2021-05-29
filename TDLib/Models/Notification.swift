@@ -8,20 +8,20 @@
 import Foundation
 
 /// Contains information about a notification
-public struct Notification: Codable {
+internal struct Notification: Codable {
     /// Notification date
-    public let date: Int
+    internal let date: Int
 
     /// Unique persistent identifier of this notification
-    public let id: Int
+    internal let id: Int
 
     /// True, if the notification was initially silent
-    public let isSilent: Bool
+    internal let isSilent: Bool
 
     /// Notification type
-    public let type: NotificationType
+    internal let type: NotificationType
 
-    public init(
+    internal init(
         date: Int,
         id: Int,
         isSilent: Bool,

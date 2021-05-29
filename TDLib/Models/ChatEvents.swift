@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a list of chat events
-public struct ChatEvents: Codable {
+internal struct ChatEvents: Codable {
     /// List of events
-    public let events: [ChatEvent]
+    internal let events: [ChatEvent]
 
-    public init(events: [ChatEvent]) {
+    internal init(events: [ChatEvent]) {
         self.events = events
     }
 }

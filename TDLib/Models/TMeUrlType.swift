@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of a URL linking to an internal Telegram entity
-public enum TMeUrlType: Codable {
+internal enum TMeUrlType: Codable {
     /// A URL linking to a user
     case tMeUrlTypeUser(TMeUrlTypeUser)
 
@@ -28,7 +28,7 @@ public enum TMeUrlType: Codable {
         case tMeUrlTypeStickerSet
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -47,7 +47,7 @@ public enum TMeUrlType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .tMeUrlTypeUser(value):
@@ -67,41 +67,41 @@ public enum TMeUrlType: Codable {
 }
 
 /// A URL linking to a user
-public struct TMeUrlTypeUser: Codable {
+internal struct TMeUrlTypeUser: Codable {
     /// Identifier of the user
-    public let userId: Int
+    internal let userId: Int
 
-    public init(userId: Int) {
+    internal init(userId: Int) {
         self.userId = userId
     }
 }
 
 /// A URL linking to a public supergroup or channel
-public struct TMeUrlTypeSupergroup: Codable {
+internal struct TMeUrlTypeSupergroup: Codable {
     /// Identifier of the supergroup or channel
-    public let supergroupId: Int64
+    internal let supergroupId: Int64
 
-    public init(supergroupId: Int64) {
+    internal init(supergroupId: Int64) {
         self.supergroupId = supergroupId
     }
 }
 
 /// A chat invite link
-public struct TMeUrlTypeChatInvite: Codable {
+internal struct TMeUrlTypeChatInvite: Codable {
     /// Chat invite link info
-    public let info: ChatInviteLinkInfo
+    internal let info: ChatInviteLinkInfo
 
-    public init(info: ChatInviteLinkInfo) {
+    internal init(info: ChatInviteLinkInfo) {
         self.info = info
     }
 }
 
 /// A URL linking to a sticker set
-public struct TMeUrlTypeStickerSet: Codable {
+internal struct TMeUrlTypeStickerSet: Codable {
     /// Identifier of the sticker set
-    public let stickerSetId: TdInt64
+    internal let stickerSetId: TdInt64
 
-    public init(stickerSetId: TdInt64) {
+    internal init(stickerSetId: TdInt64) {
         self.stickerSetId = stickerSetId
     }
 }

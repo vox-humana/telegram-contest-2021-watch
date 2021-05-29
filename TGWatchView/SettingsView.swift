@@ -1,16 +1,16 @@
 import SwiftUI
 import TGWatchUI
 
-public struct SettingsView: View {
+struct SettingsView: View {
     @ObservedObject var vm: SettingsViewModel
     private let archiveListService: ChatListService
 
-    public init(_ vm: SettingsViewModel, archiveListService: ChatListService) {
+    init(_ vm: SettingsViewModel, archiveListService: ChatListService) {
         self.vm = vm
         self.archiveListService = archiveListService
     }
 
-    public var body: some View {
+    var body: some View {
         List {
             if let profile = vm.profile {
                 ProfileLabel(profile: profile) { _ in }
@@ -91,11 +91,11 @@ extension Bundle {
 
 import Combine
 
-public final class SettingsViewModel: ObservableObject {
+final class SettingsViewModel: ObservableObject {
     @Published var profile: User?
     private var subscription: AnyCancellable?
 
-    public init(profile: AnyPublisher<User, Never>) {
+    init(profile: AnyPublisher<User, Never>) {
         subscription = profile.sink { [weak self] in
             self?.profile = $0
         }

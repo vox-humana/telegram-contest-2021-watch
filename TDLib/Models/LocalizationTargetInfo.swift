@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains information about the current localization target
-public struct LocalizationTargetInfo: Codable {
+internal struct LocalizationTargetInfo: Codable {
     /// List of available language packs for this application
-    public let languagePacks: [LanguagePackInfo]
+    internal let languagePacks: [LanguagePackInfo]
 
-    public init(languagePacks: [LanguagePackInfo]) {
+    internal init(languagePacks: [LanguagePackInfo]) {
         self.languagePacks = languagePacks
     }
 }

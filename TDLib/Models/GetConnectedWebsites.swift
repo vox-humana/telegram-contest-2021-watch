@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns all website where the current user used Telegram to log in
-public struct GetConnectedWebsites: Codable {
-    public init() {}
+internal struct GetConnectedWebsites: Codable {
+    internal init() {}
 }

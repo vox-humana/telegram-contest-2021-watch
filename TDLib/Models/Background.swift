@@ -8,26 +8,26 @@
 import Foundation
 
 /// Describes a chat background
-public struct Background: Codable {
+internal struct Background: Codable {
     /// Document with the background; may be null. Null only for filled backgrounds
-    public let document: Document?
+    internal let document: Document?
 
     /// Unique background identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// True, if the background is dark and is recommended to be used with dark theme
-    public let isDark: Bool
+    internal let isDark: Bool
 
     /// True, if this is one of default backgrounds
-    public let isDefault: Bool
+    internal let isDefault: Bool
 
     /// Unique background name
-    public let name: String
+    internal let name: String
 
     /// Type of the background
-    public let type: BackgroundType
+    internal let type: BackgroundType
 
-    public init(
+    internal init(
         document: Document?,
         id: TdInt64,
         isDark: Bool,

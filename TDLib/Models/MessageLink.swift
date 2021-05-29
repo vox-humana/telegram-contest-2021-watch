@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains an HTTPS link to a message in a supergroup or channel
-public struct MessageLink: Codable {
+internal struct MessageLink: Codable {
     /// True, if the link will work for non-members of the chat
-    public let isPublic: Bool
+    internal let isPublic: Bool
 
     /// Message link
-    public let link: String
+    internal let link: String
 
-    public init(
+    internal init(
         isPublic: Bool,
         link: String
     ) {

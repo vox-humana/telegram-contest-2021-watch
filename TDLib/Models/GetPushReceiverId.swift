@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns a globally unique push notification subscription identifier for identification of an account, which has received a push notification. Can be called synchronously
-public struct GetPushReceiverId: Codable {
+internal struct GetPushReceiverId: Codable {
     /// JSON-encoded push notification payload
-    public let payload: String
+    internal let payload: String
 
-    public init(payload: String) {
+    internal init(payload: String) {
         self.payload = payload
     }
 }

@@ -8,6 +8,6 @@
 import Foundation
 
 /// Clears all imported contacts, contact list remains unchanged
-public struct ClearImportedContacts: Codable {
-    public init() {}
+internal struct ClearImportedContacts: Codable {
+    internal init() {}
 }

@@ -8,17 +8,17 @@
 import Foundation
 
 /// Saves application log event on the server. Can be called before authorization
-public struct SaveApplicationLogEvent: Codable {
+internal struct SaveApplicationLogEvent: Codable {
     /// Optional chat identifier, associated with the event
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The log event data
-    public let data: JsonValue
+    internal let data: JsonValue
 
     /// Event type
-    public let type: String
+    internal let type: String
 
-    public init(
+    internal init(
         chatId: Int64,
         data: JsonValue,
         type: String

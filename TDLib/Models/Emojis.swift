@@ -8,11 +8,11 @@
 import Foundation
 
 /// Represents a list of emoji
-public struct Emojis: Codable {
+internal struct Emojis: Codable {
     /// List of emojis
-    public let emojis: [String]
+    internal let emojis: [String]
 
-    public init(emojis: [String]) {
+    internal init(emojis: [String]) {
         self.emojis = emojis
     }
 }

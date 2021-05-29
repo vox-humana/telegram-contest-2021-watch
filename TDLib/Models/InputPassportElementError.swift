@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains the description of an error in a Telegram Passport element; for bots only
-public struct InputPassportElementError: Codable {
+internal struct InputPassportElementError: Codable {
     /// Error message
-    public let message: String
+    internal let message: String
 
     /// Error source
-    public let source: InputPassportElementErrorSource
+    internal let source: InputPassportElementErrorSource
 
     /// Type of Telegram Passport element that has the error
-    public let type: PassportElementType
+    internal let type: PassportElementType
 
-    public init(
+    internal init(
         message: String,
         source: InputPassportElementErrorSource,
         type: PassportElementType

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns information about a message thread. Can be used only if message.can_get_message_thread == true
-public struct GetMessageThread: Codable {
+internal struct GetMessageThread: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of the message
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {

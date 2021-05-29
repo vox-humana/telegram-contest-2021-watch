@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes the marked as unread state of a chat
-public struct ToggleChatIsMarkedAsUnread: Codable {
+internal struct ToggleChatIsMarkedAsUnread: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of is_marked_as_unread
-    public let isMarkedAsUnread: Bool
+    internal let isMarkedAsUnread: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         isMarkedAsUnread: Bool
     ) {

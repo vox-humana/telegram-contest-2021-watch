@@ -8,23 +8,23 @@
 import Foundation
 
 /// Represents the current state of 2-step verification
-public struct PasswordState: Codable {
+internal struct PasswordState: Codable {
     /// True, if some Telegram Passport elements were saved
-    public let hasPassportData: Bool
+    internal let hasPassportData: Bool
 
     /// True, if a 2-step verification password is set
-    public let hasPassword: Bool
+    internal let hasPassword: Bool
 
     /// True, if a recovery email is set
-    public let hasRecoveryEmailAddress: Bool
+    internal let hasRecoveryEmailAddress: Bool
 
     /// Hint for the password; may be empty
-    public let passwordHint: String
+    internal let passwordHint: String
 
     /// Information about the recovery email address to which the confirmation email was sent; may be null
-    public let recoveryEmailAddressCodeInfo: EmailAddressAuthenticationCodeInfo?
+    internal let recoveryEmailAddressCodeInfo: EmailAddressAuthenticationCodeInfo?
 
-    public init(
+    internal init(
         hasPassportData: Bool,
         hasPassword: Bool,
         hasRecoveryEmailAddress: Bool,

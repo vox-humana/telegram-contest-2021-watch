@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the categories of chats for which a list of frequently used chats can be retrieved
-public enum TopChatCategory: Codable {
+internal enum TopChatCategory: Codable {
     /// A category containing frequently used private chats with non-bot users
     case topChatCategoryUsers
 
@@ -40,7 +40,7 @@ public enum TopChatCategory: Codable {
         case topChatCategoryForwardChats
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -61,7 +61,7 @@ public enum TopChatCategory: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .topChatCategoryUsers:

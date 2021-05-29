@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents the type of a user. The following types are possible: regular users, deleted users and bots
-public enum UserType: Codable {
+internal enum UserType: Codable {
     /// A regular user
     case userTypeRegular
 
@@ -28,7 +28,7 @@ public enum UserType: Codable {
         case userTypeUnknown
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -44,7 +44,7 @@ public enum UserType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .userTypeRegular:
@@ -61,23 +61,23 @@ public enum UserType: Codable {
 }
 
 /// A bot (see https://core.telegram.org/bots)
-public struct UserTypeBot: Codable {
+internal struct UserTypeBot: Codable {
     /// True, if the bot can be invited to basic group and supergroup chats
-    public let canJoinGroups: Bool
+    internal let canJoinGroups: Bool
 
     /// True, if the bot can read all messages in basic group or supergroup chats and not just those addressed to the bot. In private and channel chats a bot can always read all messages
-    public let canReadAllGroupMessages: Bool
+    internal let canReadAllGroupMessages: Bool
 
     /// Placeholder for inline queries (displayed on the application input field)
-    public let inlineQueryPlaceholder: String
+    internal let inlineQueryPlaceholder: String
 
     /// True, if the bot supports inline queries
-    public let isInline: Bool
+    internal let isInline: Bool
 
     /// True, if the location of the user should be sent with every inline query to this bot
-    public let needLocation: Bool
+    internal let needLocation: Bool
 
-    public init(
+    internal init(
         canJoinGroups: Bool,
         canReadAllGroupMessages: Bool,
         inlineQueryPlaceholder: String,

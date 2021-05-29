@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a chat or user profile photo
-public struct ChatPhoto: Codable {
+internal struct ChatPhoto: Codable {
     /// Point in time (Unix timestamp) when the photo has been added
-    public let addedDate: Int
+    internal let addedDate: Int
 
     /// Animated variant of the photo in MPEG4 format; may be null
-    public let animation: AnimatedChatPhoto?
+    internal let animation: AnimatedChatPhoto?
 
     /// Unique photo identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Photo minithumbnail; may be null
-    public let minithumbnail: Minithumbnail?
+    internal let minithumbnail: Minithumbnail?
 
     /// Available variants of the photo in JPEG format, in different size
-    public let sizes: [PhotoSize]
+    internal let sizes: [PhotoSize]
 
-    public init(
+    internal init(
         addedDate: Int,
         animation: AnimatedChatPhoto?,
         id: TdInt64,

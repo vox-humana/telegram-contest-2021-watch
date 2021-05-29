@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns network data usage statistics. Can be called before authorization
-public struct GetNetworkStatistics: Codable {
+internal struct GetNetworkStatistics: Codable {
     /// If true, returns only data for the current library launch
-    public let onlyCurrent: Bool
+    internal let onlyCurrent: Bool
 
-    public init(onlyCurrent: Bool) {
+    internal init(onlyCurrent: Bool) {
         self.onlyCurrent = onlyCurrent
     }
 }

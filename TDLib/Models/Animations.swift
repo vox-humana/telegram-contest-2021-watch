@@ -8,11 +8,11 @@
 import Foundation
 
 /// Represents a list of animations
-public struct Animations: Codable {
+internal struct Animations: Codable {
     /// List of animations
-    public let animations: [Animation]
+    internal let animations: [Animation]
 
-    public init(animations: [Animation]) {
+    internal init(animations: [Animation]) {
         self.animations = animations
     }
 }

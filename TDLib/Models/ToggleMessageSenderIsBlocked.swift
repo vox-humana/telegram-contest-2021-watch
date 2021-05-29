@@ -8,14 +8,14 @@
 import Foundation
 
 /// Changes the block state of a message sender. Currently, only users and supergroup chats can be blocked
-public struct ToggleMessageSenderIsBlocked: Codable {
+internal struct ToggleMessageSenderIsBlocked: Codable {
     /// New value of is_blocked
-    public let isBlocked: Bool
+    internal let isBlocked: Bool
 
     /// Message Sender
-    public let sender: MessageSender
+    internal let sender: MessageSender
 
-    public init(
+    internal init(
         isBlocked: Bool,
         sender: MessageSender
     ) {

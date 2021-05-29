@@ -8,11 +8,11 @@
 import Foundation
 
 /// Deletes a profile photo
-public struct DeleteProfilePhoto: Codable {
+internal struct DeleteProfilePhoto: Codable {
     /// Identifier of the profile photo to delete
-    public let profilePhotoId: TdInt64
+    internal let profilePhotoId: TdInt64
 
-    public init(profilePhotoId: TdInt64) {
+    internal init(profilePhotoId: TdInt64) {
         self.profilePhotoId = profilePhotoId
     }
 }

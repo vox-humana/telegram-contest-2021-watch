@@ -8,32 +8,32 @@
 import Foundation
 
 /// Describes an audio file. Audio is usually in MP3 or M4A format
-public struct Audio: Codable {
+internal struct Audio: Codable {
     /// The minithumbnail of the album cover; may be null
-    public let albumCoverMinithumbnail: Minithumbnail?
+    internal let albumCoverMinithumbnail: Minithumbnail?
 
     /// The thumbnail of the album cover in JPEG format; as defined by the sender. The full size thumbnail should be extracted from the downloaded file; may be null
-    public let albumCoverThumbnail: Thumbnail?
+    internal let albumCoverThumbnail: Thumbnail?
 
     /// File containing the audio
-    public let audio: File
+    internal let audio: File
 
     /// Duration of the audio, in seconds; as defined by the sender
-    public let duration: Int
+    internal let duration: Int
 
     /// Original name of the file; as defined by the sender
-    public let fileName: String
+    internal let fileName: String
 
     /// The MIME type of the file; as defined by the sender
-    public let mimeType: String
+    internal let mimeType: String
 
     /// Performer of the audio; as defined by the sender
-    public let performer: String
+    internal let performer: String
 
     /// Title of the audio; as defined by the sender
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         albumCoverMinithumbnail: Minithumbnail?,
         albumCoverThumbnail: Thumbnail?,
         audio: File,

@@ -8,28 +8,28 @@
 import Foundation
 
 /// Describes a game
-public struct Game: Codable {
+internal struct Game: Codable {
     /// Game animation; may be null
-    public let animation: Animation?
+    internal let animation: Animation?
 
-    public let description: String
+    internal let description: String
 
     /// Game ID
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Game photo
-    public let photo: Photo
+    internal let photo: Photo
 
     /// Game short name. To share a game use the URL https://t.me/{bot_username}?game={game_short_name}
-    public let shortName: String
+    internal let shortName: String
 
     /// Game text, usually containing scoreboards for a game
-    public let text: FormattedText
+    internal let text: FormattedText
 
     /// Game title
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         animation: Animation?,
         description: String,
         id: TdInt64,

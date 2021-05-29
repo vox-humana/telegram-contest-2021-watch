@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes an instant view page for a web page
-public struct WebPageInstantView: Codable {
+internal struct WebPageInstantView: Codable {
     /// True, if the instant view contains the full page. A network request might be needed to get the full web page instant view
-    public let isFull: Bool
+    internal let isFull: Bool
 
     /// True, if the instant view must be shown from right to left
-    public let isRtl: Bool
+    internal let isRtl: Bool
 
     /// Content of the web page
-    public let pageBlocks: [PageBlock]
+    internal let pageBlocks: [PageBlock]
 
     /// Version of the instant view, currently can be 1 or 2
-    public let version: Int
+    internal let version: Int
 
     /// Number of the instant view views; 0 if unknown
-    public let viewCount: Int
+    internal let viewCount: Int
 
-    public init(
+    internal init(
         isFull: Bool,
         isRtl: Bool,
         pageBlocks: [PageBlock],

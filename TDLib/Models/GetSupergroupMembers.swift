@@ -8,20 +8,20 @@
 import Foundation
 
 /// Returns information about members or banned users in a supergroup or channel. Can be used only if SupergroupFullInfo.can_get_members == true; additionally, administrator privileges may be required for some filters
-public struct GetSupergroupMembers: Codable {
+internal struct GetSupergroupMembers: Codable {
     /// The type of users to return. By default, supergroupMembersFilterRecent
-    public let filter: SupergroupMembersFilter
+    internal let filter: SupergroupMembersFilter
 
     /// The maximum number of users be returned; up to 200
-    public let limit: Int
+    internal let limit: Int
 
     /// Number of users to skip
-    public let offset: Int
+    internal let offset: Int
 
     /// Identifier of the supergroup or channel
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(
+    internal init(
         filter: SupergroupMembersFilter,
         limit: Int,
         offset: Int,

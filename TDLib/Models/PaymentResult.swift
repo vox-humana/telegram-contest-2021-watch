@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains the result of a payment request
-public struct PaymentResult: Codable {
+internal struct PaymentResult: Codable {
     /// True, if the payment request was successful; otherwise the verification_url will be not empty
-    public let success: Bool
+    internal let success: Bool
 
     /// URL for additional payment credentials verification
-    public let verificationUrl: String
+    internal let verificationUrl: String
 
-    public init(
+    internal init(
         success: Bool,
         verificationUrl: String
     ) {

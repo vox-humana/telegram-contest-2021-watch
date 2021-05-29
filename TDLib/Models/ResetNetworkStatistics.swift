@@ -8,6 +8,6 @@
 import Foundation
 
 /// Resets all network data usage statistics to zero. Can be called before authorization
-public struct ResetNetworkStatistics: Codable {
-    public init() {}
+internal struct ResetNetworkStatistics: Codable {
+    internal init() {}
 }

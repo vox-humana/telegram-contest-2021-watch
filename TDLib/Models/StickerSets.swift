@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a list of sticker sets
-public struct StickerSets: Codable {
+internal struct StickerSets: Codable {
     /// List of sticker sets
-    public let sets: [StickerSetInfo]
+    internal let sets: [StickerSetInfo]
 
     /// Approximate total number of sticker sets found
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         sets: [StickerSetInfo],
         totalCount: Int
     ) {

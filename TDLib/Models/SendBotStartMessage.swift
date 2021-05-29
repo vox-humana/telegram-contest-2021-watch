@@ -8,17 +8,17 @@
 import Foundation
 
 /// Invites a bot to a chat (if it is not yet a member) and sends it the /start command. Bots can't be invited to a private chat other than the chat with the bot. Bots can't be invited to channels (although they can be added as admins) and secret chats. Returns the sent message
-public struct SendBotStartMessage: Codable {
+internal struct SendBotStartMessage: Codable {
     /// Identifier of the bot
-    public let botUserId: Int
+    internal let botUserId: Int
 
     /// Identifier of the target chat
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// A hidden parameter sent to the bot for deep linking purposes (https://core.telegram.org/bots#deep-linking)
-    public let parameter: String
+    internal let parameter: String
 
-    public init(
+    internal init(
         botUserId: Int,
         chatId: Int64,
         parameter: String

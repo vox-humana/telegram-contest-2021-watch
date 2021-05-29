@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns the squared received number; for testing only. This is an offline method. Can be called before authorization
-public struct TestSquareInt: Codable {
+internal struct TestSquareInt: Codable {
     /// Number to square
-    public let x: Int
+    internal let x: Int
 
-    public init(x: Int) {
+    internal init(x: Int) {
         self.x = x
     }
 }

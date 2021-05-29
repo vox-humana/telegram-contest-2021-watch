@@ -8,14 +8,14 @@
 import Foundation
 
 /// A full list of available network statistic entries
-public struct NetworkStatistics: Codable {
+internal struct NetworkStatistics: Codable {
     /// Network statistics entries
-    public let entries: [NetworkStatisticsEntry]
+    internal let entries: [NetworkStatisticsEntry]
 
     /// Point in time (Unix timestamp) from which the statistics are collected
-    public let sinceDate: Int
+    internal let sinceDate: Int
 
-    public init(
+    internal init(
         entries: [NetworkStatisticsEntry],
         sinceDate: Int
     ) {

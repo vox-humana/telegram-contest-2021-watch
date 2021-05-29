@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sends a Telegram Passport authorization form, effectively sharing data with the service. This method must be called after getPassportAuthorizationFormAvailableElements if some previously available elements are going to be reused
-public struct SendPassportAuthorizationForm: Codable {
+internal struct SendPassportAuthorizationForm: Codable {
     /// Authorization form identifier
-    public let autorizationFormId: Int
+    internal let autorizationFormId: Int
 
     /// Types of Telegram Passport elements chosen by user to complete the authorization form
-    public let types: [PassportElementType]
+    internal let types: [PassportElementType]
 
-    public init(
+    internal init(
         autorizationFormId: Int,
         types: [PassportElementType]
     ) {

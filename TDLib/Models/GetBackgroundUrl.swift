@@ -8,14 +8,14 @@
 import Foundation
 
 /// Constructs a persistent HTTP URL for a background
-public struct GetBackgroundUrl: Codable {
+internal struct GetBackgroundUrl: Codable {
     /// Background name
-    public let name: String
+    internal let name: String
 
     /// Background type
-    public let type: BackgroundType
+    internal let type: BackgroundType
 
-    public init(
+    internal init(
         name: String,
         type: BackgroundType
     ) {

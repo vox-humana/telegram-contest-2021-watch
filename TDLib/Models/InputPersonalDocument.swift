@@ -8,14 +8,14 @@
 import Foundation
 
 /// A personal document to be saved to Telegram Passport
-public struct InputPersonalDocument: Codable {
+internal struct InputPersonalDocument: Codable {
     /// List of files containing the pages of the document
-    public let files: [InputFile]
+    internal let files: [InputFile]
 
     /// List of files containing a certified English translation of the document
-    public let translation: [InputFile]
+    internal let translation: [InputFile]
 
-    public init(
+    internal init(
         files: [InputFile],
         translation: [InputFile]
     ) {

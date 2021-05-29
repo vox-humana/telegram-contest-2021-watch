@@ -8,14 +8,14 @@
 import Foundation
 
 /// Parses Bold, Italic, Underline, Strikethrough, Code, Pre, PreCode, TextUrl and MentionName entities contained in the text. Can be called synchronously
-public struct ParseTextEntities: Codable {
+internal struct ParseTextEntities: Codable {
     /// Text parse mode
-    public let parseMode: TextParseMode
+    internal let parseMode: TextParseMode
 
     /// The text to parse
-    public let text: String
+    internal let text: String
 
-    public init(
+    internal init(
         parseMode: TextParseMode,
         text: String
     ) {

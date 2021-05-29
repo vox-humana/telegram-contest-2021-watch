@@ -8,6 +8,6 @@
 import Foundation
 
 /// Resends the 2-step verification recovery email address verification code
-public struct ResendRecoveryEmailAddressCode: Codable {
-    public init() {}
+internal struct ResendRecoveryEmailAddressCode: Codable {
+    internal init() {}
 }

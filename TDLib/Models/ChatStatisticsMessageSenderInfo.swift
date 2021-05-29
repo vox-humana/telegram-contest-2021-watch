@@ -8,17 +8,17 @@
 import Foundation
 
 /// Contains statistics about messages sent by a user
-public struct ChatStatisticsMessageSenderInfo: Codable {
+internal struct ChatStatisticsMessageSenderInfo: Codable {
     /// Average number of characters in sent messages
-    public let averageCharacterCount: Int
+    internal let averageCharacterCount: Int
 
     /// Number of sent messages
-    public let sentMessageCount: Int
+    internal let sentMessageCount: Int
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         averageCharacterCount: Int,
         sentMessageCount: Int,
         userId: Int

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns the specified error and ensures that the Error object is used; for testing only. Can be called synchronously
-public struct TestReturnError: Codable {
+internal struct TestReturnError: Codable {
     /// The error to be returned
-    public let error: Error
+    internal let error: Error
 
-    public init(error: Error) {
+    internal init(error: Error) {
         self.error = error
     }
 }

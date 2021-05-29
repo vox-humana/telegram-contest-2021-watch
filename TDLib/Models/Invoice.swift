@@ -8,44 +8,44 @@
 import Foundation
 
 /// Product invoice
-public struct Invoice: Codable {
+internal struct Invoice: Codable {
     /// ISO 4217 currency code
-    public let currency: String
+    internal let currency: String
 
     /// True, if the total price depends on the shipping method
-    public let isFlexible: Bool
+    internal let isFlexible: Bool
 
     /// True, if the payment is a test payment
-    public let isTest: Bool
+    internal let isTest: Bool
 
     /// The maximum allowed amount of tip in the smallest units of the currency
-    public let maxTipAmount: Int64
+    internal let maxTipAmount: Int64
 
     /// True, if the user's email address is needed for payment
-    public let needEmailAddress: Bool
+    internal let needEmailAddress: Bool
 
     /// True, if the user's name is needed for payment
-    public let needName: Bool
+    internal let needName: Bool
 
     /// True, if the user's phone number is needed for payment
-    public let needPhoneNumber: Bool
+    internal let needPhoneNumber: Bool
 
     /// True, if the user's shipping address is needed for payment
-    public let needShippingAddress: Bool
+    internal let needShippingAddress: Bool
 
     /// A list of objects used to calculate the total price of the product
-    public let priceParts: [LabeledPricePart]
+    internal let priceParts: [LabeledPricePart]
 
     /// True, if the user's email address will be sent to the provider
-    public let sendEmailAddressToProvider: Bool
+    internal let sendEmailAddressToProvider: Bool
 
     /// True, if the user's phone number will be sent to the provider
-    public let sendPhoneNumberToProvider: Bool
+    internal let sendPhoneNumberToProvider: Bool
 
     /// Suggested amounts of tip in the smallest units of the currency
-    public let suggestedTipAmounts: [Int64]
+    internal let suggestedTipAmounts: [Int64]
 
-    public init(
+    internal init(
         currency: String,
         isFlexible: Bool,
         isTest: Bool,

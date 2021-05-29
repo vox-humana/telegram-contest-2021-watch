@@ -8,70 +8,70 @@
 import Foundation
 
 /// Describes a web page preview
-public struct WebPage: Codable {
+internal struct WebPage: Codable {
     /// Preview of the content as an animation, if available; may be null
-    public let animation: Animation?
+    internal let animation: Animation?
 
     /// Preview of the content as an audio file, if available; may be null
-    public let audio: Audio?
+    internal let audio: Audio?
 
     /// Author of the content
-    public let author: String
+    internal let author: String
 
-    public let description: FormattedText
+    internal let description: FormattedText
 
     /// URL to display
-    public let displayUrl: String
+    internal let displayUrl: String
 
     /// Preview of the content as a document, if available (currently only available for small PDF files and ZIP archives); may be null
-    public let document: Document?
+    internal let document: Document?
 
     /// Duration of the content, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// Height of the embedded preview
-    public let embedHeight: Int
+    internal let embedHeight: Int
 
     /// MIME type of the embedded preview, (e.g., text/html or video/mp4)
-    public let embedType: String
+    internal let embedType: String
 
     /// URL to show in the embedded preview
-    public let embedUrl: String
+    internal let embedUrl: String
 
     /// Width of the embedded preview
-    public let embedWidth: Int
+    internal let embedWidth: Int
 
     /// Version of instant view, available for the web page (currently can be 1 or 2), 0 if none
-    public let instantViewVersion: Int
+    internal let instantViewVersion: Int
 
     /// Image representing the content; may be null
-    public let photo: Photo?
+    internal let photo: Photo?
 
     /// Short name of the site (e.g., Google Docs, App Store)
-    public let siteName: String
+    internal let siteName: String
 
     /// Preview of the content as a sticker for small WEBP files, if available; may be null
-    public let sticker: Sticker?
+    internal let sticker: Sticker?
 
     /// Title of the content
-    public let title: String
+    internal let title: String
 
     /// Type of the web page. Can be: article, photo, audio, video, document, profile, app, or something else
-    public let type: String
+    internal let type: String
 
     /// Original URL of the link
-    public let url: String
+    internal let url: String
 
     /// Preview of the content as a video, if available; may be null
-    public let video: Video?
+    internal let video: Video?
 
     /// Preview of the content as a video note, if available; may be null
-    public let videoNote: VideoNote?
+    internal let videoNote: VideoNote?
 
     /// Preview of the content as a voice note, if available; may be null
-    public let voiceNote: VoiceNote?
+    internal let voiceNote: VoiceNote?
 
-    public init(
+    internal init(
         animation: Animation?,
         audio: Audio?,
         author: String,

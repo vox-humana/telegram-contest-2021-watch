@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the reason why a call was discarded
-public enum CallDiscardReason: Codable {
+internal enum CallDiscardReason: Codable {
     /// The call wasn't discarded, or the reason is unknown
     case callDiscardReasonEmpty
 
@@ -32,7 +32,7 @@ public enum CallDiscardReason: Codable {
         case callDiscardReasonHungUp
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -49,7 +49,7 @@ public enum CallDiscardReason: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .callDiscardReasonEmpty:

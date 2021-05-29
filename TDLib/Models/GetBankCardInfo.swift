@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns information about a bank card
-public struct GetBankCardInfo: Codable {
+internal struct GetBankCardInfo: Codable {
     /// The bank card number
-    public let bankCardNumber: String
+    internal let bankCardNumber: String
 
-    public init(bankCardNumber: String) {
+    internal init(bankCardNumber: String) {
         self.bankCardNumber = bankCardNumber
     }
 }

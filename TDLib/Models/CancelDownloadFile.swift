@@ -8,14 +8,14 @@
 import Foundation
 
 /// Stops the downloading of a file. If a file has already been downloaded, does nothing
-public struct CancelDownloadFile: Codable {
+internal struct CancelDownloadFile: Codable {
     /// Identifier of a file to stop downloading
-    public let fileId: Int
+    internal let fileId: Int
 
     /// Pass true to stop downloading only if it hasn't been started, i.e. request hasn't been sent to server
-    public let onlyIfPending: Bool
+    internal let onlyIfPending: Bool
 
-    public init(
+    internal init(
         fileId: Int,
         onlyIfPending: Bool
     ) {

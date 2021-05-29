@@ -8,6 +8,6 @@
 import Foundation
 
 /// Resends phone number confirmation code
-public struct ResendPhoneNumberConfirmationCode: Codable {
-    public init() {}
+internal struct ResendPhoneNumberConfirmationCode: Codable {
+    internal init() {}
 }

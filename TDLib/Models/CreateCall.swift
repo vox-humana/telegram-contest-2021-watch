@@ -8,17 +8,17 @@
 import Foundation
 
 /// Creates a new call
-public struct CreateCall: Codable {
+internal struct CreateCall: Codable {
     /// True, if a video call needs to be created
-    public let isVideo: Bool
+    internal let isVideo: Bool
 
     /// Description of the call protocols supported by the application
-    public let `protocol`: CallProtocol
+    internal let `protocol`: CallProtocol
 
     /// Identifier of the user to be called
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         isVideo: Bool,
         protocol: CallProtocol,
         userId: Int

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Part of the face, relative to which a mask should be placed
-public enum MaskPoint: Codable {
+internal enum MaskPoint: Codable {
     /// A mask should be placed relatively to the forehead
     case maskPointForehead
 
@@ -28,7 +28,7 @@ public enum MaskPoint: Codable {
         case maskPointChin
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -43,7 +43,7 @@ public enum MaskPoint: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .maskPointForehead:

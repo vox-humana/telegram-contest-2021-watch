@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the types of chats to which notification settings are applied
-public enum NotificationSettingsScope: Codable {
+internal enum NotificationSettingsScope: Codable {
     /// Notification settings applied to all private and secret chats when the corresponding chat setting has a default value
     case notificationSettingsScopePrivateChats
 
@@ -24,7 +24,7 @@ public enum NotificationSettingsScope: Codable {
         case notificationSettingsScopeChannelChats
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -37,7 +37,7 @@ public enum NotificationSettingsScope: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .notificationSettingsScopePrivateChats:

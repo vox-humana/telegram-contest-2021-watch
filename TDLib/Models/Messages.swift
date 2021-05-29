@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains a list of messages
-public struct Messages: Codable {
+internal struct Messages: Codable {
     /// List of messages; messages may be null
-    public let messages: [Message]?
+    internal let messages: [Message]?
 
     /// Approximate total count of messages found
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         messages: [Message]?,
         totalCount: Int
     ) {

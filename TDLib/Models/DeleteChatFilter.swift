@@ -8,11 +8,11 @@
 import Foundation
 
 /// Deletes existing chat filter
-public struct DeleteChatFilter: Codable {
+internal struct DeleteChatFilter: Codable {
     /// Chat filter identifier
-    public let chatFilterId: Int
+    internal let chatFilterId: Int
 
-    public init(chatFilterId: Int) {
+    internal init(chatFilterId: Int) {
         self.chatFilterId = chatFilterId
     }
 }

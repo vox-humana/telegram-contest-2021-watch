@@ -8,14 +8,14 @@
 import Foundation
 
 /// Represents a date range
-public struct DateRange: Codable {
+internal struct DateRange: Codable {
     /// Point in time (Unix timestamp) at which the date range ends
-    public let endDate: Int
+    internal let endDate: Int
 
     /// Point in time (Unix timestamp) at which the date range begins
-    public let startDate: Int
+    internal let startDate: Int
 
-    public init(
+    internal init(
         endDate: Int,
         startDate: Int
     ) {

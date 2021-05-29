@@ -12,16 +12,18 @@ public struct LocationState {
 }
 
 public struct LocationContentView: View {
-    let state: LocationState
+    private let state: LocationState
+    private let fullView: Bool
 
-    public init(_ state: LocationState) {
+    public init(_ state: LocationState, fullView: Bool = false) {
         self.state = state
+        self.fullView = fullView
     }
 
     public var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            map
-                .frame(width: 160, height: 120)
+        VStack(alignment: .leading, spacing: 0) {
+            map.aspectRatio(4 / 3, contentMode: .fit)
+
             if state.isLive {
                 Text("Live Location")
                     .padding(.tgTextPadding)
@@ -34,6 +36,7 @@ public struct LocationContentView: View {
         if #available(watchOS 7.0, *) {
             Map(
                 mapRect: .constant(mapRect),
+                interactionModes: MapInteractionModes(rawValue: 0),
                 annotationItems: [state]
             ) { location in
                 MapAnnotation(coordinate: location.location, anchorPoint: CGPoint(x: 0.5, y: 0.85)) {
@@ -71,8 +74,9 @@ struct LocationContentView_Previews: PreviewProvider {
         Group {
             LocationContentView(.preview)
             LocationContentView(.live)
+                .frame(width: .tgMessageWidth)
         }
+        .tgMessageStyle(isOutgoing: false)
         .accentColor(.blue)
-        .background(Color.white)
     }
 }

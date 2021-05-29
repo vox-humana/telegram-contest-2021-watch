@@ -8,26 +8,26 @@
 import Foundation
 
 /// Theme colors for a payment form
-public struct PaymentFormTheme: Codable {
+internal struct PaymentFormTheme: Codable {
     /// A color of the payment form background in the RGB24 format
-    public let backgroundColor: Int
+    internal let backgroundColor: Int
 
     /// A color of thebuttons in the RGB24 format
-    public let buttonColor: Int
+    internal let buttonColor: Int
 
     /// A color of text on the buttons in the RGB24 format
-    public let buttonTextColor: Int
+    internal let buttonTextColor: Int
 
     /// A color of hints in the RGB24 format
-    public let hintColor: Int
+    internal let hintColor: Int
 
     /// A color of links in the RGB24 format
-    public let linkColor: Int
+    internal let linkColor: Int
 
     /// A color of text in the RGB24 format
-    public let textColor: Int
+    internal let textColor: Int
 
-    public init(
+    internal init(
         backgroundColor: Int,
         buttonColor: Int,
         buttonTextColor: Int,

@@ -8,11 +8,11 @@
 import Foundation
 
 /// Removes background from the list of installed backgrounds
-public struct RemoveBackground: Codable {
+internal struct RemoveBackground: Codable {
     /// The background identifier
-    public let backgroundId: TdInt64
+    internal let backgroundId: TdInt64
 
-    public init(backgroundId: TdInt64) {
+    internal init(backgroundId: TdInt64) {
         self.backgroundId = backgroundId
     }
 }

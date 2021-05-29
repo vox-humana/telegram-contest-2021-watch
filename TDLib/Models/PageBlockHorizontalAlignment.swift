@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a horizontal alignment of a table cell content
-public enum PageBlockHorizontalAlignment: Codable {
+internal enum PageBlockHorizontalAlignment: Codable {
     /// The content should be left-aligned
     case pageBlockHorizontalAlignmentLeft
 
@@ -24,7 +24,7 @@ public enum PageBlockHorizontalAlignment: Codable {
         case pageBlockHorizontalAlignmentRight
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -37,7 +37,7 @@ public enum PageBlockHorizontalAlignment: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .pageBlockHorizontalAlignmentLeft:

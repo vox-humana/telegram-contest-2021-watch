@@ -8,26 +8,26 @@
 import Foundation
 
 /// Represents a cell of a table
-public struct PageBlockTableCell: Codable {
+internal struct PageBlockTableCell: Codable {
     /// Horizontal cell content alignment
-    public let align: PageBlockHorizontalAlignment
+    internal let align: PageBlockHorizontalAlignment
 
     /// The number of columns the cell should span
-    public let colspan: Int
+    internal let colspan: Int
 
     /// True, if it is a header cell
-    public let isHeader: Bool
+    internal let isHeader: Bool
 
     /// The number of rows the cell should span
-    public let rowspan: Int
+    internal let rowspan: Int
 
     /// Cell text; may be null. If the text is null, then the cell should be invisible
-    public let text: RichText?
+    internal let text: RichText?
 
     /// Vertical cell content alignment
-    public let valign: PageBlockVerticalAlignment
+    internal let valign: PageBlockVerticalAlignment
 
-    public init(
+    internal init(
         align: PageBlockHorizontalAlignment,
         colspan: Int,
         isHeader: Bool,

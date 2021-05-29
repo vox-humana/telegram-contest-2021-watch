@@ -8,20 +8,20 @@
 import Foundation
 
 /// Stripe payment provider
-public struct PaymentsProviderStripe: Codable {
+internal struct PaymentsProviderStripe: Codable {
     /// True, if the cardholder name must be provided
-    public let needCardholderName: Bool
+    internal let needCardholderName: Bool
 
     /// True, if the user country must be provided
-    public let needCountry: Bool
+    internal let needCountry: Bool
 
     /// True, if the user ZIP/postal code must be provided
-    public let needPostalCode: Bool
+    internal let needPostalCode: Bool
 
     /// Stripe API publishable key
-    public let publishableKey: String
+    internal let publishableKey: String
 
-    public init(
+    internal init(
         needCardholderName: Bool,
         needCountry: Bool,
         needPostalCode: Bool,

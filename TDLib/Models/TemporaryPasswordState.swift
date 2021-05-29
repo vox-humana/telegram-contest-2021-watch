@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns information about the availability of a temporary password, which can be used for payments
-public struct TemporaryPasswordState: Codable {
+internal struct TemporaryPasswordState: Codable {
     /// True, if a temporary password is available
-    public let hasPassword: Bool
+    internal let hasPassword: Bool
 
     /// Time left before the temporary password expires, in seconds
-    public let validFor: Int
+    internal let validFor: Int
 
-    public init(
+    internal init(
         hasPassword: Bool,
         validFor: Int
     ) {

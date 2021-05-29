@@ -8,11 +8,11 @@
 import Foundation
 
 /// Changes the order of chat filters
-public struct ReorderChatFilters: Codable {
+internal struct ReorderChatFilters: Codable {
     /// Identifiers of chat filters in the new correct order
-    public let chatFilterIds: [Int]
+    internal let chatFilterIds: [Int]
 
-    public init(chatFilterIds: [Int]) {
+    internal init(chatFilterIds: [Int]) {
         self.chatFilterIds = chatFilterIds
     }
 }

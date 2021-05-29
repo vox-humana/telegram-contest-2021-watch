@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains notifications about data changes
-public enum Update: Codable {
+internal enum Update: Codable {
     /// The user authorization state has changed
     case updateAuthorizationState(UpdateAuthorizationState)
 
@@ -352,7 +352,7 @@ public enum Update: Codable {
         case updateChatMember
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -614,7 +614,7 @@ public enum Update: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .updateAuthorizationState(value):
@@ -877,34 +877,34 @@ public enum Update: Codable {
 }
 
 /// The user authorization state has changed
-public struct UpdateAuthorizationState: Codable {
+internal struct UpdateAuthorizationState: Codable {
     /// New authorization state
-    public let authorizationState: AuthorizationState
+    internal let authorizationState: AuthorizationState
 
-    public init(authorizationState: AuthorizationState) {
+    internal init(authorizationState: AuthorizationState) {
         self.authorizationState = authorizationState
     }
 }
 
 /// A new message was received; can also be an outgoing message
-public struct UpdateNewMessage: Codable {
+internal struct UpdateNewMessage: Codable {
     /// The new message
-    public let message: Message
+    internal let message: Message
 
-    public init(message: Message) {
+    internal init(message: Message) {
         self.message = message
     }
 }
 
 /// A request to send a message has reached the Telegram server. This doesn't mean that the message will be sent successfully or even that the send message request will be processed. This update will be sent only if the option "use_quick_ack" is set to true. This update may be sent multiple times for the same message
-public struct UpdateMessageSendAcknowledged: Codable {
+internal struct UpdateMessageSendAcknowledged: Codable {
     /// The chat identifier of the sent message
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// A temporary message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {
@@ -914,14 +914,14 @@ public struct UpdateMessageSendAcknowledged: Codable {
 }
 
 /// A message has been successfully sent
-public struct UpdateMessageSendSucceeded: Codable {
+internal struct UpdateMessageSendSucceeded: Codable {
     /// Information about the sent message. Usually only the message identifier, date, and content are changed, but almost all other fields can also change
-    public let message: Message
+    internal let message: Message
 
     /// The previous temporary message identifier
-    public let oldMessageId: Int64
+    internal let oldMessageId: Int64
 
-    public init(
+    internal init(
         message: Message,
         oldMessageId: Int64
     ) {
@@ -931,20 +931,20 @@ public struct UpdateMessageSendSucceeded: Codable {
 }
 
 /// A message failed to send. Be aware that some messages being sent can be irrecoverably deleted, in which case updateDeleteMessages will be received instead of this update
-public struct UpdateMessageSendFailed: Codable {
+internal struct UpdateMessageSendFailed: Codable {
     /// An error code
-    public let errorCode: Int
+    internal let errorCode: Int
 
     /// Error message
-    public let errorMessage: String
+    internal let errorMessage: String
 
     /// Contains information about the message which failed to send
-    public let message: Message
+    internal let message: Message
 
     /// The previous temporary message identifier
-    public let oldMessageId: Int64
+    internal let oldMessageId: Int64
 
-    public init(
+    internal init(
         errorCode: Int,
         errorMessage: String,
         message: Message,
@@ -958,17 +958,17 @@ public struct UpdateMessageSendFailed: Codable {
 }
 
 /// The message content has changed
-public struct UpdateMessageContent: Codable {
+internal struct UpdateMessageContent: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// New message content
-    public let newContent: MessageContent
+    internal let newContent: MessageContent
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64,
         newContent: MessageContent
@@ -980,20 +980,20 @@ public struct UpdateMessageContent: Codable {
 }
 
 /// A message was edited. Changes in the message content will come in a separate updateMessageContent
-public struct UpdateMessageEdited: Codable {
+internal struct UpdateMessageEdited: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Point in time (Unix timestamp) when the message was edited
-    public let editDate: Int
+    internal let editDate: Int
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// New message reply markup; may be null
-    public let replyMarkup: ReplyMarkup?
+    internal let replyMarkup: ReplyMarkup?
 
-    public init(
+    internal init(
         chatId: Int64,
         editDate: Int,
         messageId: Int64,
@@ -1007,17 +1007,17 @@ public struct UpdateMessageEdited: Codable {
 }
 
 /// The message pinned state was changed
-public struct UpdateMessageIsPinned: Codable {
+internal struct UpdateMessageIsPinned: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// True, if the message is pinned
-    public let isPinned: Bool
+    internal let isPinned: Bool
 
     /// The message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         isPinned: Bool,
         messageId: Int64
@@ -1029,17 +1029,17 @@ public struct UpdateMessageIsPinned: Codable {
 }
 
 /// The information about interactions with a message has changed
-public struct UpdateMessageInteractionInfo: Codable {
+internal struct UpdateMessageInteractionInfo: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New information about interactions with the message; may be null
-    public let interactionInfo: MessageInteractionInfo?
+    internal let interactionInfo: MessageInteractionInfo?
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         interactionInfo: MessageInteractionInfo?,
         messageId: Int64
@@ -1051,14 +1051,14 @@ public struct UpdateMessageInteractionInfo: Codable {
 }
 
 /// The message content was opened. Updates voice note messages to "listened", video note messages to "viewed" and starts the TTL timer for self-destructing messages
-public struct UpdateMessageContentOpened: Codable {
+internal struct UpdateMessageContentOpened: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {
@@ -1068,17 +1068,17 @@ public struct UpdateMessageContentOpened: Codable {
 }
 
 /// A message with an unread mention was read
-public struct UpdateMessageMentionRead: Codable {
+internal struct UpdateMessageMentionRead: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Message identifier
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// The new number of unread mention messages left in the chat
-    public let unreadMentionCount: Int
+    internal let unreadMentionCount: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64,
         unreadMentionCount: Int
@@ -1090,14 +1090,14 @@ public struct UpdateMessageMentionRead: Codable {
 }
 
 /// A message with a live location was viewed. When the update is received, the application is supposed to update the live location
-public struct UpdateMessageLiveLocationViewed: Codable {
+internal struct UpdateMessageLiveLocationViewed: Codable {
     /// Identifier of the chat with the live location message
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of the message with live location
-    public let messageId: Int64
+    internal let messageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         messageId: Int64
     ) {
@@ -1107,24 +1107,24 @@ public struct UpdateMessageLiveLocationViewed: Codable {
 }
 
 /// A new chat has been loaded/created. This update is guaranteed to come before the chat identifier is returned to the application. The chat field changes will be reported through separate updates
-public struct UpdateNewChat: Codable {
+internal struct UpdateNewChat: Codable {
     /// The chat
-    public let chat: Chat
+    internal let chat: Chat
 
-    public init(chat: Chat) {
+    internal init(chat: Chat) {
         self.chat = chat
     }
 }
 
 /// The title of a chat was changed
-public struct UpdateChatTitle: Codable {
+internal struct UpdateChatTitle: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new chat title
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         chatId: Int64,
         title: String
     ) {
@@ -1134,14 +1134,14 @@ public struct UpdateChatTitle: Codable {
 }
 
 /// A chat photo was changed
-public struct UpdateChatPhoto: Codable {
+internal struct UpdateChatPhoto: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new chat photo; may be null
-    public let photo: ChatPhotoInfo?
+    internal let photo: ChatPhotoInfo?
 
-    public init(
+    internal init(
         chatId: Int64,
         photo: ChatPhotoInfo?
     ) {
@@ -1151,14 +1151,14 @@ public struct UpdateChatPhoto: Codable {
 }
 
 /// Chat permissions was changed
-public struct UpdateChatPermissions: Codable {
+internal struct UpdateChatPermissions: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new chat permissions
-    public let permissions: ChatPermissions
+    internal let permissions: ChatPermissions
 
-    public init(
+    internal init(
         chatId: Int64,
         permissions: ChatPermissions
     ) {
@@ -1168,17 +1168,17 @@ public struct UpdateChatPermissions: Codable {
 }
 
 /// The last message of a chat was changed. If last_message is null, then the last message in the chat became unknown. Some new unknown messages might be added to the chat in this case
-public struct UpdateChatLastMessage: Codable {
+internal struct UpdateChatLastMessage: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new last message in the chat; may be null
-    public let lastMessage: Message?
+    internal let lastMessage: Message?
 
     /// The new chat positions in the chat lists
-    public let positions: [ChatPosition]
+    internal let positions: [ChatPosition]
 
-    public init(
+    internal init(
         chatId: Int64,
         lastMessage: Message?,
         positions: [ChatPosition]
@@ -1190,14 +1190,14 @@ public struct UpdateChatLastMessage: Codable {
 }
 
 /// The position of a chat in a chat list has changed. Instead of this update updateChatLastMessage or updateChatDraftMessage might be sent
-public struct UpdateChatPosition: Codable {
+internal struct UpdateChatPosition: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New chat position. If new order is 0, then the chat needs to be removed from the list
-    public let position: ChatPosition
+    internal let position: ChatPosition
 
-    public init(
+    internal init(
         chatId: Int64,
         position: ChatPosition
     ) {
@@ -1207,14 +1207,14 @@ public struct UpdateChatPosition: Codable {
 }
 
 /// A chat was marked as unread or was read
-public struct UpdateChatIsMarkedAsUnread: Codable {
+internal struct UpdateChatIsMarkedAsUnread: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of is_marked_as_unread
-    public let isMarkedAsUnread: Bool
+    internal let isMarkedAsUnread: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         isMarkedAsUnread: Bool
     ) {
@@ -1224,14 +1224,14 @@ public struct UpdateChatIsMarkedAsUnread: Codable {
 }
 
 /// A chat was blocked or unblocked
-public struct UpdateChatIsBlocked: Codable {
+internal struct UpdateChatIsBlocked: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of is_blocked
-    public let isBlocked: Bool
+    internal let isBlocked: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         isBlocked: Bool
     ) {
@@ -1241,14 +1241,14 @@ public struct UpdateChatIsBlocked: Codable {
 }
 
 /// A chat's has_scheduled_messages field has changed
-public struct UpdateChatHasScheduledMessages: Codable {
+internal struct UpdateChatHasScheduledMessages: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of has_scheduled_messages
-    public let hasScheduledMessages: Bool
+    internal let hasScheduledMessages: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         hasScheduledMessages: Bool
     ) {
@@ -1258,14 +1258,14 @@ public struct UpdateChatHasScheduledMessages: Codable {
 }
 
 /// A chat voice chat state has changed
-public struct UpdateChatVoiceChat: Codable {
+internal struct UpdateChatVoiceChat: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of voice_chat
-    public let voiceChat: VoiceChat
+    internal let voiceChat: VoiceChat
 
-    public init(
+    internal init(
         chatId: Int64,
         voiceChat: VoiceChat
     ) {
@@ -1275,14 +1275,14 @@ public struct UpdateChatVoiceChat: Codable {
 }
 
 /// The value of the default disable_notification parameter, used when a message is sent to the chat, was changed
-public struct UpdateChatDefaultDisableNotification: Codable {
+internal struct UpdateChatDefaultDisableNotification: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new default_disable_notification value
-    public let defaultDisableNotification: Bool
+    internal let defaultDisableNotification: Bool
 
-    public init(
+    internal init(
         chatId: Int64,
         defaultDisableNotification: Bool
     ) {
@@ -1292,17 +1292,17 @@ public struct UpdateChatDefaultDisableNotification: Codable {
 }
 
 /// Incoming messages were read or number of unread messages has been changed
-public struct UpdateChatReadInbox: Codable {
+internal struct UpdateChatReadInbox: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of the last read incoming message
-    public let lastReadInboxMessageId: Int64
+    internal let lastReadInboxMessageId: Int64
 
     /// The number of unread messages left in the chat
-    public let unreadCount: Int
+    internal let unreadCount: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         lastReadInboxMessageId: Int64,
         unreadCount: Int
@@ -1314,14 +1314,14 @@ public struct UpdateChatReadInbox: Codable {
 }
 
 /// Outgoing messages were read
-public struct UpdateChatReadOutbox: Codable {
+internal struct UpdateChatReadOutbox: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of last read outgoing message
-    public let lastReadOutboxMessageId: Int64
+    internal let lastReadOutboxMessageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         lastReadOutboxMessageId: Int64
     ) {
@@ -1331,14 +1331,14 @@ public struct UpdateChatReadOutbox: Codable {
 }
 
 /// The chat unread_mention_count has changed
-public struct UpdateChatUnreadMentionCount: Codable {
+internal struct UpdateChatUnreadMentionCount: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The number of unread mention messages left in the chat
-    public let unreadMentionCount: Int
+    internal let unreadMentionCount: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         unreadMentionCount: Int
     ) {
@@ -1348,14 +1348,14 @@ public struct UpdateChatUnreadMentionCount: Codable {
 }
 
 /// Notification settings for a chat were changed
-public struct UpdateChatNotificationSettings: Codable {
+internal struct UpdateChatNotificationSettings: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new notification settings
-    public let notificationSettings: ChatNotificationSettings
+    internal let notificationSettings: ChatNotificationSettings
 
-    public init(
+    internal init(
         chatId: Int64,
         notificationSettings: ChatNotificationSettings
     ) {
@@ -1365,14 +1365,14 @@ public struct UpdateChatNotificationSettings: Codable {
 }
 
 /// Notification settings for some type of chats were updated
-public struct UpdateScopeNotificationSettings: Codable {
+internal struct UpdateScopeNotificationSettings: Codable {
     /// The new notification settings
-    public let notificationSettings: ScopeNotificationSettings
+    internal let notificationSettings: ScopeNotificationSettings
 
     /// Types of chats for which notification settings were updated
-    public let scope: NotificationSettingsScope
+    internal let scope: NotificationSettingsScope
 
-    public init(
+    internal init(
         notificationSettings: ScopeNotificationSettings,
         scope: NotificationSettingsScope
     ) {
@@ -1382,14 +1382,14 @@ public struct UpdateScopeNotificationSettings: Codable {
 }
 
 /// The message Time To Live setting for a chat was changed
-public struct UpdateChatMessageTtlSetting: Codable {
+internal struct UpdateChatMessageTtlSetting: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New value of message_ttl_setting
-    public let messageTtlSetting: Int
+    internal let messageTtlSetting: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         messageTtlSetting: Int
     ) {
@@ -1399,14 +1399,14 @@ public struct UpdateChatMessageTtlSetting: Codable {
 }
 
 /// The chat action bar was changed
-public struct UpdateChatActionBar: Codable {
+internal struct UpdateChatActionBar: Codable {
     /// The new value of the action bar; may be null
-    public let actionBar: ChatActionBar?
+    internal let actionBar: ChatActionBar?
 
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
-    public init(
+    internal init(
         actionBar: ChatActionBar?,
         chatId: Int64
     ) {
@@ -1416,14 +1416,14 @@ public struct UpdateChatActionBar: Codable {
 }
 
 /// The default chat reply markup was changed. Can occur because new messages with reply markup were received or because an old reply markup was hidden by the user
-public struct UpdateChatReplyMarkup: Codable {
+internal struct UpdateChatReplyMarkup: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier of the message from which reply markup needs to be used; 0 if there is no default custom reply markup in the chat
-    public let replyMarkupMessageId: Int64
+    internal let replyMarkupMessageId: Int64
 
-    public init(
+    internal init(
         chatId: Int64,
         replyMarkupMessageId: Int64
     ) {
@@ -1433,17 +1433,17 @@ public struct UpdateChatReplyMarkup: Codable {
 }
 
 /// A chat draft has changed. Be aware that the update may come in the currently opened chat but with old content of the draft. If the user has changed the content of the draft, this update shouldn't be applied
-public struct UpdateChatDraftMessage: Codable {
+internal struct UpdateChatDraftMessage: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// The new draft message; may be null
-    public let draftMessage: DraftMessage?
+    internal let draftMessage: DraftMessage?
 
     /// The new chat positions in the chat lists
-    public let positions: [ChatPosition]
+    internal let positions: [ChatPosition]
 
-    public init(
+    internal init(
         chatId: Int64,
         draftMessage: DraftMessage?,
         positions: [ChatPosition]
@@ -1455,24 +1455,24 @@ public struct UpdateChatDraftMessage: Codable {
 }
 
 /// The list of chat filters or a chat filter has changed
-public struct UpdateChatFilters: Codable {
+internal struct UpdateChatFilters: Codable {
     /// The new list of chat filters
-    public let chatFilters: [ChatFilterInfo]
+    internal let chatFilters: [ChatFilterInfo]
 
-    public init(chatFilters: [ChatFilterInfo]) {
+    internal init(chatFilters: [ChatFilterInfo]) {
         self.chatFilters = chatFilters
     }
 }
 
 /// The number of online group members has changed. This update with non-zero count is sent only for currently opened chats. There is no guarantee that it will be sent just after the count has changed
-public struct UpdateChatOnlineMemberCount: Codable {
+internal struct UpdateChatOnlineMemberCount: Codable {
     /// Identifier of the chat
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// New number of online members in the chat, or 0 if unknown
-    public let onlineMemberCount: Int
+    internal let onlineMemberCount: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         onlineMemberCount: Int
     ) {
@@ -1482,14 +1482,14 @@ public struct UpdateChatOnlineMemberCount: Codable {
 }
 
 /// A notification was changed
-public struct UpdateNotification: Codable {
+internal struct UpdateNotification: Codable {
     /// Changed notification
-    public let notification: Notification
+    internal let notification: Notification
 
     /// Unique notification group identifier
-    public let notificationGroupId: Int
+    internal let notificationGroupId: Int
 
-    public init(
+    internal init(
         notification: Notification,
         notificationGroupId: Int
     ) {
@@ -1499,32 +1499,32 @@ public struct UpdateNotification: Codable {
 }
 
 /// A list of active notifications in a notification group has changed
-public struct UpdateNotificationGroup: Codable {
+internal struct UpdateNotificationGroup: Codable {
     /// List of added group notifications, sorted by notification ID
-    public let addedNotifications: [Notification]
+    internal let addedNotifications: [Notification]
 
     /// Identifier of a chat to which all notifications in the group belong
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// True, if the notifications should be shown without sound
-    public let isSilent: Bool
+    internal let isSilent: Bool
 
     /// Unique notification group identifier
-    public let notificationGroupId: Int
+    internal let notificationGroupId: Int
 
     /// Chat identifier, which notification settings must be applied to the added notifications
-    public let notificationSettingsChatId: Int64
+    internal let notificationSettingsChatId: Int64
 
     /// Identifiers of removed group notifications, sorted by notification ID
-    public let removedNotificationIds: [Int]
+    internal let removedNotificationIds: [Int]
 
     /// Total number of unread notifications in the group, can be bigger than number of active notifications
-    public let totalCount: Int
+    internal let totalCount: Int
 
     /// New type of the notification group
-    public let type: NotificationGroupType
+    internal let type: NotificationGroupType
 
-    public init(
+    internal init(
         addedNotifications: [Notification],
         chatId: Int64,
         isSilent: Bool,
@@ -1546,24 +1546,24 @@ public struct UpdateNotificationGroup: Codable {
 }
 
 /// Contains active notifications that was shown on previous application launches. This update is sent only if the message database is used. In that case it comes once before any updateNotification and updateNotificationGroup update
-public struct UpdateActiveNotifications: Codable {
+internal struct UpdateActiveNotifications: Codable {
     /// Lists of active notification groups
-    public let groups: [NotificationGroup]
+    internal let groups: [NotificationGroup]
 
-    public init(groups: [NotificationGroup]) {
+    internal init(groups: [NotificationGroup]) {
         self.groups = groups
     }
 }
 
 /// Describes whether there are some pending notification updates. Can be used to prevent application from killing, while there are some pending notifications
-public struct UpdateHavePendingNotifications: Codable {
+internal struct UpdateHavePendingNotifications: Codable {
     /// True, if there are some delayed notification updates, which will be sent soon
-    public let haveDelayedNotifications: Bool
+    internal let haveDelayedNotifications: Bool
 
     /// True, if there can be some yet unreceived notifications, which are being fetched from the server
-    public let haveUnreceivedNotifications: Bool
+    internal let haveUnreceivedNotifications: Bool
 
-    public init(
+    internal init(
         haveDelayedNotifications: Bool,
         haveUnreceivedNotifications: Bool
     ) {
@@ -1573,20 +1573,20 @@ public struct UpdateHavePendingNotifications: Codable {
 }
 
 /// Some messages were deleted
-public struct UpdateDeleteMessages: Codable {
+internal struct UpdateDeleteMessages: Codable {
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// True, if the messages are deleted only from the cache and can possibly be retrieved again in the future
-    public let fromCache: Bool
+    internal let fromCache: Bool
 
     /// True, if the messages are permanently deleted by a user (as opposed to just becoming inaccessible)
-    public let isPermanent: Bool
+    internal let isPermanent: Bool
 
     /// Identifiers of the deleted messages
-    public let messageIds: [Int64]
+    internal let messageIds: [Int64]
 
-    public init(
+    internal init(
         chatId: Int64,
         fromCache: Bool,
         isPermanent: Bool,
@@ -1600,20 +1600,20 @@ public struct UpdateDeleteMessages: Codable {
 }
 
 /// User activity in the chat has changed
-public struct UpdateUserChatAction: Codable {
+internal struct UpdateUserChatAction: Codable {
     /// The action description
-    public let action: ChatAction
+    internal let action: ChatAction
 
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// If not 0, a message thread identifier in which the action was performed
-    public let messageThreadId: Int64
+    internal let messageThreadId: Int64
 
     /// Identifier of a user performing an action
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         action: ChatAction,
         chatId: Int64,
         messageThreadId: Int64,
@@ -1627,14 +1627,14 @@ public struct UpdateUserChatAction: Codable {
 }
 
 /// The user went online or offline
-public struct UpdateUserStatus: Codable {
+internal struct UpdateUserStatus: Codable {
     /// New status of the user
-    public let status: UserStatus
+    internal let status: UserStatus
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         status: UserStatus,
         userId: Int
     ) {
@@ -1644,54 +1644,54 @@ public struct UpdateUserStatus: Codable {
 }
 
 /// Some data of a user has changed. This update is guaranteed to come before the user identifier is returned to the application
-public struct UpdateUser: Codable {
+internal struct UpdateUser: Codable {
     /// New data about the user
-    public let user: User
+    internal let user: User
 
-    public init(user: User) {
+    internal init(user: User) {
         self.user = user
     }
 }
 
 /// Some data of a basic group has changed. This update is guaranteed to come before the basic group identifier is returned to the application
-public struct UpdateBasicGroup: Codable {
+internal struct UpdateBasicGroup: Codable {
     /// New data about the group
-    public let basicGroup: BasicGroup
+    internal let basicGroup: BasicGroup
 
-    public init(basicGroup: BasicGroup) {
+    internal init(basicGroup: BasicGroup) {
         self.basicGroup = basicGroup
     }
 }
 
 /// Some data of a supergroup or a channel has changed. This update is guaranteed to come before the supergroup identifier is returned to the application
-public struct UpdateSupergroup: Codable {
+internal struct UpdateSupergroup: Codable {
     /// New data about the supergroup
-    public let supergroup: Supergroup
+    internal let supergroup: Supergroup
 
-    public init(supergroup: Supergroup) {
+    internal init(supergroup: Supergroup) {
         self.supergroup = supergroup
     }
 }
 
 /// Some data of a secret chat has changed. This update is guaranteed to come before the secret chat identifier is returned to the application
-public struct UpdateSecretChat: Codable {
+internal struct UpdateSecretChat: Codable {
     /// New data about the secret chat
-    public let secretChat: SecretChat
+    internal let secretChat: SecretChat
 
-    public init(secretChat: SecretChat) {
+    internal init(secretChat: SecretChat) {
         self.secretChat = secretChat
     }
 }
 
 /// Some data from userFullInfo has been changed
-public struct UpdateUserFullInfo: Codable {
+internal struct UpdateUserFullInfo: Codable {
     /// New full information about the user
-    public let userFullInfo: UserFullInfo
+    internal let userFullInfo: UserFullInfo
 
     /// User identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         userFullInfo: UserFullInfo,
         userId: Int
     ) {
@@ -1701,14 +1701,14 @@ public struct UpdateUserFullInfo: Codable {
 }
 
 /// Some data from basicGroupFullInfo has been changed
-public struct UpdateBasicGroupFullInfo: Codable {
+internal struct UpdateBasicGroupFullInfo: Codable {
     /// New full information about the group
-    public let basicGroupFullInfo: BasicGroupFullInfo
+    internal let basicGroupFullInfo: BasicGroupFullInfo
 
     /// Identifier of a basic group
-    public let basicGroupId: Int
+    internal let basicGroupId: Int
 
-    public init(
+    internal init(
         basicGroupFullInfo: BasicGroupFullInfo,
         basicGroupId: Int
     ) {
@@ -1718,14 +1718,14 @@ public struct UpdateBasicGroupFullInfo: Codable {
 }
 
 /// Some data from supergroupFullInfo has been changed
-public struct UpdateSupergroupFullInfo: Codable {
+internal struct UpdateSupergroupFullInfo: Codable {
     /// New full information about the supergroup
-    public let supergroupFullInfo: SupergroupFullInfo
+    internal let supergroupFullInfo: SupergroupFullInfo
 
     /// Identifier of the supergroup or channel
-    public let supergroupId: Int
+    internal let supergroupId: Int
 
-    public init(
+    internal init(
         supergroupFullInfo: SupergroupFullInfo,
         supergroupId: Int
     ) {
@@ -1735,14 +1735,14 @@ public struct UpdateSupergroupFullInfo: Codable {
 }
 
 /// Service notification from the server. Upon receiving this the application must show a popup with the content of the notification
-public struct UpdateServiceNotification: Codable {
+internal struct UpdateServiceNotification: Codable {
     /// Notification content
-    public let content: MessageContent
+    internal let content: MessageContent
 
     /// Notification type. If type begins with "AUTH_KEY_DROP_", then two buttons "Cancel" and "Log out" should be shown under notification; if user presses the second, all local data should be destroyed using Destroy method
-    public let type: String
+    internal let type: String
 
-    public init(
+    internal init(
         content: MessageContent,
         type: String
     ) {
@@ -1752,30 +1752,30 @@ public struct UpdateServiceNotification: Codable {
 }
 
 /// Information about a file was updated
-public struct UpdateFile: Codable {
+internal struct UpdateFile: Codable {
     /// New data about the file
-    public let file: File
+    internal let file: File
 
-    public init(file: File) {
+    internal init(file: File) {
         self.file = file
     }
 }
 
 /// The file generation process needs to be started by the application
-public struct UpdateFileGenerationStart: Codable {
+internal struct UpdateFileGenerationStart: Codable {
     /// String specifying the conversion applied to the original file. If conversion is "#url#" than original_path contains an HTTP/HTTPS URL of a file, which should be downloaded by the application
-    public let conversion: String
+    internal let conversion: String
 
     /// The path to a file that should be created and where the new file should be generated
-    public let destinationPath: String
+    internal let destinationPath: String
 
     /// Unique identifier for the generation process
-    public let generationId: TdInt64
+    internal let generationId: TdInt64
 
     /// The path to a file from which a new file is generated; may be empty
-    public let originalPath: String
+    internal let originalPath: String
 
-    public init(
+    internal init(
         conversion: String,
         destinationPath: String,
         generationId: TdInt64,
@@ -1789,44 +1789,44 @@ public struct UpdateFileGenerationStart: Codable {
 }
 
 /// File generation is no longer needed
-public struct UpdateFileGenerationStop: Codable {
+internal struct UpdateFileGenerationStop: Codable {
     /// Unique identifier for the generation process
-    public let generationId: TdInt64
+    internal let generationId: TdInt64
 
-    public init(generationId: TdInt64) {
+    internal init(generationId: TdInt64) {
         self.generationId = generationId
     }
 }
 
 /// New call was created or information about a call was updated
-public struct UpdateCall: Codable {
+internal struct UpdateCall: Codable {
     /// New data about a call
-    public let call: Call
+    internal let call: Call
 
-    public init(call: Call) {
+    internal init(call: Call) {
         self.call = call
     }
 }
 
 /// Information about a group call was updated
-public struct UpdateGroupCall: Codable {
+internal struct UpdateGroupCall: Codable {
     /// New data about a group call
-    public let groupCall: GroupCall
+    internal let groupCall: GroupCall
 
-    public init(groupCall: GroupCall) {
+    internal init(groupCall: GroupCall) {
         self.groupCall = groupCall
     }
 }
 
 /// Information about a group call participant was changed. The updates are sent only after the group call is received through getGroupCall and only if the call is joined or being joined
-public struct UpdateGroupCallParticipant: Codable {
+internal struct UpdateGroupCallParticipant: Codable {
     /// Identifier of group call
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
     /// New data about a participant
-    public let participant: GroupCallParticipant
+    internal let participant: GroupCallParticipant
 
-    public init(
+    internal init(
         groupCallId: Int,
         participant: GroupCallParticipant
     ) {
@@ -1836,14 +1836,14 @@ public struct UpdateGroupCallParticipant: Codable {
 }
 
 /// New call signaling data arrived
-public struct UpdateNewCallSignalingData: Codable {
+internal struct UpdateNewCallSignalingData: Codable {
     /// The call identifier
-    public let callId: Int
+    internal let callId: Int
 
     /// The data
-    public let data: Data
+    internal let data: Data
 
-    public init(
+    internal init(
         callId: Int,
         data: Data
     ) {
@@ -1853,14 +1853,14 @@ public struct UpdateNewCallSignalingData: Codable {
 }
 
 /// Some privacy setting rules have been changed
-public struct UpdateUserPrivacySettingRules: Codable {
+internal struct UpdateUserPrivacySettingRules: Codable {
     /// New privacy rules
-    public let rules: UserPrivacySettingRules
+    internal let rules: UserPrivacySettingRules
 
     /// The privacy setting
-    public let setting: UserPrivacySetting
+    internal let setting: UserPrivacySetting
 
-    public init(
+    internal init(
         rules: UserPrivacySettingRules,
         setting: UserPrivacySetting
     ) {
@@ -1870,17 +1870,17 @@ public struct UpdateUserPrivacySettingRules: Codable {
 }
 
 /// Number of unread messages in a chat list has changed. This update is sent only if the message database is used
-public struct UpdateUnreadMessageCount: Codable {
+internal struct UpdateUnreadMessageCount: Codable {
     /// The chat list with changed number of unread messages
-    public let chatList: ChatList
+    internal let chatList: ChatList
 
     /// Total number of unread messages
-    public let unreadCount: Int
+    internal let unreadCount: Int
 
     /// Total number of unread messages in unmuted chats
-    public let unreadUnmutedCount: Int
+    internal let unreadUnmutedCount: Int
 
-    public init(
+    internal init(
         chatList: ChatList,
         unreadCount: Int,
         unreadUnmutedCount: Int
@@ -1892,26 +1892,26 @@ public struct UpdateUnreadMessageCount: Codable {
 }
 
 /// Number of unread chats, i.e. with unread messages or marked as unread, has changed. This update is sent only if the message database is used
-public struct UpdateUnreadChatCount: Codable {
+internal struct UpdateUnreadChatCount: Codable {
     /// The chat list with changed number of unread messages
-    public let chatList: ChatList
+    internal let chatList: ChatList
 
     /// Total number of chats marked as unread
-    public let markedAsUnreadCount: Int
+    internal let markedAsUnreadCount: Int
 
     /// Total number of unmuted chats marked as unread
-    public let markedAsUnreadUnmutedCount: Int
+    internal let markedAsUnreadUnmutedCount: Int
 
     /// Approximate total number of chats in the chat list
-    public let totalCount: Int
+    internal let totalCount: Int
 
     /// Total number of unread chats
-    public let unreadCount: Int
+    internal let unreadCount: Int
 
     /// Total number of unread unmuted chats
-    public let unreadUnmutedCount: Int
+    internal let unreadUnmutedCount: Int
 
-    public init(
+    internal init(
         chatList: ChatList,
         markedAsUnreadCount: Int,
         markedAsUnreadUnmutedCount: Int,
@@ -1929,14 +1929,14 @@ public struct UpdateUnreadChatCount: Codable {
 }
 
 /// An option changed its value
-public struct UpdateOption: Codable {
+internal struct UpdateOption: Codable {
     /// The option name
-    public let name: String
+    internal let name: String
 
     /// The new option value
-    public let value: OptionValue
+    internal let value: OptionValue
 
-    public init(
+    internal init(
         name: String,
         value: OptionValue
     ) {
@@ -1946,24 +1946,24 @@ public struct UpdateOption: Codable {
 }
 
 /// A sticker set has changed
-public struct UpdateStickerSet: Codable {
+internal struct UpdateStickerSet: Codable {
     /// The sticker set
-    public let stickerSet: StickerSet
+    internal let stickerSet: StickerSet
 
-    public init(stickerSet: StickerSet) {
+    internal init(stickerSet: StickerSet) {
         self.stickerSet = stickerSet
     }
 }
 
 /// The list of installed sticker sets was updated
-public struct UpdateInstalledStickerSets: Codable {
+internal struct UpdateInstalledStickerSets: Codable {
     /// True, if the list of installed mask sticker sets was updated
-    public let isMasks: Bool
+    internal let isMasks: Bool
 
     /// The new list of installed ordinary sticker sets
-    public let stickerSetIds: [TdInt64]
+    internal let stickerSetIds: [TdInt64]
 
-    public init(
+    internal init(
         isMasks: Bool,
         stickerSetIds: [TdInt64]
     ) {
@@ -1973,24 +1973,24 @@ public struct UpdateInstalledStickerSets: Codable {
 }
 
 /// The list of trending sticker sets was updated or some of them were viewed
-public struct UpdateTrendingStickerSets: Codable {
+internal struct UpdateTrendingStickerSets: Codable {
     /// The prefix of the list of trending sticker sets with the newest trending sticker sets
-    public let stickerSets: StickerSets
+    internal let stickerSets: StickerSets
 
-    public init(stickerSets: StickerSets) {
+    internal init(stickerSets: StickerSets) {
         self.stickerSets = stickerSets
     }
 }
 
 /// The list of recently used stickers was updated
-public struct UpdateRecentStickers: Codable {
+internal struct UpdateRecentStickers: Codable {
     /// True, if the list of stickers attached to photo or video files was updated, otherwise the list of sent stickers is updated
-    public let isAttached: Bool
+    internal let isAttached: Bool
 
     /// The new list of file identifiers of recently used stickers
-    public let stickerIds: [Int]
+    internal let stickerIds: [Int]
 
-    public init(
+    internal init(
         isAttached: Bool,
         stickerIds: [Int]
     ) {
@@ -2000,34 +2000,34 @@ public struct UpdateRecentStickers: Codable {
 }
 
 /// The list of favorite stickers was updated
-public struct UpdateFavoriteStickers: Codable {
+internal struct UpdateFavoriteStickers: Codable {
     /// The new list of file identifiers of favorite stickers
-    public let stickerIds: [Int]
+    internal let stickerIds: [Int]
 
-    public init(stickerIds: [Int]) {
+    internal init(stickerIds: [Int]) {
         self.stickerIds = stickerIds
     }
 }
 
 /// The list of saved animations was updated
-public struct UpdateSavedAnimations: Codable {
+internal struct UpdateSavedAnimations: Codable {
     /// The new list of file identifiers of saved animations
-    public let animationIds: [Int]
+    internal let animationIds: [Int]
 
-    public init(animationIds: [Int]) {
+    internal init(animationIds: [Int]) {
         self.animationIds = animationIds
     }
 }
 
 /// The selected background has changed
-public struct UpdateSelectedBackground: Codable {
+internal struct UpdateSelectedBackground: Codable {
     /// The new selected background; may be null
-    public let background: Background?
+    internal let background: Background?
 
     /// True, if background for dark theme has changed
-    public let forDarkTheme: Bool
+    internal let forDarkTheme: Bool
 
-    public init(
+    internal init(
         background: Background?,
         forDarkTheme: Bool
     ) {
@@ -2037,17 +2037,17 @@ public struct UpdateSelectedBackground: Codable {
 }
 
 /// Some language pack strings have been updated
-public struct UpdateLanguagePackStrings: Codable {
+internal struct UpdateLanguagePackStrings: Codable {
     /// Identifier of the updated language pack
-    public let languagePackId: String
+    internal let languagePackId: String
 
     /// Localization target to which the language pack belongs
-    public let localizationTarget: String
+    internal let localizationTarget: String
 
     /// List of changed language pack strings
-    public let strings: [LanguagePackString]
+    internal let strings: [LanguagePackString]
 
-    public init(
+    internal init(
         languagePackId: String,
         localizationTarget: String,
         strings: [LanguagePackString]
@@ -2059,24 +2059,24 @@ public struct UpdateLanguagePackStrings: Codable {
 }
 
 /// The connection state has changed. This update must be used only to show a human-readable description of the connection state
-public struct UpdateConnectionState: Codable {
+internal struct UpdateConnectionState: Codable {
     /// The new connection state
-    public let state: ConnectionState
+    internal let state: ConnectionState
 
-    public init(state: ConnectionState) {
+    internal init(state: ConnectionState) {
         self.state = state
     }
 }
 
 /// New terms of service must be accepted by the user. If the terms of service are declined, then the deleteAccount method should be called with the reason "Decline ToS update"
-public struct UpdateTermsOfService: Codable {
+internal struct UpdateTermsOfService: Codable {
     /// The new terms of service
-    public let termsOfService: TermsOfService
+    internal let termsOfService: TermsOfService
 
     /// Identifier of the terms of service
-    public let termsOfServiceId: String
+    internal let termsOfServiceId: String
 
-    public init(
+    internal init(
         termsOfService: TermsOfService,
         termsOfServiceId: String
     ) {
@@ -2086,34 +2086,34 @@ public struct UpdateTermsOfService: Codable {
 }
 
 /// The list of users nearby has changed. The update is guaranteed to be sent only 60 seconds after a successful searchChatsNearby request
-public struct UpdateUsersNearby: Codable {
+internal struct UpdateUsersNearby: Codable {
     /// The new list of users nearby
-    public let usersNearby: [ChatNearby]
+    internal let usersNearby: [ChatNearby]
 
-    public init(usersNearby: [ChatNearby]) {
+    internal init(usersNearby: [ChatNearby]) {
         self.usersNearby = usersNearby
     }
 }
 
 /// The list of supported dice emojis has changed
-public struct UpdateDiceEmojis: Codable {
+internal struct UpdateDiceEmojis: Codable {
     /// The new list of supported dice emojis
-    public let emojis: [String]
+    internal let emojis: [String]
 
-    public init(emojis: [String]) {
+    internal init(emojis: [String]) {
         self.emojis = emojis
     }
 }
 
 /// The parameters of animation search through GetOption("animation_search_bot_username") bot has changed
-public struct UpdateAnimationSearchParameters: Codable {
+internal struct UpdateAnimationSearchParameters: Codable {
     /// The new list of emojis suggested for searching
-    public let emojis: [String]
+    internal let emojis: [String]
 
     /// Name of the animation search provider
-    public let provider: String
+    internal let provider: String
 
-    public init(
+    internal init(
         emojis: [String],
         provider: String
     ) {
@@ -2123,14 +2123,14 @@ public struct UpdateAnimationSearchParameters: Codable {
 }
 
 /// The list of suggested to the user actions has changed
-public struct UpdateSuggestedActions: Codable {
+internal struct UpdateSuggestedActions: Codable {
     /// Added suggested actions
-    public let addedActions: [SuggestedAction]
+    internal let addedActions: [SuggestedAction]
 
     /// Removed suggested actions
-    public let removedActions: [SuggestedAction]
+    internal let removedActions: [SuggestedAction]
 
-    public init(
+    internal init(
         addedActions: [SuggestedAction],
         removedActions: [SuggestedAction]
     ) {
@@ -2140,26 +2140,26 @@ public struct UpdateSuggestedActions: Codable {
 }
 
 /// A new incoming inline query; for bots only
-public struct UpdateNewInlineQuery: Codable {
+internal struct UpdateNewInlineQuery: Codable {
     /// Contains information about the type of the chat, from which the query originated; may be null if unknown
-    public let chatType: ChatType?
+    internal let chatType: ChatType?
 
     /// Unique query identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Offset of the first entry to return
-    public let offset: String
+    internal let offset: String
 
     /// Text of the query
-    public let query: String
+    internal let query: String
 
     /// Identifier of the user who sent the query
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
     /// User location; may be null
-    public let userLocation: Location?
+    internal let userLocation: Location?
 
-    public init(
+    internal init(
         chatType: ChatType?,
         id: TdInt64,
         offset: String,
@@ -2177,23 +2177,23 @@ public struct UpdateNewInlineQuery: Codable {
 }
 
 /// The user has chosen a result of an inline query; for bots only
-public struct UpdateNewChosenInlineResult: Codable {
+internal struct UpdateNewChosenInlineResult: Codable {
     /// Identifier of the sent inline message, if known
-    public let inlineMessageId: String
+    internal let inlineMessageId: String
 
     /// Text of the query
-    public let query: String
+    internal let query: String
 
     /// Identifier of the chosen result
-    public let resultId: String
+    internal let resultId: String
 
     /// Identifier of the user who sent the query
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
     /// User location; may be null
-    public let userLocation: Location?
+    internal let userLocation: Location?
 
-    public init(
+    internal init(
         inlineMessageId: String,
         query: String,
         resultId: String,
@@ -2209,26 +2209,26 @@ public struct UpdateNewChosenInlineResult: Codable {
 }
 
 /// A new incoming callback query; for bots only
-public struct UpdateNewCallbackQuery: Codable {
+internal struct UpdateNewCallbackQuery: Codable {
     /// Identifier of the chat where the query was sent
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Identifier that uniquely corresponds to the chat to which the message was sent
-    public let chatInstance: TdInt64
+    internal let chatInstance: TdInt64
 
     /// Unique query identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Identifier of the message, from which the query originated
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// Query payload
-    public let payload: CallbackQueryPayload
+    internal let payload: CallbackQueryPayload
 
     /// Identifier of the user who sent the query
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         chatInstance: TdInt64,
         id: TdInt64,
@@ -2246,23 +2246,23 @@ public struct UpdateNewCallbackQuery: Codable {
 }
 
 /// A new incoming callback query from a message sent via a bot; for bots only
-public struct UpdateNewInlineCallbackQuery: Codable {
+internal struct UpdateNewInlineCallbackQuery: Codable {
     /// An identifier uniquely corresponding to the chat a message was sent to
-    public let chatInstance: TdInt64
+    internal let chatInstance: TdInt64
 
     /// Unique query identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Identifier of the inline message, from which the query originated
-    public let inlineMessageId: String
+    internal let inlineMessageId: String
 
     /// Query payload
-    public let payload: CallbackQueryPayload
+    internal let payload: CallbackQueryPayload
 
     /// Identifier of the user who sent the query
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
-    public init(
+    internal init(
         chatInstance: TdInt64,
         id: TdInt64,
         inlineMessageId: String,
@@ -2278,20 +2278,20 @@ public struct UpdateNewInlineCallbackQuery: Codable {
 }
 
 /// A new incoming shipping query; for bots only. Only for invoices with flexible price
-public struct UpdateNewShippingQuery: Codable {
+internal struct UpdateNewShippingQuery: Codable {
     /// Unique query identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Invoice payload
-    public let invoicePayload: String
+    internal let invoicePayload: String
 
     /// Identifier of the user who sent the query
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
     /// User shipping address
-    public let shippingAddress: Address
+    internal let shippingAddress: Address
 
-    public init(
+    internal init(
         id: TdInt64,
         invoicePayload: String,
         senderUserId: Int,
@@ -2305,29 +2305,29 @@ public struct UpdateNewShippingQuery: Codable {
 }
 
 /// A new incoming pre-checkout query; for bots only. Contains full information about a checkout
-public struct UpdateNewPreCheckoutQuery: Codable {
+internal struct UpdateNewPreCheckoutQuery: Codable {
     /// Currency for the product price
-    public let currency: String
+    internal let currency: String
 
     /// Unique query identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Invoice payload
-    public let invoicePayload: Data
+    internal let invoicePayload: Data
 
     /// Information about the order; may be null
-    public let orderInfo: OrderInfo?
+    internal let orderInfo: OrderInfo?
 
     /// Identifier of the user who sent the query
-    public let senderUserId: Int
+    internal let senderUserId: Int
 
     /// Identifier of a shipping option chosen by the user; may be empty if not applicable
-    public let shippingOptionId: String
+    internal let shippingOptionId: String
 
     /// Total price for the product, in the smallest units of the currency
-    public let totalAmount: Int64
+    internal let totalAmount: Int64
 
-    public init(
+    internal init(
         currency: String,
         id: TdInt64,
         invoicePayload: Data,
@@ -2347,27 +2347,27 @@ public struct UpdateNewPreCheckoutQuery: Codable {
 }
 
 /// A new incoming event; for bots only
-public struct UpdateNewCustomEvent: Codable {
+internal struct UpdateNewCustomEvent: Codable {
     /// A JSON-serialized event
-    public let event: String
+    internal let event: String
 
-    public init(event: String) {
+    internal init(event: String) {
         self.event = event
     }
 }
 
 /// A new incoming query; for bots only
-public struct UpdateNewCustomQuery: Codable {
+internal struct UpdateNewCustomQuery: Codable {
     /// JSON-serialized query data
-    public let data: String
+    internal let data: String
 
     /// The query identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Query timeout
-    public let timeout: Int
+    internal let timeout: Int
 
-    public init(
+    internal init(
         data: String,
         id: TdInt64,
         timeout: Int
@@ -2379,27 +2379,27 @@ public struct UpdateNewCustomQuery: Codable {
 }
 
 /// A poll was updated; for bots only
-public struct UpdatePoll: Codable {
+internal struct UpdatePoll: Codable {
     /// New data about the poll
-    public let poll: Poll
+    internal let poll: Poll
 
-    public init(poll: Poll) {
+    internal init(poll: Poll) {
         self.poll = poll
     }
 }
 
 /// A user changed the answer to a poll; for bots only
-public struct UpdatePollAnswer: Codable {
+internal struct UpdatePollAnswer: Codable {
     /// 0-based identifiers of answer options, chosen by the user
-    public let optionIds: [Int]
+    internal let optionIds: [Int]
 
     /// Unique poll identifier
-    public let pollId: TdInt64
+    internal let pollId: TdInt64
 
     /// The user, who changed the answer to the poll
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         optionIds: [Int],
         pollId: TdInt64,
         userId: Int
@@ -2411,26 +2411,26 @@ public struct UpdatePollAnswer: Codable {
 }
 
 /// User rights changed in a chat; for bots only
-public struct UpdateChatMember: Codable {
+internal struct UpdateChatMember: Codable {
     /// Identifier of the user, changing the rights
-    public let actorUserId: Int
+    internal let actorUserId: Int
 
     /// Chat identifier
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Point in time (Unix timestamp) when the user rights was changed
-    public let date: Int
+    internal let date: Int
 
     /// If user has joined the chat using an invite link, the invite link; may be null
-    public let inviteLink: ChatInviteLink?
+    internal let inviteLink: ChatInviteLink?
 
     /// New chat member
-    public let newChatMember: ChatMember
+    internal let newChatMember: ChatMember
 
     /// Previous chat member
-    public let oldChatMember: ChatMember
+    internal let oldChatMember: ChatMember
 
-    public init(
+    internal init(
         actorUserId: Int,
         chatId: Int64,
         date: Int,

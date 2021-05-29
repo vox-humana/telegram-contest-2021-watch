@@ -8,11 +8,11 @@
 import Foundation
 
 /// Checks whether the maximum number of owned public chats has been reached. Returns corresponding error if the limit was reached
-public struct CheckCreatedPublicChatsLimit: Codable {
+internal struct CheckCreatedPublicChatsLimit: Codable {
     /// Type of the public chats, for which to check the limit
-    public let type: PublicChatType
+    internal let type: PublicChatType
 
-    public init(type: PublicChatType) {
+    internal init(type: PublicChatType) {
         self.type = type
     }
 }

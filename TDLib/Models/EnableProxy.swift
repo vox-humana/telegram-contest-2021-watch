@@ -8,11 +8,11 @@
 import Foundation
 
 /// Enables a proxy. Only one proxy can be enabled at a time. Can be called before authorization
-public struct EnableProxy: Codable {
+internal struct EnableProxy: Codable {
     /// Proxy identifier
-    public let proxyId: Int
+    internal let proxyId: Int
 
-    public init(proxyId: Int) {
+    internal init(proxyId: Int) {
         self.proxyId = proxyId
     }
 }

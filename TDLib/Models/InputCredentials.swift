@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains information about the payment method chosen by the user
-public enum InputCredentials: Codable {
+internal enum InputCredentials: Codable {
     /// Applies if a user chooses some previously saved payment credentials. To use their previously saved credentials, the user must have a valid temporary password
     case inputCredentialsSaved(InputCredentialsSaved)
 
@@ -28,7 +28,7 @@ public enum InputCredentials: Codable {
         case inputCredentialsGooglePay
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -47,7 +47,7 @@ public enum InputCredentials: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .inputCredentialsSaved(value):
@@ -67,24 +67,24 @@ public enum InputCredentials: Codable {
 }
 
 /// Applies if a user chooses some previously saved payment credentials. To use their previously saved credentials, the user must have a valid temporary password
-public struct InputCredentialsSaved: Codable {
+internal struct InputCredentialsSaved: Codable {
     /// Identifier of the saved credentials
-    public let savedCredentialsId: String
+    internal let savedCredentialsId: String
 
-    public init(savedCredentialsId: String) {
+    internal init(savedCredentialsId: String) {
         self.savedCredentialsId = savedCredentialsId
     }
 }
 
 /// Applies if a user enters new credentials on a payment provider website
-public struct InputCredentialsNew: Codable {
+internal struct InputCredentialsNew: Codable {
     /// True, if the credential identifier can be saved on the server side
-    public let allowSave: Bool
+    internal let allowSave: Bool
 
     /// Contains JSON-encoded data with a credential identifier from the payment provider
-    public let data: String
+    internal let data: String
 
-    public init(
+    internal init(
         allowSave: Bool,
         data: String
     ) {
@@ -94,21 +94,21 @@ public struct InputCredentialsNew: Codable {
 }
 
 /// Applies if a user enters new credentials using Apple Pay
-public struct InputCredentialsApplePay: Codable {
+internal struct InputCredentialsApplePay: Codable {
     /// JSON-encoded data with the credential identifier
-    public let data: String
+    internal let data: String
 
-    public init(data: String) {
+    internal init(data: String) {
         self.data = data
     }
 }
 
 /// Applies if a user enters new credentials using Google Pay
-public struct InputCredentialsGooglePay: Codable {
+internal struct InputCredentialsGooglePay: Codable {
     /// JSON-encoded data with the credential identifier
-    public let data: String
+    internal let data: String
 
-    public init(data: String) {
+    internal init(data: String) {
         self.data = data
     }
 }

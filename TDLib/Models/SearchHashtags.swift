@@ -8,14 +8,14 @@
 import Foundation
 
 /// Searches for recently used hashtags by their prefix
-public struct SearchHashtags: Codable {
+internal struct SearchHashtags: Codable {
     /// The maximum number of hashtags to be returned
-    public let limit: Int
+    internal let limit: Int
 
     /// Hashtag prefix to search for
-    public let prefix: String
+    internal let prefix: String
 
-    public init(
+    internal init(
         limit: Int,
         prefix: String
     ) {

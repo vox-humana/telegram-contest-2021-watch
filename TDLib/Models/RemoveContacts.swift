@@ -8,11 +8,11 @@
 import Foundation
 
 /// Removes users from the contact list
-public struct RemoveContacts: Codable {
+internal struct RemoveContacts: Codable {
     /// Identifiers of users to be deleted
-    public let userIds: [Int]
+    internal let userIds: [Int]
 
-    public init(userIds: [Int]) {
+    internal init(userIds: [Int]) {
         self.userIds = userIds
     }
 }

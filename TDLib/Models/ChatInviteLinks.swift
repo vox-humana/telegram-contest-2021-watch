@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains a list of chat invite links
-public struct ChatInviteLinks: Codable {
+internal struct ChatInviteLinks: Codable {
     /// List of invite links
-    public let inviteLinks: [ChatInviteLink]
+    internal let inviteLinks: [ChatInviteLink]
 
     /// Approximate total count of chat invite links found
-    public let totalCount: Int
+    internal let totalCount: Int
 
-    public init(
+    internal init(
         inviteLinks: [ChatInviteLink],
         totalCount: Int
     ) {

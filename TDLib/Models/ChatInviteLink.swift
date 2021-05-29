@@ -8,35 +8,35 @@
 import Foundation
 
 /// Contains a chat invite link
-public struct ChatInviteLink: Codable {
+internal struct ChatInviteLink: Codable {
     /// User identifier of an administrator created the link
-    public let creatorUserId: Int
+    internal let creatorUserId: Int
 
     /// Point in time (Unix timestamp) when the link was created
-    public let date: Int
+    internal let date: Int
 
     /// Point in time (Unix timestamp) when the link was last edited; 0 if never or unknown
-    public let editDate: Int
+    internal let editDate: Int
 
     /// Point in time (Unix timestamp) when the link will expire; 0 if never
-    public let expireDate: Int
+    internal let expireDate: Int
 
     /// Chat invite link
-    public let inviteLink: String
+    internal let inviteLink: String
 
     /// True, if the link is primary. Primary invite link can't have expire date or usage limit. There is exactly one primary invite link for each administrator with can_invite_users right at a given time
-    public let isPrimary: Bool
+    internal let isPrimary: Bool
 
     /// True, if the link was revoked
-    public let isRevoked: Bool
+    internal let isRevoked: Bool
 
     /// Number of chat members, which joined the chat using the link
-    public let memberCount: Int
+    internal let memberCount: Int
 
     /// The maximum number of members, which can join the chat using the link simultaneously; 0 if not limited
-    public let memberLimit: Int
+    internal let memberLimit: Int
 
-    public init(
+    internal init(
         creatorUserId: Int,
         date: Int,
         editDate: Int,

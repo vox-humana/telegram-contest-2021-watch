@@ -8,17 +8,17 @@
 import Foundation
 
 /// Changes the background selected by the user; adds background to the list of installed backgrounds
-public struct SetBackground: Codable {
+internal struct SetBackground: Codable {
     /// The input background to use, null for filled backgrounds
-    public let background: InputBackground
+    internal let background: InputBackground
 
     /// True, if the background is chosen for dark theme
-    public let forDarkTheme: Bool
+    internal let forDarkTheme: Bool
 
     /// Background type; null for default background. The method will return error 404 if type is null
-    public let type: BackgroundType
+    internal let type: BackgroundType
 
-    public init(
+    internal init(
         background: InputBackground,
         forDarkTheme: Bool,
         type: BackgroundType

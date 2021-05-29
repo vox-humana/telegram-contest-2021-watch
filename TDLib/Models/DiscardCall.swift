@@ -8,23 +8,23 @@
 import Foundation
 
 /// Discards a call
-public struct DiscardCall: Codable {
+internal struct DiscardCall: Codable {
     /// Call identifier
-    public let callId: Int
+    internal let callId: Int
 
     /// Identifier of the connection used during the call
-    public let connectionId: TdInt64
+    internal let connectionId: TdInt64
 
     /// The call duration, in seconds
-    public let duration: Int
+    internal let duration: Int
 
     /// True, if the user was disconnected
-    public let isDisconnected: Bool
+    internal let isDisconnected: Bool
 
     /// True, if the call was a video call
-    public let isVideo: Bool
+    internal let isVideo: Bool
 
-    public init(
+    internal init(
         callId: Int,
         connectionId: TdInt64,
         duration: Int,

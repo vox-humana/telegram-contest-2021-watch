@@ -8,17 +8,17 @@
 import Foundation
 
 /// Edits the text of an inline text or game message sent via a bot; for bots only
-public struct EditInlineMessageText: Codable {
+internal struct EditInlineMessageText: Codable {
     /// Inline message identifier
-    public let inlineMessageId: String
+    internal let inlineMessageId: String
 
     /// New text content of the message. Should be of type inputMessageText
-    public let inputMessageContent: InputMessageContent
+    internal let inputMessageContent: InputMessageContent
 
     /// The new message reply markup
-    public let replyMarkup: ReplyMarkup
+    internal let replyMarkup: ReplyMarkup
 
-    public init(
+    internal init(
         inlineMessageId: String,
         inputMessageContent: InputMessageContent,
         replyMarkup: ReplyMarkup

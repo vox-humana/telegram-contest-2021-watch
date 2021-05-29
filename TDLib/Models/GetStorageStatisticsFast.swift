@@ -8,6 +8,6 @@
 import Foundation
 
 /// Quickly returns approximate storage usage statistics. Can be called before authorization
-public struct GetStorageStatisticsFast: Codable {
-    public init() {}
+internal struct GetStorageStatisticsFast: Codable {
+    internal init() {}
 }

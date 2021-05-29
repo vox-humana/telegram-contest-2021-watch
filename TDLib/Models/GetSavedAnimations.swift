@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns saved animations
-public struct GetSavedAnimations: Codable {
-    public init() {}
+internal struct GetSavedAnimations: Codable {
+    internal init() {}
 }

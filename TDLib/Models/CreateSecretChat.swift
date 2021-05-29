@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns an existing chat corresponding to a known secret chat
-public struct CreateSecretChat: Codable {
+internal struct CreateSecretChat: Codable {
     /// Secret chat identifier
-    public let secretChatId: Int
+    internal let secretChatId: Int
 
-    public init(secretChatId: Int) {
+    internal init(secretChatId: Int) {
         self.secretChatId = secretChatId
     }
 }

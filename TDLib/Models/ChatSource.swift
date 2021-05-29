@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes a reason why an external chat is shown in a chat list
-public enum ChatSource: Codable {
+internal enum ChatSource: Codable {
     /// The chat is sponsored by the user's MTProxy server
     case chatSourceMtprotoProxy
 
@@ -20,7 +20,7 @@ public enum ChatSource: Codable {
         case chatSourcePublicServiceAnnouncement
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -32,7 +32,7 @@ public enum ChatSource: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .chatSourceMtprotoProxy:
@@ -45,14 +45,14 @@ public enum ChatSource: Codable {
 }
 
 /// The chat contains a public service announcement
-public struct ChatSourcePublicServiceAnnouncement: Codable {
+internal struct ChatSourcePublicServiceAnnouncement: Codable {
     /// The text of the announcement
-    public let text: String
+    internal let text: String
 
     /// The type of the announcement
-    public let type: String
+    internal let type: String
 
-    public init(
+    internal init(
         text: String,
         type: String
     ) {

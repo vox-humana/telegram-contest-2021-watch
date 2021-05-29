@@ -21,7 +21,7 @@ import TGWatchUI // TODO: extract model
         static let preview = VoiceChat(defaultParticipantId: nil, groupCallId: 0, hasParticipants: false)
     }
 
-    public extension Array where Element == Chat {
+    extension Array where Element == Chat {
         static func preview() -> [Chat] {
             [
                 .preview(
@@ -93,13 +93,13 @@ import TGWatchUI // TODO: extract model
         }
     }
 
-    public extension User {
+    extension User {
         static let profile = User(
             firstName: "Alicia", haveAccess: false, id: 1, isContact: true, isFake: false, isMutualContact: true, isScam: false, isSupport: false, isVerified: true, languageCode: "RU", lastName: "", phoneNumber: "123456789", profilePhoto: ProfilePhoto(big: .userAvatar, hasAnimation: false, id: 0, minithumbnail: nil, small: .userAvatar), restrictionReason: "", status: .userStatusEmpty, type: .userTypeRegular, username: "alice"
         )
     }
 
-    public extension Photo {
+    extension Photo {
         static let photo = Photo(hasStickers: false, minithumbnail: nil, sizes: [
             PhotoSize(height: 240, photo: .photo, progressiveSizes: [], type: "m", width: 320),
         ])
@@ -135,4 +135,10 @@ import TGWatchUI // TODO: extract model
 //        static let jpeg = Thumbnail(file: .localFile("Thumbnail.jpg"), format: .thumbnailFormatJpeg, height: 0, width: 0)
 //    }
 
+#else
+    extension Array where Element == Chat {
+        static func preview() -> [Chat] {
+            []
+        }
+    }
 #endif

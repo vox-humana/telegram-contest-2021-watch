@@ -8,23 +8,23 @@
 import Foundation
 
 /// Describes a server for relaying call data
-public struct CallServer: Codable {
+internal struct CallServer: Codable {
     /// Server identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Server IPv4 address
-    public let ipAddress: String
+    internal let ipAddress: String
 
     /// Server IPv6 address
-    public let ipv6Address: String
+    internal let ipv6Address: String
 
     /// Server port number
-    public let port: Int
+    internal let port: Int
 
     /// Server type
-    public let type: CallServerType
+    internal let type: CallServerType
 
-    public init(
+    internal init(
         id: TdInt64,
         ipAddress: String,
         ipv6Address: String,

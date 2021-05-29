@@ -8,38 +8,38 @@
 import Foundation
 
 /// Contains full information about a user
-public struct UserFullInfo: Codable {
+internal struct UserFullInfo: Codable {
     /// A short user bio
-    public let bio: String
+    internal let bio: String
 
     /// If the user is a bot, information about the bot; may be null
-    public let botInfo: BotInfo?
+    internal let botInfo: BotInfo?
 
     /// True, if the user can be called
-    public let canBeCalled: Bool
+    internal let canBeCalled: Bool
 
     /// Number of group chats where both the other user and the current user are a member; 0 for the current user
-    public let groupInCommonCount: Int
+    internal let groupInCommonCount: Int
 
     /// True, if the user can't be called due to their privacy settings
-    public let hasPrivateCalls: Bool
+    internal let hasPrivateCalls: Bool
 
     /// True, if the user is blocked by the current user
-    public let isBlocked: Bool
+    internal let isBlocked: Bool
 
     /// True, if the current user needs to explicitly allow to share their phone number with the user when the method addContact is used
-    public let needPhoneNumberPrivacyException: Bool
+    internal let needPhoneNumberPrivacyException: Bool
 
     /// User profile photo; may be null
-    public let photo: ChatPhoto?
+    internal let photo: ChatPhoto?
 
     /// For bots, the text that is included with the link when users share the bot
-    public let shareText: String
+    internal let shareText: String
 
     /// True, if a video call can be created with the user
-    public let supportsVideoCalls: Bool
+    internal let supportsVideoCalls: Bool
 
-    public init(
+    internal init(
         bio: String,
         botInfo: BotInfo?,
         canBeCalled: Bool,

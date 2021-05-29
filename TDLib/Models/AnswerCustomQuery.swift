@@ -8,14 +8,14 @@
 import Foundation
 
 /// Answers a custom query; for bots only
-public struct AnswerCustomQuery: Codable {
+internal struct AnswerCustomQuery: Codable {
     /// Identifier of a custom query
-    public let customQueryId: TdInt64
+    internal let customQueryId: TdInt64
 
     /// JSON-serialized answer to the query
-    public let data: String
+    internal let data: String
 
-    public init(
+    internal init(
         customQueryId: TdInt64,
         data: String
     ) {

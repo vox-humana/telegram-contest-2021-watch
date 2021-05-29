@@ -8,20 +8,20 @@
 import Foundation
 
 /// Order information
-public struct OrderInfo: Codable {
+internal struct OrderInfo: Codable {
     /// Email address of the user
-    public let emailAddress: String
+    internal let emailAddress: String
 
     /// Name of the user
-    public let name: String
+    internal let name: String
 
     /// Phone number of the user
-    public let phoneNumber: String
+    internal let phoneNumber: String
 
     /// Shipping address for this order; may be null
-    public let shippingAddress: Address?
+    internal let shippingAddress: Address?
 
-    public init(
+    internal init(
         emailAddress: String,
         name: String,
         phoneNumber: String,

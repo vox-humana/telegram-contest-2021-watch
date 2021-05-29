@@ -8,11 +8,11 @@
 import Foundation
 
 /// Checks the authentication code sent to confirm a new phone number of the user
-public struct CheckChangePhoneNumberCode: Codable {
+internal struct CheckChangePhoneNumberCode: Codable {
     /// Verification code received by SMS, phone call or flash call
-    public let code: String
+    internal let code: String
 
-    public init(code: String) {
+    internal init(code: String) {
         self.code = code
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains statistics about network usage
-public enum NetworkStatisticsEntry: Codable {
+internal enum NetworkStatisticsEntry: Codable {
     /// Contains information about the total amount of data that was used to send and receive files
     case networkStatisticsEntryFile(NetworkStatisticsEntryFile)
 
@@ -20,7 +20,7 @@ public enum NetworkStatisticsEntry: Codable {
         case networkStatisticsEntryCall
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum NetworkStatisticsEntry: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .networkStatisticsEntryFile(value):
@@ -47,20 +47,20 @@ public enum NetworkStatisticsEntry: Codable {
 }
 
 /// Contains information about the total amount of data that was used to send and receive files
-public struct NetworkStatisticsEntryFile: Codable {
+internal struct NetworkStatisticsEntryFile: Codable {
     /// Type of the file the data is part of
-    public let fileType: FileType
+    internal let fileType: FileType
 
     /// Type of the network the data was sent through. Call setNetworkType to maintain the actual network type
-    public let networkType: NetworkType
+    internal let networkType: NetworkType
 
     /// Total number of bytes received
-    public let receivedBytes: Int64
+    internal let receivedBytes: Int64
 
     /// Total number of bytes sent
-    public let sentBytes: Int64
+    internal let sentBytes: Int64
 
-    public init(
+    internal init(
         fileType: FileType,
         networkType: NetworkType,
         receivedBytes: Int64,
@@ -74,20 +74,20 @@ public struct NetworkStatisticsEntryFile: Codable {
 }
 
 /// Contains information about the total amount of data that was used for calls
-public struct NetworkStatisticsEntryCall: Codable {
+internal struct NetworkStatisticsEntryCall: Codable {
     /// Total call duration, in seconds
-    public let duration: Double
+    internal let duration: Double
 
     /// Type of the network the data was sent through. Call setNetworkType to maintain the actual network type
-    public let networkType: NetworkType
+    internal let networkType: NetworkType
 
     /// Total number of bytes received
-    public let receivedBytes: Int64
+    internal let receivedBytes: Int64
 
     /// Total number of bytes sent
-    public let sentBytes: Int64
+    internal let sentBytes: Int64
 
-    public init(
+    internal init(
         duration: Double,
         networkType: NetworkType,
         receivedBytes: Int64,

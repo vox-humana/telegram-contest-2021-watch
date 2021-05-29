@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains detailed information about a notification
-public enum NotificationType: Codable {
+internal enum NotificationType: Codable {
     /// New message was received
     case notificationTypeNewMessage(NotificationTypeNewMessage)
 
@@ -28,7 +28,7 @@ public enum NotificationType: Codable {
         case notificationTypeNewPushMessage
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -46,7 +46,7 @@ public enum NotificationType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .notificationTypeNewMessage(value):
@@ -65,43 +65,43 @@ public enum NotificationType: Codable {
 }
 
 /// New message was received
-public struct NotificationTypeNewMessage: Codable {
+internal struct NotificationTypeNewMessage: Codable {
     /// The message
-    public let message: Message
+    internal let message: Message
 
-    public init(message: Message) {
+    internal init(message: Message) {
         self.message = message
     }
 }
 
 /// New call was received
-public struct NotificationTypeNewCall: Codable {
+internal struct NotificationTypeNewCall: Codable {
     /// Call identifier
-    public let callId: Int
+    internal let callId: Int
 
-    public init(callId: Int) {
+    internal init(callId: Int) {
         self.callId = callId
     }
 }
 
 /// New message was received through a push notification
-public struct NotificationTypeNewPushMessage: Codable {
+internal struct NotificationTypeNewPushMessage: Codable {
     /// Push message content
-    public let content: PushMessageContent
+    internal let content: PushMessageContent
 
     /// True, if the message is outgoing
-    public let isOutgoing: Bool
+    internal let isOutgoing: Bool
 
     /// The message identifier. The message will not be available in the chat history, but the ID can be used in viewMessages, or as reply_to_message_id
-    public let messageId: Int64
+    internal let messageId: Int64
 
     /// The sender of the message. Corresponding user or chat may be inaccessible
-    public let sender: MessageSender
+    internal let sender: MessageSender
 
     /// Name of the sender
-    public let senderName: String
+    internal let senderName: String
 
-    public init(
+    internal init(
         content: PushMessageContent,
         isOutgoing: Bool,
         messageId: Int64,

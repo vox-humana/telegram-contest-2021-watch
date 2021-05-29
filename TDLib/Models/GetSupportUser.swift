@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns a user that can be contacted to get support
-public struct GetSupportUser: Codable {
-    public init() {}
+internal struct GetSupportUser: Codable {
+    internal init() {}
 }

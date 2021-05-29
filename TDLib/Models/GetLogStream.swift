@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns information about currently used log stream for internal logging of TDLib. Can be called synchronously
-public struct GetLogStream: Codable {
-    public init() {}
+internal struct GetLogStream: Codable {
+    internal init() {}
 }

@@ -8,14 +8,14 @@
 import Foundation
 
 /// Sets auto-download settings
-public struct SetAutoDownloadSettings: Codable {
+internal struct SetAutoDownloadSettings: Codable {
     /// New user auto-download settings
-    public let settings: AutoDownloadSettings
+    internal let settings: AutoDownloadSettings
 
     /// Type of the network for which the new settings are applied
-    public let type: NetworkType
+    internal let type: NetworkType
 
-    public init(
+    internal init(
         settings: AutoDownloadSettings,
         type: NetworkType
     ) {

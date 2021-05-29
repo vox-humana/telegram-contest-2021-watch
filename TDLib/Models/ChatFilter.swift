@@ -8,47 +8,47 @@
 import Foundation
 
 /// Represents a filter of user chats
-public struct ChatFilter: Codable {
+internal struct ChatFilter: Codable {
     /// True, if archived chats need to be excluded
-    public let excludeArchived: Bool
+    internal let excludeArchived: Bool
 
     /// True, if muted chats need to be excluded
-    public let excludeMuted: Bool
+    internal let excludeMuted: Bool
 
     /// True, if read chats need to be excluded
-    public let excludeRead: Bool
+    internal let excludeRead: Bool
 
     /// The chat identifiers of always excluded chats in the filtered chat list
-    public let excludedChatIds: [Int64]
+    internal let excludedChatIds: [Int64]
 
     /// The icon name for short filter representation. If non-empty, must be one of "All", "Unread", "Unmuted", "Bots", "Channels", "Groups", "Private", "Custom", "Setup", "Cat", "Crown", "Favorite", "Flower", "Game", "Home", "Love", "Mask", "Party", "Sport", "Study", "Trade", "Travel", "Work".//-If empty, use getChatFilterDefaultIconName to get default icon name for the filter
-    public let iconName: String
+    internal let iconName: String
 
     /// True, if bots need to be included
-    public let includeBots: Bool
+    internal let includeBots: Bool
 
     /// True, if channels need to be included
-    public let includeChannels: Bool
+    internal let includeChannels: Bool
 
     /// True, if contacts need to be included
-    public let includeContacts: Bool
+    internal let includeContacts: Bool
 
     /// True, if basic groups and supergroups need to be included
-    public let includeGroups: Bool
+    internal let includeGroups: Bool
 
     /// True, if non-contact users need to be included
-    public let includeNonContacts: Bool
+    internal let includeNonContacts: Bool
 
     /// The chat identifiers of always included chats in the filtered chat list
-    public let includedChatIds: [Int64]
+    internal let includedChatIds: [Int64]
 
     /// The chat identifiers of pinned chats in the filtered chat list
-    public let pinnedChatIds: [Int64]
+    internal let pinnedChatIds: [Int64]
 
     /// The title of the filter; 1-12 characters without line feeds
-    public let title: String
+    internal let title: String
 
-    public init(
+    internal init(
         excludeArchived: Bool,
         excludeMuted: Bool,
         excludeRead: Bool,

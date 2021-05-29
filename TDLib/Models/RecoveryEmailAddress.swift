@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains information about the current recovery email address
-public struct RecoveryEmailAddress: Codable {
+internal struct RecoveryEmailAddress: Codable {
     /// Recovery email address
-    public let recoveryEmailAddress: String
+    internal let recoveryEmailAddress: String
 
-    public init(recoveryEmailAddress: String) {
+    internal init(recoveryEmailAddress: String) {
         self.recoveryEmailAddress = recoveryEmailAddress
     }
 }

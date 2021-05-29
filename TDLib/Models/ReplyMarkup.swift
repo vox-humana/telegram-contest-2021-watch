@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains a description of a custom keyboard and actions that can be done with it to quickly reply to bots
-public enum ReplyMarkup: Codable {
+internal enum ReplyMarkup: Codable {
     /// Instructs application to remove the keyboard once this message has been received. This kind of keyboard can't be received in an incoming message; instead, UpdateChatReplyMarkup with message_id == 0 will be sent
     case replyMarkupRemoveKeyboard(ReplyMarkupRemoveKeyboard)
 
@@ -28,7 +28,7 @@ public enum ReplyMarkup: Codable {
         case replyMarkupInlineKeyboard
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -47,7 +47,7 @@ public enum ReplyMarkup: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .replyMarkupRemoveKeyboard(value):
@@ -67,40 +67,40 @@ public enum ReplyMarkup: Codable {
 }
 
 /// Instructs application to remove the keyboard once this message has been received. This kind of keyboard can't be received in an incoming message; instead, UpdateChatReplyMarkup with message_id == 0 will be sent
-public struct ReplyMarkupRemoveKeyboard: Codable {
+internal struct ReplyMarkupRemoveKeyboard: Codable {
     /// True, if the keyboard is removed only for the mentioned users or the target user of a reply
-    public let isPersonal: Bool
+    internal let isPersonal: Bool
 
-    public init(isPersonal: Bool) {
+    internal init(isPersonal: Bool) {
         self.isPersonal = isPersonal
     }
 }
 
 /// Instructs application to force a reply to this message
-public struct ReplyMarkupForceReply: Codable {
+internal struct ReplyMarkupForceReply: Codable {
     /// True, if a forced reply must automatically be shown to the current user. For outgoing messages, specify true to show the forced reply only for the mentioned users and for the target user of a reply
-    public let isPersonal: Bool
+    internal let isPersonal: Bool
 
-    public init(isPersonal: Bool) {
+    internal init(isPersonal: Bool) {
         self.isPersonal = isPersonal
     }
 }
 
 /// Contains a custom keyboard layout to quickly reply to bots
-public struct ReplyMarkupShowKeyboard: Codable {
+internal struct ReplyMarkupShowKeyboard: Codable {
     /// True, if the keyboard must automatically be shown to the current user. For outgoing messages, specify true to show the keyboard only for the mentioned users and for the target user of a reply
-    public let isPersonal: Bool
+    internal let isPersonal: Bool
 
     /// True, if the application needs to hide the keyboard after use
-    public let oneTime: Bool
+    internal let oneTime: Bool
 
     /// True, if the application needs to resize the keyboard vertically
-    public let resizeKeyboard: Bool
+    internal let resizeKeyboard: Bool
 
     /// A list of rows of bot keyboard buttons
-    public let rows: [[KeyboardButton]]
+    internal let rows: [[KeyboardButton]]
 
-    public init(
+    internal init(
         isPersonal: Bool,
         oneTime: Bool,
         resizeKeyboard: Bool,
@@ -114,11 +114,11 @@ public struct ReplyMarkupShowKeyboard: Codable {
 }
 
 /// Contains an inline keyboard layout
-public struct ReplyMarkupInlineKeyboard: Codable {
+internal struct ReplyMarkupInlineKeyboard: Codable {
     /// A list of rows of inline keyboard buttons
-    public let rows: [[InlineKeyboardButton]]
+    internal let rows: [[InlineKeyboardButton]]
 
-    public init(rows: [[InlineKeyboardButton]]) {
+    internal init(rows: [[InlineKeyboardButton]]) {
         self.rows = rows
     }
 }

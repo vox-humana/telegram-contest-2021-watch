@@ -8,20 +8,20 @@
 import Foundation
 
 /// Represents a chat event
-public struct ChatEvent: Codable {
+internal struct ChatEvent: Codable {
     /// Action performed by the user
-    public let action: ChatEventAction
+    internal let action: ChatEventAction
 
     /// Point in time (Unix timestamp) when the event happened
-    public let date: Int
+    internal let date: Int
 
     /// Chat event identifier
-    public let id: TdInt64
+    internal let id: TdInt64
 
     /// Identifier of the user who performed the action that triggered the event
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         action: ChatEventAction,
         date: Int,
         id: TdInt64,

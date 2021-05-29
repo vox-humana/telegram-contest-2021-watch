@@ -8,11 +8,11 @@
 import Foundation
 
 /// Deletes all call messages
-public struct DeleteAllCallMessages: Codable {
+internal struct DeleteAllCallMessages: Codable {
     /// Pass true to delete the messages for all users
-    public let revoke: Bool
+    internal let revoke: Bool
 
-    public init(revoke: Bool) {
+    internal init(revoke: Bool) {
         self.revoke = revoke
     }
 }

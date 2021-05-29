@@ -8,67 +8,67 @@
 import Foundation
 
 /// Contains full information about a supergroup or channel
-public struct SupergroupFullInfo: Codable {
+internal struct SupergroupFullInfo: Codable {
     /// Number of privileged users in the supergroup or channel; 0 if unknown
-    public let administratorCount: Int
+    internal let administratorCount: Int
 
     /// Number of users banned from chat; 0 if unknown
-    public let bannedCount: Int
+    internal let bannedCount: Int
 
     /// True, if members of the chat can be retrieved
-    public let canGetMembers: Bool
+    internal let canGetMembers: Bool
 
     /// True, if the supergroup or channel statistics are available
-    public let canGetStatistics: Bool
+    internal let canGetStatistics: Bool
 
     /// True, if the supergroup location can be changed
-    public let canSetLocation: Bool
+    internal let canSetLocation: Bool
 
     /// True, if the supergroup sticker set can be changed
-    public let canSetStickerSet: Bool
+    internal let canSetStickerSet: Bool
 
     /// True, if the chat username can be changed
-    public let canSetUsername: Bool
+    internal let canSetUsername: Bool
 
-    public let description: String
+    internal let description: String
 
     /// Primary invite link for this chat; may be null. For chat administrators with can_invite_users right only
-    public let inviteLink: ChatInviteLink?
+    internal let inviteLink: ChatInviteLink?
 
     /// True, if new chat members will have access to old messages. In public or discussion groups and both public and private channels, old messages are always available, so this option affects only private supergroups without a linked chat. The value of this field is only available for chat administrators
-    public let isAllHistoryAvailable: Bool
+    internal let isAllHistoryAvailable: Bool
 
     /// Chat identifier of a discussion group for the channel, or a channel, for which the supergroup is the designated discussion group; 0 if none or unknown
-    public let linkedChatId: Int64
+    internal let linkedChatId: Int64
 
     /// Location to which the supergroup is connected; may be null
-    public let location: ChatLocation?
+    internal let location: ChatLocation?
 
     /// Number of members in the supergroup or channel; 0 if unknown
-    public let memberCount: Int
+    internal let memberCount: Int
 
     /// Chat photo; may be null
-    public let photo: ChatPhoto?
+    internal let photo: ChatPhoto?
 
     /// Number of restricted users in the supergroup; 0 if unknown
-    public let restrictedCount: Int
+    internal let restrictedCount: Int
 
     /// Delay between consecutive sent messages for non-administrator supergroup members, in seconds
-    public let slowModeDelay: Int
+    internal let slowModeDelay: Int
 
     /// Time left before next message can be sent in the supergroup, in seconds. An updateSupergroupFullInfo update is not triggered when value of this field changes, but both new and old values are non-zero
-    public let slowModeDelayExpiresIn: Double
+    internal let slowModeDelayExpiresIn: Double
 
     /// Identifier of the supergroup sticker set; 0 if none
-    public let stickerSetId: TdInt64
+    internal let stickerSetId: TdInt64
 
     /// Identifier of the basic group from which supergroup was upgraded; 0 if none
-    public let upgradedFromBasicGroupId: Int
+    internal let upgradedFromBasicGroupId: Int
 
     /// Identifier of the last message in the basic group from which supergroup was upgraded; 0 if none
-    public let upgradedFromMaxMessageId: Int64
+    internal let upgradedFromMaxMessageId: Int64
 
-    public init(
+    internal init(
         administratorCount: Int,
         bannedCount: Int,
         canGetMembers: Bool,

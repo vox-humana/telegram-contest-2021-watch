@@ -8,14 +8,14 @@
 import Foundation
 
 /// Describes an item of a list page block
-public struct PageBlockListItem: Codable {
+internal struct PageBlockListItem: Codable {
     /// Item label
-    public let label: String
+    internal let label: String
 
     /// Item blocks
-    public let pageBlocks: [PageBlock]
+    internal let pageBlocks: [PageBlock]
 
-    public init(
+    internal init(
         label: String,
         pageBlocks: [PageBlock]
     ) {

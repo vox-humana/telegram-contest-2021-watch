@@ -8,7 +8,7 @@
 import Foundation
 
 /// Describes the type of a call server
-public enum CallServerType: Codable {
+internal enum CallServerType: Codable {
     /// A Telegram call reflector
     case callServerTypeTelegramReflector(CallServerTypeTelegramReflector)
 
@@ -20,7 +20,7 @@ public enum CallServerType: Codable {
         case callServerTypeWebrtc
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -33,7 +33,7 @@ public enum CallServerType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case let .callServerTypeTelegramReflector(value):
@@ -47,30 +47,30 @@ public enum CallServerType: Codable {
 }
 
 /// A Telegram call reflector
-public struct CallServerTypeTelegramReflector: Codable {
+internal struct CallServerTypeTelegramReflector: Codable {
     /// A peer tag to be used with the reflector
-    public let peerTag: Data
+    internal let peerTag: Data
 
-    public init(peerTag: Data) {
+    internal init(peerTag: Data) {
         self.peerTag = peerTag
     }
 }
 
 /// A WebRTC server
-public struct CallServerTypeWebrtc: Codable {
+internal struct CallServerTypeWebrtc: Codable {
     /// Authentication password
-    public let password: String
+    internal let password: String
 
     /// True, if the server supports STUN
-    public let supportsStun: Bool
+    internal let supportsStun: Bool
 
     /// True, if the server supports TURN
-    public let supportsTurn: Bool
+    internal let supportsTurn: Bool
 
     /// Username to be used for authentication
-    public let username: String
+    internal let username: String
 
-    public init(
+    internal init(
         password: String,
         supportsStun: Bool,
         supportsTurn: Bool,

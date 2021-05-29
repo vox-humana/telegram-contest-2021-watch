@@ -8,11 +8,11 @@
 import Foundation
 
 /// Revokes invite link for a group call. Requires groupCall.can_be_managed group call flag
-public struct RevokeGroupCallInviteLink: Codable {
+internal struct RevokeGroupCallInviteLink: Codable {
     /// Group call identifier
-    public let groupCallId: Int
+    internal let groupCallId: Int
 
-    public init(groupCallId: Int) {
+    internal init(groupCallId: Int) {
         self.groupCallId = groupCallId
     }
 }

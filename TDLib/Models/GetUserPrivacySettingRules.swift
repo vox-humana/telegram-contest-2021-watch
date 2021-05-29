@@ -8,11 +8,11 @@
 import Foundation
 
 /// Returns the current privacy settings
-public struct GetUserPrivacySettingRules: Codable {
+internal struct GetUserPrivacySettingRules: Codable {
     /// The privacy setting
-    public let setting: UserPrivacySetting
+    internal let setting: UserPrivacySetting
 
-    public init(setting: UserPrivacySetting) {
+    internal init(setting: UserPrivacySetting) {
         self.setting = setting
     }
 }

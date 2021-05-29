@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a value representing a number of seconds
-public struct Seconds: Codable {
+internal struct Seconds: Codable {
     /// Number of seconds
-    public let seconds: Double
+    internal let seconds: Double
 
-    public init(seconds: Double) {
+    internal init(seconds: Double) {
         self.seconds = seconds
     }
 }

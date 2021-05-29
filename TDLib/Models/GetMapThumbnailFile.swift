@@ -8,26 +8,26 @@
 import Foundation
 
 /// Returns information about a file with a map thumbnail in PNG format. Only map thumbnail files with size less than 1MB can be downloaded
-public struct GetMapThumbnailFile: Codable {
+internal struct GetMapThumbnailFile: Codable {
     /// Identifier of a chat, in which the thumbnail will be shown. Use 0 if unknown
-    public let chatId: Int64
+    internal let chatId: Int64
 
     /// Map height in pixels before applying scale; 16-1024
-    public let height: Int
+    internal let height: Int
 
     /// Location of the map center
-    public let location: Location
+    internal let location: Location
 
     /// Map scale; 1-3
-    public let scale: Int
+    internal let scale: Int
 
     /// Map width in pixels before applying scale; 16-1024
-    public let width: Int
+    internal let width: Int
 
     /// Map zoom level; 13-20
-    public let zoom: Int
+    internal let zoom: Int
 
-    public init(
+    internal init(
         chatId: Int64,
         height: Int,
         location: Location,

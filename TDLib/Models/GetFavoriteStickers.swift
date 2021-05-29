@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns favorite stickers
-public struct GetFavoriteStickers: Codable {
-    public init() {}
+internal struct GetFavoriteStickers: Codable {
+    internal init() {}
 }

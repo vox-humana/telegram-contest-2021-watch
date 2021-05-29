@@ -8,11 +8,11 @@
 import Foundation
 
 /// Contains a TDLib internal log verbosity level
-public struct LogVerbosityLevel: Codable {
+internal struct LogVerbosityLevel: Codable {
     /// Log verbosity level
-    public let verbosityLevel: Int
+    internal let verbosityLevel: Int
 
-    public init(verbosityLevel: Int) {
+    internal init(verbosityLevel: Int) {
         self.verbosityLevel = verbosityLevel
     }
 }

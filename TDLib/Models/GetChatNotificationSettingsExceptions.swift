@@ -8,14 +8,14 @@
 import Foundation
 
 /// Returns list of chats with non-default notification settings
-public struct GetChatNotificationSettingsExceptions: Codable {
+internal struct GetChatNotificationSettingsExceptions: Codable {
     /// If true, also chats with non-default sound will be returned
-    public let compareSound: Bool
+    internal let compareSound: Bool
 
     /// If specified, only chats from the specified scope will be returned
-    public let scope: NotificationSettingsScope
+    internal let scope: NotificationSettingsScope
 
-    public init(
+    internal init(
         compareSound: Bool,
         scope: NotificationSettingsScope
     ) {

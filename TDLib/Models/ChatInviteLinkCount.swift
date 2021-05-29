@@ -8,17 +8,17 @@
 import Foundation
 
 /// Describes a chat administrator with a number of active and revoked chat invite links
-public struct ChatInviteLinkCount: Codable {
+internal struct ChatInviteLinkCount: Codable {
     /// Number of active invite links
-    public let inviteLinkCount: Int
+    internal let inviteLinkCount: Int
 
     /// Number of revoked invite links
-    public let revokedInviteLinkCount: Int
+    internal let revokedInviteLinkCount: Int
 
     /// Administrator's user identifier
-    public let userId: Int
+    internal let userId: Int
 
-    public init(
+    internal init(
         inviteLinkCount: Int,
         revokedInviteLinkCount: Int,
         userId: Int

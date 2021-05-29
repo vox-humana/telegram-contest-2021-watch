@@ -8,6 +8,6 @@
 import Foundation
 
 /// Returns the period of inactivity after which the account of the current user will automatically be deleted
-public struct GetAccountTtl: Codable {
-    public init() {}
+internal struct GetAccountTtl: Codable {
+    internal init() {}
 }

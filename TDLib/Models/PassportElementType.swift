@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains the type of a Telegram Passport element
-public enum PassportElementType: Codable {
+internal enum PassportElementType: Codable {
     /// A Telegram Passport element containing the user's personal details
     case passportElementTypePersonalDetails
 
@@ -64,7 +64,7 @@ public enum PassportElementType: Codable {
         case passportElementTypeEmailAddress
     }
 
-    public init(from decoder: Decoder) throws {
+    internal init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DtoCodingKeys.self)
         let type = try container.decode(Kind.self, forKey: .type)
         switch type {
@@ -97,7 +97,7 @@ public enum PassportElementType: Codable {
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
+    internal func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: DtoCodingKeys.self)
         switch self {
         case .passportElementTypePersonalDetails:

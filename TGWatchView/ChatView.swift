@@ -1,14 +1,15 @@
 import SwiftUI
 import TGWatchUI
 
-public struct ChatView: View {
+struct ChatView: View {
     @ObservedObject var vm: ChatViewModel
+    // @State private var firstScrollToBottom: Bool = true
 
-    public init(_ vm: ChatViewModel) {
+    init(_ vm: ChatViewModel) {
         self.vm = vm
     }
 
-    public var body: some View {
+    var body: some View {
         CompatibleScrollViewReader { _ in
             List { // To override list style that NavigationLink adds :facepalm:
                 if vm.messages.isEmpty {
@@ -38,7 +39,8 @@ public struct ChatView: View {
                                         hideBackground: message.content.hiddenBackground
                                     )
                                     .onAppear {
-                                        if vm.messages.first?.id == message.id {
+                                        // TODO: load more
+                                        if vm.messages.last?.id == message.id, vm.messages.count == 1 {
                                             vm.loadMoreHistory()
                                         }
                                     }
@@ -47,40 +49,52 @@ public struct ChatView: View {
                                     Spacer()
                                 }
                             }
+                            .id(message.id)
                         }
                         .clearedListStyle()
                     }
                     ReplyPanelView(chatId: vm.chat.id)
                 }
             }
+            .environment(\.defaultMinListRowHeight, 10)
+//            .onReceive(vm.$messages, perform: { _ in
+//                if firstScrollToBottom, let id = vm.messages.first?.id {
+//                    //DispatchQueue.main.async {
+//                        proxy.scrollTo(id, anchor: .top)
+//                    //}
+//                    //firstScrollToBottom = false
+//                }
+//            })
+            .onAppear {
+                vm.loadMoreHistory()
+            }
         }
         .navigationBarTitle(vm.chat.title)
-        .onAppear {
-            vm.loadMoreHistory()
-        }
     }
 }
 
 extension MessageState: Identifiable {}
 
-struct ChatView_Previews: PreviewProvider {
-    static let messages: [MessageState] = .preview
+#if DEBUG
+    struct ChatView_Previews: PreviewProvider {
+        static let messages: [MessageState] = .preview
 
-    static var previews: some View {
-        ChatView(
-            ChatViewModel(
-                chat: .preview(id: 0, title: "Alicia", lastMessage: nil),
-                service: DummyChatService(),
-                messages: messages
+        static var previews: some View {
+            ChatView(
+                ChatViewModel(
+                    chat: .preview(id: 0, title: "Alicia", lastMessage: nil),
+                    service: DummyChatService(),
+                    messages: messages
+                )
             )
-        )
-        .accentColor(.blue)
+            .accentColor(.blue)
+        }
     }
-}
+#endif
 
 import Combine
 
-public final class ChatViewModel: ObservableObject {
+final class ChatViewModel: ObservableObject {
     let chat: Chat
     let service: ChatService
     private var lastMessageId: MessageId?
@@ -88,7 +102,7 @@ public final class ChatViewModel: ObservableObject {
     @Published var isLoading = false
     private var subscription: AnyCancellable?
 
-    public init(chat: Chat, service: ChatService, messages: [MessageState] = []) {
+    init(chat: Chat, service: ChatService, messages: [MessageState] = []) {
         self.chat = chat
         self.service = service
         self.messages = messages
