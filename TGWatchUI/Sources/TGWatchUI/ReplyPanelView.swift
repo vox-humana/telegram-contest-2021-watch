@@ -18,29 +18,40 @@ public struct ReplyPanelView: View {
         TextField("Reply", text: $text, onCommit: {
             self.sendTextMessage()
         })
+
         HStack {
-            Button {
-                // TODO:
-            }
-            label: {
-                Image("VoiceMessage", bundle: .module)
-            }
             Button {
                 // TODO: presentAudioRecordingControllerWithOutputURL on WKInterfaceController?
             }
             label: {
-                Image("Location", bundle: .module)
+                Image("VoiceMessage", bundle: .module)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
+
+            Button {
+                // TODO:
+            }
+            label: {
+                Image("Location", bundle: .module)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+
             Button {
                 // TODO:
             }
             label: {
                 Image("Sticker", bundle: .module)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
             }
         }
+        .padding(.top, 10)
         .clearedListStyle()
         .buttonStyle(PlainButtonStyle())
 
+        // TODO: remove spacing here
         Section(
             header: Text("Suggestions".uppercased())
                 .padding(
@@ -72,10 +83,19 @@ public struct ReplyPanelView: View {
 }
 
 struct ReplyPanelView_Previews: PreviewProvider {
+    static let devices: [PreviewDevice] = [
+        "Apple Watch Series 6 - 44mm",
+        "Apple Watch Series 3 - 38mm",
+    ]
+
     static var previews: some View {
-        List {
-            ReplyPanelView(chatId: 0)
+        ForEach(devices, id: \.rawValue) { device in
+            List {
+                ReplyPanelView(chatId: 0)
+            }
+            .environment(\.defaultMinListRowHeight, 10)
+            .accentColor(.blue)
+            .previewDevice(device)
         }
-        .accentColor(.blue)
     }
 }

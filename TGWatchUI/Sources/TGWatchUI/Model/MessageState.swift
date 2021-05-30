@@ -9,6 +9,7 @@ public enum MessageContentState {
     case contact(ContactState)
     case document(DocumentState)
     case audio(AudioState)
+    case sticker(StickerState)
 }
 
 public struct UserState {
@@ -74,6 +75,8 @@ public extension MessageContentState {
         case let .text(text) where EmojiContentView.canRender(text):
             return true
         case .videoNote:
+            return true
+        case .sticker:
             return true
         default:
             return false

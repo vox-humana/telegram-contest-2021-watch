@@ -33,8 +33,18 @@ final class TGChatService {
                 completion: callback
             )
         }
-        // TODO: check total and retry?
-        .map { $0.messages ?? [] }
+        .tryMap {
+            if let messages = $0.messages {
+                return messages
+            }
+            if $0.totalCount == 0 {
+                return []
+            }
+
+            throw Error(code: 1, message: "Not enough data")
+        }
+        // TODO: pass total for retry on VM
+        // .retry(3)
         .eraseToAnyPublisher()
     }
 }

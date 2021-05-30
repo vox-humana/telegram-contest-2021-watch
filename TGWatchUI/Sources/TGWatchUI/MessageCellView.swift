@@ -16,6 +16,7 @@ public struct MessageCellView: View {
             case let .text(text):
                 if EmojiContentView.canRender(text) {
                     EmojiContentView(text)
+                        .debugBorder()
                 } else {
                     Text(text)
                         .padding(.tgTextPadding)
@@ -35,6 +36,8 @@ public struct MessageCellView: View {
                 DocumentContentView(content, keepImageColors: !message.isOutgoing)
             case let .audio(content):
                 AudioContentView(content, keepImageColors: !message.isOutgoing)
+            case let .sticker(content):
+                StickerContentView(content)
             }
         }
     }

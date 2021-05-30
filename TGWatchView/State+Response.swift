@@ -2,11 +2,22 @@ import MapKit
 import TGWatchUI
 
 extension AudioState {
-    convenience init(_ message: MessageAudio) {
+    convenience init(_ audio: MessageAudio) {
         self.init(
-            caption: message.caption.text,
-            duration: message.audio.duration,
+            title: audio.audio.title,
+            caption: audio.caption.text,
+            duration: audio.audio.duration,
             unplayed: false // TODO: ?
+        )
+    }
+
+    convenience init(_ voice: MessageVoiceNote) {
+        // TODO: voice & waveform
+        self.init(
+            title: voice.caption.text,
+            caption: "",
+            duration: voice.voiceNote.duration,
+            unplayed: !voice.isListened
         )
     }
 }
@@ -151,6 +162,15 @@ extension ChatState {
     }
 }
 
+extension StickerState {
+    init(_ message: MessageSticker) {
+        self.init(
+            emoji: message.sticker.emoji,
+            isAnimated: message.sticker.isAnimated
+        )
+    }
+}
+
 enum SenderDTO {
     case user(User)
     case chat(Chat)
@@ -201,7 +221,7 @@ extension MessageContentState {
         case .messageExpiredPhoto:
             return nil
         case let .messageSticker(sticker):
-            // TODO:
+            self = .sticker(.init(sticker))
             return nil
         case let .messageVideo(video):
             self = .video(.init(video))
@@ -209,8 +229,8 @@ extension MessageContentState {
             return nil
         case let .messageVideoNote(videoNote):
             self = .videoNote(.init(videoNote))
-        case .messageVoiceNote:
-            return nil
+        case let .messageVoiceNote(voiceNote):
+            self = .audio(.init(voiceNote))
         case let .messageLocation(location):
             self = .location(.init(location))
         case .messageVenue:
@@ -272,5 +292,13 @@ private extension Photo {
         // https://core.telegram.org/api/files#image-thumbnail-types
         // TODO: sort all
         sizes.first(where: { $0.type == "m" || $0.type == "s" }).map(\.photo)!
+    }
+}
+
+// TODO: remove
+extension Chat {
+    var canSendMessages: Bool {
+        // TODO: check channels
+        permissions.canSendMessages
     }
 }

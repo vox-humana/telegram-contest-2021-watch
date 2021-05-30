@@ -21,42 +21,40 @@ public struct LoginView: View {
     }
 
     func connectedView(link: String) -> some View {
-        GeometryReader { proxy in
-            ScrollView {
-                VStack(alignment: .center, spacing: 3) {
-                    Text("Log in to Telegram\nby QR Code")
-                        .font(.tgLoginTitle)
-                        .multilineTextAlignment(.center)
+        ScrollView {
+            VStack(alignment: .center, spacing: 3) {
+                Text("Log in to Telegram\nby QR Code")
+                    .font(.tgLoginTitle)
+                    .multilineTextAlignment(.center)
 
-                    Text("Settings on your Phone")
-                        .font(.tgSubtitle)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.tgGrey)
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(.tgGrey)
+                Text("Settings on your Phone")
+                    .font(.tgSubtitle)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.tgGrey)
+                Image(systemName: "chevron.down")
+                    .foregroundColor(.tgGrey)
 
-                    Text("Devices")
-                        .font(.tgSubtitle)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.tgGrey)
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(.tgGrey)
+                Text("Devices")
+                    .font(.tgSubtitle)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.tgGrey)
+                Image(systemName: "chevron.down")
+                    .foregroundColor(.tgGrey)
 
-                    Text("Scan QR")
-                        .font(.tgSubtitle)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.tgGrey)
-                        .padding(.bottom, 8)
+                Text("Scan QR")
+                    .font(.tgSubtitle)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.tgGrey)
+                    .padding(.bottom, 8)
 
-                    QRCodeView(
-                        link,
-                        image: UIImage(named: "qr-logo", in: .module, with: nil)
-                    )
-                    .padding(10)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .frame(width: proxy.size.maxSide, height: proxy.size.maxSide)
-                }
+                QRCodeView(
+                    link,
+                    image: UIImage(named: "qr-logo", in: .module, with: nil)
+                )
+                .padding(10)
+                .background(Color.white)
+                .cornerRadius(10)
+                .frame(width: qrCodeSize, height: qrCodeSize)
             }
         }
     }
@@ -71,6 +69,7 @@ public struct LoginView: View {
     }
 
     private var qrCodeSize: CGFloat {
+        // GeometryReader doesn't work well on watchOS6
         WKInterfaceDevice.current().screenBounds.width
     }
 }
@@ -82,6 +81,14 @@ struct LoginView_Previews: PreviewProvider {
                 DummyAuthService(state: .confirmationWaiting(link: "https://telegram.org"))
             )
         )
+        .previewDevice("Apple Watch Series 3 - 38mm")
+
+        LoginView(
+            LoginViewModel(
+                DummyAuthService(state: .confirmationWaiting(link: "https://telegram.org"))
+            )
+        )
+        .previewDevice("Apple Watch Series 6 - 44mm")
     }
 }
 

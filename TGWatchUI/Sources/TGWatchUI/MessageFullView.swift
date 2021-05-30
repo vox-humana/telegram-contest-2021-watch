@@ -1,5 +1,6 @@
 import SwiftUI
 
+// TODO: pass canSendMessages
 public struct MessageFullView: View {
     private let state: MessageState
 

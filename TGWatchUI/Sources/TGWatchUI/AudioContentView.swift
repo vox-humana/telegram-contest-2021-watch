@@ -1,39 +1,50 @@
 import SwiftUI
 
 public class AudioState {
-    public init(caption: String, duration: Int, unplayed: Bool) {
+    public init(title: String, caption: String, duration: Int, unplayed: Bool) {
+        self.title = title
         self.caption = caption
         self.duration = duration
         self.unplayed = unplayed
     }
 
+    let title: String
     let caption: String
     let duration: Int
     let unplayed: Bool
 }
 
-public struct AudioContentView: View {
+struct AudioContentView: View {
     let state: AudioState
     let keepImageColors: Bool
 
-    public init(_ state: AudioState, keepImageColors: Bool) {
+    init(_ state: AudioState, keepImageColors: Bool) {
         self.state = state
         self.keepImageColors = keepImageColors
     }
 
-    public var body: some View {
+    var body: some View {
         HStack(alignment: .center, spacing: 8) {
             image("Play")
 
-            VStack(alignment: .leading) {
-                if !state.caption.isEmpty {
-                    Text(state.caption)
+            VStack(alignment: .leading, spacing: 2) {
+                if !state.title.isEmpty {
+                    Text(state.title)
+                        .lineLimit(1)
                 } else {
                     image("WavesFilled")
                 }
-                Text(state.duration.durationString)
+                HStack {
+                    Text(state.duration.durationString)
+                    if state.unplayed {
+                        if keepImageColors {
+                            UnreadIndicator().foregroundColor(.accentColor)
+                        } else {
+                            UnreadIndicator()
+                        }
+                    }
+                }
             }
-            .padding(contentPagging)
             .font(.tgTitle)
             Spacer()
         }
@@ -54,10 +65,10 @@ public struct AudioContentView: View {
 
 extension AudioState {
     static let preview = AudioState(
-        caption: "", duration: 26, unplayed: true
+        title: "", caption: "", duration: 26, unplayed: true
     )
     static let previewWithCaption = AudioState(
-        caption: "Name", duration: 26, unplayed: true
+        title: "Long title of the track", caption: "Caption", duration: 26, unplayed: true
     )
 }
 

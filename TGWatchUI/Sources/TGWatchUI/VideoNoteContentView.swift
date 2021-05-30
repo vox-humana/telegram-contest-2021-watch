@@ -12,14 +12,15 @@ public class VideoNoteState {
     let unplayed: Bool
 }
 
-public struct VideoNoteContentView: View {
+// TODO: do not crop in message cell
+struct VideoNoteContentView: View {
     private let state: VideoNoteState
 
-    public init(_ state: VideoNoteState) {
+    init(_ state: VideoNoteState) {
         self.state = state
     }
 
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .center, spacing: 0) {
             ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .center) {
@@ -37,6 +38,7 @@ public struct VideoNoteContentView: View {
 
                     if state.unplayed {
                         UnreadIndicator()
+                            .foregroundColor(.accentColor)
                     }
                 }
                 .alignmentGuide(.trailing, computeValue: { _ in 25 })

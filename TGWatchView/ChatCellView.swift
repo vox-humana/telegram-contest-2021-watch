@@ -34,7 +34,7 @@ struct ChatCellView: View {
 
                     // TODO: or onplayed?
                     if chat.unreadMentionCount > 0 {
-                        UnreadIndicator()
+                        UnreadIndicator().foregroundColor(.accentColor)
                     }
 
                     Spacer()
@@ -60,18 +60,18 @@ extension Message {
             return text.text.text
         case let .messageAnimation(animation):
             return animation.caption.text
-        case let .messageAudio(audio):
-            return audio.caption.text
-        case let .messageDocument(document):
-            return document.caption.text
-        case let .messagePhoto(photo):
-            return photo.caption.text
+        case .messageAudio:
+            return "Audio"
+        case .messageDocument:
+            return "Document"
+        case .messagePhoto:
+            return "Photo"
         case .messageExpiredPhoto:
             return "Expired photo"
         case let .messageSticker(sticker):
             return sticker.sticker.emoji
-        case let .messageVideo(video):
-            return video.caption.text
+        case .messageVideo:
+            return "Video"
         case .messageExpiredVideo:
             return "Expired video"
         case .messageVideoNote:

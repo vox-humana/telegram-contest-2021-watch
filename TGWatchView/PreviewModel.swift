@@ -8,7 +8,7 @@ import TGWatchUI // TODO: extract model
     }
 
     extension ChatPermissions {
-        static let preview = ChatPermissions(canAddWebPagePreviews: false, canChangeInfo: false, canInviteUsers: false, canPinMessages: false, canSendMediaMessages: false, canSendMessages: false, canSendOtherMessages: false, canSendPolls: false)
+        static let preview = ChatPermissions(canAddWebPagePreviews: false, canChangeInfo: false, canInviteUsers: false, canPinMessages: false, canSendMediaMessages: false, canSendMessages: true, canSendOtherMessages: false, canSendPolls: false)
     }
 
     extension ChatPhotoInfo {

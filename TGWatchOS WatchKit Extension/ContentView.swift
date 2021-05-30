@@ -7,7 +7,7 @@ struct ContentView: View {
 
     var body: some View {
         if showLoginFlow {
-            let login = LoginView(
+            LoginView(
                 LoginViewModel(
                     service.authService
                 )
@@ -26,13 +26,7 @@ struct ContentView: View {
                     showLoginFlow = true
                 }
             })
-
-            if #available(watchOS 7.0, *) {
-                login
-                    .navigationBarTitle("Telegram")
-            } else {
-                login
-            }
+            .navigationBarTitle("Telegram")
         } else {
             let chatList = ChatListView(
                 .init(
