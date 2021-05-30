@@ -8,10 +8,10 @@ Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
 from TG iOS?
 
 ## Image loading
-TDLib?
+TDLib
 
 ## DB / local storage
-TDLib?
+TDLib
 
 ## Crazy thoughts
 - Use external JSON serialization lib (faster than built-in)
@@ -20,6 +20,10 @@ TDLib?
 ## Environment
 Xcode 12.5-RC (App Store version)
 Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
+
+## Tools
+* Create icon assets `./make_icons.sh AppIcon.svg`
+* Version bump `agvtool next-version -all` , `agvtool new-marketing-version <your_specific_version>` https://developer.apple.com/library/archive/qa/qa1827/_index.html
 
 # Notes watchOS 6 limitiations
 - Check `watchOS6` & `#available(watchOS 7.0` for watchOS 6 API limitations
@@ -31,7 +35,6 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 
 # Tasks
 [] Check run on device
-[] Rewrite QRCode generation to match with design (corners)
 [] Remove `swift_qrcodejs` dependency
 [] Extract model (states) library to reuse in TGWatchUI and TDLibClient
 [] Check colors codes in style

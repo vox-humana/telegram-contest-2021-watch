@@ -32,5 +32,5 @@ for line in $sizes_mapper
 do
     suffix=`echo $line|awk '{print $1}'`
     size=`echo $line|awk '{print $2}'`
-    $INK -o "$DIRNAME/$BASE-$suffix.png" -w $size -h $size $SVG
+    $INK -o "$DIRNAME/$BASE-$suffix.png" -w $size -h $size --export-png-color-mode=RGB_8 $SVG
 done

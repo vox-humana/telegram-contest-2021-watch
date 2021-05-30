@@ -1,5 +1,6 @@
 import Combine
 import SwiftUI
+import TGWatchUI
 
 struct ContentView: View {
     @State var showLoginFlow: Bool = true
@@ -8,8 +9,7 @@ struct ContentView: View {
         if showLoginFlow {
             let login = LoginView(
                 LoginViewModel(
-                    signal: service.authService.authStateSignal.eraseToAnyPublisher(),
-                    sendPassword: service.authService.sendAuthentication(password:)
+                    service.authService
                 )
             )
             .onReceive(service.authService.authStateSignal, perform: { state in

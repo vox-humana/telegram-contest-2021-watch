@@ -14,13 +14,13 @@ let package = Package(
             targets: ["TGWatchUI"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/ApolloZhu/swift_qrcodejs.git", .upToNextMinor(from: "1.2.0")),
+    ],
     targets: [
         .target(
             name: "TGWatchUI",
-            dependencies: []
-//            resources: [
-//                .process("Resources/Assets.xcassets")
-//            ]
+            dependencies: ["swift_qrcodejs"]
         ),
     ]
 )

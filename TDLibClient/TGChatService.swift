@@ -1,6 +1,6 @@
 import Combine
 import Foundation
-import TGWatchUI
+import TGWatchUI // TODO: extract model
 
 // TODO: per chat and remove `ChatViewModel`
 final class TGChatService {

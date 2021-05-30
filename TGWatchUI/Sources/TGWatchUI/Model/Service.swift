@@ -5,6 +5,29 @@ public typealias UserId = Int
 public typealias ChatId = Int64
 public typealias MessageId = Int64
 
+public enum AuthState {
+    case initial
+    case confirmationWaiting(link: String)
+    case passwordWaiting
+    case passwordSent
+    case authorized
+}
+
+public protocol AuthService {
+    func sendAuthentication(password: String)
+    var authStateSignal: AnyPublisher<AuthState, Never> { get }
+}
+
+struct DummyAuthService: AuthService {
+    let state: AuthState
+
+    func sendAuthentication(password _: String) {}
+
+    var authStateSignal: AnyPublisher<AuthState, Never> {
+        Just(state).eraseToAnyPublisher()
+    }
+}
+
 public protocol ChatService {
     func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int) -> AnyPublisher<(MessageId, [MessageState]), Error>
     func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Error>

@@ -1,8 +1,9 @@
 import Combine
 import Foundation
+import TGWatchUI // TODO: extract model
 
 final class TGAuthService {
-    let authStateSignal = CurrentValueSubject<AuthState, Never>(.initial)
+    private let authStateSubject = CurrentValueSubject<AuthState, Never>(.initial)
     private let api: TdApi
 
     init(api: TdApi) {
@@ -15,20 +16,6 @@ final class TGAuthService {
             process(authorizationState: state.authorizationState)
         default:
             break
-        }
-    }
-
-    func sendAuthentication(password: String) {
-        logger.debug("Sending password....")
-        try? api.checkAuthenticationPassword(password: password) { [weak self] response in
-            if case let .failure(error) = response {
-                logger.debug(error.localizedDescription)
-                try? self?.api.getAuthorizationState { [weak self] in
-                    if let state = try? $0.get() {
-                        self?.process(authorizationState: state)
-                    }
-                }
-            }
         }
     }
 
@@ -96,13 +83,33 @@ final class TGAuthService {
 
     private static func logError(_ response: Result<Ok, Swift.Error>) {
         if case let .failure(error) = response {
-            logger.debug(error.localizedDescription)
+            logger.assert(error.localizedDescription)
         }
     }
 
     private func sendAuthState(_ state: AuthState) {
         DispatchQueue.main.async {
-            self.authStateSignal.send(state)
+            self.authStateSubject.send(state)
+        }
+    }
+}
+
+extension TGAuthService: AuthService {
+    var authStateSignal: AnyPublisher<AuthState, Never> {
+        authStateSubject.eraseToAnyPublisher()
+    }
+
+    func sendAuthentication(password: String) {
+        logger.debug("Sending password....")
+        try? api.checkAuthenticationPassword(password: password) { [weak self] response in
+            if case let .failure(error) = response {
+                logger.debug(error.localizedDescription)
+                try? self?.api.getAuthorizationState { [weak self] in
+                    if let state = try? $0.get() {
+                        self?.process(authorizationState: state)
+                    }
+                }
+            }
         }
     }
 }

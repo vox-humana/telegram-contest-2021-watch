@@ -2,14 +2,6 @@ import Combine
 import SwiftUI
 import TGWatchUI // TODO: extract model
 
-public enum AuthState {
-    case initial
-    case confirmationWaiting(link: String)
-    case passwordWaiting
-    case passwordSent
-    case authorized
-}
-
 protocol ChatListService {
     func downloadPhoto(for chat: Chat)
     func requestChatList()
