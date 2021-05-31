@@ -7,7 +7,7 @@ struct ChatCellView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            AvatarView(chat.photo.map(LocalPhotoState.init(chatPhoto:)))
+            AvatarView(chat.photo.map(ThumbnailState.init(chatPhoto:)))
                 .padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 0))
                 .onAppear {
                     downloadPhoto(chat)

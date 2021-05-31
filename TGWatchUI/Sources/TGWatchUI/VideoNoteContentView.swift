@@ -1,19 +1,19 @@
 import SwiftUI
 
 public class VideoNoteState {
-    public init(duration: Int, thumbnail: LocalPhotoState, unplayed: Bool) {
+    public init(duration: Int, thumbnail: ThumbnailState, unplayed: Bool) {
         self.duration = duration
         self.thumbnail = thumbnail
         self.unplayed = unplayed
     }
 
     let duration: Int
-    let thumbnail: LocalPhotoState
+    let thumbnail: ThumbnailState
     let unplayed: Bool
 }
 
-// TODO: do not crop in message cell
 struct VideoNoteContentView: View {
+    @Environment(\.imageLoader) private var imageLoader
     private let state: VideoNoteState
 
     init(_ state: VideoNoteState) {
@@ -24,7 +24,7 @@ struct VideoNoteContentView: View {
         VStack(alignment: .center, spacing: 0) {
             ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .center) {
-                    image
+                    PhotoView(task: imageLoader.task(photo: state.thumbnail))
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 140, height: 140)
                     Image("BlurPlay", bundle: .module)
@@ -45,18 +45,11 @@ struct VideoNoteContentView: View {
             }
         }
     }
-
-    @ViewBuilder
-    private var image: some View {
-        LocalPhotoView(photo: state.thumbnail)
-            .background(Color.gray)
-    }
 }
 
 struct VideoNoteContentView_Previews: PreviewProvider {
     static var previews: some View {
         VideoNoteContentView(.unplayed)
-            // .tgMessageStyle(isOutgoing: true)
             .accentColor(.blue)
     }
 }

@@ -1,25 +1,29 @@
 import SwiftUI
 
 public struct PhotoState {
-    public init(photo: LocalPhotoState, caption: String) {
+    public init(photo: ThumbnailState, caption: String) {
         self.photo = photo
         self.caption = caption
     }
 
-    let photo: LocalPhotoState
+    let photo: ThumbnailState
     let caption: String
 }
 
-public struct PhotoContentView: View {
+struct PhotoContentView: View {
+    @Environment(\.imageLoader) private var imageLoader
     let state: PhotoState
+    let width: CGFloat
 
-    public init(_ state: PhotoState) {
-        self.state = state
-    }
-
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            image
+            PhotoView(task: imageLoader.task(photo: state.photo))
+                .frame(
+                    width: width,
+                    height: width / state.photo.aspectRatio,
+                    alignment: .center
+                )
+
             if !state.caption.isEmpty {
                 Text(state.caption)
                     .font(.tgTitle)
@@ -27,19 +31,13 @@ public struct PhotoContentView: View {
             }
         }
     }
-
-    @ViewBuilder
-    private var image: some View {
-        LocalPhotoView(photo: state.photo)
-            .background(Color.gray)
-    }
 }
 
 struct PhotoContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PhotoContentView(.withCaption)
-            PhotoContentView(.withoutCaption)
+            PhotoContentView(state: .withCaption, width: .tgMessageWidth)
+            PhotoContentView(state: .withoutCaption, width: .tgMessageWidth)
         }
         .tgMessageStyle(isOutgoing: true)
         .accentColor(.blue)
@@ -55,9 +53,14 @@ extension PhotoState {
     )
 }
 
-extension LocalPhotoState {
-    static let preview = LocalPhotoState(
-        file: .photo,
+extension ThumbnailState {
+    static let preview = ThumbnailState(
+        thumbnail: .init(file: .photo, format: .jpg, width: 4, height: 3),
+        minithumbnail: nil
+    )
+
+    static let previewAvatar = ThumbnailState(
+        thumbnail: .init(file: .userAvatar, format: .png, width: 4, height: 3),
         minithumbnail: nil
     )
 }
@@ -66,10 +69,11 @@ extension LocalFileState {
     static let thumbnail = downloaded("Thumbnail.jpg")
     static let userAvatar = downloaded("user-avatar.png")
     static let photo = downloaded("Image.png")
-    static let notLoaded = LocalFileState(downloaded: false, path: "")
+    static let notLoaded = LocalFileState(fileId: -1, downloaded: false, path: "")
 
     static func downloaded(_ path: String) -> LocalFileState {
         .init(
+            fileId: 1,
             downloaded: true,
             path: imagePath(path)
         )

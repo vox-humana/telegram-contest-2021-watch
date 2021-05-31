@@ -39,10 +39,37 @@ extension VideoState {
         self.init(
             caption: message.caption.text,
             duration: message.video.duration,
-            thumbnail: LocalPhotoState(
-                file: LocalFileState(video: message.video),
+            thumbnail: .init(
+                thumbnail: message.video.thumbnail.map(ThumbnailState.Thumbnail.init),
                 minithumbnail: MiniThumbnailState(message.video.minithumbnail)
             )
+        )
+    }
+}
+
+extension ThumbnailState.Thumbnail {
+    init(_ thumbnail: Thumbnail) {
+        self.init(
+            file: .init(file: thumbnail.file),
+            format: Format(thumbnail.format),
+            width: thumbnail.width,
+            height: thumbnail.height
+        )
+    }
+}
+
+extension ThumbnailState {
+    init(_ photo: Photo) {
+        let size = photo.smallSize!
+        self.init(
+            thumbnail:
+            .init(
+                file: .init(file: size.photo),
+                format: .jpg, // `PhotoSize` always contains JPEG
+                width: size.width,
+                height: size.height
+            ),
+            minithumbnail: .init(photo.minithumbnail)
         )
     }
 }
@@ -50,43 +77,81 @@ extension VideoState {
 extension PhotoState {
     init(_ message: MessagePhoto) {
         self.init(
-            photo: LocalPhotoState(
-                file: .init(photo: message.photo),
-                minithumbnail: MiniThumbnailState(message.photo.minithumbnail)
-            ),
+            photo: .init(message.photo),
             caption: message.caption.text
         )
     }
 }
 
-extension LocalFileState {
-    init(video: Video) {
-        self.init(
-            file: video.video
-        )
+extension ThumbnailState.Thumbnail.Format {
+    init(_ format: ThumbnailFormat) {
+        switch format {
+        case .thumbnailFormatJpeg:
+            self = .jpg
+        case .thumbnailFormatPng:
+            self = .png
+        case .thumbnailFormatWebp:
+            self = .webp
+        case .thumbnailFormatGif:
+            self = .gif
+        case .thumbnailFormatTgs:
+            self = .tgs
+        case .thumbnailFormatMpeg4:
+            self = .mpeg4
+        }
     }
 }
 
 extension LocalFileState {
-    init(photo: Photo) {
+    init?(video: Video) {
+        guard let thumbnail = video.thumbnail else {
+            return nil
+        }
+
         self.init(
-            file: photo.small
+            file: thumbnail.file
+        )
+    }
+
+    init?(video: VideoNote) {
+        guard let thumbnail = video.thumbnail else {
+            return nil
+        }
+
+        self.init(
+            file: thumbnail.file
         )
     }
 }
 
-extension LocalPhotoState {
+// extension LocalFileState {
+//    init(photo: Photo) {
+//        self.init(
+//            file: photo.small
+//        )
+//    }
+// }
+
+extension ThumbnailState {
     init(chatPhoto: ChatPhotoInfo) {
         self.init(
-            file: .init(file: chatPhoto.small),
-            minithumbnail: MiniThumbnailState(chatPhoto.minithumbnail)
+            thumbnail: Thumbnail(
+                file: .init(file: chatPhoto.small),
+                format: .jpg, // `ChatPhotoInfo` always contains JPEG
+                width: 160, height: 160
+            ),
+            minithumbnail: .init(chatPhoto.minithumbnail)
         )
     }
 
     init(profilePhoto: ProfilePhoto) {
         self.init(
-            file: .init(file: profilePhoto.small),
-            minithumbnail: MiniThumbnailState(profilePhoto.minithumbnail)
+            thumbnail: Thumbnail(
+                file: .init(file: profilePhoto.small),
+                format: .jpg, // `ProfilePhoto` always contains JPEG
+                width: 160, height: 160
+            ),
+            minithumbnail: .init(profilePhoto.minithumbnail)
         )
     }
 }
@@ -94,6 +159,7 @@ extension LocalPhotoState {
 extension LocalFileState {
     init(file: File) {
         self.init(
+            fileId: file.id,
             downloaded: file.local.isDownloadingCompleted,
             path: file.local.path
         )
@@ -109,12 +175,19 @@ extension MiniThumbnailState {
     }
 }
 
+/*
+ .init(
+     file: LocalFileState(video: message.videoNote),
+     format: ThumbnailState.Format(message.videoNote.thumbnail?.format ?? .thumbnailFormatJpeg),
+     minithumbnail: MiniThumbnailState(message.videoNote.minithumbnail)
+ */
 extension VideoNoteState {
     convenience init(_ message: MessageVideoNote) {
         self.init(
             duration: message.videoNote.duration,
-            thumbnail: .init(
-                file: .init(file: message.videoNote.video),
+            thumbnail:
+            .init(
+                thumbnail: message.videoNote.thumbnail.map(ThumbnailState.Thumbnail.init),
                 minithumbnail: MiniThumbnailState(message.videoNote.minithumbnail)
             ),
             unplayed: !message.isViewed
@@ -146,7 +219,7 @@ extension UserState {
             id: response.id,
             firstName: response.firstName,
             lastName: response.lastName,
-            photo: response.profilePhoto.map(LocalPhotoState.init(profilePhoto:))
+            photo: response.profilePhoto.map(ThumbnailState.init(profilePhoto:))
         )
     }
 }
@@ -156,7 +229,7 @@ extension ChatState {
         self.init(
             id: response.id,
             title: response.title,
-            photo: response.photo.map(LocalPhotoState.init(chatPhoto:)),
+            photo: response.photo.map(ThumbnailState.init(chatPhoto:)),
             lastMessageText: response.lastMessage?.lastMessageText ?? ""
         )
     }
@@ -222,7 +295,6 @@ extension MessageContentState {
             return nil
         case let .messageSticker(sticker):
             self = .sticker(.init(sticker))
-            return nil
         case let .messageVideo(video):
             self = .video(.init(video))
         case .messageExpiredVideo:
@@ -288,10 +360,16 @@ extension MessageContentState {
 }
 
 private extension Photo {
-    var small: File {
+    var smallSize: PhotoSize? {
         // https://core.telegram.org/api/files#image-thumbnail-types
-        // TODO: sort all
-        sizes.first(where: { $0.type == "m" || $0.type == "s" }).map(\.photo)!
+        let allSizes = ["s", "m", "x", "y", "w", "a", "b", "c", "d"]
+        for i in 0 ..< allSizes.count {
+            if let size = sizes.first(where: { $0.type == allSizes[i] }) {
+                return size
+            }
+        }
+        assertionFailure("Empty photo sizes")
+        return nil
     }
 }
 

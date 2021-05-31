@@ -1,23 +1,55 @@
 import SwiftUI
 
-public struct LocalPhotoState {
-    public init(file: LocalFileState, minithumbnail: MiniThumbnailState?) {
-        self.file = file
+public struct ThumbnailState {
+    public struct Thumbnail {
+        public init(file: LocalFileState, format: ThumbnailState.Thumbnail.Format, width: Int, height: Int) {
+            self.file = file
+            self.format = format
+            self.width = width
+            self.height = height
+        }
+
+        public enum Format {
+            case jpg
+            case png
+            case webp
+            case gif
+            case tgs
+            case mpeg4
+        }
+
+        public let file: LocalFileState
+        public let format: Format
+        public let width: Int
+        public let height: Int
+    }
+
+    public init(thumbnail: ThumbnailState.Thumbnail?, minithumbnail: MiniThumbnailState?) {
+        self.thumbnail = thumbnail
         self.minithumbnail = minithumbnail
     }
 
-    let file: LocalFileState
-    let minithumbnail: MiniThumbnailState?
+    public let thumbnail: Thumbnail?
+    public let minithumbnail: MiniThumbnailState?
+
+    var aspectRatio: CGFloat {
+        guard let thumbnail = thumbnail else {
+            return 1
+        }
+        return CGFloat(thumbnail.width) / CGFloat(thumbnail.height)
+    }
 }
 
 public struct LocalFileState {
-    public init(downloaded: Bool, path: String) {
+    public init(fileId: FileId, downloaded: Bool, path: String) {
+        self.fileId = fileId
         self.downloaded = downloaded
         self.path = path
     }
 
-    let downloaded: Bool
-    let path: String
+    public let fileId: FileId
+    public let downloaded: Bool
+    public let path: String
 }
 
 public struct MiniThumbnailState {
@@ -25,7 +57,7 @@ public struct MiniThumbnailState {
         self.data = data
     }
 
-    let data: Data
+    public let data: Data
 }
 
 // TODO: add caching
@@ -33,8 +65,8 @@ struct LocalPhotoView: View {
     private class LocalLoader: ObservableObject {
         var image: Image?
 
-        init(file: LocalFileState) {
-            guard file.downloaded else {
+        init(file: LocalFileState?) {
+            guard let file = file, file.downloaded else {
                 return
             }
 
@@ -77,14 +109,14 @@ struct LocalPhotoView: View {
             .aspectRatio(contentMode: .fit)
     }
 
-    init(photo: LocalPhotoState) {
+    init(photo: ThumbnailState) {
         _loader = ObservedObject(
-            wrappedValue: LocalLoader(file: photo.file)
+            wrappedValue: LocalLoader(file: photo.thumbnail?.file)
         )
         _thumbnailLoader = ObservedObject(
             wrappedValue: ThumbnailLoader()
         )
-        if !photo.file.downloaded, let thumbnail = photo.minithumbnail {
+        if photo.thumbnail?.file.downloaded == false, let thumbnail = photo.minithumbnail {
             thumbnailLoader.load(thumbnail: thumbnail)
         }
     }

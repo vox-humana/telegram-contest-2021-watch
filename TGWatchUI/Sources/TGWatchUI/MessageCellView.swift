@@ -11,35 +11,42 @@ public struct MessageCellView: View {
     }
 
     public var body: some View {
-        Group {
-            switch message.content {
-            case let .text(text):
-                if EmojiContentView.canRender(text) {
-                    EmojiContentView(text)
-                        .debugBorder()
-                } else {
-                    Text(text)
-                        .padding(.tgTextPadding)
-                }
-            case let .location(content):
-                LocationContentView(content)
-                    .disabled(true)
-            case let .videoNote(content):
-                VideoNoteContentView(content)
-            case let .photo(content):
-                PhotoContentView(content)
-            case let .video(content):
-                VideoContentView(content)
-            case let .contact(content):
-                ContactContentView(content, keepImageColors: !message.isOutgoing)
-            case let .document(content):
-                DocumentContentView(content, keepImageColors: !message.isOutgoing)
-            case let .audio(content):
-                AudioContentView(content, keepImageColors: !message.isOutgoing)
-            case let .sticker(content):
-                StickerContentView(content)
+//        Group {
+        switch message.content {
+        case let .text(text):
+            if EmojiContentView.canRender(text) {
+                EmojiContentView(text)
+            } else {
+                Text(text)
+                    .padding(.tgTextPadding)
             }
+        case let .location(content):
+            LocationContentView(content)
+                .disabled(true)
+                .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
+        case let .videoNote(content):
+            VideoNoteContentView(content)
+        case let .photo(content):
+            PhotoContentView(
+                state: content, width: fullView ? .screenWidth : .tgMessageWidth
+            )
+        case let .video(content):
+            VideoContentView(
+                state: content, width: fullView ? .screenWidth : .tgMessageWidth
+            )
+        case let .contact(content):
+            ContactContentView(content, keepImageColors: !message.isOutgoing)
+                .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
+        case let .document(content):
+            DocumentContentView(content, keepImageColors: !message.isOutgoing)
+                .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
+        case let .audio(content):
+            AudioContentView(content, keepImageColors: !message.isOutgoing)
+                .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
+        case let .sticker(content):
+            StickerContentView(content)
         }
+//        }
     }
 }
 
@@ -53,10 +60,12 @@ struct MessageCellView_Previews: PreviewProvider {
                 MessageCellView(message)
                     .tgMessageStyle(
                         isOutgoing: message.isOutgoing,
-                        hideBackground: message.content.hiddenBackground
+                        hideBackground: message.content.hiddenBackground,
+                        ignoreClipping: message.content.hiddenBackground
                     )
             }
         }
+        // .environment(\.imageLoader, DummyImageLoader(image: <#T##Image?#>))
         .accentColor(.blue)
     }
 }

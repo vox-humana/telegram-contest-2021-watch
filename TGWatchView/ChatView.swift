@@ -28,22 +28,24 @@ struct ChatView: View {
                     }
 
                     ForEach(vm.messages.reversed()) { message in
-                        NavigationLink(destination: MessageFullView(message)) {
+                        NavigationLink(
+                            destination:
+                            MessageFullView(message)
+                                .environment(\.imageLoader, vm)
+                        ) {
                             HStack {
                                 if message.isOutgoing {
                                     Spacer()
                                 }
 
                                 MessageCellView(message)
-                                    .tgMessageStyle(
-                                        isOutgoing: message.isOutgoing,
-                                        hideBackground: message.content.hiddenBackground
-                                    )
+                                    .tgMessageStyle(message)
                                     .onAppear {
                                         if vm.messages.last?.id == message.id {
                                             // TODO: vm.loadMoreHistory()
                                         }
                                     }
+                                    .environment(\.imageLoader, vm)
 
                                 if !message.isOutgoing {
                                     Spacer()
@@ -119,7 +121,7 @@ import Combine
 
 final class ChatViewModel: ObservableObject {
     let chat: Chat
-    let service: ChatService
+    let chatService: ChatService
 
     let minimalHistorySize = 10
     private var lastMessageId: MessageId?
@@ -129,11 +131,12 @@ final class ChatViewModel: ObservableObject {
 
     private var subscription: AnyCancellable?
 
+    private var loadingImages = NSCache<NSString, TGImageLoadingTask>()
+
     init(chat: Chat, service: ChatService, messages: [MessageState] = []) {
         self.chat = chat
-        self.service = service
+        chatService = service
         self.messages = messages
-        // TODO: preheat
         loadMoreHistory()
     }
 
@@ -163,7 +166,7 @@ final class ChatViewModel: ObservableObject {
         }
 
         isLoading = true
-        subscription = service
+        subscription = chatService
             .chatHistory(chat.id, from: lastMessageId ?? 0, limit: minimalHistorySize)
             .receive(on: DispatchQueue.main)
             // TODO: .retry(3)
@@ -184,5 +187,142 @@ final class ChatViewModel: ObservableObject {
                     // self.initialLoading = false
                 }
             })
+    }
+}
+
+extension ChatViewModel: ImageLoader {
+    func task(photo: ThumbnailState) -> ImageLoadingTask {
+        let fileId = String(photo.thumbnail?.file.fileId ?? 0)
+        let hasData = photo.minithumbnail == nil ? "0" : "1"
+
+        let id = NSString(string: "\(fileId)-\(hasData)")
+        if let existing = loadingImages.object(forKey: id) {
+            return existing
+        }
+        let created = TGImageLoadingTask(chatService, photo: photo)
+        loadingImages.setObject(created, forKey: id)
+        return created
+    }
+}
+
+final class TGImageLoadingTask: ImageLoadingTask {
+    private let imageSubject = CurrentValueSubject<Image?, Never>(nil)
+    private let chatService: ChatService
+    private let photo: ThumbnailState
+    private var subscription: AnyCancellable?
+
+    init(_ chatService: ChatService, photo: ThumbnailState) {
+        self.chatService = chatService
+        self.photo = photo
+        subscription = load(photo: photo).sink { [weak self] in
+            self?.imageSubject.send($0)
+        }
+    }
+
+    var image: AnyPublisher<Image?, Never> { imageSubject.eraseToAnyPublisher() }
+
+    private func load(photo: ThumbnailState) -> AnyPublisher<Image?, Never> {
+        if let thumbnail = photo.thumbnail, thumbnail.file.downloaded {
+            return Self.image(from: thumbnail.file.path, format: thumbnail.format)
+        }
+
+        let miniThumbnail = Self.thumbnail(for: photo.minithumbnail?.data)
+
+        if let thumbnail = photo.thumbnail {
+            return
+                chatService.download(file: thumbnail.file.fileId)
+                    // TODO: .retry(3)
+                    .catch { (error: Swift.Error) -> AnyPublisher<String, Never> in
+                        logger.assert(error.localizedDescription)
+                        return Just("").eraseToAnyPublisher()
+                    }
+                    .flatMap { (path: String) -> AnyPublisher<Image?, Never> in
+                        Self.image(from: path, format: thumbnail.format)
+                    }
+                    .prepend(
+                        miniThumbnail
+                    )
+                    .receive(on: DispatchQueue.main)
+                    .eraseToAnyPublisher()
+        } else {
+            return miniThumbnail
+                .receive(on: DispatchQueue.main)
+                .eraseToAnyPublisher()
+        }
+    }
+
+    private static func thumbnail(for data: Data?) -> AnyPublisher<Image?, Never> {
+        guard let data = data else {
+            logger.assert("No thumbnail")
+            return Just(nil).eraseToAnyPublisher()
+        }
+        return Deferred {
+            Just(Image.image(from: data))
+        }
+        .subscribe(on: DispatchQueue.global())
+        .eraseToAnyPublisher()
+    }
+
+    private func image(
+        for fileId: FileId, format: ThumbnailState.Thumbnail.Format
+    ) -> AnyPublisher<Image?, Never> {
+        chatService.download(file: fileId)
+            .catch { (error: Swift.Error) -> AnyPublisher<String, Never> in
+                logger.assert(error.localizedDescription)
+                return Just("").eraseToAnyPublisher()
+            }
+            .flatMap { (path: String) -> AnyPublisher<Image?, Never> in
+                Self.image(from: path, format: format)
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private static func image(
+        from path: String, format: ThumbnailState.Thumbnail.Format
+    ) -> AnyPublisher<Image?, Never> {
+        Deferred {
+            Just(Image.image(from: path, format: format))
+        }
+        .subscribe(on: DispatchQueue.global())
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+}
+
+private extension Image {
+    static func image(from path: String, format: ThumbnailState.Thumbnail.Format) -> Image? {
+        switch format {
+        case .jpg,
+             .png,
+             .gif: // TODO: check GIF
+            let fileURL = URL(fileURLWithPath: path)
+            guard
+                let data = try? Data(contentsOf: fileURL),
+                let uiImage = UIImage(data: data)
+            else {
+                assertionFailure("Can't read image from: \(path)")
+                return nil
+            }
+            return Image(uiImage: uiImage)
+
+        case .webp:
+            // TODO:
+            assertionFailure("unsupported")
+            return nil
+        case .tgs:
+            assertionFailure("unsupported")
+            return nil
+        case .mpeg4:
+            assertionFailure("unsupported")
+            return nil
+        }
+    }
+
+    static func image(from data: Data) -> Image? {
+        guard let uiImage = UIImage(data: data) else {
+            assertionFailure("Can't create image from thumbnail data")
+            return nil
+        }
+        return Image(uiImage: uiImage)
     }
 }

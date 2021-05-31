@@ -1,10 +1,10 @@
 import SwiftUI
 
 public struct AvatarView: View {
-    let state: LocalPhotoState?
+    let state: ThumbnailState?
     private let size: CGFloat = 24
 
-    public init(_ state: LocalPhotoState?) {
+    public init(_ state: ThumbnailState?) {
         self.state = state
     }
 
@@ -20,17 +20,17 @@ public struct AvatarView: View {
     }
 }
 
-private extension LocalPhotoState {
+private extension ThumbnailState {
     var canBeRendered: Bool {
-        file.downloaded || minithumbnail != nil
+        thumbnail?.file.downloaded == true || minithumbnail != nil
     }
 }
 
 struct AvatarView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 10) {
-            AvatarView(LocalPhotoState(file: .userAvatar, minithumbnail: nil))
-            AvatarView(LocalPhotoState(file: .notLoaded, minithumbnail: nil))
+            AvatarView(.previewAvatar)
+            AvatarView(.previewAvatar)
             AvatarView(nil)
         }
         .accentColor(.blue)

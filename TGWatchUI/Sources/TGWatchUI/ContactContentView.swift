@@ -63,6 +63,6 @@ struct ContactContentView_Previews: PreviewProvider {
                     .accentColor(.blue)
             }
         }
-        .frame(width: 160)
+        .frame(width: .tgMessageWidth)
     }
 }

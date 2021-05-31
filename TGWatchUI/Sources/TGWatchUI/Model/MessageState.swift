@@ -13,7 +13,7 @@ public enum MessageContentState {
 }
 
 public struct UserState {
-    public init(id: UserId, firstName: String, lastName: String, photo: LocalPhotoState?) {
+    public init(id: UserId, firstName: String, lastName: String, photo: ThumbnailState?) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -23,7 +23,7 @@ public struct UserState {
     let id: UserId
     let firstName: String
     let lastName: String
-    let photo: LocalPhotoState?
+    let photo: ThumbnailState?
 }
 
 extension UserState {
@@ -38,7 +38,7 @@ public enum MessageSenderState {
 }
 
 public struct ChatState {
-    public init(id: ChatId, title: String, photo: LocalPhotoState?, lastMessageText: String) {
+    public init(id: ChatId, title: String, photo: ThumbnailState?, lastMessageText: String) {
         self.id = id
         self.title = title
         self.photo = photo
@@ -47,7 +47,7 @@ public struct ChatState {
 
     let id: ChatId
     let title: String
-    let photo: LocalPhotoState?
+    let photo: ThumbnailState?
     let lastMessageText: String
 }
 
@@ -67,21 +67,6 @@ public struct MessageState {
     public let sender: MessageSenderState
     public let date: Date
     public let isOutgoing: Bool
-}
-
-public extension MessageContentState {
-    var hiddenBackground: Bool {
-        switch self {
-        case let .text(text) where EmojiContentView.canRender(text):
-            return true
-        case .videoNote:
-            return true
-        case .sticker:
-            return true
-        default:
-            return false
-        }
-    }
 }
 
 public extension Array where Element == MessageState {
@@ -110,6 +95,14 @@ public extension Array where Element == MessageState {
             date: Date(),
             isOutgoing: true
         ),
+        .init(
+            id: 3,
+            chatId: 1,
+            content: .videoNote(.unplayed),
+            sender: .user(.preview),
+            date: Date(),
+            isOutgoing: true
+        ),
     ]
 }
 
@@ -118,6 +111,6 @@ extension UserState {
         id: 1,
         firstName: "Alicia",
         lastName: "Torreaux",
-        photo: .init(file: .userAvatar, minithumbnail: nil)
+        photo: .previewAvatar
     )
 }

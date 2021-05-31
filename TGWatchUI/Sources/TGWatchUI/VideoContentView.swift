@@ -1,7 +1,7 @@
 import SwiftUI
 
 public class VideoState {
-    public init(caption: String, duration: Int, thumbnail: LocalPhotoState) {
+    public init(caption: String, duration: Int, thumbnail: ThumbnailState) {
         self.caption = caption
         self.duration = duration
         self.thumbnail = thumbnail
@@ -9,21 +9,25 @@ public class VideoState {
 
     let caption: String
     let duration: Int
-    let thumbnail: LocalPhotoState
+    let thumbnail: ThumbnailState
 }
 
-public struct VideoContentView: View {
-    private let state: VideoState
+struct VideoContentView: View {
+    @Environment(\.imageLoader) private var imageLoader
+    let state: VideoState
+    let width: CGFloat
 
-    public init(_ state: VideoState) {
-        self.state = state
-    }
-
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .center) {
-                    image
+                    PhotoView(task: imageLoader.task(photo: state.thumbnail))
+                        .frame(
+                            width: width,
+                            height: width / state.thumbnail.aspectRatio,
+                            alignment: .center
+                        )
+
                     Image("BlurPlay", bundle: .module)
                 }
                 Text(state.duration.durationString)
@@ -43,19 +47,13 @@ public struct VideoContentView: View {
             }
         }
     }
-
-    @ViewBuilder
-    private var image: some View {
-        LocalPhotoView(photo: state.thumbnail)
-            .background(Color.gray)
-    }
 }
 
 struct VideoContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            VideoContentView(.withCaption)
-            VideoContentView(.withoutCaption)
+            VideoContentView(state: .withCaption, width: .tgMessageWidth)
+            VideoContentView(state: .withoutCaption, width: .tgMessageWidth)
         }
         .tgMessageStyle(isOutgoing: true)
         .accentColor(.blue)

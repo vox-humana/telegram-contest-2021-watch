@@ -43,33 +43,84 @@ public extension Color {
 
 extension CGFloat {
     static let tgMessageCornerRadius: CGFloat = 14
-    static let tgMessageWidth: CGFloat = 160
+    // static let tgMessageWidth: CGFloat = 160
+
+    static var tgMessageWidth: CGFloat = {
+        // Keeping the same ratio for all screens
+        screenWidth / 184 * 160
+    }()
+
+    static var screenWidth: CGFloat = {
+        WKInterfaceDevice.current().screenBounds.width
+    }()
 }
 
 struct TGMessage: ViewModifier {
     let isOutgoing: Bool
     let hideBackground: Bool
+    let ignoreClipping: Bool
 
     func body(content: Content) -> some View {
-        if !hideBackground {
-            content
-                .foregroundColor(isOutgoing ? Color.white : Color.tgBlack)
-                .background(isOutgoing ? Color.accentColor : Color.white)
+        let message = addBackground(content)
+
+        if !ignoreClipping {
+            message
                 .clipShape(
                     RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
                 )
         } else {
+            message
+        }
+    }
+
+    @ViewBuilder
+    private func addBackground(_ content: Content) -> some View {
+        if !hideBackground {
             content
-                .clipShape(
-                    RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
-                )
+                .foregroundColor(isOutgoing ? Color.white : Color.tgBlack)
+                .background(isOutgoing ? Color.accentColor : Color.white)
+        } else {
+            content
         }
     }
 }
 
 public extension View {
-    func tgMessageStyle(isOutgoing: Bool, hideBackground: Bool = false) -> some View {
-        modifier(TGMessage(isOutgoing: isOutgoing, hideBackground: hideBackground))
+    func tgMessageStyle(isOutgoing: Bool, hideBackground: Bool = false, ignoreClipping: Bool = false) -> some View {
+        modifier(
+            TGMessage(
+                isOutgoing: isOutgoing,
+                hideBackground: hideBackground,
+                ignoreClipping: ignoreClipping
+            )
+        )
+    }
+}
+
+public extension View {
+    func tgMessageStyle(_ message: MessageState) -> some View {
+        modifier(
+            TGMessage(
+                isOutgoing: message.isOutgoing,
+                hideBackground: message.content.hiddenBackground,
+                ignoreClipping: message.content.hiddenBackground
+            )
+        )
+    }
+}
+
+extension MessageContentState {
+    var hiddenBackground: Bool {
+        switch self {
+        case let .text(text) where EmojiContentView.canRender(text):
+            return true
+        case .videoNote:
+            return true
+        case .sticker:
+            return true
+        default:
+            return false
+        }
     }
 }
 

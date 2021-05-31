@@ -18,8 +18,10 @@ public struct MessageFullView: View {
             }
             .frame(minHeight: 44)
 
-            MessageCellView(state)
-                .tgMessageStyle(isOutgoing: state.isOutgoing, hideBackground: true)
+            MessageCellView(state, fullView: true)
+                .tgMessageStyle(
+                    isOutgoing: state.isOutgoing, hideBackground: true, ignoreClipping: state.content.hiddenBackground
+                )
                 .clearedListStyle()
 
             HStack {
@@ -48,7 +50,7 @@ private extension MessageSenderState {
         }
     }
 
-    var photo: LocalPhotoState? {
+    var photo: ThumbnailState? {
         switch self {
         case let .user(user):
             return user.photo

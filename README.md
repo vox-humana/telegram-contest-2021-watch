@@ -34,7 +34,14 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 - No ScrollViewReader
 
 # Tasks
-[] Check run on device
+[] Message author in channels
+[] Reply panel in messages
+[] Download photo and video thumbnails
+[] Play video
+[] Play audio
+[] Stickers
+[] Polls
+[] Quizzes
 [] Remove `swift_qrcodejs` dependency
 [] Extract model (states) library to reuse in TGWatchUI and TDLibClient
 [] Check colors codes in style

@@ -2,7 +2,6 @@ import Combine
 import Foundation
 import TGWatchUI // TODO: extract model
 
-// TODO: per chat and remove `ChatViewModel`
 final class TGChatService {
     private let api: TdApi
     let newMessagesSubject = PassthroughSubject<Message, Never>()
@@ -11,12 +10,13 @@ final class TGChatService {
         self.api = api
     }
 
-    // TODO: register in TGService
     func process(update: Update) {
         switch update {
         case let .updateNewMessage(message):
             newMessagesSubject.send(message.message)
-        // TODO: send into a stream
+        case let .updateFile(file):
+            // TODO: notify
+            logger.debug("Update: \(file)")
         default:
             break
         }
@@ -125,7 +125,7 @@ extension TGChatService: ChatService {
             .eraseToAnyPublisher()
     }
 
-    public func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
+    func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
         api.request { [api](callback: @escaping (Result<Message, Swift.Error>) -> Void) in
             let replyMarkup = ReplyMarkup.replyMarkupInlineKeyboard(.init(rows: [[]]))
             try? api.sendMessage(
@@ -139,6 +139,15 @@ extension TGChatService: ChatService {
             )
         }
         .map(\.id)
+        .eraseToAnyPublisher()
+    }
+
+    func download(file: FileId) -> AnyPublisher<String, Swift.Error> {
+        api.request { [api](callback: @escaping (Result<File, Swift.Error>) -> Void) in
+            let donwloadPriority = 1 // [1..32]
+            try? api.downloadFile(fileId: file, limit: 0, offset: 0, priority: donwloadPriority, synchronous: true, completion: callback)
+        }
+        .map(\.local.path)
         .eraseToAnyPublisher()
     }
 }

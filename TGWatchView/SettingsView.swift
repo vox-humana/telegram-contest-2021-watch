@@ -49,7 +49,7 @@ struct ProfileLabel: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 8) {
-            AvatarView(profile.profilePhoto.map(LocalPhotoState.init(profilePhoto:)))
+            AvatarView(profile.profilePhoto.map(ThumbnailState.init(profilePhoto:)))
                 .onAppear {
                     downloadPhoto(profile)
                 }
