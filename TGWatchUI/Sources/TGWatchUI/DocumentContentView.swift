@@ -25,6 +25,7 @@ public struct DocumentContentView: View {
 
             VStack(alignment: .leading) {
                 Text(state.fileName)
+                    .lineLimit(1)
                 Text(ByteCountFormatter.string(fromByteCount: state.size, countStyle: .file))
             }
             .padding(contentPagging)

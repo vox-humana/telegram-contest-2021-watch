@@ -751,6 +751,8 @@
 		8E27196425F4A14600A263D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196325F4A14600A263D2 /* ContentView.swift */; };
 		8E27196625F4A14600A263D2 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */; };
 		8E27196A25F4A14600A263D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E27196925F4A14600A263D2 /* Assets.xcassets */; };
+		8E453C6F26650FE500A7BB44 /* TGImageLoadingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E453C6E26650FE400A7BB44 /* TGImageLoadingTask.swift */; };
+		8E453C752665125F00A7BB44 /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 8E453C742665125F00A7BB44 /* SDWebImageWebPCoder */; };
 		8ECD9535265A5B0900F6B600 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD9534265A5B0900F6B600 /* Logger.swift */; };
 		8ECD9537265A5BF500F6B600 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD9536265A5BF500F6B600 /* Secrets.swift */; };
 		8ECDC0B3265E79CE0075BAB6 /* tdjson.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */; };
@@ -1565,6 +1567,7 @@
 		8E27196525F4A14600A263D2 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		8E27196925F4A14600A263D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E27196E25F4A14600A263D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E453C6E26650FE400A7BB44 /* TGImageLoadingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGImageLoadingTask.swift; sourceTree = "<group>"; };
 		8EB3418925F5D0A10030F121 /* TGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGService.swift; sourceTree = "<group>"; };
 		8ECD9534265A5B0900F6B600 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		8ECD9536265A5BF500F6B600 /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -1582,6 +1585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EE3726E265FD2F0007D2A47 /* TGWatchUI in Frameworks */,
+				8E453C752665125F00A7BB44 /* SDWebImageWebPCoder in Frameworks */,
 				8ECDC0B3265E79CE0075BAB6 /* tdjson.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1596,6 +1600,7 @@
 				8E119711265CF96E0042A874 /* ChatListView.swift */,
 				8ED51EE3266231F6008E519A /* ChatView.swift */,
 				8E119715265CF96E0042A874 /* Client.swift */,
+				8E453C6E26650FE400A7BB44 /* TGImageLoadingTask.swift */,
 				8E1E5272265FBA2700D6AD12 /* State+Response.swift */,
 				8E11971A265CF96E0042A874 /* PreviewModel.swift */,
 				8E11970D265CF96E0042A874 /* SettingsView.swift */,
@@ -2485,6 +2490,7 @@
 			name = "TGWatchOS WatchKit Extension";
 			packageProductDependencies = (
 				8EE3726D265FD2F0007D2A47 /* TGWatchUI */,
+				8E453C742665125F00A7BB44 /* SDWebImageWebPCoder */,
 			);
 			productName = "TGWatchOS WatchKit Extension";
 			productReference = 8E27195C25F4A14600A263D2 /* TGWatchOS WatchKit Extension.appex */;
@@ -2519,6 +2525,9 @@
 				Base,
 			);
 			mainGroup = 8E27194225F4A14400A263D2;
+			packageReferences = (
+				8E453C732665125F00A7BB44 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
+			);
 			productRefGroup = 8E27194A25F4A14400A263D2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2987,6 +2996,7 @@
 				8E119AD0265CF9A60042A874 /* GetGroupsInCommon.swift in Sources */,
 				8E119A28265CF9A50042A874 /* EditChatFilter.swift in Sources */,
 				8E119A81265CF9A50042A874 /* UploadStickerFile.swift in Sources */,
+				8E453C6F26650FE500A7BB44 /* TGImageLoadingTask.swift in Sources */,
 				8E119CD4265CF9A60042A874 /* TestVectorStringObject.swift in Sources */,
 				8E119BE4265CF9A60042A874 /* ReadFilePart.swift in Sources */,
 				8E119C6A265CF9A60042A874 /* SuggestedAction.swift in Sources */,
@@ -3610,7 +3620,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		8E453C732665125F00A7BB44 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageWebPCoder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		8E453C742665125F00A7BB44 /* SDWebImageWebPCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E453C732665125F00A7BB44 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */;
+			productName = SDWebImageWebPCoder;
+		};
 		8EE3726D265FD2F0007D2A47 /* TGWatchUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TGWatchUI;

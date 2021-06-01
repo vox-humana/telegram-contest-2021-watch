@@ -48,7 +48,7 @@ struct AudioContentView: View {
             .font(.tgTitle)
             Spacer()
         }
-        .padding(8)
+        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 0))
     }
 
     private func image(_ name: String) -> some View {
@@ -83,6 +83,7 @@ struct AudioContentView_Previews: PreviewProvider {
                 AudioContentView(.previewWithCaption, keepImageColors:!flag)
                     .tgMessageStyle(isOutgoing: flag)
             }
+            .frame(width: .tgMessageWidth)
             .accentColor(.blue)
         }
     }

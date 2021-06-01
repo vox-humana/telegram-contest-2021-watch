@@ -26,7 +26,7 @@ struct VideoNoteContentView: View {
                 ZStack(alignment: .center) {
                     PhotoView(task: imageLoader.task(photo: state.thumbnail))
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 140, height: 140)
+                        .frame(width: .tgStickerWidth, height: .tgStickerWidth)
                     Image("BlurPlay", bundle: .module)
                 }
                 .clipShape(Circle())

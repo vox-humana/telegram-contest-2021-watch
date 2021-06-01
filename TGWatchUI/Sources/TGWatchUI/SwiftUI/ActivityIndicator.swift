@@ -8,18 +8,8 @@ public struct ActivityIndicator: View {
     }
 }
 
-struct SpinnerConfiguration {
-    var spinnerColor: Color = .white
-    var blurredBackground: Color = .black
-    var spinnerBackgroundColor: Color = .gray
-    var backgroundCornerRadius: CGFloat = 30
-    var width: CGFloat = 50
-    var height: CGFloat = 50
-    var speed: Double = 1
-}
-
 struct SpinnerView: View {
-    var configuration = SpinnerConfiguration()
+    private let size: CGFloat = 30
     @State var isAnimating = false
 
     var body: some View {
@@ -32,7 +22,7 @@ struct SpinnerView: View {
                     lineCap: .round
                 )
             )
-            .frame(width: 44, height: 44)
+            .frame(width: size, height: size)
             .rotationEffect(.degrees(isAnimating ? 360 : 0))
             .animation(
                 Animation.linear(duration: 1)

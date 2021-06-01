@@ -1,23 +1,47 @@
 import SwiftUI
 
 public struct StickerState {
-    public init(emoji: String, isAnimated: Bool) {
+    public init(
+        emoji: String,
+        isAnimated: Bool,
+        thumbnail: ThumbnailState,
+        file: LocalFileState,
+        width: Int,
+        height: Int
+    ) {
         self.emoji = emoji
         self.isAnimated = isAnimated
+        self.thumbnail = thumbnail
+        self.file = file
+        self.width = width
+        self.height = height
     }
 
-    let emoji: String
-    let isAnimated: Bool
+    public let emoji: String
+    public let isAnimated: Bool
+    public let thumbnail: ThumbnailState
+    public let file: LocalFileState
+    public let width: Int
+    public let height: Int
 }
 
-public struct StickerContentView: View {
+struct StickerContentView: View {
+    @Environment(\.imageLoader) private var imageLoader
     let state: StickerState
 
-    public init(_ state: StickerState) {
-        self.state = state
+    var body: some View {
+        sticker
+            // TODO: or keep aspect :notsureif:
+            .frame(width: .tgStickerWidth, height: .tgStickerWidth)
+            .debugBorder()
     }
 
-    public var body: some View {
-        Text(state.emoji)
+    @ViewBuilder
+    private var sticker: some View {
+        if state.isAnimated {
+            TGSStickerView(player: imageLoader.player(sticker: state))
+        } else {
+            PhotoView(task: imageLoader.task(photo: state.thumbnail))
+        }
     }
 }

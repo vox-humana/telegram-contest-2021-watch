@@ -8,6 +8,7 @@ public protocol ImageLoadingTask {
 
 public protocol ImageLoader {
     func task(photo: ThumbnailState) -> ImageLoadingTask
+    func player(sticker: StickerState) -> TGSPlayer
 }
 
 struct ImageLoaderEnvironment: EnvironmentKey {
@@ -28,6 +29,13 @@ struct DummyImageLoader: ImageLoader {
     func task(photo _: ThumbnailState) -> ImageLoadingTask {
         DummyImageLoadingTask(initialImage: image)
     }
+
+    func player(sticker _: StickerState) -> TGSPlayer {
+        TGSPlayer(
+            fileDownload: Just("") // TODO: pass preview
+                .setFailureType(to: Error.self).eraseToAnyPublisher()
+        )
+    }
 }
 
 public extension EnvironmentValues {
@@ -43,7 +51,6 @@ struct PhotoView: View {
 
     init(task: ImageLoadingTask) {
         self.task = task
-        // image = task.image
     }
 
     var body: some View {
@@ -52,7 +59,6 @@ struct PhotoView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
         }
-        .background(Color.tgGrey)
         // TODO: cancel on disappear
         .onReceive(task.image) {
             self.image = $0

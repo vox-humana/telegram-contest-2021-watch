@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-public struct ReplyPanelView: View {
+public struct SendMessagePanelView: View {
     private let suggestions = [
         "Hello!", "What's up?", "On my way.", "OK",
     ]
@@ -82,7 +82,7 @@ public struct ReplyPanelView: View {
     }
 }
 
-struct ReplyPanelView_Previews: PreviewProvider {
+struct SendMessagePanelView_Previews: PreviewProvider {
     static let devices: [PreviewDevice] = [
         "Apple Watch Series 6 - 44mm",
         "Apple Watch Series 3 - 38mm",
@@ -91,7 +91,7 @@ struct ReplyPanelView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(devices, id: \.rawValue) { device in
             List {
-                ReplyPanelView(chatId: 0)
+                SendMessagePanelView(chatId: 0)
             }
             .environment(\.defaultMinListRowHeight, 10)
             .accentColor(.blue)

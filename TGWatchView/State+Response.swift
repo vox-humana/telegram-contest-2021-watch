@@ -124,14 +124,6 @@ extension LocalFileState {
     }
 }
 
-// extension LocalFileState {
-//    init(photo: Photo) {
-//        self.init(
-//            file: photo.small
-//        )
-//    }
-// }
-
 extension ThumbnailState {
     init(chatPhoto: ChatPhotoInfo) {
         self.init(
@@ -239,7 +231,13 @@ extension StickerState {
     init(_ message: MessageSticker) {
         self.init(
             emoji: message.sticker.emoji,
-            isAnimated: message.sticker.isAnimated
+            isAnimated: message.sticker.isAnimated,
+            thumbnail: ThumbnailState(
+                thumbnail: message.sticker.thumbnail.map(ThumbnailState.Thumbnail.init), minithumbnail: nil
+            ),
+            file: .init(file: message.sticker.sticker),
+            width: message.sticker.width,
+            height: message.sticker.height
         )
     }
 }

@@ -33,6 +33,7 @@ public extension Font {
     static let tgLoginTitle = tgTitle.weight(.medium)
     static let tgChatTitle = tgTitle.weight(.medium)
     static let tgSubtitle = Font.system(size: 14)
+    static let tgSender = Font.system(size: 14).weight(.medium)
     static let tgBadgeCount = tgSubtitle
 }
 
@@ -48,6 +49,10 @@ extension CGFloat {
     static var tgMessageWidth: CGFloat = {
         // Keeping the same ratio for all screens
         screenWidth / 184 * 160
+    }()
+
+    static var tgStickerWidth: CGFloat = {
+        screenWidth / 184 * 140
     }()
 
     static var screenWidth: CGFloat = {
@@ -163,4 +168,30 @@ extension DateFormatter {
         formatter.timeStyle = .none
         return formatter
     }()
+}
+
+// https://github.com/overtake/TelegramSwift/blob/master/submodules/TGUIKit/TGUIKit/PresentationTheme.swift
+private let userColors: [Color] = [
+    Color(hex: 0xFE3C30), // red
+    Color(hex: 0xFF9502), // orange
+    Color(hex: 0x787AFF), // purple
+    Color(hex: 0x00B15A), // green
+    Color(hex: 0x28C9B7), // cyan
+    Color(hex: 0x2094FA), // blue
+    Color(hex: 0xFA0F4F), // pink
+]
+
+public func getUserColor(_ id: UserId) -> Color {
+    userColors[id % 7]
+}
+
+private extension Color {
+    init(hex: UInt) {
+        self.init(
+            red: Double(hex >> 16 & 0xFF) / 255,
+            green: Double(hex >> 08 & 0xFF) / 255,
+            blue: Double(hex >> 00 & 0xFF) / 255,
+            opacity: 1.0
+        )
+    }
 }

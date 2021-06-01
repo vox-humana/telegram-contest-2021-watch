@@ -36,12 +36,12 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 # Tasks
 [] Message author in channels
 [] Reply panel in messages
-[] Download photo and video thumbnails
 [] Play video
 [] Play audio
-[] Stickers
 [] Polls
 [] Quizzes
+[] Remove bloody list spacing (insets)
+[] Remove SDWebImage dependency (extract webp and lottie decoding)
 [] Remove `swift_qrcodejs` dependency
 [] Extract model (states) library to reuse in TGWatchUI and TDLibClient
 [] Check colors codes in style

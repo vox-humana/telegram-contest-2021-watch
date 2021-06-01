@@ -51,14 +51,26 @@ public struct ChatState {
     let lastMessageText: String
 }
 
+public struct MessageReplyState {
+    public init(sender: MessageSenderState, content: String) {
+        self.sender = sender
+        self.content = content
+    }
+
+    let sender: MessageSenderState
+    let content: String
+}
+
 public struct MessageState {
-    public init(id: MessageId, chatId: ChatId, content: MessageContentState, sender: MessageSenderState, date: Date, isOutgoing: Bool) {
+    public init(id: MessageId, chatId: ChatId, content: MessageContentState, sender: MessageSenderState, date: Date, isOutgoing: Bool, privateChat: Bool = true, reply: MessageReplyState? = nil) {
         self.id = id
         self.chatId = chatId
         self.content = content
         self.sender = sender
         self.date = date
         self.isOutgoing = isOutgoing
+        self.privateChat = privateChat
+        self.reply = reply
     }
 
     public let id: MessageId
@@ -67,6 +79,8 @@ public struct MessageState {
     public let sender: MessageSenderState
     public let date: Date
     public let isOutgoing: Bool
+    public var privateChat: Bool
+    public let reply: MessageReplyState?
 }
 
 public extension Array where Element == MessageState {
@@ -77,7 +91,8 @@ public extension Array where Element == MessageState {
             content: .text("Any gift ideas for mom? 🎁"),
             sender: .user(.preview),
             date: Date(),
-            isOutgoing: false
+            isOutgoing: false,
+            privateChat: true
         ),
         .init(
             id: 2,
@@ -85,7 +100,18 @@ public extension Array where Element == MessageState {
             content: .text("A dog!"),
             sender: .user(.preview),
             date: Date(),
-            isOutgoing: true
+            isOutgoing: true,
+            privateChat: false
+        ),
+        .init(
+            id: 5,
+            chatId: 1,
+            content: .audio(.preview),
+            sender: .user(.preview),
+            date: Date(),
+            isOutgoing: true,
+            privateChat: false,
+            reply: .init(sender: .user(.preview), content: "Voice Message")
         ),
         .init(
             id: 3,
@@ -93,15 +119,17 @@ public extension Array where Element == MessageState {
             content: .photo(.withoutCaption),
             sender: .user(.preview),
             date: Date(),
-            isOutgoing: true
+            isOutgoing: true,
+            privateChat: false
         ),
         .init(
-            id: 3,
+            id: 4,
             chatId: 1,
             content: .videoNote(.unplayed),
             sender: .user(.preview),
             date: Date(),
-            isOutgoing: true
+            isOutgoing: true,
+            privateChat: false
         ),
     ]
 }

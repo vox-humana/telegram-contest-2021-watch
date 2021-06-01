@@ -33,14 +33,14 @@ public struct MessageFullView: View {
             .foregroundColor(.tgGrey)
             .listRowBackground(Color.clear)
 
-            ReplyPanelView(chatId: state.chatId)
+            SendMessagePanelView(chatId: state.chatId)
         }
         .environment(\.defaultMinListRowHeight, 10)
         .navigationBarTitle(Text("Message"))
     }
 }
 
-private extension MessageSenderState {
+extension MessageSenderState {
     var senderName: String {
         switch self {
         case let .user(user):

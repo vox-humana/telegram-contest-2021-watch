@@ -40,9 +40,10 @@ struct ChatView: View {
 
                                 MessageCellView(message)
                                     .tgMessageStyle(message)
+                                    .clearedListStyle()
                                     .onAppear {
                                         if vm.messages.last?.id == message.id {
-                                            // TODO: vm.loadMoreHistory()
+                                            // vm.loadMoreHistory()
                                         }
                                     }
                                     .environment(\.imageLoader, vm)
@@ -63,7 +64,7 @@ struct ChatView: View {
                         .frame(height: 0)
                         .clearedListStyle()
 
-                    ReplyPanelView(chatId: vm.chat.id)
+                    SendMessagePanelView(chatId: vm.chat.id)
                 }
             }
             .environment(\.defaultMinListRowHeight, 10)
@@ -132,6 +133,7 @@ final class ChatViewModel: ObservableObject {
     private var subscription: AnyCancellable?
 
     private var loadingImages = NSCache<NSString, TGImageLoadingTask>()
+    private var animatedSticker = NSCache<NSString, TGSPlayer>()
 
     init(chat: Chat, service: ChatService, messages: [MessageState] = []) {
         self.chat = chat
@@ -141,7 +143,7 @@ final class ChatViewModel: ObservableObject {
     }
 
     deinit {
-        logger.debug("")
+        logger.debug("🧹")
     }
 
     var showFullScreenLoading: Bool {
@@ -179,7 +181,7 @@ final class ChatViewModel: ObservableObject {
 
                 let hasMore = self.lastMessageId != tuple.0
                 self.lastMessageId = tuple.0
-                self.messages += tuple.1
+                self.messages += tuple.1.map { $0.changingPrivate(self.chat.isPrivate) }
                 self.isLoading = false
                 if self.messages.count < self.minimalHistorySize, hasMore {
                     self.loadMoreHistory()
@@ -203,126 +205,36 @@ extension ChatViewModel: ImageLoader {
         loadingImages.setObject(created, forKey: id)
         return created
     }
-}
 
-final class TGImageLoadingTask: ImageLoadingTask {
-    private let imageSubject = CurrentValueSubject<Image?, Never>(nil)
-    private let chatService: ChatService
-    private let photo: ThumbnailState
-    private var subscription: AnyCancellable?
-
-    init(_ chatService: ChatService, photo: ThumbnailState) {
-        self.chatService = chatService
-        self.photo = photo
-        subscription = load(photo: photo).sink { [weak self] in
-            self?.imageSubject.send($0)
+    func player(sticker: StickerState) -> TGSPlayer {
+        let fileId = sticker.file.fileId
+        let id = NSString(string: "\(fileId)")
+        if let existing = animatedSticker.object(forKey: id) {
+            return existing
         }
-    }
-
-    var image: AnyPublisher<Image?, Never> { imageSubject.eraseToAnyPublisher() }
-
-    private func load(photo: ThumbnailState) -> AnyPublisher<Image?, Never> {
-        if let thumbnail = photo.thumbnail, thumbnail.file.downloaded {
-            return Self.image(from: thumbnail.file.path, format: thumbnail.format)
-        }
-
-        let miniThumbnail = Self.thumbnail(for: photo.minithumbnail?.data)
-
-        if let thumbnail = photo.thumbnail {
-            return
-                chatService.download(file: thumbnail.file.fileId)
-                    // TODO: .retry(3)
-                    .catch { (error: Swift.Error) -> AnyPublisher<String, Never> in
-                        logger.assert(error.localizedDescription)
-                        return Just("").eraseToAnyPublisher()
-                    }
-                    .flatMap { (path: String) -> AnyPublisher<Image?, Never> in
-                        Self.image(from: path, format: thumbnail.format)
-                    }
-                    .prepend(
-                        miniThumbnail
-                    )
-                    .receive(on: DispatchQueue.main)
-                    .eraseToAnyPublisher()
-        } else {
-            return miniThumbnail
-                .receive(on: DispatchQueue.main)
-                .eraseToAnyPublisher()
-        }
-    }
-
-    private static func thumbnail(for data: Data?) -> AnyPublisher<Image?, Never> {
-        guard let data = data else {
-            logger.assert("No thumbnail")
-            return Just(nil).eraseToAnyPublisher()
-        }
-        return Deferred {
-            Just(Image.image(from: data))
-        }
-        .subscribe(on: DispatchQueue.global())
-        .eraseToAnyPublisher()
-    }
-
-    private func image(
-        for fileId: FileId, format: ThumbnailState.Thumbnail.Format
-    ) -> AnyPublisher<Image?, Never> {
-        chatService.download(file: fileId)
-            .catch { (error: Swift.Error) -> AnyPublisher<String, Never> in
-                logger.assert(error.localizedDescription)
-                return Just("").eraseToAnyPublisher()
-            }
-            .flatMap { (path: String) -> AnyPublisher<Image?, Never> in
-                Self.image(from: path, format: format)
-            }
-            .eraseToAnyPublisher()
-    }
-
-    private static func image(
-        from path: String, format: ThumbnailState.Thumbnail.Format
-    ) -> AnyPublisher<Image?, Never> {
-        Deferred {
-            Just(Image.image(from: path, format: format))
-        }
-        .subscribe(on: DispatchQueue.global())
-        .receive(on: DispatchQueue.main)
-        .eraseToAnyPublisher()
+        let created = TGSPlayer(fileDownload: chatService.download(file: fileId))
+        animatedSticker.setObject(created, forKey: id)
+        return created
     }
 }
 
-private extension Image {
-    static func image(from path: String, format: ThumbnailState.Thumbnail.Format) -> Image? {
-        switch format {
-        case .jpg,
-             .png,
-             .gif: // TODO: check GIF
-            let fileURL = URL(fileURLWithPath: path)
-            guard
-                let data = try? Data(contentsOf: fileURL),
-                let uiImage = UIImage(data: data)
-            else {
-                assertionFailure("Can't read image from: \(path)")
-                return nil
-            }
-            return Image(uiImage: uiImage)
-
-        case .webp:
-            // TODO:
-            assertionFailure("unsupported")
-            return nil
-        case .tgs:
-            assertionFailure("unsupported")
-            return nil
-        case .mpeg4:
-            assertionFailure("unsupported")
-            return nil
-        }
+private extension MessageState {
+    func changingPrivate(_ isPrivate: Bool) -> MessageState {
+        var m = self
+        m.privateChat = isPrivate
+        return m
     }
+}
 
-    static func image(from data: Data) -> Image? {
-        guard let uiImage = UIImage(data: data) else {
-            assertionFailure("Can't create image from thumbnail data")
-            return nil
+private extension Chat {
+    var isPrivate: Bool {
+        switch type {
+        case .chatTypePrivate:
+            return true
+        case .chatTypeBasicGroup(_),
+             .chatTypeSupergroup(_),
+             .chatTypeSecret:
+            return false
         }
-        return Image(uiImage: uiImage)
     }
 }
