@@ -16,45 +16,13 @@ public struct MessageCellView: View {
 
             replyView
 
-            switch message.content {
-            case let .text(text):
-                if EmojiContentView.canRender(text) {
-                    EmojiContentView(text)
-                } else {
-                    Text(text)
-                        .padding(.tgTextPadding)
-                }
-            case let .location(content):
-                LocationContentView(content)
-                    .disabled(true)
-                    .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
-            case let .videoNote(content):
-                VideoNoteContentView(content)
-            case let .photo(content):
-                PhotoContentView(
-                    state: content, width: fullView ? .screenWidth : .tgMessageWidth
-                )
-            case let .video(content):
-                VideoContentView(
-                    state: content, width: fullView ? .screenWidth : .tgMessageWidth
-                )
-            case let .contact(content):
-                ContactContentView(content, keepImageColors: !message.isOutgoing)
-                    .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
-            case let .document(content):
-                DocumentContentView(content, keepImageColors: !message.isOutgoing)
-                    .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
-            case let .audio(content):
-                AudioContentView(content, keepImageColors: !message.isOutgoing)
-                    .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
-            case let .sticker(content):
-                StickerContentView(state: content)
-            }
+            MessageContentView(message, fullView: fullView)
         }
     }
 
     @ViewBuilder
     private var senderView: some View {
+        // TODO: bottom offset for images
         if !message.isOutgoing, !message.privateChat {
             Text(message.sender.senderName)
                 .lineLimit(1)

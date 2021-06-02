@@ -36,11 +36,15 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 # Tasks
 [] Message author in channels
 [] Reply panel in messages
-[] Play video
-[] Play audio
 [] Polls
 [] Quizzes
+[] Check performance of animated stickers. Limit the timer to limit redraw (skip frames) or show animation only in full view
+[] Try DispatchAsync for autoload on scrolling
+[] Check permissions for chats & channels
+[] Play video
+[] Play audio
 [] Remove bloody list spacing (insets)
+[] Hide "new message" button on chat list appearance (wait for data and use ScrollReader)
 [] Remove SDWebImage dependency (extract webp and lottie decoding)
 [] Remove `swift_qrcodejs` dependency
 [] Extract model (states) library to reuse in TGWatchUI and TDLibClient

@@ -242,6 +242,37 @@ extension StickerState {
     }
 }
 
+extension PollState {
+    init(_ poll: Poll) {
+        self.init(
+            // TODO: id
+            question: poll.question,
+            anonymous: poll.isAnonymous,
+            closed: poll.isClosed,
+            type: .init(poll.type),
+            options: poll.options.map(PollState.Option.init)
+        )
+    }
+}
+
+extension PollState.PollType {
+    init(_ type: PollType) {
+        switch type {
+        case let .pollTypeRegular(poll):
+            self = .poll(multipleAnswers: poll.allowMultipleAnswers)
+        case let .pollTypeQuiz(quiz):
+            self = .quiz(correct: quiz.correctOptionId)
+        }
+    }
+}
+
+extension PollState.Option {
+    init(_ option: PollOption) {
+        // TODO: option.isBeingChosen
+        self.init(text: option.text, chosen: option.isChosen, percentage: option.votePercentage)
+    }
+}
+
 enum SenderDTO {
     case user(User)
     case chat(Chat)
@@ -311,9 +342,8 @@ extension MessageContentState {
             return nil
         case .messageGame:
             return nil
-        case .messagePoll:
-            // TODO:
-            return nil
+        case let .messagePoll(message):
+            self = .poll(.init(message.poll))
         case .messageInvoice:
             return nil
         case .messageCall:

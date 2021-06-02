@@ -10,6 +10,7 @@ public enum MessageContentState {
     case document(DocumentState)
     case audio(AudioState)
     case sticker(StickerState)
+    case poll(PollState)
 }
 
 public struct UserState {

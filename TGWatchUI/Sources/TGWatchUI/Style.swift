@@ -35,11 +35,15 @@ public extension Font {
     static let tgSubtitle = Font.system(size: 14)
     static let tgSender = Font.system(size: 14).weight(.medium)
     static let tgBadgeCount = tgSubtitle
+    static let tgPollNumber = Font.custom("SF Compact Rounded", size: 11).weight(.medium)
 }
 
 public extension Color {
-    static let tgGrey = Color.secondary
+    static let tgGrey = Color(hex: 0x8E8E93) // Color.secondary
     static let tgBlack = Color.black
+    static let tgGreyPlatter = Color(hex: 0x222223)
+    static let tgGreen = Color(hex: 0x00B15A)
+    static let tgRed = Color(hex: 0xFE3C30)
 }
 
 extension CGFloat {
@@ -123,6 +127,9 @@ extension MessageContentState {
             return true
         case .sticker:
             return true
+        case .poll:
+            // Poll has its own style inside
+            return true
         default:
             return false
         }
@@ -172,17 +179,17 @@ extension DateFormatter {
 
 // https://github.com/overtake/TelegramSwift/blob/master/submodules/TGUIKit/TGUIKit/PresentationTheme.swift
 private let userColors: [Color] = [
-    Color(hex: 0xFE3C30), // red
+    .tgRed, // red
     Color(hex: 0xFF9502), // orange
     Color(hex: 0x787AFF), // purple
-    Color(hex: 0x00B15A), // green
+    .tgGreen, // green
     Color(hex: 0x28C9B7), // cyan
     Color(hex: 0x2094FA), // blue
     Color(hex: 0xFA0F4F), // pink
 ]
 
 public func getUserColor(_ id: UserId) -> Color {
-    userColors[id % 7]
+    userColors[abs(id) % 7]
 }
 
 private extension Color {

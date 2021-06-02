@@ -33,7 +33,6 @@ struct StickerContentView: View {
         sticker
             // TODO: or keep aspect :notsureif:
             .frame(width: .tgStickerWidth, height: .tgStickerWidth)
-            .debugBorder()
     }
 
     @ViewBuilder

@@ -16,7 +16,7 @@ struct PhotoContentView: View {
     let width: CGFloat
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .center, spacing: 0) {
             PhotoView(task: imageLoader.task(photo: state.photo))
                 .frame(
                     width: width,

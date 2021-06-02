@@ -10,7 +10,7 @@ struct EmojiContentView: View {
     var body: some View {
         Text(emoji)
             .font(.system(size: fontSize))
-            .debugBorder()
+            .padding(.vertical, -1) // fix for SwiftUI padding in List
     }
 
     static func canRender(_ text: String) -> Bool {
@@ -34,14 +34,17 @@ struct EmojiContentView: View {
 
 struct EmojiContentView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        List {
             ZStack {
                 Rectangle().frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/ .center/*@END_MENU_TOKEN@*/)
                 EmojiContentView("🥰")
                     .debugBorder()
             }
+            .clearedListStyle()
             EmojiContentView("🏖🦘")
+                .clearedListStyle()
             EmojiContentView("🍷🏖🦘")
+                .clearedListStyle()
         }
     }
 }

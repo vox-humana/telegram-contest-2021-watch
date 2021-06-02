@@ -18,11 +18,18 @@ public struct MessageFullView: View {
             }
             .frame(minHeight: 44)
 
-            MessageCellView(state, fullView: true)
+            let content = MessageContentView(state, fullView: true)
                 .tgMessageStyle(
-                    isOutgoing: state.isOutgoing, hideBackground: true, ignoreClipping: state.content.hiddenBackground
+                    isOutgoing: state.isOutgoing,
+                    hideBackground: true,
+                    ignoreClipping: state.content.hiddenBackground
                 )
-                .clearedListStyle()
+            if !state.content.usesListStyle {
+                content
+                    .clearedListStyle()
+            } else {
+                content
+            }
 
             HStack {
                 Text(DateFormatter.date(from: state.date).uppercased())
@@ -37,6 +44,17 @@ public struct MessageFullView: View {
         }
         .environment(\.defaultMinListRowHeight, 10)
         .navigationBarTitle(Text("Message"))
+    }
+}
+
+private extension MessageContentState {
+    var usesListStyle: Bool {
+        switch self {
+        case .poll:
+            return true
+        default:
+            return false
+        }
     }
 }
 
