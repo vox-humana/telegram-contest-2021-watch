@@ -29,9 +29,14 @@ struct DummyAuthService: AuthService {
     }
 }
 
+import MapKit
+
 public protocol ChatService {
     func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int, forward: Bool) -> AnyPublisher<(MessageId, [MessageState]), Error>
-    func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Error>
+    // TODO: pass optional reply message ID
+    func send(message: String, to chat: ChatId) -> AnyPublisher<MessageId, Error>
+    func send(location: CLLocationCoordinate2D, to chat: ChatId) -> AnyPublisher<MessageId, Error>
+    func send(voice: URL, to chat: ChatId) -> AnyPublisher<MessageId, Error>
     func newMessages(_ chatId: ChatId) -> AnyPublisher<MessageState, Never>
     func download(file: FileId) -> AnyPublisher<String, Swift.Error>
 }
@@ -43,7 +48,15 @@ public struct DummyChatService: ChatService {
         Just((MessageId(0), [])).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 
-    public func send(_: String, to _: ChatId) -> AnyPublisher<MessageId, Error> {
+    public func send(message _: String, to _: ChatId) -> AnyPublisher<MessageId, Error> {
+        Just(MessageId(0)).setFailureType(to: Error.self).eraseToAnyPublisher()
+    }
+
+    public func send(location _: CLLocationCoordinate2D, to _: ChatId) -> AnyPublisher<MessageId, Error> {
+        Just(MessageId(0)).setFailureType(to: Error.self).eraseToAnyPublisher()
+    }
+
+    public func send(voice _: URL, to _: ChatId) -> AnyPublisher<MessageId, Error> {
         Just(MessageId(0)).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 
@@ -70,6 +83,7 @@ public extension EnvironmentValues {
 public protocol ChatMessageSender {
     func sendMessage(_ text: String)
     func sendLocation(_ location: CLLocationCoordinate2D)
+    func sendVoiceFile(_ url: URL)
 }
 
 public struct DummyMessageSender: ChatMessageSender {
@@ -77,6 +91,7 @@ public struct DummyMessageSender: ChatMessageSender {
 
     public func sendMessage(_: String) {}
     public func sendLocation(_: CLLocationCoordinate2D) {}
+    public func sendVoiceFile(_: URL) {}
 }
 
 public struct ChatMessageSenderEnvironment: EnvironmentKey {

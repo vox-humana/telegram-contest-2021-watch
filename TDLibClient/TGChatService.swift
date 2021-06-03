@@ -1,5 +1,6 @@
 import Combine
 import Foundation
+import MapKit
 import TGWatchUI // TODO: extract model
 
 final class TGChatService {
@@ -45,6 +46,23 @@ final class TGChatService {
         }
         // TODO: pass total for retry on VM
         // .retry(3)
+        .eraseToAnyPublisher()
+    }
+
+    private func send(content: InputMessageContent, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
+        api.request { [api](callback: @escaping (Result<Message, Swift.Error>) -> Void) in
+            let replyMarkup = ReplyMarkup.replyMarkupInlineKeyboard(.init(rows: [[]]))
+            try? api.sendMessage(
+                chatId: chat,
+                inputMessageContent: content,
+                messageThreadId: 0,
+                options: MessageSendOptions(disableNotification: false, fromBackground: false, schedulingState: .messageSchedulingStateSendAtDate(.init(sendDate: Int(CFAbsoluteTimeGetCurrent())))),
+                replyMarkup: replyMarkup,
+                replyToMessageId: 0,
+                completion: callback
+            )
+        }
+        .map(\.id)
         .eraseToAnyPublisher()
     }
 }
@@ -137,21 +155,32 @@ extension TGChatService: ChatService {
             .eraseToAnyPublisher()
     }
 
-    func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
-        api.request { [api](callback: @escaping (Result<Message, Swift.Error>) -> Void) in
-            let replyMarkup = ReplyMarkup.replyMarkupInlineKeyboard(.init(rows: [[]]))
-            try? api.sendMessage(
-                chatId: chat,
-                inputMessageContent: .inputMessageText(InputMessageText(message)),
-                messageThreadId: 0,
-                options: MessageSendOptions(disableNotification: false, fromBackground: false, schedulingState: .messageSchedulingStateSendAtDate(.init(sendDate: Int(CFAbsoluteTimeGetCurrent())))),
-                replyMarkup: replyMarkup,
-                replyToMessageId: 0,
-                completion: callback
+    func send(message: String, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
+        send(content: .inputMessageText(InputMessageText(message)), to: chat)
+    }
+
+    func send(voice: URL, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
+        let duration = voice.audioDuration
+        let audio = InputMessageContent.inputMessageVoiceNote(
+            .init(caption: .init(entities: [], text: ""),
+                  duration: Int(duration),
+                  voiceNote: .inputFileLocal(.init(path: voice.path)),
+                  waveform: Data() // TODO: calculate waveform
             )
-        }
-        .map(\.id)
-        .eraseToAnyPublisher()
+        )
+        return send(content: audio, to: chat)
+    }
+
+    func send(location: CLLocationCoordinate2D, to chat: ChatId) -> AnyPublisher<MessageId, Swift.Error> {
+        let location = InputMessageContent.inputMessageLocation(
+            .init(heading: 0,
+                  livePeriod: 0,
+                  location: .init(
+                      horizontalAccuracy: 0, latitude: location.latitude, longitude: location.longitude
+                  ),
+                  proximityAlertRadius: 0)
+        )
+        return send(content: location, to: chat)
     }
 
     func download(file: FileId) -> AnyPublisher<String, Swift.Error> {
@@ -171,5 +200,14 @@ extension InputMessageText {
             disableWebPagePreview: true,
             text: FormattedText(entities: [], text: text)
         )
+    }
+}
+
+import AVFoundation
+
+private extension URL {
+    var audioDuration: TimeInterval {
+        let avAsset = AVAsset(url: self)
+        return CMTimeGetSeconds(avAsset.duration)
     }
 }

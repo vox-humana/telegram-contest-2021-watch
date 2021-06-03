@@ -283,7 +283,7 @@ extension ChatViewModel: ImageLoader {
 
 extension ChatViewModel: ChatMessageSender {
     func sendMessage(_ text: String) {
-        chatService.send(text, to: chat.id)
+        chatService.send(message: text, to: chat.id)
             .sink { _ in
 
             } receiveValue: { message in
@@ -293,6 +293,16 @@ extension ChatViewModel: ChatMessageSender {
     }
 
     func sendLocation(_: CLLocationCoordinate2D) {}
+
+    func sendVoiceFile(_ url: URL) {
+        chatService.send(voice: url, to: chat.id)
+            .sink { _ in
+
+            } receiveValue: { message in
+                logger.debug("sent \(message)")
+            }
+            .store(in: &subscriptions)
+    }
 }
 
 private extension MessageState {

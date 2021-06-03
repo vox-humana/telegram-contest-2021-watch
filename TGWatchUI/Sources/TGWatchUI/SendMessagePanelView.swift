@@ -22,7 +22,9 @@ public struct SendMessagePanelView: View {
 
         HStack {
             Button {
-                // TODO: presentAudioRecordingControllerWithOutputURL on WKInterfaceController?
+                WKExtension.shared().rootInterfaceController?.showRecording {
+                    messageSender.sendVoiceFile($0)
+                }
             }
             label: {
                 Image("VoiceMessage", bundle: .module)
@@ -102,3 +104,24 @@ struct SendMessagePanelView_Previews: PreviewProvider {
         }
     }
 }
+
+private extension WKInterfaceController {
+    func showRecording(completion: @escaping (URL) -> Void) {
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("audio.mp4")
+        presentAudioRecorderController(withOutputURL: url, preset: .narrowBandSpeech, options: nil) { flag, error in
+            if flag {
+                completion(url)
+            } else {
+                print(error?.localizedDescription ?? "failure")
+            }
+        }
+    }
+}
+
+// TODO: use for emoji or scribble?
+// WKExtension.shared().rootInterfaceController?
+//    .presentTextInputController(
+//        withSuggestions: nil, allowedInputMode: .allowEmoji
+//    ) {
+//        print($0)
+//    }
