@@ -20,12 +20,12 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 - No ScrollViewReader
 
 # Tasks
+[] Send text message
 [] Message author in channels
 [] Reply panel in messages
 [] Check performance of animated stickers. Limit the timer to limit redraw (skip frames) or show animation only in full view
 [] Try DispatchAsync for autoload on scrolling
 [] Check permissions for chats & channels
-[] Send text message
 [] Notifications support
 [] Contact list "New Message"
 [] Show and update "unread" for sent messages

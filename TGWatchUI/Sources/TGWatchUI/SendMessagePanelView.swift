@@ -5,13 +5,14 @@ public struct SendMessagePanelView: View {
     private let suggestions = [
         "Hello!", "What's up?", "On my way.", "OK",
     ]
-    @Environment(\.chatService) var chatService
+    @Environment(\.messageSender) private var messageSender
+    @Environment(\.presentationMode) private var presentation
     @State private var text: String = ""
 
-    private let chatId: ChatId
+    private let dismissOnSend: Bool
 
-    public init(chatId: ChatId) {
-        self.chatId = chatId
+    public init(dismissOnSend: Bool = false) {
+        self.dismissOnSend = dismissOnSend
     }
 
     public var body: some View {
@@ -51,11 +52,11 @@ public struct SendMessagePanelView: View {
         .clearedListStyle()
         .buttonStyle(PlainButtonStyle())
 
-        // TODO: remove spacing here
         Section(
-            header: Text("Suggestions".uppercased())
+            header:
+            Text("Suggestions".uppercased())
                 .padding(
-                    EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0)
+                    EdgeInsets(top: -10, leading: 0, bottom: 1, trailing: 0)
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.tgSubtitle)
@@ -63,7 +64,7 @@ public struct SendMessagePanelView: View {
         ) {
             ForEach(suggestions, id: \.self) { suggestion in
                 Button {
-                    self.sendTextMessage()
+                    self.sendTextMessage(suggestion)
                 }
                 label: {
                     Text(suggestion)
@@ -75,10 +76,12 @@ public struct SendMessagePanelView: View {
         }
     }
 
-    private func sendTextMessage() {
-        // TODO: move outside
-        chatService.send(text, to: chatId)
+    private func sendTextMessage(_ message: String? = nil) {
+        messageSender.sendMessage(message ?? text)
         text = ""
+        if dismissOnSend {
+            presentation.wrappedValue.dismiss()
+        }
     }
 }
 
@@ -91,7 +94,7 @@ struct SendMessagePanelView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(devices, id: \.rawValue) { device in
             List {
-                SendMessagePanelView(chatId: 0)
+                SendMessagePanelView()
             }
             .environment(\.defaultMinListRowHeight, 10)
             .accentColor(.blue)

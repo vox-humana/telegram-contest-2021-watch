@@ -404,7 +404,20 @@ private extension Photo {
 // TODO: remove
 extension Chat {
     var canSendMessages: Bool {
-        // TODO: check channels
-        permissions.canSendMessages
+        // TODO: check admin status in channel
+        permissions.canSendMessages || isChannel
+    }
+
+    var isChannel: Bool {
+        switch type {
+        case .chatTypePrivate:
+            return false
+        case .chatTypeBasicGroup:
+            return false
+        case let .chatTypeSupergroup(group):
+            return group.isChannel
+        case .chatTypeSecret:
+            return false
+        }
     }
 }

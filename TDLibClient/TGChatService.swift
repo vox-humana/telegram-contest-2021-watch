@@ -103,6 +103,18 @@ extension TdApi {
 }
 
 extension TGChatService: ChatService {
+    func newMessages(_ chatId: ChatId) -> AnyPublisher<MessageState, Never> {
+        newMessagesSubject
+            .filter { $0.chatId == chatId }
+            .flatMap { [api] in
+                api.fillMessage($0)
+                    .catch { _ in
+                        Empty(completeImmediately: true).eraseToAnyPublisher()
+                    }
+            }
+            .eraseToAnyPublisher()
+    }
+
     func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int = 20, forward: Bool = false) -> AnyPublisher<(MessageId, [MessageState]), Swift.Error> {
         requestMessages(chatId, from: from, limit: limit, forward: forward)
             .flatMap { [api] (messages: [Message]) -> AnyPublisher<(MessageId, [MessageState]), Swift.Error> in

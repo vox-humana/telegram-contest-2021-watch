@@ -33,8 +33,9 @@ struct ChatView: View {
                         ForEach(vm.messages.reversed()) { message in
                             NavigationLink(
                                 destination:
-                                MessageFullView(message)
+                                MessageFullView(message, canSendMessages: vm.showSendPanel)
                                     .environment(\.imageLoader, vm)
+                                    .environment(\.messageSender, vm)
                             ) {
                                 HStack {
                                     if message.isOutgoing {
@@ -68,21 +69,22 @@ struct ChatView: View {
                             .frame(height: 0)
                             .clearedListStyle()
 
-                        SendMessagePanelView(chatId: vm.chat.id)
+                        SendMessagePanelView(dismissOnSend: false)
+                            .environment(\.messageSender, vm)
                     }
                 }
                 .environment(\.defaultMinListRowHeight, 10)
                 .onReceive(vm.$initialLoading, perform: { loading in
                     if firstScrollToBottom, !loading, let id = vm.messages.first?.id {
                         // First render, then scroll
-                        DispatchQueue.main.async { // asyncAfter(deadline: .now() + .milliseconds(900)) {
+                        DispatchQueue.main.async {
                             proxy.scrollTo(id, anchor: .bottom)
                         }
                         firstScrollToBottom = false
                     }
                 })
                 .onAppear {
-                    vm.loadNewMessages()
+                    // vm.loadNewMessages()
                 }
             }
         }
@@ -137,7 +139,8 @@ final class ChatViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var initialLoading = true
 
-    private var subscription: AnyCancellable?
+    private var historySubscription: AnyCancellable?
+    private var subscriptions = Set<AnyCancellable>()
 
     private var loadingImages = NSCache<NSString, TGImageLoadingTask>()
     private var animatedSticker = NSCache<NSString, TGSPlayer>()
@@ -147,6 +150,16 @@ final class ChatViewModel: ObservableObject {
         chatService = service
         self.messages = messages
         loadMoreHistory()
+
+        chatService.newMessages(chat.id)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
+                guard let self = self else { return }
+                // TODO: merge
+                logger.debug("New message \(message)")
+                self.messages = [message] + self.messages
+            }
+            .store(in: &subscriptions)
     }
 
     deinit {
@@ -180,7 +193,7 @@ final class ChatViewModel: ObservableObject {
         }
 
         isLoading = true
-        subscription = chatService
+        historySubscription = chatService
             .chatHistory(chat.id, from: firstMessageId, limit: minimalHistorySize, forward: true)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] error in
@@ -194,15 +207,17 @@ final class ChatViewModel: ObservableObject {
                 }
 
                 let newMessages = tuple.1.map { $0.changingPrivate(self.chat.isPrivate) }
-                guard newMessages.last?.id == firstMessageId else {
+                let newIds = newMessages.map(\.id)
+                let oldIds = self.messages.map(\.id)
+
+                guard newIds.first == oldIds.first else {
                     // TODO: check for new messages?
-                    let newIds = newMessages.map(\.id)
-                    let oldIds = self.messages.map(\.id)
                     logger.assert("\(oldIds) prepending \(newIds)")
                     return
                 }
 
                 // TODO: merge
+                logger.debug("prepending \(newIds) to \(oldIds)")
                 self.messages = newMessages.dropFirst() + self.messages
             })
     }
@@ -218,7 +233,7 @@ final class ChatViewModel: ObservableObject {
         }
 
         isLoading = true
-        subscription = chatService
+        historySubscription = chatService
             .chatHistory(chat.id, from: lastMessageId ?? 0, limit: defaultChunkSize, forward: false)
             .receive(on: DispatchQueue.main)
             // TODO: .retry(3)
@@ -264,6 +279,20 @@ extension ChatViewModel: ImageLoader {
         animatedSticker.setObject(created, forKey: id)
         return created
     }
+}
+
+extension ChatViewModel: ChatMessageSender {
+    func sendMessage(_ text: String) {
+        chatService.send(text, to: chat.id)
+            .sink { _ in
+
+            } receiveValue: { message in
+                logger.debug("sent \(message)")
+            }
+            .store(in: &subscriptions)
+    }
+
+    func sendLocation(_: CLLocationCoordinate2D) {}
 }
 
 private extension MessageState {

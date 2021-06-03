@@ -3,9 +3,11 @@ import SwiftUI
 // TODO: pass canSendMessages
 public struct MessageFullView: View {
     private let state: MessageState
+    private let canSendMessages: Bool
 
-    public init(_ state: MessageState) {
+    public init(_ state: MessageState, canSendMessages: Bool = true) {
         self.state = state
+        self.canSendMessages = canSendMessages
     }
 
     public var body: some View {
@@ -40,7 +42,9 @@ public struct MessageFullView: View {
             .foregroundColor(.tgGrey)
             .listRowBackground(Color.clear)
 
-            SendMessagePanelView(chatId: state.chatId)
+            if canSendMessages {
+                SendMessagePanelView(dismissOnSend: true)
+            }
         }
         .environment(\.defaultMinListRowHeight, 10)
         .navigationBarTitle(Text("Message"))

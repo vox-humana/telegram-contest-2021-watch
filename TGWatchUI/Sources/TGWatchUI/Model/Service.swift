@@ -32,6 +32,7 @@ struct DummyAuthService: AuthService {
 public protocol ChatService {
     func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int, forward: Bool) -> AnyPublisher<(MessageId, [MessageState]), Error>
     func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Error>
+    func newMessages(_ chatId: ChatId) -> AnyPublisher<MessageState, Never>
     func download(file: FileId) -> AnyPublisher<String, Swift.Error>
 }
 
@@ -46,12 +47,15 @@ public struct DummyChatService: ChatService {
         Just(MessageId(0)).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 
+    public func newMessages(_: ChatId) -> AnyPublisher<MessageState, Never> {
+        Empty().eraseToAnyPublisher()
+    }
+
     public func download(file _: FileId) -> AnyPublisher<String, Error> {
         Just("").setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }
 
-// TODO: move out
 public struct ChatServiceEnvironment: EnvironmentKey {
     public static var defaultValue: ChatService = DummyChatService()
 }
@@ -60,5 +64,28 @@ public extension EnvironmentValues {
     var chatService: ChatService {
         get { self[ChatServiceEnvironment.self] }
         set { self[ChatServiceEnvironment.self] = newValue }
+    }
+}
+
+public protocol ChatMessageSender {
+    func sendMessage(_ text: String)
+    func sendLocation(_ location: CLLocationCoordinate2D)
+}
+
+public struct DummyMessageSender: ChatMessageSender {
+    public init() {}
+
+    public func sendMessage(_: String) {}
+    public func sendLocation(_: CLLocationCoordinate2D) {}
+}
+
+public struct ChatMessageSenderEnvironment: EnvironmentKey {
+    public static var defaultValue: ChatMessageSender = DummyMessageSender()
+}
+
+public extension EnvironmentValues {
+    var messageSender: ChatMessageSender {
+        get { self[ChatMessageSenderEnvironment.self] }
+        set { self[ChatMessageSenderEnvironment.self] = newValue }
     }
 }
