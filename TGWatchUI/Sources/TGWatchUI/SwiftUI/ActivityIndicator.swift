@@ -1,15 +1,19 @@
 import SwiftUI
 
 public struct ActivityIndicator: View {
-    public init() {}
+    private let size: CGFloat
+
+    public init(size: CGFloat = 30) {
+        self.size = size
+    }
 
     public var body: some View {
-        SpinnerView() // ProgressView()
+        SpinnerView(size: size) // ProgressView()
     }
 }
 
 struct SpinnerView: View {
-    private let size: CGFloat = 30
+    let size: CGFloat
     @State var isAnimating = false
 
     var body: some View {
@@ -36,7 +40,17 @@ struct SpinnerView: View {
 
 struct SpinnerView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityIndicator()
-            .accentColor(.blue)
+        CompatibleScrollViewReader { _ in
+            ActivityIndicator(size: 24)
+                .padding()
+
+            List {
+                Text("one")
+                Text("two")
+            }
+        }
+        .accentColor(.blue)
+        .environment(\.defaultMinListRowHeight, 10)
+        .navigationBarTitle("Chat")
     }
 }

@@ -26,10 +26,10 @@ final class TGChatService {
         logger.debug("")
     }
 
-    private func requestMessages(_ chatId: ChatId, from: MessageId, limit: Int = 20) -> AnyPublisher<[Message], Swift.Error> {
+    private func requestMessages(_ chatId: ChatId, from: MessageId, limit: Int = 20, forward: Bool = false) -> AnyPublisher<[Message], Swift.Error> {
         api.request { [api](callback: @escaping (Result<Messages, Swift.Error>) -> Void) in
             try? api.getChatHistory(
-                chatId: chatId, fromMessageId: from, limit: limit, offset: 0, onlyLocal: false,
+                chatId: chatId, fromMessageId: from, limit: limit, offset: forward ? -limit : 0, onlyLocal: false,
                 completion: callback
             )
         }
@@ -103,8 +103,8 @@ extension TdApi {
 }
 
 extension TGChatService: ChatService {
-    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int = 20) -> AnyPublisher<(MessageId, [MessageState]), Swift.Error> {
-        requestMessages(chatId, from: from, limit: limit)
+    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int = 20, forward: Bool = false) -> AnyPublisher<(MessageId, [MessageState]), Swift.Error> {
+        requestMessages(chatId, from: from, limit: limit, forward: forward)
             .flatMap { [api] (messages: [Message]) -> AnyPublisher<(MessageId, [MessageState]), Swift.Error> in
                 guard let lastMessage = messages.last?.id else {
                     return Just((from, [MessageState]()))

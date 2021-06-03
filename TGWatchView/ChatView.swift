@@ -21,64 +21,69 @@ struct ChatView: View {
                     .multilineTextAlignment(.center)
             }
 
-            List { // To override list style that NavigationLink adds :facepalm:
-                if vm.showMessages {
-                    if vm.isLoading {
-                        ActivityIndicator()
-                    }
-
-                    ForEach(vm.messages.reversed()) { message in
-                        NavigationLink(
-                            destination:
-                            MessageFullView(message)
-                                .environment(\.imageLoader, vm)
-                        ) {
-                            HStack {
-                                if message.isOutgoing {
-                                    Spacer()
-                                }
-
-                                MessageCellView(message)
-                                    .tgMessageStyle(message)
-                                    .clearedListStyle()
-                                    .onAppear {
-                                        if vm.messages.last?.id == message.id {
-                                            // vm.loadMoreHistory()
-                                        }
-                                    }
-                                    .environment(\.imageLoader, vm)
-
-                                if !message.isOutgoing {
-                                    Spacer()
-                                }
-                            }
-                            .id(message.id)
+            if !vm.showFullScreenLoading {
+                List { // To override list style that NavigationLink adds :facepalm:
+                    if vm.showMessages {
+                        if vm.isLoading {
+                            ActivityIndicator(size: 24)
+                                .padding()
+                                .clearedListStyle()
                         }
-                        .clearedListStyle()
+
+                        ForEach(vm.messages.reversed()) { message in
+                            NavigationLink(
+                                destination:
+                                MessageFullView(message)
+                                    .environment(\.imageLoader, vm)
+                            ) {
+                                HStack {
+                                    if message.isOutgoing {
+                                        Spacer()
+                                    }
+
+                                    MessageCellView(message)
+                                        .tgMessageStyle(message)
+                                        .clearedListStyle()
+                                        .onAppear {
+                                            if vm.messages.last?.id == message.id {
+                                                // TODO: load more button for WatchOS6
+                                                // vm.loadMoreHistory()
+                                            }
+                                        }
+                                        .environment(\.imageLoader, vm)
+
+                                    if !message.isOutgoing {
+                                        Spacer()
+                                    }
+                                }
+                                .id(message.id)
+                            }
+                            .clearedListStyle()
+                        }
+                    }
+
+                    if vm.showSendPanel {
+                        // Trying to add extra space to List (padding doesn't work)
+                        Text("")
+                            .frame(height: 0)
+                            .clearedListStyle()
+
+                        SendMessagePanelView(chatId: vm.chat.id)
                     }
                 }
-
-                if vm.showSendPanel {
-                    // Extra space
-                    Text("")
-                        .frame(height: 0)
-                        .clearedListStyle()
-
-                    SendMessagePanelView(chatId: vm.chat.id)
-                }
-            }
-            .environment(\.defaultMinListRowHeight, 10)
-            .onReceive(vm.$initialLoading, perform: { loading in
-                if firstScrollToBottom, !loading, let id = vm.messages.first?.id {
-                    // First render, then scroll
-                    DispatchQueue.main.async {
-                        proxy.scrollTo(id, anchor: .bottom)
+                .environment(\.defaultMinListRowHeight, 10)
+                .onReceive(vm.$initialLoading, perform: { loading in
+                    if firstScrollToBottom, !loading, let id = vm.messages.first?.id {
+                        // First render, then scroll
+                        DispatchQueue.main.async { // asyncAfter(deadline: .now() + .milliseconds(900)) {
+                            proxy.scrollTo(id, anchor: .bottom)
+                        }
+                        firstScrollToBottom = false
                     }
-                    firstScrollToBottom = false
+                })
+                .onAppear {
+                    vm.loadNewMessages()
                 }
-            })
-            .onAppear {
-                // vm.loadMoreHistory()
             }
         }
         .navigationBarTitle(vm.chat.title)
@@ -124,7 +129,9 @@ final class ChatViewModel: ObservableObject {
     let chat: Chat
     let chatService: ChatService
 
-    let minimalHistorySize = 10
+    private let minimalHistorySize = 10
+    private let defaultChunkSize = 10
+    private var hasMore: Bool = true
     private var lastMessageId: MessageId?
     @Published var messages: [MessageState]
     @Published var isLoading = false
@@ -147,7 +154,7 @@ final class ChatViewModel: ObservableObject {
     }
 
     var showFullScreenLoading: Bool {
-        messages.isEmpty && isLoading
+        initialLoading || (messages.isEmpty && isLoading)
     }
 
     var isEmpty: Bool {
@@ -155,11 +162,49 @@ final class ChatViewModel: ObservableObject {
     }
 
     var showMessages: Bool {
-        initialLoading == false
+        !initialLoading && !messages.isEmpty
     }
 
     var showSendPanel: Bool {
-        chat.canSendMessages && showMessages
+        chat.canSendMessages && !showFullScreenLoading
+    }
+
+    func loadNewMessages() {
+        guard !isLoading else {
+            return
+        }
+
+        guard let firstMessageId = messages.first?.id else {
+            logger.debug("No history in chat, ignore refresh")
+            return
+        }
+
+        isLoading = true
+        subscription = chatService
+            .chatHistory(chat.id, from: firstMessageId, limit: minimalHistorySize, forward: true)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] error in
+                logger.debug(error)
+                self?.isLoading = false
+            }, receiveValue: { [weak self] tuple in
+                guard let self = self else { return }
+
+                defer {
+                    self.isLoading = false
+                }
+
+                let newMessages = tuple.1.map { $0.changingPrivate(self.chat.isPrivate) }
+                guard newMessages.last?.id == firstMessageId else {
+                    // TODO: check for new messages?
+                    let newIds = newMessages.map(\.id)
+                    let oldIds = self.messages.map(\.id)
+                    logger.assert("\(oldIds) prepending \(newIds)")
+                    return
+                }
+
+                // TODO: merge
+                self.messages = newMessages.dropFirst() + self.messages
+            })
     }
 
     func loadMoreHistory() {
@@ -167,9 +212,14 @@ final class ChatViewModel: ObservableObject {
             return
         }
 
+        guard hasMore else {
+            logger.debug("Chat doesn't have more messages, ignore more loading")
+            return
+        }
+
         isLoading = true
         subscription = chatService
-            .chatHistory(chat.id, from: lastMessageId ?? 0, limit: minimalHistorySize)
+            .chatHistory(chat.id, from: lastMessageId ?? 0, limit: defaultChunkSize, forward: false)
             .receive(on: DispatchQueue.main)
             // TODO: .retry(3)
             .sink(receiveCompletion: { [weak self] error in
@@ -179,14 +229,12 @@ final class ChatViewModel: ObservableObject {
             }, receiveValue: { [weak self] tuple in
                 guard let self = self else { return }
 
-                let hasMore = self.lastMessageId != tuple.0
+                self.hasMore = self.lastMessageId != tuple.0
                 self.lastMessageId = tuple.0
                 self.messages += tuple.1.map { $0.changingPrivate(self.chat.isPrivate) }
                 self.isLoading = false
-                if self.messages.count < self.minimalHistorySize, hasMore {
+                if self.messages.count < self.minimalHistorySize, self.hasMore {
                     self.loadMoreHistory()
-                } else {
-                    // self.initialLoading = false
                 }
             })
     }

@@ -30,7 +30,7 @@ struct DummyAuthService: AuthService {
 }
 
 public protocol ChatService {
-    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int) -> AnyPublisher<(MessageId, [MessageState]), Error>
+    func chatHistory(_ chatId: ChatId, from: MessageId, limit: Int, forward: Bool) -> AnyPublisher<(MessageId, [MessageState]), Error>
     func send(_ message: String, to chat: ChatId) -> AnyPublisher<MessageId, Error>
     func download(file: FileId) -> AnyPublisher<String, Swift.Error>
 }
@@ -38,7 +38,7 @@ public protocol ChatService {
 public struct DummyChatService: ChatService {
     public init() {}
 
-    public func chatHistory(_: ChatId, from _: MessageId, limit _: Int) -> AnyPublisher<(MessageId, [MessageState]), Error> {
+    public func chatHistory(_: ChatId, from _: MessageId, limit _: Int, forward _: Bool) -> AnyPublisher<(MessageId, [MessageState]), Error> {
         Just((MessageId(0), [])).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 

@@ -34,33 +34,10 @@ public struct LocationContentView: View {
     @ViewBuilder
     private var map: some View {
         if #available(watchOS 7.0, *) {
-            Map(
-                mapRect: .constant(mapRect),
-                interactionModes: MapInteractionModes(rawValue: 0),
-                annotationItems: [state]
-            ) { location in
-                MapAnnotation(coordinate: location.location, anchorPoint: CGPoint(x: 0.5, y: 0.85)) {
-                    Image("Pin", bundle: .module)
-                }
-            }
+            MapView(location: state.location)
         } else {
-            Text("📍 \(state.location.latitude), \(state.location.longitude)")
+            WKMapView(location: state.location)
         }
-    }
-
-    private var mapRect: MKMapRect {
-        let scale = MKMapPointsPerMeterAtLatitude(state.location.latitude)
-        let center = MKMapPoint(state.location)
-        let offset = scale * 80
-        let width = scale * 500
-        let height = scale * 500
-        return MKMapRect(x: center.x - width / 2, y: center.y - height / 2 - offset, width: width, height: height)
-    }
-}
-
-extension LocationState: Identifiable {
-    public var id: String {
-        "\(location.latitude):\(location.longitude):\(isLive)"
     }
 }
 

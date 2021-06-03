@@ -1,18 +1,4 @@
-# Plan of attack
-## Networking
-
-### TDLib for networking
-Build TDLib for watchOS https://github.com/tdlib/td/tree/master/example/ios
-
-## QRCode generator
-from TG iOS?
-
-## Image loading
-TDLib
-
-## DB / local storage
-TDLib
-
+# Plan
 ## Crazy thoughts
 - Use external JSON serialization lib (faster than built-in)
 - Use whole module + time optimizations
@@ -36,14 +22,18 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 # Tasks
 [] Message author in channels
 [] Reply panel in messages
-[] Polls
-[] Quizzes
 [] Check performance of animated stickers. Limit the timer to limit redraw (skip frames) or show animation only in full view
 [] Try DispatchAsync for autoload on scrolling
 [] Check permissions for chats & channels
-[] Play video
+[] Send text message
+[] Notifications support
+[] Contact list "New Message"
+[] Show and update "unread" for sent messages
+[] Send sticker
+[] Send audio
+[] Play video and VideoNote
 [] Play audio
-[] Remove bloody list spacing (insets)
+[] Check bloody list spacing (insets)
 [] Hide "new message" button on chat list appearance (wait for data and use ScrollReader)
 [] Remove SDWebImage dependency (extract webp and lottie decoding)
 [] Remove `swift_qrcodejs` dependency
