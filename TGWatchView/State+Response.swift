@@ -290,7 +290,7 @@ extension MessageSenderState {
 }
 
 extension MessageState {
-    init?(_ message: Message, sender: SenderDTO) {
+    init?(_ message: Message, sender: SenderDTO, reply: MessageReplyState?) {
         guard let content = MessageContentState(message.content) else {
             return nil
         }
@@ -300,7 +300,9 @@ extension MessageState {
             content: content,
             sender: .init(sender),
             date: Date(timeIntervalSince1970: Double(message.date)),
-            isOutgoing: message.isOutgoing
+            isOutgoing: message.isOutgoing,
+            privateChat: true,
+            reply: reply
         )
     }
 }

@@ -3,11 +3,9 @@ import SwiftUI
 
 public struct MessageCellView: View {
     private let message: MessageState
-    private let fullView: Bool
 
-    public init(_ message: MessageState, fullView: Bool = false) {
+    public init(_ message: MessageState) {
         self.message = message
-        self.fullView = fullView
     }
 
     public var body: some View {
@@ -16,45 +14,35 @@ public struct MessageCellView: View {
 
             replyView
 
-            MessageContentView(message, fullView: fullView)
+            MessageContentView(message, fullView: false)
         }
     }
 
     @ViewBuilder
     private var senderView: some View {
         // TODO: bottom offset for images
-        if !message.isOutgoing, !message.privateChat {
+        if showSender {
             Text(message.sender.senderName)
                 .lineLimit(1)
                 .font(.tgSender)
                 .foregroundColor(message.sender.color)
-                .padding(EdgeInsets(top: 4, leading: 9, bottom: -3, trailing: 9))
+                .padding(EdgeInsets(top: 4, leading: 9, bottom: 0, trailing: 9))
         }
     }
 
     @ViewBuilder
     private var replyView: some View {
         if let reply = message.reply {
-            HStack(spacing: 6) {
-                Rectangle()
-                    .fill(replyColor)
-                    .cornerRadius(2)
-                    .frame(width: 2, height: 30)
-                VStack(alignment: .leading) {
-                    Text(reply.sender.senderName)
-                        .lineLimit(1)
-                        .foregroundColor(replyColor)
-                    Text(reply.content)
-                        .lineLimit(1)
-                        .font(.tgSubtitle)
-                }
-            }
-            .padding(EdgeInsets(top: 7, leading: 11, bottom: -3, trailing: 0))
+            ReplyView(state: reply, accentColor: !message.isOutgoing, showSender: showSender)
         }
     }
 
     private var replyColor: Color {
-        fullView || !message.isOutgoing ? Color.accentColor : Color.white
+        !message.isOutgoing ? Color.accentColor : Color.white
+    }
+
+    private var showSender: Bool {
+        !message.isOutgoing && !message.privateChat
     }
 }
 
@@ -73,7 +61,7 @@ struct MessageCellView_Previews: PreviewProvider {
                     )
             }
         }
-        // .environment(\.imageLoader, DummyImageLoader(image: <#T##Image?#>))
+        .environment(\.imageLoader, DummyImageLoader(image: Image("Image.png")))
         .accentColor(.blue)
     }
 }

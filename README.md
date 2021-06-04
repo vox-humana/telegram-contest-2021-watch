@@ -20,9 +20,10 @@ Apple Watch Series 3 38mm watchOS 6.0 simulator (armv7k 32 bit)
 - No ScrollViewReader
 
 # Tasks
-[] Message author in channels
-[] Reply panel in messages
+[] Check offsets for message author in channels and replies
+[] Check reply colors in all messages (sticker, video etc)
 [] Scroll to just sent messages
+[] Keep scroll on "load more" button
 [] Check performance of animated stickers. Limit the timer to limit redraw (skip frames) or show animation only in full view. Render all images into memory or files (right in download folder) instead of rendering every single frame
 [] Check permissions for chats & channels
 [] Notifications support

@@ -75,11 +75,20 @@ extension LocalFileState {
         .init(
             fileId: 1,
             downloaded: true,
-            path: imagePath(path)
+            path: .imagePath(path)
         )
     }
+}
 
-    private static func imagePath(_ filename: String) -> String {
+extension Image {
+    static func preview(name: String) -> Image {
+        let uiImage = UIImage(contentsOfFile: .imagePath(name))!
+        return Image(uiImage: uiImage)
+    }
+}
+
+private extension String {
+    static func imagePath(_ filename: String) -> String {
         URL(fileURLWithPath: #file)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

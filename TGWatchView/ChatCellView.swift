@@ -58,8 +58,8 @@ extension Message {
         switch content {
         case let .messageText(text):
             return text.text.text
-        case let .messageAnimation(animation):
-            return animation.caption.text
+        case .messageAnimation:
+            return "GIF"
         case .messageAudio:
             return "Audio"
         case .messageDocument:
@@ -69,7 +69,7 @@ extension Message {
         case .messageExpiredPhoto:
             return "Expired photo"
         case let .messageSticker(sticker):
-            return sticker.sticker.emoji
+            return sticker.sticker.emoji + "Sticker"
         case .messageVideo:
             return "Video"
         case .messageExpiredVideo:

@@ -27,7 +27,17 @@ struct ChatView: View {
                         if vm.isLoading {
                             ActivityIndicator(size: 24)
                                 .padding()
+                                .frame(maxWidth: .infinity)
                                 .clearedListStyle()
+                        } else if vm.hasMore {
+                            Button {
+                                vm.loadMoreHistory()
+                            }
+                            label: {
+                                Text("Load More")
+                                    .font(.tgTitle)
+                                    .frame(height: 44)
+                            }
                         }
 
                         ForEach(vm.messages.reversed()) { message in
@@ -45,12 +55,11 @@ struct ChatView: View {
                                     MessageCellView(message)
                                         .tgMessageStyle(message)
                                         .clearedListStyle()
-                                        .onAppear {
-                                            if vm.messages.last?.id == message.id {
-                                                // TODO: load more button for WatchOS6
-                                                // vm.loadMoreHistory()
-                                            }
-                                        }
+//                                        .onAppear {
+//                                            if vm.messages.last?.id == message.id {
+//                                                vm.loadMoreHistory()
+//                                            }
+//                                        }
                                         .environment(\.imageLoader, vm)
 
                                     if !message.isOutgoing {
@@ -134,7 +143,7 @@ final class ChatViewModel: ObservableObject {
 
     private let minimalHistorySize = 10
     private let defaultChunkSize = 10
-    private var hasMore: Bool = true
+    private(set) var hasMore: Bool = true
     private var lastMessageId: MessageId?
     @Published var messages: [MessageState]
     @Published var isLoading = false
@@ -158,7 +167,7 @@ final class ChatViewModel: ObservableObject {
                 guard let self = self else { return }
                 // TODO: merge
                 logger.debug("New message \(message)")
-                self.messages = [message] + self.messages
+                self.messages = [message.changingPrivate(chat.isPrivate)] + self.messages
             }
             .store(in: &subscriptions)
     }

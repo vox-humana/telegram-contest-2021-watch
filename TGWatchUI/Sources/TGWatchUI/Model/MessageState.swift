@@ -63,7 +63,7 @@ public struct MessageReplyState {
 }
 
 public struct MessageState {
-    public init(id: MessageId, chatId: ChatId, content: MessageContentState, sender: MessageSenderState, date: Date, isOutgoing: Bool, privateChat: Bool = true, reply: MessageReplyState? = nil) {
+    public init(id: MessageId, chatId: ChatId, content: MessageContentState, sender: MessageSenderState, date: Date, isOutgoing: Bool, privateChat: Bool, reply: MessageReplyState?) {
         self.id = id
         self.chatId = chatId
         self.content = content
@@ -93,7 +93,8 @@ public extension Array where Element == MessageState {
             sender: .user(.preview),
             date: Date(),
             isOutgoing: false,
-            privateChat: true
+            privateChat: false,
+            reply: .init(sender: .user(.preview), content: "20K subscribers!")
         ),
         .init(
             id: 2,
@@ -102,7 +103,8 @@ public extension Array where Element == MessageState {
             sender: .user(.preview),
             date: Date(),
             isOutgoing: true,
-            privateChat: false
+            privateChat: false,
+            reply: nil
         ),
         .init(
             id: 5,
@@ -121,7 +123,8 @@ public extension Array where Element == MessageState {
             sender: .user(.preview),
             date: Date(),
             isOutgoing: true,
-            privateChat: false
+            privateChat: false,
+            reply: nil
         ),
         .init(
             id: 4,
@@ -130,7 +133,8 @@ public extension Array where Element == MessageState {
             sender: .user(.preview),
             date: Date(),
             isOutgoing: true,
-            privateChat: false
+            privateChat: false,
+            reply: nil
         ),
     ]
 }

@@ -96,6 +96,46 @@ extension TdApi {
         }
     }
 
+    func loadReplies(_ chatId: ChatId, for messages: [Message]) -> AnyPublisher<[String], Swift.Error> {
+        request { [weak self] callback in
+            let ids = messages
+                .filter {
+                    ($0.replyInChatId == 0 || $0.replyInChatId == chatId) &&
+                        $0.replyToMessageId != 0
+                }
+                .map(\.replyToMessageId)
+            try? self?.getMessages(chatId: chatId, messageIds: ids, completion: callback)
+        }
+        .map { (response: Messages) -> [String] in
+            response.messages?.map(\.lastMessageText).filter { !$0.isEmpty } ?? []
+        }
+        .eraseToAnyPublisher()
+    }
+
+    func loadReply(_ chatId: ChatId, for message: Message) -> AnyPublisher<MessageReplyState?, Swift.Error> {
+        guard
+            message.replyToMessageId != 0,
+            chatId == message.replyInChatId || message.replyInChatId == 0
+        else {
+            return Just(nil).setFailureType(to: Swift.Error.self).eraseToAnyPublisher()
+        }
+
+        return request { [weak self] callback in
+            try? self?.getMessage(chatId: chatId, messageId: message.replyToMessageId, completion: callback)
+        }
+        .flatMap { [weak self] (message: Message) -> AnyPublisher<MessageReplyState?, Swift.Error> in
+            guard let self = self else {
+                return Just(nil).setFailureType(to: Swift.Error.self).eraseToAnyPublisher()
+            }
+            return
+                self.requestSender(message.sender)
+                    .map(MessageSenderState.init)
+                    .map { MessageReplyState(sender: $0, content: message.lastMessageText) }
+                    .eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
+    }
+
     func request<Value>(_ apiCall: @escaping (@escaping (Result<Value, Swift.Error>) -> Void) -> Void) -> AnyPublisher<Value, Swift.Error> {
         Future<Value, Swift.Error> { promise in
             apiCall { response in
@@ -111,10 +151,11 @@ extension TdApi {
         .eraseToAnyPublisher()
     }
 
-    func fillMessage(_ message: Message) -> AnyPublisher<MessageState, Swift.Error> {
-        requestSender(message.sender)
+    func fillMessage(_ chatId: ChatId, _ message: Message) -> AnyPublisher<MessageState, Swift.Error> {
+        Publishers
+            .CombineLatest(requestSender(message.sender), loadReply(chatId, for: message))
             .compactMap {
-                MessageState(message, sender: $0)
+                MessageState(message, sender: $0.0, reply: $0.1)
             }
             .eraseToAnyPublisher()
     }
@@ -134,7 +175,7 @@ extension TGChatService: ChatService {
         newMessagesSubject
             .filter { $0.chatId == chatId }
             .flatMap { [api] in
-                api.fillMessage($0)
+                api.fillMessage(chatId, $0)
                     .catch { _ in
                         Empty(completeImmediately: true).eraseToAnyPublisher()
                     }
@@ -151,7 +192,7 @@ extension TGChatService: ChatService {
                         .eraseToAnyPublisher()
                 }
                 let publishers = messages.map {
-                    api.fillMessage($0)
+                    api.fillMessage(chatId, $0)
                 }
 
                 return
