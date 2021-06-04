@@ -11,16 +11,16 @@ public struct LocationState {
     let isLive: Bool
 }
 
-public struct LocationContentView: View {
+struct LocationContentView: View {
     private let state: LocationState
     private let fullView: Bool
 
-    public init(_ state: LocationState, fullView: Bool = false) {
+    init(_ state: LocationState, fullView: Bool = false) {
         self.state = state
         self.fullView = fullView
     }
 
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             map.aspectRatio(4 / 3, contentMode: .fit)
 
@@ -42,8 +42,12 @@ public struct LocationContentView: View {
 }
 
 extension LocationState {
-    static let preview = LocationState(location: .init(latitude: -33.848792, longitude: 151.206011), isLive: false)
-    static let live = LocationState(location: .init(latitude: -33.848792, longitude: 151.206011), isLive: true)
+    static let preview = LocationState(location: .stPaul, isLive: false)
+    static let live = LocationState(location: .stPaul, isLive: true)
+}
+
+extension CLLocationCoordinate2D {
+    static let stPaul = CLLocationCoordinate2D(latitude: 51.5138, longitude: -0.0984)
 }
 
 struct LocationContentView_Previews: PreviewProvider {

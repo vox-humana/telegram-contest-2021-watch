@@ -165,21 +165,14 @@ struct PollFullView_Previews: PreviewProvider {
 }
 
 struct PollContentView_Previews: PreviewProvider {
-    static let devices: [PreviewDevice] = [
-        "Apple Watch Series 6 - 44mm",
-        "Apple Watch Series 3 - 38mm",
-    ]
-
     static var previews: some View {
-        ForEach(devices, id: \.rawValue) { device in
+        DevicePreview {
             List {
                 PollContentView(state: .previewPoll, outgoing: false)
                 PollContentView(state: .previewQuiz, outgoing: true)
             }
             .environment(\.defaultMinListRowHeight, 10)
-            .previewDevice(device)
         }
-        .accentColor(.blue)
     }
 }
 

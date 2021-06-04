@@ -1,4 +1,5 @@
 import Combine
+import MapKit
 import SwiftUI
 
 public struct SendMessagePanelView: View {
@@ -8,6 +9,7 @@ public struct SendMessagePanelView: View {
     @Environment(\.messageSender) private var messageSender
     @Environment(\.presentationMode) private var presentation
     @State private var text: String = ""
+    @State private var locationPickerShown: Bool = false
 
     private let dismissOnSend: Bool
 
@@ -33,7 +35,7 @@ public struct SendMessagePanelView: View {
             }
 
             Button {
-                // TODO:
+                locationPickerShown = true
             }
             label: {
                 Image("Location", bundle: .module)
@@ -51,8 +53,17 @@ public struct SendMessagePanelView: View {
             }
         }
         .padding(.top, 10)
-        .clearedListStyle()
         .buttonStyle(PlainButtonStyle())
+        .sheet(isPresented: $locationPickerShown) {
+            LocationPickerView {
+                locationPickerShown = false
+                messageSender.sendLocation($0)
+                if dismissOnSend {
+                    presentation.wrappedValue.dismiss()
+                }
+            }
+        }
+        .clearedListStyle()
 
         Section(
             header:
@@ -88,19 +99,12 @@ public struct SendMessagePanelView: View {
 }
 
 struct SendMessagePanelView_Previews: PreviewProvider {
-    static let devices: [PreviewDevice] = [
-        "Apple Watch Series 6 - 44mm",
-        "Apple Watch Series 3 - 38mm",
-    ]
-
     static var previews: some View {
-        ForEach(devices, id: \.rawValue) { device in
+        DevicePreview {
             List {
                 SendMessagePanelView()
             }
             .environment(\.defaultMinListRowHeight, 10)
-            .accentColor(.blue)
-            .previewDevice(device)
         }
     }
 }

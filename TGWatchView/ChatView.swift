@@ -78,7 +78,8 @@ struct ChatView: View {
                     if firstScrollToBottom, !loading, let id = vm.messages.first?.id {
                         // First render, then scroll
                         DispatchQueue.main.async {
-                            proxy.scrollTo(id, anchor: .bottom)
+                            // iMessage uses top alignment for the last message
+                            proxy.scrollTo(id, anchor: .top)
                         }
                         firstScrollToBottom = false
                     }
@@ -292,7 +293,15 @@ extension ChatViewModel: ChatMessageSender {
             .store(in: &subscriptions)
     }
 
-    func sendLocation(_: CLLocationCoordinate2D) {}
+    func sendLocation(_ location: CLLocationCoordinate2D) {
+        chatService.send(location: location, to: chat.id)
+            .sink { _ in
+
+            } receiveValue: { message in
+                logger.debug("sent \(message)")
+            }
+            .store(in: &subscriptions)
+    }
 
     func sendVoiceFile(_ url: URL) {
         chatService.send(voice: url, to: chat.id)
@@ -316,11 +325,11 @@ private extension MessageState {
 private extension Chat {
     var isPrivate: Bool {
         switch type {
-        case .chatTypePrivate:
-            return true
-        case .chatTypeBasicGroup(_),
-             .chatTypeSupergroup(_),
+        case .chatTypePrivate,
              .chatTypeSecret:
+            return true
+        case .chatTypeBasicGroup,
+             .chatTypeSupergroup:
             return false
         }
     }

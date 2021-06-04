@@ -76,19 +76,13 @@ public struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(
-            LoginViewModel(
-                DummyAuthService(state: .confirmationWaiting(link: "https://telegram.org"))
+        DevicePreview {
+            LoginView(
+                LoginViewModel(
+                    DummyAuthService(state: .confirmationWaiting(link: "https://telegram.org"))
+                )
             )
-        )
-        .previewDevice("Apple Watch Series 3 - 38mm")
-
-        LoginView(
-            LoginViewModel(
-                DummyAuthService(state: .confirmationWaiting(link: "https://telegram.org"))
-            )
-        )
-        .previewDevice("Apple Watch Series 6 - 44mm")
+        }
     }
 }
 

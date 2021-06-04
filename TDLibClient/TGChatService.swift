@@ -118,6 +118,15 @@ extension TdApi {
             }
             .eraseToAnyPublisher()
     }
+
+    // Add Open/Close :thinking:
+    func viewMessages(_ chatId: ChatId, messageIds: [MessageId]) -> AnyPublisher<Bool, Swift.Error> {
+        request { [weak self](callback: @escaping (Result<Ok, Swift.Error>) -> Void) in
+            try? self?.viewMessages(chatId: chatId, forceRead: true, messageIds: messageIds, messageThreadId: 0, completion: callback)
+        }
+        .map { _ in true }
+        .eraseToAnyPublisher()
+    }
 }
 
 extension TGChatService: ChatService {
@@ -151,6 +160,13 @@ extension TGChatService: ChatService {
                             (lastMessage, $0)
                         }
                         .eraseToAnyPublisher()
+            }
+            .flatMap { [api] result in
+                // Mark as read
+                api.viewMessages(chatId, messageIds: result.1.map(\.id))
+                    .map { _ in
+                        result
+                    }
             }
             .eraseToAnyPublisher()
     }

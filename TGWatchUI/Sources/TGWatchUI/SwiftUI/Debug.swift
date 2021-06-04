@@ -13,6 +13,7 @@ private extension Color {
             Color.green,
             Color.blue,
             Color.orange,
+            Color.yellow,
             Color.pink,
             Color.purple,
         ]

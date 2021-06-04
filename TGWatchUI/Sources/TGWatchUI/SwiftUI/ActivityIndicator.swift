@@ -20,7 +20,7 @@ struct SpinnerView: View {
         Circle()
             .trim(from: 0.25, to: 0.75)
             .stroke(
-                Color.accentColor,
+                Color.white,
                 style: StrokeStyle(
                     lineWidth: 5,
                     lineCap: .round

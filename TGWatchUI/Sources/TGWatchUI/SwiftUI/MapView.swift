@@ -2,36 +2,47 @@ import MapKit
 import SwiftUI
 
 struct WKMapView: WKInterfaceObjectRepresentable {
-    let location: CLLocationCoordinate2D
+    let location: CLLocationCoordinate2D?
 
     func makeWKInterfaceObject(context _: Context) -> WKInterfaceMap {
         // WKInterfaceMap has corner radius :facepalm:
         let map = WKInterfaceMap()
-        map.setVisibleMapRect(MKMapRect(center: location))
+        if let location = location {
+            map.setVisibleMapRect(MKMapRect(center: location))
+        }
         return map
     }
 
     func updateWKInterfaceObject(_ map: WKInterfaceMap, context _: Context) {
         map.removeAllAnnotations()
-        let uiImage = UIImage(named: "Pin", in: .module, with: nil)
-        map.addAnnotation(location, with: uiImage, centerOffset: CGPoint(x: 0, y: -25))
+        if let location = location {
+            let uiImage = UIImage(named: "Pin", in: .module, with: nil)
+            map.addAnnotation(location, with: uiImage, centerOffset: CGPoint(x: 0, y: -25))
+        }
     }
 }
 
 // Seems like it has leaks in annotations :notsureif:
 @available(watchOS 7.0, *)
 struct MapView: View {
-    let location: CLLocationCoordinate2D
+    let location: CLLocationCoordinate2D?
 
     var body: some View {
-        Map(
-            mapRect: .constant(MKMapRect(center: location)),
-            interactionModes: MapInteractionModes(rawValue: 0),
-            annotationItems: [location]
-        ) { location in
-            MapAnnotation(coordinate: location, anchorPoint: CGPoint(x: 0.5, y: 0.85)) {
-                Image("Pin", bundle: .module)
+        if let location = location {
+            Map(
+                mapRect: .constant(MKMapRect(center: location)),
+                interactionModes: MapInteractionModes(rawValue: 0),
+                annotationItems: [location]
+            ) { location in
+                MapAnnotation(coordinate: location, anchorPoint: CGPoint(x: 0.5, y: 0.85)) {
+                    Image("Pin", bundle: .module)
+                }
             }
+        } else {
+            Map(
+                mapRect: .constant(MKMapRect(center: .stPaul)),
+                interactionModes: MapInteractionModes(rawValue: 0)
+            )
         }
     }
 }

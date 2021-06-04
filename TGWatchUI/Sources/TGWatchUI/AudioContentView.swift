@@ -32,7 +32,10 @@ struct AudioContentView: View {
                     Text(state.title)
                         .lineLimit(1)
                 } else {
+                    // TODO: replace with real waves
                     image("WavesFilled")
+                        .frame(maxWidth: .tgMessageWidth - 70)
+                        .clipped()
                 }
                 HStack {
                     Text(state.duration.durationString)
@@ -51,7 +54,7 @@ struct AudioContentView: View {
         .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 0))
     }
 
-    private func image(_ name: String) -> some View {
+    private func image(_ name: String) -> Image {
         let image = Image(name, bundle: .module)
         return keepImageColors ? image : image.renderingMode(.template)
     }
@@ -76,15 +79,16 @@ struct AudioContentView_Previews: PreviewProvider {
     private static let outgoing = [true, false]
 
     static var previews: some View {
-        ForEach(outgoing) { flag in
-            VStack {
-                AudioContentView(.preview, keepImageColors: !flag)
-                    .tgMessageStyle(isOutgoing: flag)
-                AudioContentView(.previewWithCaption, keepImageColors:!flag)
-                    .tgMessageStyle(isOutgoing: flag)
+        DevicePreview {
+            ForEach(outgoing) { flag in
+                VStack {
+                    AudioContentView(.preview, keepImageColors: !flag)
+                        .tgMessageStyle(isOutgoing: flag)
+                    AudioContentView(.previewWithCaption, keepImageColors:!flag)
+                        .tgMessageStyle(isOutgoing: flag)
+                }
+                .frame(width: .tgMessageWidth)
             }
-            .frame(width: .tgMessageWidth)
-            .accentColor(.blue)
         }
     }
 }
