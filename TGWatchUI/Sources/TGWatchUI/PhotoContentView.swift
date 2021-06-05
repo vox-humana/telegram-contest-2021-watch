@@ -28,6 +28,7 @@ struct PhotoContentView: View {
                 Text(state.caption)
                     .font(.tgTitle)
                     .padding(.tgTextPadding)
+                    .frame(width: width)
             }
         }
     }

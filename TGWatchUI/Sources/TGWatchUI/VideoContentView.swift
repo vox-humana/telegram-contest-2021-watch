@@ -18,7 +18,7 @@ struct VideoContentView: View {
     let width: CGFloat
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .center, spacing: 0) {
             ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .center) {
                     PhotoView(task: imageLoader.task(photo: state.thumbnail))
@@ -44,6 +44,7 @@ struct VideoContentView: View {
                 Text(state.caption)
                     .font(.tgTitle)
                     .padding(.tgTextPadding)
+                    .frame(width: width)
             }
         }
     }
