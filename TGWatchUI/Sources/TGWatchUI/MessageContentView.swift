@@ -37,7 +37,7 @@ public struct MessageContentView: View {
                 .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
         case let .document(content):
             DocumentContentView(content, keepImageColors: !message.isOutgoing)
-                .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
+                .frame(maxWidth: .infinity)
         case let .audio(content):
             AudioContentView(content, keepImageColors: !message.isOutgoing)
                 .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)

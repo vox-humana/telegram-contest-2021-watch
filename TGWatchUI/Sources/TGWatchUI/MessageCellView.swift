@@ -20,13 +20,12 @@ public struct MessageCellView: View {
 
     @ViewBuilder
     private var senderView: some View {
-        // TODO: bottom offset for images
         if showSender {
             Text(message.sender.senderName)
                 .lineLimit(1)
                 .font(.tgSender)
                 .foregroundColor(message.sender.color)
-                .padding(EdgeInsets(top: 4, leading: 9, bottom: 0, trailing: 9))
+                .padding(EdgeInsets(top: 4, leading: 9, bottom: needsSenderBottomPadding ? 4 : 0, trailing: 9))
         }
     }
 
@@ -43,6 +42,35 @@ public struct MessageCellView: View {
 
     private var showSender: Bool {
         !message.isOutgoing && !message.privateChat
+    }
+
+    private var needsSenderBottomPadding: Bool {
+        guard message.reply == nil else {
+            return true
+        }
+
+        switch message.content {
+        case let .text(text):
+            return EmojiContentView.canRender(text)
+        case .photo:
+            return true
+        case .video:
+            return true
+        case .videoNote:
+            return true
+        case .sticker:
+            return true
+        case .poll:
+            return true
+        case .audio:
+            return false
+        case .contact:
+            return false
+        case .document:
+            return false
+        case .location:
+            return true
+        }
     }
 }
 

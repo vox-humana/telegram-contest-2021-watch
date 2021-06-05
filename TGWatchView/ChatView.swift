@@ -256,7 +256,12 @@ final class ChatViewModel: ObservableObject {
 
                 self.hasMore = self.lastMessageId != tuple.0
                 self.lastMessageId = tuple.0
+
+                let newIds = tuple.1.map(\.id)
+                let oldIds = self.messages.map(\.id)
+                logger.debug("appending \(newIds) to \(oldIds)")
                 self.messages += tuple.1.map { $0.changingPrivate(self.chat.isPrivate) }
+
                 self.isLoading = false
                 if self.messages.count < self.minimalHistorySize, self.hasMore {
                     self.loadMoreHistory()

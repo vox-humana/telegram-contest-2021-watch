@@ -18,7 +18,7 @@ public struct MessageFullView: View {
                     .font(.tgTitle)
                     .lineLimit(1)
             }
-            .frame(height: 44)
+            .frame(height: 34)
 
             if let reply = state.reply {
                 ReplyView(state: reply, accentColor: true, showSender: false)

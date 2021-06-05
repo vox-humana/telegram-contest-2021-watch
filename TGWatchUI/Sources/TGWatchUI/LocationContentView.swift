@@ -22,7 +22,13 @@ struct LocationContentView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            map.aspectRatio(4 / 3, contentMode: .fit)
+            let map = map.aspectRatio(4 / 3, contentMode: .fit)
+
+            if needsClipping {
+                map.tgMessageClipping()
+            } else {
+                map
+            }
 
             if state.isLive {
                 Text("Live Location")
@@ -38,6 +44,10 @@ struct LocationContentView: View {
         } else {
             WKMapView(location: state.location)
         }
+    }
+
+    private var needsClipping: Bool {
+        fullView || !state.isLive
     }
 }
 

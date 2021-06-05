@@ -73,10 +73,7 @@ struct TGMessage: ViewModifier {
         let message = addBackground(content)
 
         if !ignoreClipping {
-            message
-                .clipShape(
-                    RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
-                )
+            message.tgMessageClipping()
         } else {
             message
         }
@@ -104,6 +101,12 @@ public extension View {
             )
         )
     }
+
+    func tgMessageClipping() -> some View {
+        clipShape(
+            RoundedRectangle(cornerRadius: .tgMessageCornerRadius, style: .circular)
+        )
+    }
 }
 
 public extension View {
@@ -123,6 +126,10 @@ extension MessageContentState {
         switch self {
         case let .text(text) where EmojiContentView.canRender(text):
             return true
+        case let .photo(photo):
+            return photo.caption.isEmpty
+        case let .video(video):
+            return video.caption.isEmpty
         case .videoNote:
             return true
         case .sticker:
@@ -130,6 +137,8 @@ extension MessageContentState {
         case .poll:
             // Poll has its own style inside
             return true
+        case let .location(location):
+            return !location.isLive
         default:
             return false
         }

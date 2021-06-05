@@ -17,12 +17,18 @@ struct PhotoContentView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            PhotoView(task: imageLoader.task(photo: state.photo))
+            let photo = PhotoView(task: imageLoader.task(photo: state.photo))
                 .frame(
                     width: width,
                     height: width / state.photo.aspectRatio,
                     alignment: .center
                 )
+
+            if needsClipping {
+                photo.tgMessageClipping()
+            } else {
+                photo
+            }
 
             if !state.caption.isEmpty {
                 Text(state.caption)
@@ -31,6 +37,10 @@ struct PhotoContentView: View {
                     .frame(width: width)
             }
         }
+    }
+
+    private var needsClipping: Bool {
+        width != .tgMessageWidth || state.caption.isEmpty
     }
 }
 

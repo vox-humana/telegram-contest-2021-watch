@@ -19,7 +19,7 @@ struct VideoContentView: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            ZStack(alignment: .bottomTrailing) {
+            let thumbnail = ZStack(alignment: .bottomTrailing) {
                 ZStack(alignment: .center) {
                     PhotoView(task: imageLoader.task(photo: state.thumbnail))
                         .frame(
@@ -40,13 +40,28 @@ struct VideoContentView: View {
                     )
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 4, trailing: 4))
             }
-            if !state.caption.isEmpty {
+
+            if needsClipping {
+                thumbnail.tgMessageClipping()
+            } else {
+                thumbnail
+            }
+
+            if showCaption {
                 Text(state.caption)
                     .font(.tgTitle)
                     .padding(.tgTextPadding)
                     .frame(width: width)
             }
         }
+    }
+
+    private var showCaption: Bool {
+        !state.caption.isEmpty
+    }
+
+    private var needsClipping: Bool {
+        width != .tgMessageWidth || !showCaption
     }
 }
 
