@@ -1,8 +1,10 @@
+import UserNotifications
 import WatchKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        print(#function)
+        UNUserNotificationCenter.current().delegate = self
     }
 
     func applicationDidBecomeActive() {
@@ -12,6 +14,23 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationWillResignActive() {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
+    }
+
+    func didRegisterForRemoteNotifications(withDeviceToken deviceToken: Data) {
+        service.authService.registerForPush(token: deviceToken)
+    }
+
+    func didFailToRegisterForRemoteNotificationsWithError(_ error: Error) {
+        logger.assert(error.localizedDescription)
+    }
+
+    func didFailToRegisterForRemoteNotifications(withError error: Error) {
+        logger.assert(error.localizedDescription)
+    }
+
+    func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (WKBackgroundFetchResult) -> Void) {
+        logger.debug(userInfo)
+        completionHandler(.newData)
     }
 
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {

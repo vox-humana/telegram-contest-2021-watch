@@ -32,6 +32,12 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To send location in chat</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>WKExtensionDelegateClassName</key>
+	<string>$(PRODUCT_MODULE_NAME).ExtensionDelegate</string>
 	<key>WKWatchOnly</key>
 	<true/>
 </dict>

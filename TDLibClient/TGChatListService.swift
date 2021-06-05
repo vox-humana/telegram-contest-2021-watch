@@ -65,8 +65,8 @@ final class TGChatListService {
             if var chat = chats[state.chatId] {
                 chat.unreadMentionCount = state.unreadMentionCount
                 chats[state.chatId] = chat
+                notifyChats()
             }
-            notifyChats()
 
         case let .updateMessageMentionRead(state):
             chats[state.chatId]?.unreadMentionCount = state.unreadMentionCount

@@ -1,6 +1,8 @@
 import Combine
 import Foundation
 import TGWatchUI // TODO: extract model
+import UserNotifications
+import WatchKit
 
 final class TGAuthService {
     private let authStateSubject = CurrentValueSubject<AuthState, Never>(.initial)
@@ -68,6 +70,7 @@ final class TGAuthService {
         case .authorizationStateReady:
             logger.debug("Authorized!")
             sendAuthState(.authorized)
+            requestPushToken()
 
         case .authorizationStateLoggingOut:
             logger.debug("Logging out...")
@@ -90,6 +93,27 @@ final class TGAuthService {
     private func sendAuthState(_ state: AuthState) {
         DispatchQueue.main.async {
             self.authStateSubject.send(state)
+        }
+    }
+
+    private func requestPushToken() {
+        DispatchQueue.main.async {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, error in
+                if let error = error {
+                    logger.assert(error.localizedDescription)
+                } else {
+                    WKExtension.shared().registerForRemoteNotifications()
+                }
+            }
+        }
+    }
+
+    func registerForPush(token: Data) {
+        let hexString = token.map { data in String(format: "%02.2hhx", data) }.joined()
+        logger.debug("Device token raw: \(hexString)")
+        // https://core.telegram.org/tdlib/notification-api/
+        try? api.registerDevice(deviceToken: .deviceTokenApplePush(.init(deviceToken: hexString, isAppSandbox: true)), otherUserIds: []) { result in
+            logger.debug("Device registration result: \(result)")
         }
     }
 }
