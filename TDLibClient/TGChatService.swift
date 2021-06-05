@@ -196,7 +196,12 @@ extension TGChatService: ChatService {
                 }
 
                 return
-                    Publishers.MergeMany(publishers).collect()
+                    Publishers.MergeMany(publishers)
+                        .collect()
+                        // `collect` doesn't guarantees the order
+                        .sort {
+                            $0.id > $1.id
+                        }
                         .map {
                             (lastMessage, $0)
                         }
@@ -266,5 +271,17 @@ private extension URL {
     var audioDuration: TimeInterval {
         let avAsset = AVAsset(url: self)
         return CMTimeGetSeconds(avAsset.duration)
+    }
+}
+
+extension Publisher where Output: Sequence {
+    typealias Sorter = (Output.Element, Output.Element) -> Bool
+
+    func sort(
+        by sorter: @escaping Sorter
+    ) -> Publishers.Map<Self, [Output.Element]> {
+        map { sequence in
+            sequence.sorted(by: sorter)
+        }
     }
 }
