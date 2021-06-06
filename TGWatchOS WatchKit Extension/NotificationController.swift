@@ -1,15 +1,19 @@
 import SwiftUI
+import TGWatchUI
 import UserNotifications
 import WatchKit
 
 let REPLY_ACTION = "REPLY"
 
 final class NotificationController: WKUserNotificationHostingController<NotificationView> {
-    // private var bodyText: String = ""
-    private var content: UNNotificationContent?
+    private var state: MessageState?
+
+    override init() {
+        UNUserNotificationCenter.debugNotifications("NotificationController")
+    }
 
     override var body: NotificationView {
-        NotificationView(content: content!)
+        NotificationView(message: state!)
     }
 
     override func willActivate() {
@@ -22,8 +26,9 @@ final class NotificationController: WKUserNotificationHostingController<Notifica
         super.didDeactivate()
     }
 
-    override func suggestionsForResponseToAction(withIdentifier identifier: String, for _: UNNotification, inputLanguage _: String) -> [String] {
-        assert(identifier == REPLY_ACTION)
+    override func suggestionsForResponseToAction(withIdentifier _: String, for _: UNNotification, inputLanguage _: String) -> [String] {
+        UNUserNotificationCenter.debugNotifications(#function)
+        // assert(identifier == REPLY_ACTION)
         return ["Hello!", "What's up?", "On my way.", "OK"]
     }
 
@@ -31,15 +36,22 @@ final class NotificationController: WKUserNotificationHostingController<Notifica
         // This method is called when a notification needs to be presented.
         // Implement it if you use a dynamic notification interface.
         // Populate your dynamic notification interface as quickly as possible.
-        content = notification.request.content
+        UNUserNotificationCenter.debugNotifications(#function)
 
         notificationActions = [
             UNTextInputNotificationAction(identifier: REPLY_ACTION, title: "Reply", options: []),
         ]
 
-        logger.debug(notification.request.content)
-        try? service.api.processPushNotification(payload: notification.request.content.body) {
-            logger.debug($0)
+        guard let messageData = notification.request.content.userInfo["Message"] as? Data else {
+            UNUserNotificationCenter.debugNotifications("Unknown format of userinfo")
+            return
         }
+
+        guard let message = try? JSONDecoder().decode(Message.self, from: messageData) else {
+            UNUserNotificationCenter.debugNotifications("Can't decode message from data")
+            return
+        }
+        // TODO: request user
+        state = MessageState(message, sender: .user(.profile), reply: nil)
     }
 }

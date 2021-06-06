@@ -47,7 +47,7 @@ struct ChatView: View {
                                     .environment(\.imageLoader, vm)
                                     .environment(\.messageSender, vm)
                             ) {
-                                HStack {
+                                HStack(spacing: 0) {
                                     if message.isOutgoing {
                                         Spacer()
                                     }
@@ -130,6 +130,7 @@ extension MessageState: Identifiable {}
                     )
                 )
             }
+            .previewDevice("Apple Watch Series 3 - 38mm")
             .accentColor(.blue)
         }
     }

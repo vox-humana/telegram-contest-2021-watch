@@ -37,7 +37,7 @@ struct SettingsView: View {
                 SettingsViewModel(
                     profile: CurrentValueSubject(.profile).eraseToAnyPublisher()
                 ),
-                archiveListService: DummyService()
+                archiveListService: DummyChatListService()
             )
         }
     }

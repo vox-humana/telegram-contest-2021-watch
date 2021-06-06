@@ -39,6 +39,8 @@ struct AudioContentView: View {
                 }
                 HStack {
                     Text(state.duration.durationString)
+                        .lineLimit(1)
+
                     if state.unplayed {
                         if keepImageColors {
                             UnreadIndicator().foregroundColor(.compatibleAccentColor)

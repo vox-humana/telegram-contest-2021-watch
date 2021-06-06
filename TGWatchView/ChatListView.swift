@@ -115,3 +115,12 @@ struct NavigationLazyView<Content: View>: View {
         build()
     }
 }
+
+#if DEBUG
+    struct ChatListView_Previews: PreviewProvider {
+        static var previews: some View {
+            ChatListView(.init(chatListService: DummyChatListService()))
+                .previewDevice("Apple Watch Series 3 - 38mm")
+        }
+    }
+#endif

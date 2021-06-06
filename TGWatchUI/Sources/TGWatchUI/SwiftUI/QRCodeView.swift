@@ -214,7 +214,7 @@ extension CGSize {
 
 struct QRCodeView_Previews: PreviewProvider {
     private static let qrCodeSize = WKInterfaceDevice.current().screenBounds.width
-    
+
     static var previews: some View {
         DevicePreview {
             Group {
@@ -223,7 +223,7 @@ struct QRCodeView_Previews: PreviewProvider {
                     .background(Color.white)
                     .cornerRadius(10)
                     .frame(width: qrCodeSize, height: qrCodeSize)
-                
+
                 QRCodeView(
                     "https://telegram.org/login?some_very_long_login_token===",
                     image: UIImage(named: "qr-logo", in: .module, with: nil)

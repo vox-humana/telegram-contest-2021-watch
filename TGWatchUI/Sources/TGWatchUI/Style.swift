@@ -39,6 +39,7 @@ public extension Font {
 
 public extension Color {
     static let tgGrey = Color(hex: 0x8E8E93) // Color.secondary
+    static let tgSecondary = Color(hex: 0xAEB4BF) // Color.secondary
     static let tgBlack = Color.black
     static let tgGreyPlatter = Color(hex: 0x222223)
     static let tgGreen = Color(hex: 0x00B15A)

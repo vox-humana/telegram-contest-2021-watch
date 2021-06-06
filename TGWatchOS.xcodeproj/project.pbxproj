@@ -766,6 +766,7 @@
 		8EE0BA35265D31B000A9FC39 /* TGChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */; };
 		8EE3726E265FD2F0007D2A47 /* TGWatchUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE3726D265FD2F0007D2A47 /* TGWatchUI */; };
 		8EFC0E4A266CADE30006437C /* TGFileLoadingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC0E49266CADE30006437C /* TGFileLoadingTask.swift */; };
+		8EFC0E4C266CD8EB0006437C /* TGNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC0E4B266CD8EA0006437C /* TGNotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1585,6 +1586,7 @@
 		8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGChatListService.swift; sourceTree = "<group>"; };
 		8EE3726C265FD2E8007D2A47 /* TGWatchUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TGWatchUI; sourceTree = "<group>"; };
 		8EFC0E49266CADE30006437C /* TGFileLoadingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGFileLoadingTask.swift; sourceTree = "<group>"; };
+		8EFC0E4B266CD8EA0006437C /* TGNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGNotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2385,6 +2387,7 @@
 				8ED51EE1266115EF008E519A /* TGChatService.swift */,
 				8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */,
 				8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */,
+				8EFC0E4B266CD8EA0006437C /* TGNotificationService.swift */,
 			);
 			path = TDLibClient;
 			sourceTree = "<group>";
@@ -2751,6 +2754,7 @@
 				8E119CA9265CF9A60042A874 /* AnswerInlineQuery.swift in Sources */,
 				8E119CC0265CF9A60042A874 /* SetChatDiscussionGroup.swift in Sources */,
 				8E119CA5265CF9A60042A874 /* InlineKeyboardButtonType.swift in Sources */,
+				8EFC0E4C266CD8EB0006437C /* TGNotificationService.swift in Sources */,
 				8E119C44265CF9A60042A874 /* LoginUrlInfo.swift in Sources */,
 				8E119BB7265CF9A60042A874 /* CreateNewSecretChat.swift in Sources */,
 				8E119C79265CF9A60042A874 /* GetPaymentForm.swift in Sources */,

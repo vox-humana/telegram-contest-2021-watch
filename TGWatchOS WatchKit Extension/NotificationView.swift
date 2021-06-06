@@ -1,15 +1,12 @@
 import SwiftUI
+import TGWatchUI
 import UserNotifications
 
 struct NotificationView: View {
-    let content: UNNotificationContent
+    let message: MessageState
 
     var body: some View {
-        VStack {
-            Text(content.body)
-            Text("---")
-            Text(content.userInfo.description)
-        }
+        MessageContentView(message)
     }
 }
 

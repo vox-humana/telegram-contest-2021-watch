@@ -9,6 +9,7 @@ final class TGService {
     let mainChatListService: TGChatListService
     let archiveChatListService: TGChatListService
     let chatService: TGChatService
+    let notificationService: TGNotificationService
 
     init() {
         api = TdApi(client: client)
@@ -16,6 +17,7 @@ final class TGService {
         mainChatListService = TGChatListService(api: api, list: .chatListMain)
         archiveChatListService = TGChatListService(api: api, list: .chatListArchive)
         chatService = TGChatService(api: api)
+        notificationService = TGNotificationService(api: api)
     }
 
     func start() {
@@ -60,5 +62,6 @@ final class TGService {
         archiveChatListService.process(update: update)
         authService.process(update: update)
         chatService.process(update: update)
+        notificationService.process(update: update)
     }
 }

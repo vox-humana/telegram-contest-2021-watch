@@ -17,14 +17,16 @@ public struct ChatCellView: View {
                     downloadPhoto(chat)
                 }
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(chat.title)
                     .lineLimit(1)
                     .font(.tgChatTitle)
-                    .padding(EdgeInsets(top: 3, leading: 0, bottom: 0, trailing: 0))
+                    .padding(.top, 3)
                 Text(chat.lastMessageText)
                     .lineLimit(1)
-                    .font(.body)
+                    .font(.tgSubtitle)
+                    .foregroundColor(.tgSecondary)
+                    .padding(.bottom, 2)
 
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
                     Text(
@@ -34,8 +36,8 @@ public struct ChatCellView: View {
                             ?? ""
                     )
                     .lineLimit(1)
-                    .font(.caption)
-                    .foregroundColor(.tgGrey)
+                    .font(.tgSubtitle)
+                    .foregroundColor(.tgSecondary)
 
                     // TODO: or onplayed?
                     if chat.unreadMentionCount > 0 {

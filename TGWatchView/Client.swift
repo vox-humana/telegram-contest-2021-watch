@@ -9,7 +9,7 @@ protocol ChatListService {
 }
 
 struct ChatListServiceEnvironment: EnvironmentKey {
-    static var defaultValue: ChatListService = DummyService()
+    static var defaultValue: ChatListService = DummyChatListService()
 }
 
 extension EnvironmentValues {
@@ -19,15 +19,9 @@ extension EnvironmentValues {
     }
 }
 
-struct DummyService: ChatListService {
-    private let chatHistory: [Message]
-
+struct DummyChatListService: ChatListService {
     var chatListSignal: AnyPublisher<[Chat], Never> {
         Just([Chat].preview()).eraseToAnyPublisher()
-    }
-
-    init(chatHistory: [Message] = []) {
-        self.chatHistory = chatHistory
     }
 
     func requestChatList() {}

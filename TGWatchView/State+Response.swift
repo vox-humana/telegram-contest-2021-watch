@@ -220,9 +220,18 @@ extension ChatState {
             photo: response.photo.map(ThumbnailState.init(chatPhoto:)),
             unreadCount: response.unreadCount,
             unreadMentionCount: response.unreadMentionCount,
-            lastMessageText: response.lastMessage?.lastMessageText ?? "",
+            lastMessageText: response.lastMessage?.lastMessageWithSignature ?? "",
             lastMessageDate: response.lastMessage?.date
         )
+    }
+}
+
+extension Message {
+    var lastMessageWithSignature: String {
+        if !authorSignature.isEmpty {
+            return "\(authorSignature.prefix(1)): \(lastMessageText)"
+        }
+        return lastMessageText
     }
 }
 

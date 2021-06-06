@@ -1,9 +1,8 @@
 import UserNotifications
 import WatchKit
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+final class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidFinishLaunching() {
-        print(#function)
         UNUserNotificationCenter.current().delegate = self
     }
 
@@ -24,13 +23,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         logger.assert(error.localizedDescription)
     }
 
-    func didFailToRegisterForRemoteNotifications(withError error: Error) {
-        logger.assert(error.localizedDescription)
-    }
-
     func didReceiveRemoteNotification(_ userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (WKBackgroundFetchResult) -> Void) {
         logger.debug(userInfo)
-        completionHandler(.newData)
+
+        service.notificationService.processRemoteNotification(userInfo, completionHandler: completionHandler)
     }
 
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {

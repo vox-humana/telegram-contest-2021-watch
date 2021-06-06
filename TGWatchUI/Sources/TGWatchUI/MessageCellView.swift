@@ -9,12 +9,18 @@ public struct MessageCellView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        let content = VStack(alignment: .leading, spacing: 0) {
             senderView
 
             replyView
 
             MessageContentView(message, fullView: false)
+        }
+        if #available(watchOS 7.0, *) {
+            content
+        } else {
+            content
+                .frame(minWidth: .tgMessageWidth)
         }
     }
 

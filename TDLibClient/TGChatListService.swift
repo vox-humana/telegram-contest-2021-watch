@@ -29,12 +29,16 @@ final class TGChatListService {
             notifyChats()
 
         case let .updateChatTitle(state):
-            chats[state.chatId]?.title = state.title
-            notifyChats()
+            if chats[state.chatId] != nil {
+                chats[state.chatId]?.title = state.title
+                notifyChats()
+            }
 
         case let .updateChatPhoto(state):
-            chats[state.chatId]?.photo = state.photo
-            notifyChats()
+            if chats[state.chatId] != nil {
+                chats[state.chatId]?.photo = state.photo
+                notifyChats()
+            }
 
         case let .updateChatLastMessage(state):
             if var chat = chats[state.chatId] {
@@ -70,8 +74,10 @@ final class TGChatListService {
             }
 
         case let .updateMessageMentionRead(state):
-            chats[state.chatId]?.unreadMentionCount = state.unreadMentionCount
-            notifyChats()
+            if chats[state.chatId] != nil {
+                chats[state.chatId]?.unreadMentionCount = state.unreadMentionCount
+                notifyChats()
+            }
 
         case .updateChatReplyMarkup:
             break
@@ -135,7 +141,7 @@ final class TGChatListService {
         guard !chatList.isEmpty else {
             return
         }
-        logger.debug("Sending \(chatList.count) of \(chats.count)")
+        // logger.debug("Sending \(chatList.count) of \(chats.count)")
         chatListSubject.send(chatList)
     }
 }
