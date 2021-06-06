@@ -100,7 +100,7 @@ extension MessageSenderState {
         case let .user(user):
             return getUserColor(user.id)
         case let .chat(chat):
-            return getUserColor(UserId(chat.id)) // TODO: check
+            return getUserColor(UserId(truncatingIfNeeded: chat.id)) // TODO: check
         }
     }
 }
