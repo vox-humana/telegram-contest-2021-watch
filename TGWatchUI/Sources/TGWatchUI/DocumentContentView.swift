@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class DocumentState {
+public struct DocumentState: Hashable {
     public init(fileName: String, size: Int64) {
         self.fileName = fileName
         self.size = size

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct StickerState {
+public struct StickerState: Hashable {
     public init(
         emoji: String,
         isAnimated: Bool,

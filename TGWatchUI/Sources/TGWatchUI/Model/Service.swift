@@ -6,7 +6,7 @@ public typealias ChatId = Int64
 public typealias MessageId = Int64
 public typealias FileId = Int
 
-public enum AuthState {
+public enum AuthState: Equatable {
     case initial
     case confirmationWaiting(link: String)
     case passwordWaiting

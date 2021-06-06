@@ -2,7 +2,7 @@ import MapKit
 import TGWatchUI
 
 extension AudioState {
-    convenience init(_ audio: MessageAudio) {
+    init(_ audio: MessageAudio) {
         self.init(
             title: audio.audio.title,
             caption: audio.caption.text,
@@ -11,7 +11,7 @@ extension AudioState {
         )
     }
 
-    convenience init(_ voice: MessageVoiceNote) {
+    init(_ voice: MessageVoiceNote) {
         // TODO: voice & waveform
         self.init(
             title: voice.caption.text,
@@ -35,7 +35,7 @@ extension LocationState {
 }
 
 extension VideoState {
-    convenience init(_ message: MessageVideo) {
+    init(_ message: MessageVideo) {
         self.init(
             caption: message.caption.text,
             duration: message.video.duration,
@@ -174,7 +174,7 @@ extension MiniThumbnailState {
      minithumbnail: MiniThumbnailState(message.videoNote.minithumbnail)
  */
 extension VideoNoteState {
-    convenience init(_ message: MessageVideoNote) {
+    init(_ message: MessageVideoNote) {
         self.init(
             duration: message.videoNote.duration,
             thumbnail:
@@ -188,7 +188,7 @@ extension VideoNoteState {
 }
 
 extension ContactState {
-    convenience init(_ message: MessageContact) {
+    init(_ message: MessageContact) {
         self.init(
             name: "\(message.contact.firstName) \(message.contact.lastName)",
             phoneNumber: message.contact.phoneNumber
@@ -197,7 +197,7 @@ extension ContactState {
 }
 
 extension DocumentState {
-    convenience init(_ message: MessageDocument) {
+    init(_ message: MessageDocument) {
         self.init(
             fileName: message.caption.text.isEmpty ? message.document.fileName : message.caption.text,
             size: Int64(message.document.document.expectedSize)
@@ -222,7 +222,10 @@ extension ChatState {
             id: response.id,
             title: response.title,
             photo: response.photo.map(ThumbnailState.init(chatPhoto:)),
-            lastMessageText: response.lastMessage?.lastMessageText ?? ""
+            unreadCount: response.unreadCount,
+            unreadMentionCount: response.unreadMentionCount,
+            lastMessageText: response.lastMessage?.lastMessageText ?? "",
+            lastMessageDate: response.lastMessage?.date
         )
     }
 }
@@ -420,6 +423,86 @@ extension Chat {
             return group.isChannel
         case .chatTypeSecret:
             return false
+        }
+    }
+}
+
+extension Message {
+    var lastMessageText: String {
+        switch content {
+        case let .messageText(text):
+            return text.text.text
+        case .messageAnimation:
+            return "GIF"
+        case .messageAudio:
+            return "Audio"
+        case .messageDocument:
+            return "Document"
+        case .messagePhoto:
+            return "Photo"
+        case .messageExpiredPhoto:
+            return "Expired photo"
+        case let .messageSticker(sticker):
+            return sticker.sticker.emoji + "Sticker"
+        case .messageVideo:
+            return "Video"
+        case .messageExpiredVideo:
+            return "Expired video"
+        case .messageVideoNote:
+            return "Video message"
+        case .messageVoiceNote:
+            return "Voice message"
+        case .messageLocation:
+            return "Location"
+        case .messageVenue:
+            return "Venue"
+        case .messageContact:
+            return "Contact"
+        case .messageDice:
+            return "Dice"
+        case .messageGame:
+            return "Game"
+        case .messagePoll:
+            return "Poll"
+        case .messageInvoice:
+            return "Invoice"
+        case .messageCall:
+            return "Call"
+
+        case .messageVoiceChatScheduled:
+            return "Voice chat scheduled"
+        case .messageVoiceChatStarted:
+            return "Voice chat started"
+        case .messageVoiceChatEnded:
+            return "Voice chat ended"
+        case .messageBasicGroupChatCreate:
+            return "Chat created"
+        case .messageSupergroupChatCreate:
+            return "Chat created"
+        case
+            .messageInviteVoiceChatParticipants(_),
+            .messageChatChangeTitle(_),
+            .messageChatChangePhoto(_),
+            .messageChatDeletePhoto,
+            .messageChatAddMembers(_),
+            .messageChatJoinByLink,
+            .messageChatDeleteMember(_),
+            .messageChatUpgradeTo(_),
+            .messageChatUpgradeFrom(_),
+            .messagePinMessage(_),
+            .messageScreenshotTaken,
+            .messageChatSetTtl(_),
+            .messageCustomServiceAction(_),
+            .messageGameScore(_),
+            .messagePaymentSuccessful(_),
+            .messagePaymentSuccessfulBot(_),
+            .messageContactRegistered,
+            .messageWebsiteConnected(_),
+            .messagePassportDataSent(_),
+            .messagePassportDataReceived(_),
+            .messageProximityAlertTriggered(_),
+            .messageUnsupported:
+            return ""
         }
     }
 }

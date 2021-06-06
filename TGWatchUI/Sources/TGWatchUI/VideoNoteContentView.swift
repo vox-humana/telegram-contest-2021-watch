@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class VideoNoteState {
+public struct VideoNoteState: Hashable {
     public init(duration: Int, thumbnail: ThumbnailState, unplayed: Bool) {
         self.duration = duration
         self.thumbnail = thumbnail
@@ -38,7 +38,7 @@ struct VideoNoteContentView: View {
 
                     if state.unplayed {
                         UnreadIndicator()
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(.compatibleAccentColor)
                     }
                 }
                 .alignmentGuide(.trailing, computeValue: { _ in 25 })

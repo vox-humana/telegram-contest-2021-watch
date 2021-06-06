@@ -26,7 +26,7 @@ public struct UnreadBadge: View {
             .padding(.vertical, 1)
             .background(
                 Capsule(style: .circular)
-                    .foregroundColor(muted ? .tgGrey : .accentColor)
+                    .foregroundColor(muted ? .tgGrey : .compatibleAccentColor)
             )
     }
 }

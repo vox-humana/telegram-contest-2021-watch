@@ -157,7 +157,7 @@ extension ChatList: Equatable {
 
 extension TGChatListService: ChatListService {
     var chatListSignal: AnyPublisher<[Chat], Never> {
-        chatListSubject            
+        chatListSubject
             .throttle(for: .seconds(0.2), scheduler: subscriptionQueue, latest: true)
             .eraseToAnyPublisher()
     }
@@ -197,16 +197,16 @@ extension TGChatListService: ChatListService {
         }
     }
 
-    func downloadPhoto(for chat: Chat) {
-        guard let file = chat.photo?.small, !file.local.isDownloadingCompleted else {
+    func downloadPhoto(for chat: ChatState) {
+        guard let file = chat.photo?.thumbnail?.file, !file.downloaded else {
             return
         }
 
-        logger.debug("Start download \(file.id)")
-        chatIcons[file.id] = chat.id
+        logger.debug("Start download \(file.fileId)")
+        chatIcons[file.fileId] = chat.id
 
         let chatAvatarsDownloadPriority = 1 // [1..32]
-        try? api.downloadFile(fileId: file.id, limit: 0, offset: 0, priority: chatAvatarsDownloadPriority, synchronous: false) {
+        try? api.downloadFile(fileId: file.fileId, limit: 0, offset: 0, priority: chatAvatarsDownloadPriority, synchronous: false) {
             logger.debug($0)
         }
     }

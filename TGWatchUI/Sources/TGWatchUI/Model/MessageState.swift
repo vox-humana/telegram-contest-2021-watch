@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MessageContentState {
+public enum MessageContentState: Hashable {
     case text(String)
     case location(LocationState)
     case videoNote(VideoNoteState)
@@ -13,7 +13,7 @@ public enum MessageContentState {
     case poll(PollState)
 }
 
-public struct UserState {
+public struct UserState: Hashable {
     public init(id: UserId, firstName: String, lastName: String, photo: ThumbnailState?) {
         self.id = id
         self.firstName = firstName
@@ -33,26 +33,32 @@ extension UserState {
     }
 }
 
-public enum MessageSenderState {
+public enum MessageSenderState: Hashable {
     case user(UserState)
     case chat(ChatState)
 }
 
-public struct ChatState {
-    public init(id: ChatId, title: String, photo: ThumbnailState?, lastMessageText: String) {
+public struct ChatState: Hashable {
+    public init(id: ChatId, title: String, photo: ThumbnailState?, unreadCount: Int, unreadMentionCount: Int, lastMessageText: String, lastMessageDate: Int?) {
         self.id = id
         self.title = title
         self.photo = photo
+        self.unreadCount = unreadCount
+        self.unreadMentionCount = unreadMentionCount
         self.lastMessageText = lastMessageText
+        self.lastMessageDate = lastMessageDate
     }
 
-    let id: ChatId
-    let title: String
-    let photo: ThumbnailState?
-    let lastMessageText: String
+    public let id: ChatId
+    public let title: String
+    public let photo: ThumbnailState?
+    public let unreadCount: Int
+    public let unreadMentionCount: Int
+    public let lastMessageText: String
+    public let lastMessageDate: Int?
 }
 
-public struct MessageReplyState {
+public struct MessageReplyState: Hashable {
     public init(sender: MessageSenderState, content: String) {
         self.sender = sender
         self.content = content
@@ -62,7 +68,7 @@ public struct MessageReplyState {
     let content: String
 }
 
-public struct MessageState {
+public struct MessageState: Hashable {
     public init(id: MessageId, chatId: ChatId, content: MessageContentState, sender: MessageSenderState, date: Date, isOutgoing: Bool, privateChat: Bool, reply: MessageReplyState?) {
         self.id = id
         self.chatId = chatId

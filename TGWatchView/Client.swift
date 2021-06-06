@@ -3,7 +3,7 @@ import SwiftUI
 import TGWatchUI // TODO: extract model
 
 protocol ChatListService {
-    func downloadPhoto(for chat: Chat)
+    func downloadPhoto(for chat: ChatState)
     func requestChatList()
     var chatListSignal: AnyPublisher<[Chat], Never> { get }
 }
@@ -32,5 +32,5 @@ struct DummyService: ChatListService {
 
     func requestChatList() {}
 
-    func downloadPhoto(for _: Chat) {}
+    func downloadPhoto(for _: ChatState) {}
 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct PollState {
+public struct PollState: Hashable {
     public init(question: String, anonymous: Bool, closed: Bool, type: PollState.PollType, options: [PollState.Option]) {
         self.question = question
         self.anonymous = anonymous
@@ -9,7 +9,7 @@ public struct PollState {
         self.options = options
     }
 
-    public struct Option {
+    public struct Option: Hashable {
         public init(text: String, chosen: Bool, percentage: Int) {
             self.text = text
             self.chosen = chosen
@@ -21,7 +21,7 @@ public struct PollState {
         let percentage: Int
     }
 
-    public enum PollType {
+    public enum PollType: Hashable {
         case poll(multipleAnswers: Bool)
         case quiz(correct: Int)
     }

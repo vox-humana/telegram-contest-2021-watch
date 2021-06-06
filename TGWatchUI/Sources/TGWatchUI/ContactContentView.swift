@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class ContactState {
+public struct ContactState: Hashable {
     public init(name: String, phoneNumber: String) {
         self.name = name
         self.phoneNumber = phoneNumber
@@ -22,7 +22,7 @@ public struct ContactContentView: View {
     public var body: some View {
         HStack(alignment: .center, spacing: 8) {
             if keepImageColors {
-                icon.foregroundColor(.accentColor)
+                icon.foregroundColor(.compatibleAccentColor)
             } else {
                 icon
             }

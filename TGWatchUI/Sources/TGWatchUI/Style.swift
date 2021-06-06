@@ -3,8 +3,7 @@ import SwiftUI
 // All screen sizes https://developer.apple.com/design/human-interface-guidelines/watchos/visual/layout/
 
 public struct AccentStyle: ButtonStyle {
-    private let color = Color.accentColor // doesn't work on watchOS 6
-    // private let color = Color("AccentColor") // doesn't work on watchOS 6
+    private let color = Color.compatibleAccentColor
 
     public init() {}
 
@@ -44,6 +43,15 @@ public extension Color {
     static let tgGreyPlatter = Color(hex: 0x222223)
     static let tgGreen = Color(hex: 0x00B15A)
     static let tgRed = Color(hex: 0xFE3C30)
+    static let tgColor = Color(hex: 0x2094FA)
+    static var compatibleAccentColor: Color {
+        if #available(watchOS 7.0, *) {
+            return accentColor
+        } else {
+            // Neither Color("AccentColor") nor Color.accentColor work on watchOS 6
+            return tgColor
+        }
+    }
 }
 
 extension CGFloat {
@@ -52,11 +60,11 @@ extension CGFloat {
 
     static var tgMessageWidth: CGFloat = {
         // Keeping the same ratio for all screens
-        screenWidth / 184 * 160
+        (screenWidth / 184 * 160).rounded()
     }()
 
     static var tgStickerWidth: CGFloat = {
-        screenWidth / 184 * 140
+        (screenWidth / 184 * 140).rounded()
     }()
 
     static var screenWidth: CGFloat = {
@@ -84,7 +92,7 @@ struct TGMessage: ViewModifier {
         if !hideBackground {
             content
                 .foregroundColor(isOutgoing ? Color.white : Color.tgBlack)
-                .background(isOutgoing ? Color.accentColor : Color.white)
+                .background(isOutgoing ? Color.compatibleAccentColor : Color.white)
         } else {
             content
         }

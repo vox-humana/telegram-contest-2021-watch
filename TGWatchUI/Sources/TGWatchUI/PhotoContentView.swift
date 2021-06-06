@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct PhotoState {
+public struct PhotoState: Hashable {
     public init(photo: ThumbnailState, caption: String) {
         self.photo = photo
         self.caption = caption

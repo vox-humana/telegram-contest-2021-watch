@@ -1,7 +1,7 @@
 import SwiftUI
 
-public struct ThumbnailState {
-    public struct Thumbnail {
+public struct ThumbnailState: Hashable {
+    public struct Thumbnail: Hashable {
         public init(file: LocalFileState, format: ThumbnailState.Thumbnail.Format, width: Int, height: Int) {
             self.file = file
             self.format = format
@@ -9,7 +9,7 @@ public struct ThumbnailState {
             self.height = height
         }
 
-        public enum Format {
+        public enum Format: Hashable {
             case jpg
             case png
             case webp
@@ -40,7 +40,7 @@ public struct ThumbnailState {
     }
 }
 
-public struct LocalFileState {
+public struct LocalFileState: Hashable {
     public init(fileId: FileId, downloaded: Bool, path: String) {
         self.fileId = fileId
         self.downloaded = downloaded
@@ -52,7 +52,7 @@ public struct LocalFileState {
     public let path: String
 }
 
-public struct MiniThumbnailState {
+public struct MiniThumbnailState: Hashable {
     public init(data: Data) {
         self.data = data
     }

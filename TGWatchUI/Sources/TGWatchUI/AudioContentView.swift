@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class AudioState {
+public struct AudioState: Hashable {
     public init(title: String, caption: String, duration: Int, unplayed: Bool) {
         self.title = title
         self.caption = caption
@@ -41,7 +41,7 @@ struct AudioContentView: View {
                     Text(state.duration.durationString)
                     if state.unplayed {
                         if keepImageColors {
-                            UnreadIndicator().foregroundColor(.accentColor)
+                            UnreadIndicator().foregroundColor(.compatibleAccentColor)
                         } else {
                             UnreadIndicator()
                         }

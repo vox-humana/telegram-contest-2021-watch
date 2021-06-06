@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class VideoState {
+public struct VideoState: Hashable {
     public init(caption: String, duration: Int, thumbnail: ThumbnailState) {
         self.caption = caption
         self.duration = duration

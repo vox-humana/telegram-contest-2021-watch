@@ -7,7 +7,7 @@ extension ExtensionDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if response.actionIdentifier == REPLY_ACTION {
             if let inputResponse = response as? UNTextInputNotificationResponse {
-                service.chatService.send(message: inputResponse.userText, to: 534316164)
+                service.chatService.send(message: inputResponse.userText, to: 534_316_164)
                     .sink { _ in
                         completionHandler()
                     } receiveValue: { _ in

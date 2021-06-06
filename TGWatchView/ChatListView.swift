@@ -30,14 +30,14 @@ struct ChatListView: View {
                     ForEach(vm.list) { chat in
                         chatCell(chat)
                             .id(chat.id)
-                            .onAppear {
-                                if showNewMessage, offsetNewMessageButton, chat.id == vm.list.first?.id {
-                                    DispatchQueue.main.async {
-                                        proxy.scrollTo(chat.id, anchor: .top)
-                                    }
-                                    offsetNewMessageButton = false
-                                }
-                            }
+                    }
+                }
+                .onAppear {
+                    if showNewMessage, offsetNewMessageButton, let id = vm.list.first?.id {
+                        DispatchQueue.main.async {
+                            proxy.scrollTo(id, anchor: .top)
+                        }
+                        offsetNewMessageButton = false
                     }
                 }
             }
@@ -52,7 +52,7 @@ struct ChatListView: View {
                 makeChatView(chat)
             )
         ) {
-            ChatCellView(chat: chat) { chat in
+            ChatCellView(chat: ChatState(chat)) { chat in
                 vm.downloadPhoto(for: chat)
             }
         }
@@ -99,7 +99,7 @@ final class ChatListViewModel: ObservableObject {
             }
     }
 
-    func downloadPhoto(for chat: Chat) {
+    func downloadPhoto(for chat: ChatState) {
         chatListService.downloadPhoto(for: chat)
     }
 }

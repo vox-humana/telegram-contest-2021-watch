@@ -25,6 +25,6 @@ struct ReplyView: View {
     }
 
     private var replyColor: Color {
-        accentColor ? Color.accentColor : Color.white
+        accentColor ? Color.compatibleAccentColor : Color.white
     }
 }

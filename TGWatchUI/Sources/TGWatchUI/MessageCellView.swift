@@ -37,7 +37,7 @@ public struct MessageCellView: View {
     }
 
     private var replyColor: Color {
-        !message.isOutgoing ? Color.accentColor : Color.white
+        !message.isOutgoing ? Color.compatibleAccentColor : Color.white
     }
 
     private var showSender: Bool {

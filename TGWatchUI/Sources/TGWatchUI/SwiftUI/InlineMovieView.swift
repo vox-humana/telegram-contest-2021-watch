@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct InlineMovieView: WKInterfaceObjectRepresentable {
-    var movieURL: URL
+    let movieURL: URL
 
     func makeWKInterfaceObject(context _: Context) -> WKInterfaceInlineMovie {
-        WKInterfaceInlineMovie()
-    }
-
-    func updateWKInterfaceObject(_ movie: WKInterfaceInlineMovie, context _: Context) {
+        let movie = WKInterfaceInlineMovie()
         movie.setMovieURL(movieURL)
         movie.playFromBeginning()
+        return movie
     }
+
+    func updateWKInterfaceObject(_: WKInterfaceInlineMovie, context _: Context) {}
 }

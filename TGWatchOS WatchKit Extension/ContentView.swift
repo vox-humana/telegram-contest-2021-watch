@@ -13,17 +13,19 @@ struct ContentView: View {
                 )
             )
             .onReceive(service.authService.authStateSignal, perform: { state in
-                switch state {
-                case .initial:
-                    showLoginFlow = true
-                case .confirmationWaiting:
-                    showLoginFlow = true
-                case .authorized:
-                    showLoginFlow = false
-                case .passwordWaiting:
-                    showLoginFlow = true
-                case .passwordSent:
-                    showLoginFlow = true
+                DispatchQueue.main.async {
+                    switch state {
+                    case .initial:
+                        showLoginFlow = true
+                    case .confirmationWaiting:
+                        showLoginFlow = true
+                    case .authorized:
+                        showLoginFlow = false
+                    case .passwordWaiting:
+                        showLoginFlow = true
+                    case .passwordSent:
+                        showLoginFlow = true
+                    }
                 }
             })
             .navigationBarTitle("Telegram")
