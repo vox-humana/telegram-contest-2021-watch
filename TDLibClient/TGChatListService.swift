@@ -131,6 +131,9 @@ final class TGChatListService {
         let chatList = chatList.compactMap {
             self.chats[$0.chatId]
         }
+        guard !chatList.isEmpty else {
+            return
+        }
         logger.debug("Sending \(chatList.count) of \(chats.count)")
         chatListSignal.send(chatList)
     }

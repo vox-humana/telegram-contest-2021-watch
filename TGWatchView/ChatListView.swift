@@ -2,11 +2,11 @@ import Combine
 import SwiftUI
 import TGWatchUI
 
-// TODO: move to TGWatchUI
 struct ChatListView: View {
     @ObservedObject var vm: ChatListViewModel
     @Environment(\.chatService) var chatService
     private let showNewMessage: Bool
+    @State private var offsetNewMessageButton: Bool = true
 
     init(_ vm: ChatListViewModel, showNewMessage: Bool = true) {
         self.vm = vm
@@ -14,16 +14,32 @@ struct ChatListView: View {
     }
 
     var body: some View {
-        List {
-            if showNewMessage {
-                Button("New Message") {
-                    // TODO:
+        CompatibleScrollViewReader { proxy in
+            if vm.list.isEmpty {
+                ActivityIndicator()
+                    .padding()
+            } else {
+                List {
+                    if showNewMessage {
+                        Button("New Message") {
+                            // TODO:
+                        }
+                        .buttonStyle(AccentStyle())
+                        .clearedListStyle()
+                    }
+                    ForEach(vm.list) { chat in
+                        chatCell(chat)
+                            .id(chat.id)
+                            .onAppear {
+                                if showNewMessage, offsetNewMessageButton, chat.id == vm.list.first?.id {
+                                    DispatchQueue.main.async {
+                                        proxy.scrollTo(chat.id, anchor: .top)
+                                    }
+                                    offsetNewMessageButton = false
+                                }
+                            }
+                    }
                 }
-                .buttonStyle(AccentStyle())
-                .clearedListStyle()
-            }
-            ForEach(vm.list) { chat in
-                chatCell(chat)
             }
         }
         .navigationBarTitle("Chats")
@@ -75,6 +91,7 @@ final class ChatListViewModel: ObservableObject {
 
     init(chatListService: ChatListService) {
         self.chatListService = chatListService
+        chatListService.requestChatList()
         subscription = chatListService.chatListSignal
             .receive(on: DispatchQueue.main)
             .sink { [weak self] chats in

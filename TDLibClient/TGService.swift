@@ -49,9 +49,8 @@ final class TGService {
             logger.debug("Network state: \(state.state)")
         case let .updateAuthorizationState(state):
             if case .authorizationStateReady = state.authorizationState {
-                self.mainChatListService.requestChatList()
-                // TODO: delay it
-                self.archiveChatListService.requestChatList()
+//                self.mainChatListService.requestChatList()
+//                self.archiveChatListService.requestChatList()
             }
         default:
             break
