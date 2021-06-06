@@ -42,7 +42,8 @@ extension VideoState {
             thumbnail: .init(
                 thumbnail: message.video.thumbnail.map(ThumbnailState.Thumbnail.init),
                 minithumbnail: MiniThumbnailState(message.video.minithumbnail)
-            )
+            ),
+            file: .init(file: message.video.video)
         )
     }
 }
@@ -167,12 +168,6 @@ extension MiniThumbnailState {
     }
 }
 
-/*
- .init(
-     file: LocalFileState(video: message.videoNote),
-     format: ThumbnailState.Format(message.videoNote.thumbnail?.format ?? .thumbnailFormatJpeg),
-     minithumbnail: MiniThumbnailState(message.videoNote.minithumbnail)
- */
 extension VideoNoteState {
     init(_ message: MessageVideoNote) {
         self.init(
@@ -182,6 +177,7 @@ extension VideoNoteState {
                 thumbnail: message.videoNote.thumbnail.map(ThumbnailState.Thumbnail.init),
                 minithumbnail: MiniThumbnailState(message.videoNote.minithumbnail)
             ),
+            file: .init(file: message.videoNote.video),
             unplayed: !message.isViewed
         )
     }

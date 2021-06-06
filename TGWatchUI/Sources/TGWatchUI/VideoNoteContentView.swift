@@ -1,24 +1,24 @@
 import SwiftUI
 
 public struct VideoNoteState: Hashable {
-    public init(duration: Int, thumbnail: ThumbnailState, unplayed: Bool) {
+    public init(duration: Int, thumbnail: ThumbnailState, file: LocalFileState, unplayed: Bool) {
         self.duration = duration
         self.thumbnail = thumbnail
+        self.file = file
         self.unplayed = unplayed
     }
 
     let duration: Int
     let thumbnail: ThumbnailState
+    let file: LocalFileState
     let unplayed: Bool
 }
 
 struct VideoNoteContentView: View {
     @Environment(\.imageLoader) private var imageLoader
-    private let state: VideoNoteState
-
-    init(_ state: VideoNoteState) {
-        self.state = state
-    }
+    @State private var videoFilePath: String? = nil
+    let state: VideoNoteState
+    let playable: Bool
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -28,6 +28,15 @@ struct VideoNoteContentView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: .tgStickerWidth, height: .tgStickerWidth)
                     Image("BlurPlay", bundle: .module)
+
+                    if playable {
+                        VidePlayerView(
+                            filePath: $videoFilePath,
+                            task: imageLoader.fileTask(file: state.file)
+                        )
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: .tgStickerWidth, height: .tgStickerWidth)
+                    }
                 }
                 .clipShape(Circle())
 
@@ -49,13 +58,13 @@ struct VideoNoteContentView: View {
 
 struct VideoNoteContentView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoNoteContentView(.unplayed)
+        VideoNoteContentView(state: .unplayed, playable: false)
             .accentColor(.blue)
     }
 }
 
 extension VideoNoteState {
     static let unplayed = VideoNoteState(
-        duration: 26, thumbnail: .preview, unplayed: true
+        duration: 26, thumbnail: .preview, file: .video, unplayed: true
     )
 }

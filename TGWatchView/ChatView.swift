@@ -154,6 +154,7 @@ final class ChatViewModel: ObservableObject {
 
     private var loadingImages = NSCache<NSString, TGImageLoadingTask>()
     private var animatedSticker = NSCache<NSString, TGSPlayer>()
+    private var fileLoaders = NSCache<NSString, TGFileLoadingTask>()
 
     init(chat: Chat, service: ChatService, messages: [MessageState] = []) {
         self.chat = chat
@@ -175,6 +176,10 @@ final class ChatViewModel: ObservableObject {
     deinit {
         logger.debug("🧹")
     }
+
+    func attach() {}
+
+    func detach() {}
 
     var showFullScreenLoading: Bool {
         initialLoading || (messages.isEmpty && isLoading)
@@ -281,6 +286,17 @@ extension ChatViewModel: ImageLoader {
         }
         let created = TGImageLoadingTask(chatService, photo: photo)
         loadingImages.setObject(created, forKey: id)
+        return created
+    }
+
+    func fileTask(file: LocalFileState) -> FileLoadingTask {
+        let fileId = file.fileId
+        let id = NSString(string: "\(fileId)")
+        if let existing = fileLoaders.object(forKey: id) {
+            return existing
+        }
+        let created = TGFileLoadingTask(chatService, file: file)
+        fileLoaders.setObject(created, forKey: id)
         return created
     }
 

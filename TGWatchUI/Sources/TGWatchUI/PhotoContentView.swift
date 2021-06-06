@@ -81,25 +81,26 @@ extension LocalFileState {
     static let userAvatar = downloaded("user-avatar.png")
     static let photo = downloaded("Image.png")
     static let notLoaded = LocalFileState(fileId: -1, downloaded: false, path: "")
+    static let video = downloaded("video.mp4")
 
     static func downloaded(_ path: String) -> LocalFileState {
         .init(
             fileId: 1,
             downloaded: true,
-            path: .imagePath(path)
+            path: .previewFilePath(path)
         )
     }
 }
 
 extension Image {
     static func preview(name: String) -> Image {
-        let uiImage = UIImage(contentsOfFile: .imagePath(name))!
+        let uiImage = UIImage(contentsOfFile: .previewFilePath(name))!
         return Image(uiImage: uiImage)
     }
 }
 
-private extension String {
-    static func imagePath(_ filename: String) -> String {
+extension String {
+    static func previewFilePath(_ filename: String) -> String {
         URL(fileURLWithPath: #file)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

@@ -112,14 +112,14 @@ final class TGChatListService {
     }
 
     private func setChatOrder(_ chat: Chat, _ positions: [ChatPosition]) {
-        var chatModel = chat
+        var chatState = chat
         for position in positions {
             if position.list == list, let idx = chatList.firstIndex(where: { $0.chatId == chat.id }) {
                 chatList.remove(at: idx)
             }
         }
-        chatModel.positions = positions
-        chats[chatModel.id] = chatModel
+        chatState.positions = positions
+        chats[chatState.id] = chatState
         for position in positions {
             if position.list == list {
                 chatList.append(OrderedChat(chatId: chat.id, position: position))
@@ -158,7 +158,7 @@ extension ChatList: Equatable {
 extension TGChatListService: ChatListService {
     var chatListSignal: AnyPublisher<[Chat], Never> {
         chatListSubject
-            .throttle(for: .seconds(0.2), scheduler: subscriptionQueue, latest: true)
+            .throttle(for: .seconds(0.5), scheduler: subscriptionQueue, latest: true)
             .eraseToAnyPublisher()
     }
 

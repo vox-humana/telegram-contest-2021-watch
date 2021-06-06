@@ -765,6 +765,7 @@
 		8EE0BA33265D2C8000A9FC39 /* TGAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */; };
 		8EE0BA35265D31B000A9FC39 /* TGChatListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */; };
 		8EE3726E265FD2F0007D2A47 /* TGWatchUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE3726D265FD2F0007D2A47 /* TGWatchUI */; };
+		8EFC0E4A266CADE30006437C /* TGFileLoadingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC0E49266CADE30006437C /* TGFileLoadingTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1583,6 +1584,7 @@
 		8EE0BA32265D2C8000A9FC39 /* TGAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGAuthService.swift; sourceTree = "<group>"; };
 		8EE0BA34265D31B000A9FC39 /* TGChatListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGChatListService.swift; sourceTree = "<group>"; };
 		8EE3726C265FD2E8007D2A47 /* TGWatchUI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TGWatchUI; sourceTree = "<group>"; };
+		8EFC0E49266CADE30006437C /* TGFileLoadingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TGFileLoadingTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1606,6 +1608,7 @@
 				8ED51EE3266231F6008E519A /* ChatView.swift */,
 				8E119715265CF96E0042A874 /* Client.swift */,
 				8E453C6E26650FE400A7BB44 /* TGImageLoadingTask.swift */,
+				8EFC0E49266CADE30006437C /* TGFileLoadingTask.swift */,
 				8E1E5272265FBA2700D6AD12 /* State+Response.swift */,
 				8E11971A265CF96E0042A874 /* PreviewModel.swift */,
 				8E11970D265CF96E0042A874 /* SettingsView.swift */,
@@ -2789,6 +2792,7 @@
 				8E119CD0265CF9A60042A874 /* GetProxyLink.swift in Sources */,
 				8E119C1C265CF9A60042A874 /* DeleteProfilePhoto.swift in Sources */,
 				8E119A0E265CF9A50042A874 /* CallId.swift in Sources */,
+				8EFC0E4A266CADE30006437C /* TGFileLoadingTask.swift in Sources */,
 				8E119BDD265CF9A60042A874 /* UserPrivacySettingRule.swift in Sources */,
 				8E119C4E265CF9A60042A874 /* SearchChatsOnServer.swift in Sources */,
 				8E119B89265CF9A60042A874 /* PollOption.swift in Sources */,

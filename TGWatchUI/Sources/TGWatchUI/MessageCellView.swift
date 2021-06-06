@@ -89,7 +89,10 @@ struct MessageCellView_Previews: PreviewProvider {
                     )
             }
         }
-        .environment(\.imageLoader, DummyImageLoader(image: Image("Image.png")))
+        .environment(
+            \.imageLoader,
+            DummyImageLoader(image: .preview(name: "Image.png"), filePath: .previewFilePath("video.mp4"))
+        )
         .accentColor(.blue)
     }
 }

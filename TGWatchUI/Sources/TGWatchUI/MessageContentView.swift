@@ -23,14 +23,16 @@ public struct MessageContentView: View {
                 .disabled(true)
                 .frame(maxWidth: fullView ? .infinity : .tgMessageWidth)
         case let .videoNote(content):
-            VideoNoteContentView(content)
+            VideoNoteContentView(state: content, playable: fullView)
         case let .photo(content):
             PhotoContentView(
                 state: content, width: fullView ? .screenWidth : .tgMessageWidth
             )
         case let .video(content):
             VideoContentView(
-                state: content, width: fullView ? .screenWidth : .tgMessageWidth
+                state: content,
+                width: fullView ? .screenWidth : .tgMessageWidth,
+                playable: fullView
             )
         case let .contact(content):
             ContactContentView(content, keepImageColors: !message.isOutgoing)
