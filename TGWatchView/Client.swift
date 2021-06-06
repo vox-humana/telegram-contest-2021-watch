@@ -5,7 +5,7 @@ import TGWatchUI // TODO: extract model
 protocol ChatListService {
     func downloadPhoto(for chat: Chat)
     func requestChatList()
-    var chatListSignal: CurrentValueSubject<[Chat], Never> { get }
+    var chatListSignal: AnyPublisher<[Chat], Never> { get }
 }
 
 struct ChatListServiceEnvironment: EnvironmentKey {
@@ -22,7 +22,9 @@ extension EnvironmentValues {
 struct DummyService: ChatListService {
     private let chatHistory: [Message]
 
-    let chatListSignal = CurrentValueSubject<[Chat], Never>(.preview())
+    var chatListSignal: AnyPublisher<[Chat], Never> {
+        Just([Chat].preview()).eraseToAnyPublisher()
+    }
 
     init(chatHistory: [Message] = []) {
         self.chatHistory = chatHistory

@@ -1,17 +1,18 @@
 import Combine
+import Foundation
 import TGWatchUI // TODO: extract model
 
 // Based on https://github.com/tdlib/td/blob/9293f07464276d58974164e41a4bb57d3362a258/example/java/org/drinkless/tdlib/example/Example.java#L235
 
 final class TGChatListService {
-    let chatListSignal = CurrentValueSubject<[Chat], Never>([])
-
+    private let chatListSubject = CurrentValueSubject<[Chat], Never>([])
     private let api: TdApi
     private let list: ChatList
     private var chatList: [OrderedChat] = []
     private var chats: [Int64: Chat] = [:]
 
     private var chatIcons: [Int: ChatId] = [:]
+    private let subscriptionQueue = DispatchQueue(label: "chat-list-queue")
 
     init(api: TdApi, list: ChatList) {
         self.api = api
@@ -135,7 +136,7 @@ final class TGChatListService {
             return
         }
         logger.debug("Sending \(chatList.count) of \(chats.count)")
-        chatListSignal.send(chatList)
+        chatListSubject.send(chatList)
     }
 }
 
@@ -155,6 +156,12 @@ extension ChatList: Equatable {
 }
 
 extension TGChatListService: ChatListService {
+    var chatListSignal: AnyPublisher<[Chat], Never> {
+        chatListSubject            
+            .throttle(for: .seconds(0.2), scheduler: subscriptionQueue, latest: true)
+            .eraseToAnyPublisher()
+    }
+
     func requestChatList() {
         let chunkSize = 20
         logger.debug("getChats... \(chatList.count)")
