@@ -189,7 +189,7 @@ struct QRCodeView: View {
         self.string = string
         self.image = image
         if let image = image {
-            imageSize = image.size.maxSide / image.scale
+            imageSize = image.size.maxSide / image.scale - 3 // The smallest watch screen needs more data
         } else {
             imageSize = 0
         }
@@ -213,20 +213,26 @@ extension CGSize {
 }
 
 struct QRCodeView_Previews: PreviewProvider {
+    private static let qrCodeSize = WKInterfaceDevice.current().screenBounds.width
+    
     static var previews: some View {
-        QRCodeView("https://telegram.org")
-            .padding(10)
-            .background(Color.white)
-            .cornerRadius(10)
-            .frame(width: 160, height: 160)
-
-        QRCodeView(
-            "https://telegram.org/login?some_very_long_login_token===",
-            image: UIImage(named: "qr-logo", in: .module, with: nil)
-        )
-        .padding(11)
-        .background(Color.white)
-        .cornerRadius(10)
-        .frame(width: 184, height: 184)
+        DevicePreview {
+            Group {
+                QRCodeView("https://telegram.org")
+                    .padding(10)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .frame(width: qrCodeSize, height: qrCodeSize)
+                
+                QRCodeView(
+                    "https://telegram.org/login?some_very_long_login_token===",
+                    image: UIImage(named: "qr-logo", in: .module, with: nil)
+                )
+                .padding(10)
+                .background(Color.white)
+                .cornerRadius(10)
+                .frame(width: qrCodeSize, height: qrCodeSize)
+            }
+        }
     }
 }
