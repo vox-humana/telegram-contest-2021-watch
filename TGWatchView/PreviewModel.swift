@@ -141,4 +141,11 @@ import TGWatchUI // TODO: extract model
             []
         }
     }
+
+    extension User {
+        static let profile = User(
+            firstName: "Alicia", haveAccess: false, id: 1, isContact: true, isFake: false, isMutualContact: true, isScam: false, isSupport: false, isVerified: true, languageCode: "RU", lastName: "", phoneNumber: "123456789", profilePhoto: nil, restrictionReason: "", status: .userStatusEmpty, type: .userTypeRegular, username: "alice"
+        )
+    }
+
 #endif

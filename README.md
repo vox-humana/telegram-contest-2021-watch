@@ -1,5 +1,5 @@
 # Setup
-- Xcode 12.5
+- Xcode 12.5 (12E262)
 - Add `Secrets.swift` file to the root folder with app secrets:
 ```swift
 enum Secrets {
@@ -7,8 +7,8 @@ enum Secrets {
     static let appHash = <String>
 }
 ```
- - Set provisioning profiles. Make sure .watchkitapp has push notifications support and these certificates are registered in https://my.telegram.org/apps
- - Hasn't built TDLib.xcframework arm64 simulator so no Apple Silicon support :sorry:
+ - Update signing (team and provisioning profiles). To receive pushes on device make sure .watchkitapp profile has push notifications support and these certificates are registered in [Telegram](https://my.telegram.org/apps)
+ - Hasn't built TDLib.xcframework for arm64 simulator so no Apple Silicon support :sorry:
 
 # Implemented
 - Logging in via QR Code with support for accounts protected by a 2-Step Verification password.

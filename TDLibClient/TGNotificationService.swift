@@ -71,10 +71,10 @@ final class TGNotificationService {
 //        completionHandler(.newData)
 //        return
 
-        UNUserNotificationCenter.debugNotifications("Received: \(userInfo.debugDescription)")
+//        UNUserNotificationCenter.debugNotifications("Received: \(userInfo.debugDescription)")
 
         guard let messageId = messageId else {
-            UNUserNotificationCenter.debugNotifications("No msg_id in \(userInfo)")
+//            UNUserNotificationCenter.debugNotifications("No msg_id in \(userInfo)")
 //            logger.assert("No msg_id in \(userInfo)")
             completionHandler(.noData)
             return
@@ -82,7 +82,7 @@ final class TGNotificationService {
 
         let someChatId = chatId ?? channelId
         guard var someChatId = someChatId else {
-            UNUserNotificationCenter.debugNotifications("No chat_id in \(userInfo)")
+//            UNUserNotificationCenter.debugNotifications("No chat_id in \(userInfo)")
 //            logger.assert("No chat_id in \(userInfo)")
             completionHandler(.noData)
             return
@@ -90,7 +90,7 @@ final class TGNotificationService {
 
         expectingCompletions.append(completionHandler)
 
-        UNUserNotificationCenter.messageNotification(.preview(id: 0, content: .messageText(.preview("HELLO")), outgoing: false))
+//        UNUserNotificationCenter.messageNotification(.preview(id: 0, content: .messageText(.preview("HELLO")), outgoing: false))
 
 //        chatService
 //            .newMessagesSubject

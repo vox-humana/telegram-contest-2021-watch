@@ -2395,12 +2395,12 @@
 		8E27194225F4A14400A263D2 = {
 			isa = PBXGroup;
 			children = (
+				8E18ED9925F4A3030049554A /* README.md */,
+				8ECD9536265A5BF500F6B600 /* Secrets.swift */,
 				8ECDC0B2265E79C20075BAB6 /* tdjson.xcframework */,
 				8E11972B265CF9A20042A874 /* TDLib */,
 				8EE3726C265FD2E8007D2A47 /* TGWatchUI */,
 				8E11970C265CF96E0042A874 /* TGWatchView */,
-				8E18ED9925F4A3030049554A /* README.md */,
-				8ECD9536265A5BF500F6B600 /* Secrets.swift */,
 				8E18ED8825F4A2A80049554A /* TDLibClient */,
 				8E27195125F4A14500A263D2 /* TGWatchOS WatchKit App */,
 				8E27196025F4A14600A263D2 /* TGWatchOS WatchKit Extension */,
@@ -3489,8 +3489,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "TGWatchOS WatchKit Extension/TGWatchOS WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TGWatchOS WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = HHSNDG5J5M;
 				ENABLE_PREVIEWS = YES;
@@ -3504,7 +3504,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE_SPECIFIER = "TGWatchOS watchkitextension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -3518,8 +3518,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "TGWatchOS WatchKit Extension/TGWatchOS WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TGWatchOS WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = HHSNDG5J5M;
 				ENABLE_PREVIEWS = YES;
@@ -3532,7 +3532,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE_SPECIFIER = "TGWatchOS watchkitextension";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -3585,14 +3585,14 @@
 		8E27197A25F4A14600A263D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = HHSNDG5J5M;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS;
 				PRODUCT_NAME = Telegram;
-				PROVISIONING_PROFILE_SPECIFIER = "TGWatch Boat";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -3600,14 +3600,14 @@
 		8E27197B25F4A14600A263D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = HHSNDG5J5M;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.semenyutin.TGWatchOS;
 				PRODUCT_NAME = Telegram;
-				PROVISIONING_PROFILE_SPECIFIER = "TGWatch Boat";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
